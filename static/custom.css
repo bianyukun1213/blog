@@ -1,0 +1,80 @@
+#javascript-alert {
+    position: fixed;
+    z-index: 8848;
+    left: 0;
+    top: 0;
+    /* width: 600px; */
+    /* height: 100px; */
+    background-color: black;
+    color: white;
+}
+
+#javascript-alert p::before,
+#javascript-alert p::after {
+    content: '[!!!]';
+    margin: 16px;
+    font-weight: bold;
+    color: red;
+}
+
+
+/* .admonition {
+    padding: 24px 24px 24px 32px;
+    margin: 24px 0;
+    font-size: 16px;
+    line-height: 24px;
+    background-color: gray;
+    color: white;
+}
+
+.admonition p {
+    padding: 0;
+    margin: 0;
+}
+
+.admonition .admonition-title {
+    margin-bottom: 16px;
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.admonition.danger {
+    border-left: 4px #e22500 solid;
+    background-color: rgba(226, 37, 0, 0.2);
+} */
+
+/* 单独用的话直接给 .admonition.danger 设置红色就行了；这里是为了给样式提高优先级，避免被主题样式覆盖。 */
+/* .admonition.danger * {
+    color: #e22500;
+}
+
+.admonition.danger .admonition-title::before {
+    content: '[危] ';
+}
+
+.admonition.warning {
+    border-left: 4px #fc0 solid;
+    background-color: rgba(255, 204, 0, 0.2);
+}
+
+.admonition.warning * {
+    color: #fc0;
+}
+
+.admonition.warning .admonition-title::before {
+    content: '[警] ';
+}
+
+.admonition.info {
+    border-left: 4px #0088e0 solid;
+    background-color: rgba(0, 136, 224, 0.2);
+}
+
+.admonition.info * {
+    color: #0088e0;
+}
+
+.admonition.info .admonition-title::before {
+    content: '[信] ';
+} */

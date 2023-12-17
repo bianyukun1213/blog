@@ -1,1 +1,84 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 135.467 135.467"><path d="M0 161.533h135.467V297H0z" style="fill:#1e90ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" transform="translate(0 -161.533)"/><g style="font-style:normal;font-weight:400;font-size:40px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0;word-spacing:0;text-anchor:middle;fill:#fff;fill-opacity:1;stroke:none"><path d="M589.479 171.52H463.527v-16.384h125.952zm0 69.632H463.527v-16.896h125.952zm70.656-143.36h-263.68v200.704h263.68zM378.023 406.528l-43.008 10.752v-94.208h39.424v-68.096h-39.424v-82.944h43.008v-68.608H207.015v68.608h51.2v82.944h-43.52v68.096h43.52v112.64c-22.528 5.12-43.008 9.728-60.416 13.312l13.824 70.656c51.2-13.312 116.224-29.696 175.616-46.08zm84.992 72.192v-59.392h57.856v-61.952h-57.856v-46.592h-71.168v149.504c0 19.456-12.8 27.648-25.088 32.768 10.752 17.408 20.992 51.712 24.064 70.656 13.312-7.168 34.304-12.8 134.656-29.184-3.072-15.872-6.656-43.52-7.68-62.976zm143.872 16.384c-6.656 0-7.168-2.048-7.168-19.456v-45.056c28.16-11.264 59.904-24.576 89.088-39.936l-45.056-53.76c-11.776 9.728-27.648 20.992-44.032 30.72v-56.32h-69.12V476.16c0 59.904 11.264 80.384 63.488 80.384h33.792c39.936 0 56.832-20.48 62.976-89.6-18.432-4.096-46.592-15.36-59.904-26.112-1.024 45.568-3.072 54.272-10.752 54.272z" aria-label="琨" style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:512px;font-family:&quot;Noto Sans CJK SC&quot;;-inkscape-font-specification:&quot;Noto Sans CJK SC Heavy&quot;;text-align:center;text-anchor:middle;fill:#fff" transform="matrix(.26458 0 0 .26458 -49.828 -19.778)"/></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="琨_路径_修正.svg">
+  <title
+     id="title10">琨</title>
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="339.75241"
+     inkscape:cy="333.21682"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>琨</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>边宇琨</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:description>琨</dc:description>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-161.53332)">
+    <rect
+       style="fill:#1e90ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect12"
+       width="135.46666"
+       height="135.46666"
+       x="3.5603841e-006"
+       y="161.53333" />
+    <g
+       aria-label="琨"
+       transform="matrix(0.26458333,0,0,0.26458333,-49.828072,141.75519)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="flowRoot822">
+      <path
+         d="m 589.47858,171.52 h -125.952 v -16.384 h 125.952 z m 0,69.632 h -125.952 v -16.896 h 125.952 z m 70.656,-143.36 h -263.68 v 200.704 h 263.68 z m -282.112,308.736 -43.008,10.752 v -94.208 h 39.424 v -68.096 h -39.424 v -82.944 h 43.008 v -68.608 h -171.008 v 68.608 h 51.2 v 82.944 h -43.52 v 68.096 h 43.52 v 112.64 c -22.528,5.12 -43.008,9.728 -60.416,13.312 l 13.824,70.656 c 51.2,-13.312 116.224,-29.696 175.616,-46.08 z m 84.992,72.192 v -59.392 h 57.856 v -61.952 h -57.856 v -46.592 h -71.168 v 149.504 c 0,19.456 -12.8,27.648 -25.088,32.768 10.752,17.408 20.992,51.712 24.064,70.656 13.312,-7.168 34.304,-12.8 134.656,-29.184 -3.072,-15.872 -6.656,-43.52 -7.68,-62.976 z m 143.872,16.384 c -6.656,0 -7.168,-2.048 -7.168,-19.456 v -45.056 c 28.16,-11.264 59.904,-24.576 89.088,-39.936 l -45.056,-53.76 c -11.776,9.728 -27.648,20.992 -44.032,30.72 v -56.32 h -69.12 V 476.16 c 0,59.904 11.264,80.384 63.488,80.384 h 33.792 c 39.936,0 56.832,-20.48 62.976,-89.6 -18.432,-4.096 -46.592,-15.36 -59.904,-26.112 -1.024,45.568 -3.072,54.272 -10.752,54.272 z"
+         style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:512px;font-family:'Noto Sans CJK SC';-inkscape-font-specification:'Noto Sans CJK SC Heavy';text-align:center;text-anchor:middle;fill:#ffffff"
+         id="path848" />
+    </g>
+  </g>
+</svg>

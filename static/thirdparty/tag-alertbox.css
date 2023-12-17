@@ -1,0 +1,47 @@
+.alertbox {
+  padding: 16px;
+  margin: 16px 0;
+  font-size: 16px;
+  line-height: 16px;
+  background-color: gray;
+}
+
+.alertbox p {
+  padding: 0;
+  margin: 0;
+}
+
+.alertbox p:first-of-type::before {
+  margin-right: 16px;
+  font-weight: bold;
+}
+
+.alertbox.alertbox-danger {
+  border-left: 4px #e22500 solid;
+  background-color: rgba(226, 37, 0, 0.2);
+}
+
+.alertbox.alertbox-danger p:first-of-type::before {
+  content: '[!!]';
+  color: #e22500;
+}
+
+.alertbox.alertbox-warning {
+  border-left: 4px #fc0 solid;
+  background-color: rgba(255,204,0,0.2);
+}
+
+.alertbox.alertbox-warning p:first-of-type::before {
+  content: '[!]';
+  color: #fc0;
+}
+
+.alertbox.alertbox-info {
+  border-left: 4px #0088e0 solid;
+  background-color: rgba(0,136,224,0.2);
+}
+
+.alertbox.alertbox-info p:first-of-type::before {
+  content: '[i]';
+  color: #0088e0;
+}

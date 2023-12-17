@@ -1,5 +1,6 @@
 // 这里做一些对站点的整体修改。
 
+
 // const siteUrl = 'https://his2nd.life/';
 const siteUrl = `${window.location.origin}/`;
 
@@ -276,6 +277,8 @@ function sleep(sleepTime) {
 }
 // 页面加载后再执行的操作：
 function runAfterContentVisible(onSwupPageView) {
+    // 隐藏开启 Javascript 的提示。
+    $('#javascript-alert').hide(); 
     // 修正 pathname，以解决不带 .html 不显示评论，并且已保存了密码的文章也不能自动解密的问题。
     const pathname = window.location.pathname;
     let fixedPathname = getFixedPathname();
@@ -332,7 +335,7 @@ function runAfterContentVisible(onSwupPageView) {
         let smData = getSmData();
         if (smData.showInitialPopup) {
             let alertIndex = layer.alert(
-                '您好！这可能是您初次访问本站。本站的部分内容，如页面、评论、视频等托管于国外服务提供商（GitHub Pages、Vercel、Youtube 等），在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。点击“确定”永久关闭本弹窗。',
+                '您好！这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。点击“确定”永久关闭本弹窗。',
                 { title: '初次访问', icon: 0, maxWidth: 500, closeBtn: 0, scrollbar: false },
                 () => {
                     let smData = getSmData(); // 用户阅读完才会点击确定按钮，这段时间内 smData 可能改变，获取最新值。
@@ -351,10 +354,10 @@ let userRegionTextCache = '';
 const debugLog = getSmData().debugLog;
 const smLog = debugLog ? (...params) => { console.log(new Date().toLocaleTimeString() + ' |', ...params); } : () => { };
 // 轮询检测 local storage 变化，实现 Layui 跟随 Redefine 明暗。
-// 监听修改实际上比较麻烦，见：
+// 原来用的是监听，实际上比较麻烦，见：
 // https://stackoverflow.com/questions/26974084/listen-for-changes-with-localstorage-on-the-same-window
 // 这种监听对 Mozilla Firefox 无效：Firefox 把 setItem 完全当作键名处理，会在 local storage 中存入名为 setItem 的数据，并且不会触发事件。
-// 但可以修改 Storage 的原型实现效果：
+// 可以修改 Storage 的原型解决这个问题：
 // https://stackoverflow.com/questions/49367897/how-to-edit-function-setitem-in-firefox
 // https://stackoverflow.com/questions/13612643/is-it-possible-to-override-local-storage-and-session-storage-separately-in-html5
 // 但仍有缺点：这种方式不会响应 localStorage.xxx = yyy 或 localStorage['xxx'] = yyy 的存储，需要另外的办法，我没整明白。
@@ -386,14 +389,14 @@ $(document).ready(() => {
 });
 // 监听 hexo-blog-encrypt 插件的解密事件，自动刷新页面以使部分内容正确显示。
 $(window).on('hexo-blog-decrypt', (e) => {
-    if (!window.location.hash.includes('#onreload')) {
-        window.location.hash = '#onreload';
+    if (!window.location.hash.includes('#on-decryption-reload')) {
+        window.location.hash = '#on-decryption-reload';
         // 如果文章是新解密的，等待 hexo-blog-encrypt 插件写入 localStorage，这样下次再访问就能自动解密。
         setInterval(() => {
             if (localStorage.getItem(`hexo-blog-encrypt:#${window.location.pathname}`) !== null)
                 window.location.reload();
         }, 1000);
     } else {
-        window.location.hash = window.location.hash.replace('#onreload', '');
+        window.location.hash = window.location.hash.replace('#on-decryption-reload', '');
     }
 });
