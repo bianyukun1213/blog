@@ -14,7 +14,7 @@ const aesKey = '#$!2KENZ*#bLGy';
 
 const leanCloudAppId = 'TjlywOgAHj9rcaw3nbUeV561-MdYXbMMI';
 const leanCloudAppKey = 'I0J0aMw0p6O2gEv0WmeiJwsc';
-const artitalkServerUrl = 'https://artitalk.his2nd.life';
+// const artitalkServerUrl = 'https://artitalk.his2nd.life';
 
 // jQuery Ajax 包装：
 // 把以前做 daddys-here 的代码改吧改吧，见 https://github.com/bianyukun1213/daddys-here/blob/main/src/index.html#L739。
@@ -275,10 +275,25 @@ async function checkRegionBlacklistAsync(forced) {
 function sleep(sleepTime) {
     for (var start = new Date; new Date - start <= sleepTime;) { }
 }
+function getThemeColorScheme() {
+    const redefineStorage = localStorage.getItem('REDEFINE-THEME-STATUS');
+    if (redefineStorage !== null) {
+        if (JSON.parse(redefineStorage).isDark === true)
+            return 'dark';
+        else
+            return 'light';
+    }
+    else {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+            return 'dark';
+        else
+            return 'light';
+    }
+}
 // 页面加载后再执行的操作：
 function runAfterContentVisible(onSwupPageView) {
     // 隐藏开启 Javascript 的提示。
-    $('#javascript-alert').hide(); 
+    $('#javascript-alert').hide();
     // 修正 pathname，以解决不带 .html 不显示评论，并且已保存了密码的文章也不能自动解密的问题。
     const pathname = window.location.pathname;
     let fixedPathname = getFixedPathname();
@@ -286,16 +301,43 @@ function runAfterContentVisible(onSwupPageView) {
         window.location.replace(window.location.origin + fixedPathname); // 跳转。
         return; // 从 replace 到实际跳转有一段时间，没必要让代码继续执行，因此 return。
     }
-    // Artitalk 跳转：如果当前是单页模式下触发的 Artitalk 页面加载，就真地重新加载一次，以避免 Lean Cloud Storage SDK 多次初始化的问题。
-    if (pathname === '/hollow/' && onSwupPageView) {
-        window.location.reload();
-        return;
-    }
+    // // Artitalk 跳转：如果当前是单页模式下触发的 Artitalk 页面加载，就真地重新加载一次，以避免 Lean Cloud Storage SDK 多次初始化的问题。
+    // if (pathname === '/hollow/' && onSwupPageView) {
+    //     window.location.reload();
+    //     return;
+    // }
     // 检查用户属地。
     checkRegionBlacklistAsync().then((res) => {
         if (res)
             window.location.replace(`${siteUrl}go-home/`);
     });
+    if (pathname === '/hollow/') {
+        // mastodonTimeline 保存了 DOM 的引用，swup 换页再换回来，引用过时，buildTimeline 不好使，需要新建。
+        // if (!mastodonTimeline) {
+        mastodonTimeline = new MastodonApi({
+            container_body_id: "mt-body",
+            spinner_class: "loading-spinner",
+            default_theme: themeColorScheme,
+            instance_url: "https://m.cmx.im",
+            timeline_type: "profile",
+            user_id: "107989258291762102",
+            profile_name: "@Hollis",
+            hashtag_name: "",
+            toots_limit: "20",
+            hide_unlisted: false,
+            hide_reblog: false,
+            hide_replies: false,
+            hide_preview_link: false,
+            hide_emojos: false,
+            markdown_blockquote: false,
+            hide_counter_bar: false,
+            text_max_lines: "0",
+            link_see_more: "See more posts at Mastodon"
+        });
+        // } else {
+        //     mastodonTimeline.buildTimeline();
+        // }
+    }
     // 修正开往链接，全部改为由当前页面跳转，否则算什么“开往”？！
     $('a[href="https://www.travellings.cn/go.html"]').attr('target', '_self');
     // 去除无用的图片注释。
@@ -307,19 +349,19 @@ function runAfterContentVisible(onSwupPageView) {
         else
             cap.children[1].remove();
     }
-    // 修复 Redefine 单页模式下的 Artitalk。
-    if ($('#artitalk_main').length > 0) {
-        new Artitalk({
-            appId: leanCloudAppId,
-            appKey: leanCloudAppKey,
-            serverURL: artitalkServerUrl,
-            pageSize: 50,
-            shuoPla: '写点什么？',
-            avatarPla: '头像 Url',
-            color1: '#4c8dae',
-            color2: '#db5a6b'
-        });
-    }
+    // // 修复 Redefine 单页模式下的 Artitalk。
+    // if ($('#artitalk_main').length > 0) {
+    //     new Artitalk({
+    //         appId: leanCloudAppId,
+    //         appKey: leanCloudAppKey,
+    //         serverURL: artitalkServerUrl,
+    //         pageSize: 50,
+    //         shuoPla: '写点什么？',
+    //         avatarPla: '头像 Url',
+    //         color1: '#4c8dae',
+    //         color2: '#db5a6b'
+    //     });
+    // }
     // 修复移动端网易云音乐外链。
     if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
         let iframes = $('iframe');
@@ -351,8 +393,10 @@ setSmData(getSmData());
 // 初始化站点元数据。
 let siteMetaCache = {};
 let userRegionTextCache = '';
+let themeColorScheme = getThemeColorScheme();
 const debugLog = getSmData().debugLog;
 const smLog = debugLog ? (...params) => { console.log(new Date().toLocaleTimeString() + ' |', ...params); } : () => { };
+let mastodonTimeline;
 // 轮询检测 local storage 变化，实现 Layui 跟随 Redefine 明暗。
 // 原来用的是监听，实际上比较麻烦，见：
 // https://stackoverflow.com/questions/26974084/listen-for-changes-with-localstorage-on-the-same-window
@@ -363,19 +407,19 @@ const smLog = debugLog ? (...params) => { console.log(new Date().toLocaleTimeStr
 // 但仍有缺点：这种方式不会响应 localStorage.xxx = yyy 或 localStorage['xxx'] = yyy 的存储，需要另外的办法，我没整明白。
 // https://stackoverflow.com/questions/33888685/override-dot-notation-for-localstorage
 setInterval(() => {
-    const redefineStorage = localStorage.getItem('REDEFINE-THEME-STATUS');
-    if (redefineStorage !== null) {
-        if (JSON.parse(redefineStorage).isDark === true)
+    let newThemeColorScheme = getThemeColorScheme();
+    if (newThemeColorScheme !== themeColorScheme) {
+        if (newThemeColorScheme === 'dark')
             $('#layui-theme-dark').attr('href', layuiThemeDarkCdn);
         else
             $('#layui-theme-dark').removeAttr('href');
+        // 切换 mastodonTimeline 主题。
+        if (window.location.pathname === '/hollow/') {
+            mastodonTimeline.DEFAULT_THEME = newThemeColorScheme;
+            mastodonTimeline.setTheme();
+        }
     }
-    else {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
-            $('#layui-theme-dark').attr('href', layuiThemeDarkCdn);
-        else
-            $('#layui-theme-dark').removeAttr('href');
-    }
+    themeColorScheme = newThemeColorScheme;
 }, 1000);
 // 监听页面加载完成事件。
 $(document).ready(() => {
