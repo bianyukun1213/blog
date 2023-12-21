@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>他的第二人生</title><icon>https://his2nd.life/static/images/blog-logo.png</icon><subtitle>his2nd.life</subtitle><link href="https://his2nd.life/atom.xml" rel="self"/><link href="https://his2nd.life"/><updated>2023-12-16 21:30:55</updated><id>https://his2nd.life</id><author><name>Hollis</name></author><generator>his2ndlife-rss</generator><entry><title>Fedora 配置记录</title><link href="https://his2nd.life/posts/20c9a58d.html"/><id>https://his2nd.life/posts/20c9a58d.html</id><published>2023-11-12 14:39:18</published><updated>2023-12-16 21:30:55</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/20c9a58d.html 查看此页面以获得更佳的排版。</b></p><hr><p>第不知道多少次尝试日用 GNU/Linux 桌面发行版。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>他的第二人生</title><icon>https://his2nd.life/static/images/blog-logo.png</icon><subtitle>his2nd.life</subtitle><link href="https://his2nd.life/atom.xml" rel="self"/><link href="https://his2nd.life"/><updated>2023-12-16 21:30:55</updated><id>https://his2nd.life</id><author><name>Hollis</name></author><generator>his2ndlife-rss</generator><entry><title>Fedora 配置记录</title><link href="https://his2nd.life/posts/20c9a58d.html"/><id>https://his2nd.life/posts/20c9a58d.html</id><published>2023-11-12 14:39:18</published><updated>2023-12-16 21:30:55</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/20c9a58d.html 查看此页面以获得更佳的排版。</b></p><hr><p>第不知道多少次尝试日用 GNU/Linux 桌面发行版。</p>
 <span id="more"></span>
 <hr>
 <p>  台式机在学校，不想再每周末往家背死拉沉的笔记本了。之前台式机和 NAS 升级剩下些零件，又去教化和船舶淘了些破烂儿，（老板说这块 RX580 不是矿卡，不知道是不是真的。）还买了个便携显示器，再组一套！装 Fedora 玩玩，需要的 Windows 程序可以用 Wine 或者虚拟机等，但我有可能要周末画 CAD，就又装了个 Win 10。Fedora 下具体折腾了哪些，记在这里。</p>
@@ -30,7 +30,7 @@
 <p>  不过 CS2 对 Vulkan 的优化不及 DirectX，于是连 Steam 一起卸载了……打游戏还是用 Windows 吧，装了 Win 还用 Fedora 打游戏那不是自找不痛快么……</p>
 <hr>
 <p>  未完待续……</p>
-]]></content><summary type="html"><p>第不知道多少次尝试日用 GNU/Linux 桌面发行版。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="GNU/Linux" scheme="https://his2nd.life/tags/gnu-linux/"/></entry><entry><title>Postcrossing 收发记录</title><link href="https://his2nd.life/posts/6efa7a0d.html"/><id>https://his2nd.life/posts/6efa7a0d.html</id><published>2023-11-06 16:44:52</published><updated>2023-12-19 11:30:19</updated><content type="text">请访问 https://his2nd.life/posts/6efa7a0d.html 查看此页面。</content><summary type="html">此文章已被加密, 请输入密码查看。</summary><category term="生活" scheme="https://his2nd.life/categories/life/"/></entry><entry><title>捞泔水、挖土坑、酒桌上听老师讲八卦……那些不用上课的快乐时光</title><link href="https://his2nd.life/posts/8c83fe95.html"/><id>https://his2nd.life/posts/8c83fe95.html</id><published>2023-11-01 11:23:13</published><updated>2023-11-03 12:57:00</updated><content type="text">请访问 https://his2nd.life/posts/8c83fe95.html 查看此页面。</content><summary type="html">此文章已被加密, 请输入密码查看。</summary><category term="生活" scheme="https://his2nd.life/categories/life/"/></entry><entry><title>“他的第二人生”排版规则</title><link href="https://his2nd.life/posts/7a7b30c2.html"/><id>https://his2nd.life/posts/7a7b30c2.html</id><published>2023-10-13 18:59:58</published><updated>2023-11-09 12:50:52</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/7a7b30c2.html 查看此页面以获得更佳的排版。</b></p><hr><p>总结一下，方便以后格式统一。</p>
+]]></content><summary type="html"><p>第不知道多少次尝试日用 GNU/Linux 桌面发行版。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="GNU/Linux" scheme="https://his2nd.life/tags/gnu-linux/"/></entry><entry><title>Postcrossing 收发记录</title><link href="https://his2nd.life/posts/6efa7a0d.html"/><id>https://his2nd.life/posts/6efa7a0d.html</id><published>2023-11-06 16:44:52</published><updated>2023-12-19 11:30:19</updated><content type="text">请访问 https://his2nd.life/posts/6efa7a0d.html 查看此页面。</content><summary type="html">此文章已被加密, 请输入密码查看。</summary><category term="生活" scheme="https://his2nd.life/categories/life/"/></entry><entry><title>捞泔水、挖土坑、酒桌上听老师讲八卦……那些不用上课的快乐时光</title><link href="https://his2nd.life/posts/8c83fe95.html"/><id>https://his2nd.life/posts/8c83fe95.html</id><published>2023-11-01 11:23:13</published><updated>2023-11-03 12:57:00</updated><content type="text">请访问 https://his2nd.life/posts/8c83fe95.html 查看此页面。</content><summary type="html">此文章已被加密, 请输入密码查看。</summary><category term="生活" scheme="https://his2nd.life/categories/life/"/></entry><entry><title>“他的第二人生”排版规则</title><link href="https://his2nd.life/posts/7a7b30c2.html"/><id>https://his2nd.life/posts/7a7b30c2.html</id><published>2023-10-13 18:59:58</published><updated>2023-11-09 12:50:52</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/7a7b30c2.html 查看此页面以获得更佳的排版。</b></p><hr><p>总结一下，方便以后格式统一。</p>
 <span id="more"></span>
 <hr>
 <h2 id="标点符号">标点符号</h2>
@@ -173,7 +173,7 @@
 <p>  引号、括号等嵌套，一般以不同形式配合使用；但如果出于某些原因我要保持原文，就不遵守这一规则了。</p>
 <hr>
 <p>  未完待续……？</p>
-]]></content><summary type="html"><p>总结一下，方便以后格式统一。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/></entry><entry><title>城探特别篇：黑科技朝阳楼下的“秘密空间”</title><link href="https://his2nd.life/posts/65b23281.html"/><id>https://his2nd.life/posts/65b23281.html</id><published>2023-09-21 13:42:57</published><updated>2023-09-24 12:49:50</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/65b23281.html 查看此页面以获得更佳的排版。</b></p><hr><p>原来学校朝阳楼底下别有洞天！</p>
+]]></content><summary type="html"><p>总结一下，方便以后格式统一。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/></entry><entry><title>城探特别篇：黑科技朝阳楼下的“秘密空间”</title><link href="https://his2nd.life/posts/65b23281.html"/><id>https://his2nd.life/posts/65b23281.html</id><published>2023-09-21 13:42:57</published><updated>2023-09-24 12:49:50</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/65b23281.html 查看此页面以获得更佳的排版。</b></p><hr><p>原来学校朝阳楼底下别有洞天！</p>
 <span id="more"></span>
 <hr>
 <p>  课设教室待着也是待着，闯哥说带我“探险”去。他在抖音上看到有人上到了朝阳楼的楼顶，那可太好了，我俩之前就想上去看看了，说走就走。</p>
@@ -345,7 +345,7 @@
 
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>原来学校朝阳楼底下别有洞天！</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="城市探险" scheme="https://his2nd.life/tags/urban-exploration/"/></entry><entry><title>与闯哥在中国亭园散步</title><link href="https://his2nd.life/posts/bf946a0d.html"/><id>https://his2nd.life/posts/bf946a0d.html</id><published>2023-09-20 16:00:00</published><updated>2023-09-24 14:13:50</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/bf946a0d.html 查看此页面以获得更佳的排版。</b></p><hr><p>闯哥说去中国亭园，那就走吧！</p>
+]]></content><summary type="html"><p>原来学校朝阳楼底下别有洞天！</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="城市探险" scheme="https://his2nd.life/tags/urban-exploration/"/></entry><entry><title>与闯哥在中国亭园散步</title><link href="https://his2nd.life/posts/bf946a0d.html"/><id>https://his2nd.life/posts/bf946a0d.html</id><published>2023-09-20 16:00:00</published><updated>2023-09-24 14:13:50</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/bf946a0d.html 查看此页面以获得更佳的排版。</b></p><hr><p>闯哥说去中国亭园，那就走吧！</p>
 <span id="more"></span>
 <hr>
 <p>  正经人谁去课设教室啊！这么好的天儿不出来<s>玩儿</s>实习，简直是浪费！中国亭园以前是垃圾倾卸场，如今改造成公园，符合我们环境工程专业生态文明建设的方向，那就选定这里来实习好了，266 坐一路就到了。</p>
@@ -554,7 +554,7 @@
 <p>  第二天，我们都开始拉肚子。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>闯哥说去中国亭园，那就走吧！</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>开原实习记</title><link href="https://his2nd.life/posts/7e3a1b21.html"/><id>https://his2nd.life/posts/7e3a1b21.html</id><published>2023-08-24 08:00:00</published><updated>2023-09-15 20:40:41</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/7e3a1b21.html 查看此页面以获得更佳的排版。</b></p><hr><p>老师说我们可以在社交媒体上发布相关内容，但必须是正能量且与专业相关的。不过，我的博客我做主。如果我想，我可以针对此篇文章屏蔽中国大陆 IP。</p>
+]]></content><summary type="html"><p>闯哥说去中国亭园，那就走吧！</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>开原实习记</title><link href="https://his2nd.life/posts/7e3a1b21.html"/><id>https://his2nd.life/posts/7e3a1b21.html</id><published>2023-08-24 08:00:00</published><updated>2023-09-15 20:40:41</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/7e3a1b21.html 查看此页面以获得更佳的排版。</b></p><hr><p>老师说我们可以在社交媒体上发布相关内容，但必须是正能量且与专业相关的。不过，我的博客我做主。如果我想，我可以针对此篇文章屏蔽中国大陆 IP。</p>
 <span id="more"></span>
 <hr>
 
@@ -2089,7 +2089,7 @@
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>老师说我们可以在社交媒体上发布相关内容，但必须是正能量且与专业相关的。不过，我的博客我做主。如果我想，我可以针对此篇文章屏蔽中国大陆 IP。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/></entry><entry><title>鸡西实习记</title><link href="https://his2nd.life/posts/38c4a503.html"/><id>https://his2nd.life/posts/38c4a503.html</id><published>2023-06-18 19:31:38</published><updated>2023-06-25 19:44:10</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/38c4a503.html 查看此页面以获得更佳的排版。</b></p><hr><p>🤫 嘘……其实这是篇游记，而我也不仅仅去了鸡西，毕竟撞上端午节放假了嘛。</p>
+]]></content><summary type="html"><p>老师说我们可以在社交媒体上发布相关内容，但必须是正能量且与专业相关的。不过，我的博客我做主。如果我想，我可以针对此篇文章屏蔽中国大陆 IP。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/></entry><entry><title>鸡西实习记</title><link href="https://his2nd.life/posts/38c4a503.html"/><id>https://his2nd.life/posts/38c4a503.html</id><published>2023-06-18 19:31:38</published><updated>2023-06-25 19:44:10</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/38c4a503.html 查看此页面以获得更佳的排版。</b></p><hr><p>🤫 嘘……其实这是篇游记，而我也不仅仅去了鸡西，毕竟撞上端午节放假了嘛。</p>
 <span id="more"></span>
 <hr>
 <h2 id="6-18-恒山国家矿业公园">6/18 恒山国家矿业公园</h2>
@@ -2896,7 +2896,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>🤫 嘘……其实这是篇游记，而我也不仅仅去了鸡西，毕竟撞上端午节放假了嘛。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="游记" scheme="https://his2nd.life/tags/travel-note/"/></entry><entry><title>我大部分的自卑与自负都来源于肥胖</title><link href="https://his2nd.life/posts/89ce6dc2.html"/><id>https://his2nd.life/posts/89ce6dc2.html</id><published>2023-06-07 22:08:27</published><updated>2023-06-08 22:41:36</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/89ce6dc2.html 查看此页面以获得更佳的排版。</b></p><hr><p>我，是我，不是第二人称的“你”，不应该表现得“事不关己高高挂起”。我喝醉了，但关于这一点，我一定无从否认。</p>
+]]></content><summary type="html"><p>🤫 嘘……其实这是篇游记，而我也不仅仅去了鸡西，毕竟撞上端午节放假了嘛。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="游记" scheme="https://his2nd.life/tags/travel-note/"/></entry><entry><title>我大部分的自卑与自负都来源于肥胖</title><link href="https://his2nd.life/posts/89ce6dc2.html"/><id>https://his2nd.life/posts/89ce6dc2.html</id><published>2023-06-07 22:08:27</published><updated>2023-06-08 22:41:36</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/89ce6dc2.html 查看此页面以获得更佳的排版。</b></p><hr><p>我，是我，不是第二人称的“你”，不应该表现得“事不关己高高挂起”。我喝醉了，但关于这一点，我一定无从否认。</p>
 <span id="more"></span>
 <hr>
 <ol>
@@ -2954,7 +2954,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  <s>没完，直到我成功减肥！</s></p>
 <hr>
 <p>  好了好了，知道了！妈了个逼的，你喝醉了是真能瞎白话啊，话都说不利索了。我昨晚头一次耍那么大的酒疯，坐地下哭哭唧唧。</p>
-]]></content><summary type="html"><p>我，是我，不是第二人称的“你”，不应该表现得“事不关己高高挂起”。我喝醉了，但关于这一点，我一定无从否认。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/><category term="甲醇文学" scheme="https://his2nd.life/tags/hejiajiule/"/></entry><entry><title>Unraid OS 踩坑记录</title><link href="https://his2nd.life/posts/d2b23a8d.html"/><id>https://his2nd.life/posts/d2b23a8d.html</id><published>2023-05-20 14:12:36</published><updated>2023-12-16 21:24:23</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/d2b23a8d.html 查看此页面以获得更佳的排版。</b></p><hr><p>五一的时候把家中自组的 NAS 从 Windows 10 系统换到了 Unraid OS，在此记录一下配置与注意事项，以便之后重装有得参考。</p>
+]]></content><summary type="html"><p>我，是我，不是第二人称的“你”，不应该表现得“事不关己高高挂起”。我喝醉了，但关于这一点，我一定无从否认。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/><category term="甲醇文学" scheme="https://his2nd.life/tags/hejiajiule/"/></entry><entry><title>Unraid OS 踩坑记录</title><link href="https://his2nd.life/posts/d2b23a8d.html"/><id>https://his2nd.life/posts/d2b23a8d.html</id><published>2023-05-20 14:12:36</published><updated>2023-12-16 21:24:23</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/d2b23a8d.html 查看此页面以获得更佳的排版。</b></p><hr><p>五一的时候把家中自组的 NAS 从 Windows 10 系统换到了 Unraid OS，在此记录一下配置与注意事项，以便之后重装有得参考。</p>
 <span id="more"></span>
 <hr>
 <h2 id="Unraid-OS-注意事项">Unraid OS 注意事项</h2>
@@ -3246,7 +3246,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 </ul>
 <hr>
 <p>  未完待续……？</p>
-]]></content><summary type="html"><p>五一的时候把家中自组的 NAS 从 Windows 10 系统换到了 Unraid OS，在此记录一下配置与注意事项，以便之后重装有得参考。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="NAS" scheme="https://his2nd.life/tags/nas/"/><category term="Unraid OS" scheme="https://his2nd.life/tags/unraid-os/"/><category term="GNU/Linux" scheme="https://his2nd.life/tags/gnu-linux/"/></entry><entry><title>傍晚的江畔</title><link href="https://his2nd.life/posts/7de35aff.html"/><id>https://his2nd.life/posts/7de35aff.html</id><published>2023-05-17 17:58:18</published><updated>2023-07-10 21:01:38</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/7de35aff.html 查看此页面以获得更佳的排版。</b></p><hr><p>今天是 7 月 10 号，这篇文章也是补的。我也不多写文字了，放几张图吧。</p>
+]]></content><summary type="html"><p>五一的时候把家中自组的 NAS 从 Windows 10 系统换到了 Unraid OS，在此记录一下配置与注意事项，以便之后重装有得参考。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="GNU/Linux" scheme="https://his2nd.life/tags/gnu-linux/"/><category term="NAS" scheme="https://his2nd.life/tags/nas/"/><category term="Unraid OS" scheme="https://his2nd.life/tags/unraid-os/"/></entry><entry><title>傍晚的江畔</title><link href="https://his2nd.life/posts/7de35aff.html"/><id>https://his2nd.life/posts/7de35aff.html</id><published>2023-05-17 17:58:18</published><updated>2023-07-10 21:01:38</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/7de35aff.html 查看此页面以获得更佳的排版。</b></p><hr><p>今天是 7 月 10 号，这篇文章也是补的。我也不多写文字了，放几张图吧。</p>
 <span id="more"></span>
 <hr>
 <p>  傍晚的江畔，吃烤大鹅蛋。上破船溜达两圈儿。回去的时候，旁边儿的狗好一阵儿叫唤，我用狗语和它唠了几句。</p>
@@ -3337,7 +3337,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>今天是 7 月 10 号，这篇文章也是补的。我也不多写文字了，放几张图吧。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>清明节瞎溜达</title><link href="https://his2nd.life/posts/d89bf753.html"/><id>https://his2nd.life/posts/d89bf753.html</id><published>2023-04-05 14:13:26</published><updated>2023-07-09 19:51:26</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/d89bf753.html 查看此页面以获得更佳的排版。</b></p><hr><p>今天是 7 月 9 号，这篇文章是补的。我就不多写文字了，放几张图吧。</p>
+]]></content><summary type="html"><p>今天是 7 月 10 号，这篇文章也是补的。我也不多写文字了，放几张图吧。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>清明节瞎溜达</title><link href="https://his2nd.life/posts/d89bf753.html"/><id>https://his2nd.life/posts/d89bf753.html</id><published>2023-04-05 14:13:26</published><updated>2023-07-09 19:51:26</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/d89bf753.html 查看此页面以获得更佳的排版。</b></p><hr><p>今天是 7 月 9 号，这篇文章是补的。我就不多写文字了，放几张图吧。</p>
 <span id="more"></span>
 <hr>
 <p>  清明节没啥事儿和闯哥儿出去溜达。他要我把照相机拿来，他想试试。感谢闯哥儿让我想起来我还有个当初 5000 多分期买的、后来一直放着吃灰的照相机……</p>
@@ -3430,7 +3430,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>今天是 7 月 9 号，这篇文章是补的。我就不多写文字了，放几张图吧。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="摄影" scheme="https://his2nd.life/categories/photography/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>写在《生化奇兵 无限》的第十个年头</title><link href="https://his2nd.life/posts/620ee2d1.html"/><id>https://his2nd.life/posts/620ee2d1.html</id><published>2023-03-27 00:45:10</published><updated>2023-08-07 18:36:19</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/620ee2d1.html 查看此页面以获得更佳的排版。</b></p><hr><p>I miss you too, Elizabeth.</p>
+]]></content><summary type="html"><p>今天是 7 月 9 号，这篇文章是补的。我就不多写文字了，放几张图吧。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="摄影" scheme="https://his2nd.life/categories/photography/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>写在《生化奇兵 无限》的第十个年头</title><link href="https://his2nd.life/posts/620ee2d1.html"/><id>https://his2nd.life/posts/620ee2d1.html</id><published>2023-03-27 00:45:10</published><updated>2023-08-07 18:36:19</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/620ee2d1.html 查看此页面以获得更佳的排版。</b></p><hr><p>I miss you too, Elizabeth.</p>
 <span id="more"></span>
 <hr>
 
@@ -3453,7 +3453,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  《生化奇兵 无限》可是第一款让我玩儿哭了的游戏，在我的博客上，已经有三篇写给它的文章了，最近的一篇（注：即本文。）写于今年游戏发售十周年之时。而在<a href="https://his2nd.life/posts/fc0033b5.html">附带着那段录音的文章</a>的结尾，我提到，也许以后我还会试着录一首 <em>You Belong to Me</em>，可是我早就把吉他放下了，我没法儿说“以后”是什么时候——上次（很久以前）我试着录一首歌，那是《辐射 4》的电台歌曲 <em>The End of the World</em>，失败了，简单的扫弦也总是弹错。不过，以后就是以后，有些事我相信我会做到的，虽然说起来没什么道理——因为我如果有决心有毅力的话原本也不会放弃——我还是觉得有一天我会学会弹吉他的，同样的，也有一天我会学会摄影的。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>I miss you too, Elizabeth.</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>无标题</title><link href="https://his2nd.life/posts/c9a945f0.html"/><id>https://his2nd.life/posts/c9a945f0.html</id><published>2023-01-30 01:47:19</published><updated>2023-01-30 20:41:41</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/c9a945f0.html 查看此页面以获得更佳的排版。</b></p><hr><p>大半夜不睡觉，又开始发疯了是吧？！</p>
+]]></content><summary type="html"><p>I miss you too, Elizabeth.</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>无标题</title><link href="https://his2nd.life/posts/c9a945f0.html"/><id>https://his2nd.life/posts/c9a945f0.html</id><published>2023-01-30 01:47:19</published><updated>2023-01-30 20:41:41</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/c9a945f0.html 查看此页面以获得更佳的排版。</b></p><hr><p>大半夜不睡觉，又开始发疯了是吧？！</p>
 <span id="more"></span>
 <hr>
 <p>  仍然，这其实是一篇没存活多久的朋友圈长文，只是走向渐渐变得奇怪……</p>
@@ -3473,13 +3473,13 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  我试图准确描述自己的想法和情感，但这些东西是复杂的，同一时间各个想法和情感是掺杂的，尽力去表达的时候一遍一遍地分析、回顾其实有很大程度是假设和想象，它不知不觉就带有很多主观色彩，反倒违背了初衷。所以。文字其实还是不可靠。我也别追求这个那个了，省省心吧。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>大半夜不睡觉，又开始发疯了是吧？！</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/><category term="甲醇文学" scheme="https://his2nd.life/tags/hejiajiule/"/></entry><entry><title>写在国服暴雪游戏停服后：其实我只想分享一篇文章，但是吧……又唠叨了一堆</title><link href="https://his2nd.life/posts/938a5002.html"/><id>https://his2nd.life/posts/938a5002.html</id><published>2023-01-24 01:07:28</published><updated>2023-01-24 01:07:28</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/938a5002.html 查看此页面以获得更佳的排版。</b></p><hr><p>这篇文章是 <a class="link"   href="https://mp.weixin.qq.com/s/cHQNuIkBfFcJ6Kpf499rOA" >《面对国服的烂摊子，一群魔兽玩家打算“拯救世界”》 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+]]></content><summary type="html"><p>大半夜不睡觉，又开始发疯了是吧？！</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/><category term="甲醇文学" scheme="https://his2nd.life/tags/hejiajiule/"/></entry><entry><title>写在国服暴雪游戏停服后：其实我只想分享一篇文章，但是吧……又唠叨了一堆</title><link href="https://his2nd.life/posts/938a5002.html"/><id>https://his2nd.life/posts/938a5002.html</id><published>2023-01-24 01:07:28</published><updated>2023-01-24 01:07:28</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/938a5002.html 查看此页面以获得更佳的排版。</b></p><hr><p>这篇文章是 <a class="link"   href="https://mp.weixin.qq.com/s/cHQNuIkBfFcJ6Kpf499rOA" >《面对国服的烂摊子，一群魔兽玩家打算“拯救世界”》 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
 <span id="more"></span>
 <hr>
 <p>  国服暴雪游戏停服了。什么时候能再找到代理商，不确定。</p>
 <p>  我曾有一个美服暴雪账号，后来给客服发工单，附上了身份证，转去了台服，本来只是试一试，但美服客服可能也不认识汉字，不知道是简体中文，居然通过了。我就去台服玩《魔兽世界》了，那时候台服（或者说，亚服？）是唯一一个还保留点卡的区服。那时候上高中，没啥时间玩游戏，月卡是不合适的。</p>
 <p>  女性暗夜精灵，德鲁伊，名叫 Hollie，是“冬青”Holly 的变体。我现在的昵称 Hollis 也是。我喜欢“冬青”和“Holly”这个单词是因为，我很喜欢哈利·波特与张秋在槲（hú，我草我一直念 xìe）寄生树下的邂逅，尽管我实际不知道原文用的是否是“Holly”这个词。我曾做了一款简陋的音乐播放器叫“冬青音乐播放器”。说远了。我游历了达纳苏斯、黑海岸、暴风城、西部荒野、铁炉堡、达拉然、暗月马戏团、冬泉谷、嚎风峡湾、灰熊丘陵等……还有其他许多地方，但就《魔兽世界》本身来说只是很小很小的一部分。这个历史悠久的游戏（较老的部分）以现代的眼光来看，很多任务不过就是打打怪，收集一些东西，没有什么剧情演出，玩起来有些无聊，我也分不清主线和支线。而那些现版本的东西，对于我来说又太过复杂。好像是升到了 70 多级吧，我后来也就没再玩。我感兴趣的是故事，是设定，是世界环境等，但这些任务不足以支撑我玩下去。但美好的回忆总是有的。我有两次或两次以上的跨年活动是在暴风城进行的，那一天，拍卖行会变成舞厅，我可以变成夜枭形态，慢慢贴着站在舞台边缘，一起跳舞。好像是每个小时还会放烟花。女性暗夜精灵的舞蹈原型是艾莉婕的 <em>J’en ai marre!</em> 这首歌的舞蹈，我去看了 2004 年（《魔兽世界》也在这一年发售）的现场录像，艾莉婕随着歌曲舞动身姿真是……性感极了！她就是那么吸引人。这首 <em>J’en ai marre!</em> 现在还在我的歌单里，有时会随机到。</p>
-<p>  《守望先锋》，那是 2016 年横空出世的作品。我 2016 年中考，中考前的那段时间，我睡觉前总会看 Xbox One、<em>Minecraft</em> Xbox 版本和 GTA V 的宣传片，幻想有一天我也能拥有一台 Xbox One，也能与朋友在 GTA Online 的夕阳下就着电台驾车飞驰（在 2016 下半年到 2017 上半年实现了，彼时我因为做手术修养而休学，虽然遭了罪，但那时候更多的还是美好回忆，2016 到 2017 的时间，我配了电脑，玩了不少游戏，看了不少电影和剧，也读了一些小说，比如《三体》，还写了自己的程序）。呃，说回来。我在中考前一天晚上，有些睡不着，倒不是因为惧怕考试，而是脑袋里怀着对《守望先锋》的期待，净是我化身猎空拿着小手枪一边输出一边闪回的魔怔片段。</p>
+<p>  《守望先锋》，那是 2016 年横空出世的作品。我 2016 年中考，中考前的那段时间，我睡觉前总会看 Xbox One、<em>Minecraft</em> Xbox 版本和 GTA V 的宣传片，幻想有一天我也能拥有一台 Xbox One，也能与朋友在 GTA Online 的夕阳下就着电台驾车飞驰（在 2016 下半年到 2017 上半年实现了，彼时我因为做手术休养而休学，虽然遭了罪，但那时候更多的还是美好回忆，2016 到 2017 的时间，我配了电脑，玩了不少游戏，看了不少电影和剧，也读了一些小说，比如《三体》，还写了自己的程序）。呃，说回来。我在中考前一天晚上，有些睡不着，倒不是因为惧怕考试，而是脑袋里怀着对《守望先锋》的期待，净是我化身猎空拿着小手枪一边输出一边闪回的魔怔片段。</p>
 <p>  然而我到现在也没玩过《守望先锋》。一方面是，那时候的价格对我来说也不便宜了；但更重要的是，我有些完美主义，不愿接受国服游戏对血液的和谐效果，而《守望先锋》的和谐效果不像《魔兽世界》、 CS:GO 或 <em>Dota2</em> 那样可以修复的。其实，我是根本不愿接受单独把中国区独立出来，数据与世界上其他的服务器不同步这种代理方式。就是这种做法，在国服暴雪游戏停服之际，才催生了“电子骨灰盒”这一国服特供技术和调侃的说法。所以我从来没玩过《守望先锋》。</p>
 <p>  但我了解一些故事。漓江塔的“恒宇”宇航员模型，指的是“吴恒宇”这个在《守望先锋》发售前见义勇为牺牲的大学生，他最后的消息表达了他对《守望先锋》的期待。暴雪于是在游戏里为他留下了纪念。</p>
 <p>  暴雪与网易的这次分家，很多人把原因归结于鲍比·考迪克的贪婪。我不能说这是否就是根本原因，但一定是跟考迪克脱不了关系的，因为这种事情，他说了算。鲍比·考迪克是动视那边的人，在动视和暴雪合并后，暴雪当然也归他管。考迪克有许多恶劣行径，声名狼藉，但他做了啥，我不太记得了……我好忘。如果你想了解，可以听机核网的节目，讲了动视和暴雪起家的故事。</p>
@@ -3489,14 +3489,14 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  哦对了，《魔兽世界》灰机 Wiki 上的“冬泉谷”页面是我搬运翻译的，那应该是 2018 年十一期间干的。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>这篇文章是 <a class="link" href="https://mp.weixin.qq.com/s/cHQNuIkBfFcJ6Kpf499rOA">《面对国服的烂摊子，一群魔兽玩家打算“拯救世界”》 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"/></a>。</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/><category term="奇幻" scheme="https://his2nd.life/tags/fantasy/"/></entry><entry><title>暴露在公网，没事别开 Allow LAN！</title><link href="https://his2nd.life/posts/4fb28447.html"/><id>https://his2nd.life/posts/4fb28447.html</id><published>2023-01-23 18:21:08</published><updated>2023-01-23 18:21:08</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/4fb28447.html 查看此页面以获得更佳的排版。</b></p><hr><p>或者我该说，配置好防火墙？我今天才发现这个问题，在这之前，我的 NAS 不知道被操了多少遍了……</p>
+]]></content><summary type="html"><p>这篇文章是 <a class="link" href="https://mp.weixin.qq.com/s/cHQNuIkBfFcJ6Kpf499rOA">《面对国服的烂摊子，一群魔兽玩家打算“拯救世界”》 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"/></a>。</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/><category term="奇幻" scheme="https://his2nd.life/tags/fantasy/"/></entry><entry><title>暴露在公网，没事别开 Allow LAN！</title><link href="https://his2nd.life/posts/4fb28447.html"/><id>https://his2nd.life/posts/4fb28447.html</id><published>2023-01-23 18:21:08</published><updated>2023-01-23 18:21:08</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/4fb28447.html 查看此页面以获得更佳的排版。</b></p><hr><p>或者我该说，配置好防火墙？我今天才发现这个问题，在这之前，我的 NAS 不知道被操了多少遍了……</p>
 <span id="more"></span>
 <hr>
 <p>太长不看：<a class="link"   href="https://github.com/Fndroid/clash_for_windows_pkg/issues/2769" >《[Bug]: 如果发现自己Clash资源占用率极高/日志卡死/连接数异常增加，请考虑关闭Allow-Lan》 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p>  草他妈的，今天一开电脑发现网不好使，Clash 一看，流量干超了。上机场后台看，好像是凌晨三点多吧，被刷了大量流量，节点是我 24 小时开机的 NAS 用的节点，遂怀疑是 NAS 上 PT 下载配置不当或中毒了。我之前 PT 下载不小心走了全局代理被暂时标记为盒子，所以之后长记性了，特意调好的，这次应该不是它的问题啊。卡巴斯基全盘扫描一遍，没有可疑项目。并且最近我发现 Clash 占用大量内存，一度怀疑是内存泄露。去 <code>Connections</code> 页面看，全是些垃圾域名的连接。去群里问，有人说什么“局域网泄露”，遂把 <code>Allow LAN</code> 关了试试，症状居然消失了！但具体是怎么跟 <code>Allow LAN</code> 有关系的我也不知道。我知道我这台 NAS 暴露在公网下，但我以为 <code>Allow LAN</code> 是安全的，就没多想。后来为了确定关键是否就是 <code>Allow LAN</code>，搜索关键词 <code>Clash</code>、<code>Allow LAN</code>、<code>bug</code>，结果第一条就指出了这个问题，症状和条件一模一样！这回知道了，<code>Allow LAN</code> 在这种情况下并不安全，以后不能手贱随便点开了。我之前以为在本机上手动配置代理为 <code>127.0.0.1:7890</code> 就需要开 <code>Allow LAN</code>，但现在寻思应该是用不着。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>或者我该说，配置好防火墙？我今天才发现这个问题，在这之前，我的 NAS 不知道被操了多少遍了……</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>写在《流浪地球 2》上映后</title><link href="https://his2nd.life/posts/bf6e4885.html"/><id>https://his2nd.life/posts/bf6e4885.html</id><published>2023-01-22 19:15:48</published><updated>2023-01-23 23:38:46</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/bf6e4885.html 查看此页面以获得更佳的排版。</b></p><hr><p>大年初一的节目全部结束，感谢收看！</p>
+]]></content><summary type="html"><p>或者我该说，配置好防火墙？我今天才发现这个问题，在这之前，我的 NAS 不知道被操了多少遍了……</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>写在《流浪地球 2》上映后</title><link href="https://his2nd.life/posts/bf6e4885.html"/><id>https://his2nd.life/posts/bf6e4885.html</id><published>2023-01-22 19:15:48</published><updated>2023-01-23 23:38:46</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/bf6e4885.html 查看此页面以获得更佳的排版。</b></p><hr><p>大年初一的节目全部结束，感谢收看！</p>
 <span id="more"></span>
 <hr>
 <p>  握草，“50 岁以上出列”我就根本绷不住泪了，或者说，我其实就没有在忍，我一直是试图让影片主导我的情绪的。</p>
@@ -3510,7 +3510,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  确实是有机核图标的，与新浪微博在同一画面。另外，人员名单里把“白广大”打成了“白大广”，已经成了一个梗。“小五”说预计初春后上映幕后纪录片，对，上映，他说“甚至可以期待一下纪录片上院线”。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>大年初一的节目全部结束，感谢收看！</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>今天是除夕</title><link href="https://his2nd.life/posts/a6b8e5c9.html"/><id>https://his2nd.life/posts/a6b8e5c9.html</id><published>2023-01-21 20:34:19</published><updated>2023-01-21 20:34:19</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/a6b8e5c9.html 查看此页面以获得更佳的排版。</b></p><hr><p>是，当然是除夕！这他妈什么标题？！像这种琐碎的（朋友圈）小片段，我通常不会写一篇博文，而是把它们放在“树洞”页面，树洞里的文字不知道什么时候就删掉了，但是，今天是除夕啊，除夕写的东西就应该……长期保存。哈，狗屁不通。我有了另一种思维——这是我的博客，我想写什么就写什么，不应该在乎什么文章质量和其他人的看法（甚至是之后我自己的看法），因为我几乎没做过任何保证。这里就该是我发疯的地方，天经地义！我自己的博客我不在这发疯，留着给别人疯吗？不时发发疯才能保证长期下来不疯不是么……所以我呼吁，大家一起发疯！反正……在网络上就算咱是条狗别人也不会知道，也不可能顺着网线给咱一巴掌。呃……“发疯”是一种形象、夸张的幽默说法，描述我有时候写的那些东扯西扯，没什么道理的“长篇大论”（朋友圈“小”片段）。我好着呢。</p>
+]]></content><summary type="html"><p>大年初一的节目全部结束，感谢收看！</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>今天是除夕</title><link href="https://his2nd.life/posts/a6b8e5c9.html"/><id>https://his2nd.life/posts/a6b8e5c9.html</id><published>2023-01-21 20:34:19</published><updated>2023-01-21 20:34:19</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/a6b8e5c9.html 查看此页面以获得更佳的排版。</b></p><hr><p>是，当然是除夕！这他妈什么标题？！像这种琐碎的（朋友圈）小片段，我通常不会写一篇博文，而是把它们放在“树洞”页面，树洞里的文字不知道什么时候就删掉了，但是，今天是除夕啊，除夕写的东西就应该……长期保存。哈，狗屁不通。我有了另一种思维——这是我的博客，我想写什么就写什么，不应该在乎什么文章质量和其他人的看法（甚至是之后我自己的看法），因为我几乎没做过任何保证。这里就该是我发疯的地方，天经地义！我自己的博客我不在这发疯，留着给别人疯吗？不时发发疯才能保证长期下来不疯不是么……所以我呼吁，大家一起发疯！反正……在网络上就算咱是条狗别人也不会知道，也不可能顺着网线给咱一巴掌。呃……“发疯”是一种形象、夸张的幽默说法，描述我有时候写的那些东扯西扯，没什么道理的“长篇大论”（朋友圈“小”片段）。我好着呢。</p>
 <span id="more"></span>
 <hr>
 <p>  （酒是中午喝的，疯是下午和晚上发的。这首歌的几个音节莫名其妙出现在我的脑海里，让我回想起在黎明镇——《辐射 新维加斯》中的地点——的废墟闲逛的日子，所以加在了这里。）</p>
@@ -3529,7 +3529,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  哦，几年前还有一次也是差点晕喽。我不知道为什么，也许是太困了，有事，翻身又猛了，反正我那时赶紧睡了一觉，就好了。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>是，当然是除夕！这他妈什么标题？！像这种琐碎的（朋友圈）小片段，我通常不会写一篇博文，而是把它们放在“树洞”页面，树洞里的文字不知道什么时候就删掉了，但是，今天是除夕啊，除夕写的东西就应该……长期保存。哈，狗屁不通。我有了另一种思维——这是我的博客，我想写什么就写什么，不应该在乎什么文章质量和其他人的看法（甚至是之后我自己的看法），因为我几乎没做过任何保证。这里就该是我发疯的地方，天经地义！我自己的博客我不在这发疯，留着给别人疯吗？不时发发疯才能保证长期下来不疯不是么……所以我呼吁，大家一起发疯！反正……在网络上就算咱是条狗别人也不会知道，也不可能顺着网线给咱一巴掌。呃……“发疯”是一种形象、夸张的幽默说法，描述我有时候写的那些东扯西扯，没什么道理的“长篇大论”（朋友圈“小”片段）。我好着呢。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/><category term="甲醇文学" scheme="https://his2nd.life/tags/hejiajiule/"/></entry><entry><title>《深海》点映</title><link href="https://his2nd.life/posts/92a2750a.html"/><id>https://his2nd.life/posts/92a2750a.html</id><published>2023-01-19 23:39:00</published><updated>2023-01-31 22:10:55</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/92a2750a.html 查看此页面以获得更佳的排版。</b></p><hr><p>我已经很少在博客上写观后感了。但是，这是我第一次看点映场，所以还是记下来吧。</p>
+]]></content><summary type="html"><p>是，当然是除夕！这他妈什么标题？！像这种琐碎的（朋友圈）小片段，我通常不会写一篇博文，而是把它们放在“树洞”页面，树洞里的文字不知道什么时候就删掉了，但是，今天是除夕啊，除夕写的东西就应该……长期保存。哈，狗屁不通。我有了另一种思维——这是我的博客，我想写什么就写什么，不应该在乎什么文章质量和其他人的看法（甚至是之后我自己的看法），因为我几乎没做过任何保证。这里就该是我发疯的地方，天经地义！我自己的博客我不在这发疯，留着给别人疯吗？不时发发疯才能保证长期下来不疯不是么……所以我呼吁，大家一起发疯！反正……在网络上就算咱是条狗别人也不会知道，也不可能顺着网线给咱一巴掌。呃……“发疯”是一种形象、夸张的幽默说法，描述我有时候写的那些东扯西扯，没什么道理的“长篇大论”（朋友圈“小”片段）。我好着呢。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/><category term="甲醇文学" scheme="https://his2nd.life/tags/hejiajiule/"/></entry><entry><title>《深海》点映</title><link href="https://his2nd.life/posts/92a2750a.html"/><id>https://his2nd.life/posts/92a2750a.html</id><published>2023-01-19 23:39:00</published><updated>2023-01-31 22:10:55</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/92a2750a.html 查看此页面以获得更佳的排版。</b></p><hr><p>我已经很少在博客上写观后感了。但是，这是我第一次看点映场，所以还是记下来吧。</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -3552,7 +3552,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <hr>
 <p>  完。</p>
 <p>  我想，我蓝牙耳机丢在电影院了……</p>
-]]></content><summary type="html"><p>我已经很少在博客上写观后感了。但是，这是我第一次看点映场，所以还是记下来吧。</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="动画" scheme="https://his2nd.life/tags/animation/"/><category term="奇幻" scheme="https://his2nd.life/tags/fantasy/"/></entry><entry><title>2022 年末的一条分享和吐槽朋友圈，怎么就成了《海伯利安》的安利……</title><link href="https://his2nd.life/posts/8b5de3f6.html"/><id>https://his2nd.life/posts/8b5de3f6.html</id><published>2022-12-31 23:58:26</published><updated>2023-11-23 22:40:51</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/8b5de3f6.html 查看此页面以获得更佳的排版。</b></p><hr><p>又怎么，成了读书笔记？！</p>
+]]></content><summary type="html"><p>我已经很少在博客上写观后感了。但是，这是我第一次看点映场，所以还是记下来吧。</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="动画" scheme="https://his2nd.life/tags/animation/"/><category term="奇幻" scheme="https://his2nd.life/tags/fantasy/"/></entry><entry><title>2022 年末的一条分享和吐槽朋友圈，怎么就成了《海伯利安》的安利……</title><link href="https://his2nd.life/posts/8b5de3f6.html"/><id>https://his2nd.life/posts/8b5de3f6.html</id><published>2022-12-31 23:58:26</published><updated>2023-11-23 22:40:51</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/8b5de3f6.html 查看此页面以获得更佳的排版。</b></p><hr><p>又怎么，成了读书笔记？！</p>
 <span id="more"></span>
 <hr>
 <p>  今年就公开展示了两篇博文，现在可以再加一篇了……以下是条写得太长的朋友圈（但不是我写过最长的，而且略有修改），原本只是想分享和吐槽一下豆瓣上“2022 我的最爱”，结果《海伯利安》的部分写了两大段，以至于发在“随笔”栏目都有些长了，（加上可能的后续）已经达到一篇博文的篇幅了，那就正好再开一篇吧。</p>
@@ -3639,7 +3639,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  劳尔经由卢瑟斯、弗洛伊德星、永埔星来到维图-格雷-巴里亚那斯 B。在这里，劳尔肾结石发作，疼得倒地，叫当地的一户人家抬走照顾。他在圣神医生的治疗下恢复了一部分精力。然而，圣神医生对他使用了吐真剂，他将自己的身份、来源说得清清楚楚，只是由于太离谱，被医生认为是他产生的幻觉。吗啡带来的平静睡梦里，劳尔像鹰一样在天上看着几个月前的自己在旧地的老建筑师营地和伊妮娅聊天。梦中的伊妮娅说，马丁在讲述《诗篇》的故事时，犯下的最大错误就是相信云门告诉约翰·济慈赛博体的话——云门对约翰·济慈赛博体说的话都是谎言；另一个严重错误是在《诗篇》中将内核塑造为人类的敌人。她还表示，云门公案中，既是机械之子又是人类之子的混血儿，吸引逃之夭夭的移情的庇护所，像三十几代人供奉的神一样的人，被认为是约翰·济慈赛博人，是马丁的误解；他们创造那几个济慈赛博人，并不是为了引诱移情，那些赛博人并不是庇护所，而只是作为内核和人类合二为一的工具，换句话说，是为了制造一个孩子。当然，这个孩子就是伊妮娅。伊妮娅说她在做梦和想象时能看到未来发生的事，看见劳尔在几个月后梦到这些谈话，当时他正躺在床上，恐怕还经历着可怕的痛楚，他所在的星球拥有一个复杂的名字，而收容他的那家人，身上的衣服都是蓝色的。她说得分毫不差。我相信伊妮娅确实有这个能力；只是有趣的是，此次谈话也是劳尔梦到的，按理说也不一定是真的。</p>
 <hr>
 <p>  未完待续……？</p>
-]]></content><summary type="html"><p>又怎么，成了读书笔记？！</p></summary><category term="书籍" scheme="https://his2nd.life/categories/books/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>城探 Vol.4：哈药集团制药二厂</title><link href="https://his2nd.life/posts/6ce46276.html"/><id>https://his2nd.life/posts/6ce46276.html</id><published>2022-08-18 20:15:36</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/6ce46276.html 查看此页面以获得更佳的排版。</b></p><hr><p>那一天，Hollis 终于回想起了……他的博客账号密码。开玩笑的，我其实都没有什么“博客账号”。</p>
+]]></content><summary type="html"><p>又怎么，成了读书笔记？！</p></summary><category term="书籍" scheme="https://his2nd.life/categories/books/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>城探 Vol.4：哈药集团制药二厂</title><link href="https://his2nd.life/posts/6ce46276.html"/><id>https://his2nd.life/posts/6ce46276.html</id><published>2022-08-18 20:15:36</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/6ce46276.html 查看此页面以获得更佳的排版。</b></p><hr><p>那一天，Hollis 终于回想起了……他的博客账号密码。开玩笑的，我其实都没有什么“博客账号”。</p>
 <span id="more"></span>
 <hr>
 
@@ -4096,7 +4096,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>那一天，Hollis 终于回想起了……他的博客账号密码。开玩笑的，我其实都没有什么“博客账号”。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/><category term="城市探险" scheme="https://his2nd.life/tags/urban-exploration/"/></entry><entry><title>前端瞎几把记 HTML、CSS 篇</title><link href="https://his2nd.life/posts/22d0fa2f.html"/><id>https://his2nd.life/posts/22d0fa2f.html</id><published>2022-02-04 16:49:26</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/22d0fa2f.html 查看此页面以获得更佳的排版。</b></p><hr><p>生化环材，得趁早润；有用没用，随便写写。</p>
+]]></content><summary type="html"><p>那一天，Hollis 终于回想起了……他的博客账号密码。开玩笑的，我其实都没有什么“博客账号”。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/><category term="城市探险" scheme="https://his2nd.life/tags/urban-exploration/"/></entry><entry><title>前端瞎几把记 HTML、CSS 篇</title><link href="https://his2nd.life/posts/22d0fa2f.html"/><id>https://his2nd.life/posts/22d0fa2f.html</id><published>2022-02-04 16:49:26</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/22d0fa2f.html 查看此页面以获得更佳的排版。</b></p><hr><p>生化环材，得趁早润；有用没用，随便写写。</p>
 <span id="more"></span>
 <hr>
 <p>  JavaScript、TypeScript 篇没写（完）呢。</p>
@@ -4589,7 +4589,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 </ul>
 <hr>
 <p>  未完待续……？</p>
-]]></content><summary type="html"><p>生化环材，得趁早润；有用没用，随便写写。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/><category term="瞎几把记" scheme="https://his2nd.life/tags/xjbj/"/><category term="前端" scheme="https://his2nd.life/tags/front-end/"/><category term="HTML" scheme="https://his2nd.life/tags/html/"/><category term="CSS" scheme="https://his2nd.life/tags/css/"/></entry><entry><title>人类补没补完不知道，我差不多是补完了</title><link href="https://his2nd.life/posts/6cc6508f.html"/><id>https://his2nd.life/posts/6cc6508f.html</id><published>2021-08-14 00:18:21</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/6cc6508f.html 查看此页面以获得更佳的排版。</b></p><hr><p>EVA 还是 tm 那个 EVA，看不懂……</p>
+]]></content><summary type="html"><p>生化环材，得趁早润；有用没用，随便写写。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/><category term="瞎几把记" scheme="https://his2nd.life/tags/xjbj/"/><category term="前端" scheme="https://his2nd.life/tags/front-end/"/><category term="HTML" scheme="https://his2nd.life/tags/html/"/><category term="CSS" scheme="https://his2nd.life/tags/css/"/></entry><entry><title>人类补没补完不知道，我差不多是补完了</title><link href="https://his2nd.life/posts/6cc6508f.html"/><id>https://his2nd.life/posts/6cc6508f.html</id><published>2021-08-14 00:18:21</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/6cc6508f.html 查看此页面以获得更佳的排版。</b></p><hr><p>EVA 还是 tm 那个 EVA，看不懂……</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -4615,7 +4615,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  然而我还是看不懂那些神叨的玩意儿……</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>EVA 还是 tm 那个 EVA，看不懂……</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/><category term="动画" scheme="https://his2nd.life/tags/animation/"/></entry><entry><title>“钉钉自动填报”手册</title><link href="https://his2nd.life/posts/5c3f7b01.html"/><id>https://his2nd.life/posts/5c3f7b01.html</id><published>2021-08-06 19:41:57</published><updated>2023-01-09 10:04:26</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/5c3f7b01.html 查看此页面以获得更佳的排版。</b></p><hr><p>本文将指导您使用“钉钉自动填报”程序。</p>
+]]></content><summary type="html"><p>EVA 还是 tm 那个 EVA，看不懂……</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/><category term="动画" scheme="https://his2nd.life/tags/animation/"/></entry><entry><title>“钉钉自动填报”手册</title><link href="https://his2nd.life/posts/5c3f7b01.html"/><id>https://his2nd.life/posts/5c3f7b01.html</id><published>2021-08-06 19:41:57</published><updated>2023-01-09 10:04:26</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/5c3f7b01.html 查看此页面以获得更佳的排版。</b></p><hr><p>本文将指导您使用“钉钉自动填报”程序。</p>
 <span id="more"></span>
 <hr>
 <p>写在前面（2023/1/8）</p>
@@ -4689,7 +4689,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  如果您曾经强制使“钉钉自动填报”停止运行（关掉后台不算，强制停止运行需要在“应用信息”页面触发），可能需要重新设置无障碍服务。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>本文将指导您使用“钉钉自动填报”程序。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>亚布力，我又来了</title><link href="https://his2nd.life/posts/a571d75b.html"/><id>https://his2nd.life/posts/a571d75b.html</id><published>2021-07-25 21:49:05</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/a571d75b.html 查看此页面以获得更佳的排版。</b></p><hr><p>这次有幸体验到了滑道，就是……</p>
+]]></content><summary type="html"><p>本文将指导您使用“钉钉自动填报”程序。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>亚布力，我又来了</title><link href="https://his2nd.life/posts/a571d75b.html"/><id>https://his2nd.life/posts/a571d75b.html</id><published>2021-07-25 21:49:05</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/a571d75b.html 查看此页面以获得更佳的排版。</b></p><hr><p>这次有幸体验到了滑道，就是……</p>
 <span id="more"></span>
 <hr>
 <p>  这周末，我随着舅舅和他的那些同事再次拜访了亚布力。</p>
@@ -4712,7 +4712,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>这次有幸体验到了滑道，就是……</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="游记" scheme="https://his2nd.life/tags/travel-note/"/><category term="甲醇文学" scheme="https://his2nd.life/tags/hejiajiule/"/></entry><entry><title>登上了 122 中的“最高峰”</title><link href="https://his2nd.life/posts/63e6bf36.html"/><id>https://his2nd.life/posts/63e6bf36.html</id><published>2021-07-10 21:18:40</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/63e6bf36.html 查看此页面以获得更佳的排版。</b></p><hr><p>已同步。</p>
+]]></content><summary type="html"><p>这次有幸体验到了滑道，就是……</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="游记" scheme="https://his2nd.life/tags/travel-note/"/><category term="甲醇文学" scheme="https://his2nd.life/tags/hejiajiule/"/></entry><entry><title>登上了 122 中的“最高峰”</title><link href="https://his2nd.life/posts/63e6bf36.html"/><id>https://his2nd.life/posts/63e6bf36.html</id><published>2021-07-10 21:18:40</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/63e6bf36.html 查看此页面以获得更佳的排版。</b></p><hr><p>已同步。</p>
 <span id="more"></span>
 <hr>
 <p>  上学那会儿就一直想去 122 中最高的楼的楼顶看看，可是一直锁门，上不去。但今天，学校举办了中考座谈会，地点就在那栋楼里，而且校园开放，让我得以上去一探究竟。唯一的问题是……回来的时候忘了关窗户……</p>
@@ -4832,7 +4832,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片 17</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>已同步。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>6 月 13 日的碎碎念</title><link href="https://his2nd.life/posts/cd1d7705.html"/><id>https://his2nd.life/posts/cd1d7705.html</id><published>2021-06-13 22:46:53</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/cd1d7705.html 查看此页面以获得更佳的排版。</b></p><hr><p>我是傻逼。</p>
+]]></content><summary type="html"><p>已同步。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>6 月 13 日的碎碎念</title><link href="https://his2nd.life/posts/cd1d7705.html"/><id>https://his2nd.life/posts/cd1d7705.html</id><published>2021-06-13 22:46:53</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/cd1d7705.html 查看此页面以获得更佳的排版。</b></p><hr><p>我是傻逼。</p>
 <span id="more"></span>
 <hr>
 
@@ -4907,7 +4907,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片 9</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>我是傻逼。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/><category term="骑行" scheme="https://his2nd.life/tags/cycling/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>用 Blender 制作一个甜甜圈</title><link href="https://his2nd.life/posts/2edcaad5.html"/><id>https://his2nd.life/posts/2edcaad5.html</id><published>2021-05-19 19:05:16</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/2edcaad5.html 查看此页面以获得更佳的排版。</b></p><hr><p>Guru 的甜甜圈制作教程是非常经典的教程了。</p>
+]]></content><summary type="html"><p>我是傻逼。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/><category term="骑行" scheme="https://his2nd.life/tags/cycling/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>用 Blender 制作一个甜甜圈</title><link href="https://his2nd.life/posts/2edcaad5.html"/><id>https://his2nd.life/posts/2edcaad5.html</id><published>2021-05-19 19:05:16</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/2edcaad5.html 查看此页面以获得更佳的排版。</b></p><hr><p>Guru 的甜甜圈制作教程是非常经典的教程了。</p>
 <span id="more"></span>
 <hr>
 <p>  这两天照着 Guru 的教程做了一个甜甜圈。其实之前就尝试着做过一个，但那次是自由发挥，打算做一个屎形状的，然后失败了……但就恶心人的效果来看，倒也成功了。这次是老老实实照着教程一步步做的，虽然不像 Guru 的那么真实，反正是不会恶心人了。</p>
@@ -4929,7 +4929,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>Guru 的甜甜圈制作教程是非常经典的教程了。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="3D" scheme="https://his2nd.life/tags/3d/"/><category term="Blender" scheme="https://his2nd.life/tags/blender/"/></entry><entry><title>《爱，死亡和机器人》第二季播出</title><link href="https://his2nd.life/posts/a9296a55.html"/><id>https://his2nd.life/posts/a9296a55.html</id><published>2021-05-16 20:53:25</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/a9296a55.html 查看此页面以获得更佳的排版。</b></p><hr><p>Love, Death &amp; Robots</p>
+]]></content><summary type="html"><p>Guru 的甜甜圈制作教程是非常经典的教程了。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="3D" scheme="https://his2nd.life/tags/3d/"/><category term="Blender" scheme="https://his2nd.life/tags/blender/"/></entry><entry><title>《爱，死亡和机器人》第二季播出</title><link href="https://his2nd.life/posts/a9296a55.html"/><id>https://his2nd.life/posts/a9296a55.html</id><published>2021-05-16 20:53:25</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/a9296a55.html 查看此页面以获得更佳的排版。</b></p><hr><p>Love, Death &amp; Robots</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -5082,7 +5082,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  2019 年大火的 Netflix 动画《爱，死亡和机器人》近日播出了它的第二季。与第一季相比，18 集的篇幅缩减为 8 集。第一季中，《目击者》（类似《恐怖游轮》的故事，风格与《蜘蛛侠：平行宇宙》相似，因为制作人是相同的）《天鹰座裂谷之外》（写实风格，极致诱惑，现实结局）《打猎愉快》（拥有中国神话与蒸汽朋克相结合的背景，改编自刘宇昆的作品，同时刘宇昆也是《三体》英文版的译者）《援助之手》（表现了在太空中极端状况下的无助之感）《齐马蓝》（机器人的返璞归真，在经历了一切之后追寻最初的美好记忆）《冰河时代》（有很奇妙的构想）这几集我都很喜欢，当然，最喜欢的是《齐马蓝》。而第二季中，《冰》（风格与《齐马蓝》相似，人物动作流畅，色彩和光影表现出色）《突击小队》（写实风格，废墟与植被令人印象深刻）《沙漠中的史诺》（写实风格，血浆洒得带劲儿，女人露出一半的机械义体十分酷）《救生舱》（第二季中最逼真的画面）《溺毙的巨人》（写实风格，有轻松的氛围和精美的画面）都不错，而我最喜欢的，是《溺毙的巨人》。因为篇幅大幅缩减，第二季中并没有出现像第一季那么多的令人眼前一亮的作品，所以整体上，第二季的评分也不及第一季，不过拿来消遣仍然是不错的。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>Love, Death &amp; Robots</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/><category term="动画" scheme="https://his2nd.life/tags/animation/"/></entry><entry><title>跳集体舞？不，我选择骑车出来玩儿！</title><link href="https://his2nd.life/posts/12af4e31.html"/><id>https://his2nd.life/posts/12af4e31.html</id><published>2021-05-10 22:27:26</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/12af4e31.html 查看此页面以获得更佳的排版。</b></p><hr><p>众所周知，我们学校有个“非物质文化遗产”叫集体舞……</p>
+]]></content><summary type="html"><p>Love, Death &amp; Robots</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/><category term="动画" scheme="https://his2nd.life/tags/animation/"/></entry><entry><title>跳集体舞？不，我选择骑车出来玩儿！</title><link href="https://his2nd.life/posts/12af4e31.html"/><id>https://his2nd.life/posts/12af4e31.html</id><published>2021-05-10 22:27:26</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/12af4e31.html 查看此页面以获得更佳的排版。</b></p><hr><p>众所周知，我们学校有个“非物质文化遗产”叫集体舞……</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -5132,7 +5132,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  这次就骑车，途径哈尔滨大剧院，去太阳岛上转悠了一圈。但当时天已经黑了，岛内又缺少照明，因此几乎看不到什么风景了。我小时候在电视广告上看到的“月亮湾电视城”应该也就坐落在岛内，但我路过时看到它附近也是一片漆黑，它似乎不再营业了。另外，惊喜的是，我竟然发现了一尊公用电话亭，尽管它已经无法正常使用了。环岛骑行时还路过了缆车设施，这里的缆车我在两三年前坐过。最后经由公路大桥、友谊路、松浦大桥返回了学校。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>众所周知，我们学校有个“非物质文化遗产”叫集体舞……</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="骑行" scheme="https://his2nd.life/tags/cycling/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>值得一玩的 FPS 佳作——《泰坦天降 2》</title><link href="https://his2nd.life/posts/91c9abe0.html"/><id>https://his2nd.life/posts/91c9abe0.html</id><published>2021-05-10 00:46:20</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/91c9abe0.html 查看此页面以获得更佳的排版。</b></p><hr><p>“库柏，相信我。”</p>
+]]></content><summary type="html"><p>众所周知，我们学校有个“非物质文化遗产”叫集体舞……</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="骑行" scheme="https://his2nd.life/tags/cycling/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>值得一玩的 FPS 佳作——《泰坦天降 2》</title><link href="https://his2nd.life/posts/91c9abe0.html"/><id>https://his2nd.life/posts/91c9abe0.html</id><published>2021-05-10 00:46:20</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/91c9abe0.html 查看此页面以获得更佳的排版。</b></p><hr><p>“库柏，相信我。”</p>
 <span id="more"></span>
 <hr>
 
@@ -5310,7 +5310,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  《泰坦天降》系列的新作也许还遥遥无期，但总是值得期待的。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>“库柏，相信我。”</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>《极乐迪斯科》：诗一般的角色扮演游戏</title><link href="https://his2nd.life/posts/b05d0e3b.html"/><id>https://his2nd.life/posts/b05d0e3b.html</id><published>2021-05-05 21:42:01</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/b05d0e3b.html 查看此页面以获得更佳的排版。</b></p><hr><p>“第一次死亡是在心里的，哈里。”</p>
+]]></content><summary type="html"><p>“库柏，相信我。”</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>《极乐迪斯科》：诗一般的角色扮演游戏</title><link href="https://his2nd.life/posts/b05d0e3b.html"/><id>https://his2nd.life/posts/b05d0e3b.html</id><published>2021-05-05 21:42:01</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/b05d0e3b.html 查看此页面以获得更佳的排版。</b></p><hr><p>“第一次死亡是在心里的，哈里。”</p>
 <span id="more"></span>
 <hr>
 <p><a class="link"   href="https://www.gog.com/game/disco_elysium" >GOG.com 上的 极乐迪斯科 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
@@ -5502,7 +5502,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  上面这段文字，大部分是我在昨天完成游戏后打的。我其实还有许多想要表达的内容，但是……“表达”这个任务，对我来说还是太过艰巨，太累人了。如果你想了解更多关于《极乐迪斯科》的趣事，我推荐你逛一逛 <a class="link"   href="https://www.gcores.com/collections/90" >机核网的这个专题 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>“第一次死亡是在心里的，哈里。”</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/></entry><entry><title>越想越亏</title><link href="https://his2nd.life/posts/dce223ef.html"/><id>https://his2nd.life/posts/dce223ef.html</id><published>2021-04-28 21:52:48</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/dce223ef.html 查看此页面以获得更佳的排版。</b></p><hr><p>和骗子聊了二十分钟，到最后也没骂他，我真是好心。</p>
+]]></content><summary type="html"><p>“第一次死亡是在心里的，哈里。”</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/></entry><entry><title>越想越亏</title><link href="https://his2nd.life/posts/dce223ef.html"/><id>https://his2nd.life/posts/dce223ef.html</id><published>2021-04-28 21:52:48</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/dce223ef.html 查看此页面以获得更佳的排版。</b></p><hr><p>和骗子聊了二十分钟，到最后也没骂他，我真是好心。</p>
 <span id="more"></span>
 <hr>
 <p>  今天被人骗了一半。一个自称是淘宝店客服的人给我打电话，说我被他们错误标记为代理商了，银联即将进行业务扣款，他问我要不要取消这项业务，他可以帮我转接银行客服。Jesus fucking christ，我当时是怎么“相信”他们这段狗屁不通的话的？！</p>
@@ -5511,7 +5511,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  这里面还有一些值得思考的问题。骗子给我打电话时，提供的订单信息是真实的，他是从哪里得到这个订单信息的？是不是淘宝店把我的信息给卖了呢？“我看不懂，但我大受震撼。”</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>和骗子聊了二十分钟，到最后也没骂他，我真是好心。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/></entry><entry><title>“爱在……”系列</title><link href="https://his2nd.life/posts/3667c594.html"/><id>https://his2nd.life/posts/3667c594.html</id><published>2021-04-25 23:28:17</published><updated>2023-01-09 10:04:26</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/3667c594.html 查看此页面以获得更佳的排版。</b></p><hr><p>真是甜到我了！</p>
+]]></content><summary type="html"><p>和骗子聊了二十分钟，到最后也没骂他，我真是好心。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="啰里啰唆" scheme="https://his2nd.life/tags/blah-blah-blah/"/></entry><entry><title>“爱在……”系列</title><link href="https://his2nd.life/posts/3667c594.html"/><id>https://his2nd.life/posts/3667c594.html</id><published>2021-04-25 23:28:17</published><updated>2023-01-09 10:04:26</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/3667c594.html 查看此页面以获得更佳的排版。</b></p><hr><p>真是甜到我了！</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -5567,7 +5567,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  影片以时光穿越的杰西和傻女孩赛琳的角色扮演对话结束，似乎他们俩又和好了。九年后的 2022 年，第四部没有上映，不知道在那个世界里，他们生活得如何。你俩啊，锁死行不行啊？</p>
 <hr>
 <p>  未完待续……？还有没有第四部了？！</p>
-]]></content><summary type="html"><p>真是甜到我了！</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/></entry><entry><title>《阳光灿烂的日子》</title><link href="https://his2nd.life/posts/3f1c96e0.html"/><id>https://his2nd.life/posts/3f1c96e0.html</id><published>2021-04-25 00:27:39</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/3f1c96e0.html 查看此页面以获得更佳的排版。</b></p><hr><p>“古伦木！”“傻逼！”</p>
+]]></content><summary type="html"><p>真是甜到我了！</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/></entry><entry><title>《阳光灿烂的日子》</title><link href="https://his2nd.life/posts/3f1c96e0.html"/><id>https://his2nd.life/posts/3f1c96e0.html</id><published>2021-04-25 00:27:39</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/3f1c96e0.html 查看此页面以获得更佳的排版。</b></p><hr><p>“古伦木！”“傻逼！”</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -5590,7 +5590,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  喜欢到就算只有寥寥几字，我也想将它表达出来。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>“古伦木！”“傻逼！”</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/></entry><entry><title>4 月 3 日清明节假期骑行</title><link href="https://his2nd.life/posts/df8b9740.html"/><id>https://his2nd.life/posts/df8b9740.html</id><published>2021-04-03 14:55:56</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/df8b9740.html 查看此页面以获得更佳的排版。</b></p><hr><p>顶风冲上坡那个酸爽……</p>
+]]></content><summary type="html"><p>“古伦木！”“傻逼！”</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/></entry><entry><title>4 月 3 日清明节假期骑行</title><link href="https://his2nd.life/posts/df8b9740.html"/><id>https://his2nd.life/posts/df8b9740.html</id><published>2021-04-03 14:55:56</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/df8b9740.html 查看此页面以获得更佳的排版。</b></p><hr><p>顶风冲上坡那个酸爽……</p>
 <span id="more"></span>
 <hr>
 <p>  清明节假期，学校车队说黑龙江高校自行车联盟正组织活动，从哈尔滨大剧院骑到萧红故居，我就报名参加了，甚至头一天下午就把车锁在哈尔滨大剧院附近了。</p>
@@ -5636,7 +5636,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片 6</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>顶风冲上坡那个酸爽……</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="骑行" scheme="https://his2nd.life/tags/cycling/"/></entry><entry><title>Black Mesa：对 Half-Life 的完美还原</title><link href="https://his2nd.life/posts/6bc7e4f7.html"/><id>https://his2nd.life/posts/6bc7e4f7.html</id><published>2021-03-31 23:56:43</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/6bc7e4f7.html 查看此页面以获得更佳的排版。</b></p><hr><p>The SOURCE of everything.</p>
+]]></content><summary type="html"><p>顶风冲上坡那个酸爽……</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="骑行" scheme="https://his2nd.life/tags/cycling/"/></entry><entry><title>Black Mesa：对 Half-Life 的完美还原</title><link href="https://his2nd.life/posts/6bc7e4f7.html"/><id>https://his2nd.life/posts/6bc7e4f7.html</id><published>2021-03-31 23:56:43</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/6bc7e4f7.html 查看此页面以获得更佳的排版。</b></p><hr><p>The SOURCE of everything.</p>
 <span id="more"></span>
 <hr>
 
@@ -5729,7 +5729,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>截图 12</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>The SOURCE of everything.</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>城探 Vol.3：哈尔滨铁道职业技术学院旧址</title><link href="https://his2nd.life/posts/e2da606e.html"/><id>https://his2nd.life/posts/e2da606e.html</id><published>2021-02-07 22:56:13</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/e2da606e.html 查看此页面以获得更佳的排版。</b></p><hr><p>“阴间人就要去阴间地方。”——“海森堡”</p>
+]]></content><summary type="html"><p>The SOURCE of everything.</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>城探 Vol.3：哈尔滨铁道职业技术学院旧址</title><link href="https://his2nd.life/posts/e2da606e.html"/><id>https://his2nd.life/posts/e2da606e.html</id><published>2021-02-07 22:56:13</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/e2da606e.html 查看此页面以获得更佳的排版。</b></p><hr><p>“阴间人就要去阴间地方。”——“海森堡”</p>
 <span id="more"></span>
 <hr>
 
@@ -6137,7 +6137,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>照片 62</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>“阴间人就要去阴间地方。”——“海森堡”</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="城市探险" scheme="https://his2nd.life/tags/urban-exploration/"/></entry><entry><title>这个寒假，我都看（玩）了些什么</title><link href="https://his2nd.life/posts/fadd3e14.html"/><id>https://his2nd.life/posts/fadd3e14.html</id><published>2021-01-29 10:41:28</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/fadd3e14.html 查看此页面以获得更佳的排版。</b></p><hr><p>又被疫情锁在家里了……</p>
+]]></content><summary type="html"><p>“阴间人就要去阴间地方。”——“海森堡”</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="城市探险" scheme="https://his2nd.life/tags/urban-exploration/"/></entry><entry><title>这个寒假，我都看（玩）了些什么</title><link href="https://his2nd.life/posts/fadd3e14.html"/><id>https://his2nd.life/posts/fadd3e14.html</id><published>2021-01-29 10:41:28</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/fadd3e14.html 查看此页面以获得更佳的排版。</b></p><hr><p>又被疫情锁在家里了……</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -6954,7 +6954,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>《死亡搁浅》截图 40</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>又被疫情锁在家里了……</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>《泰坦尼克号》：跨越世纪的经典</title><link href="https://his2nd.life/posts/80c38828.html"/><id>https://his2nd.life/posts/80c38828.html</id><published>2021-01-15 11:40:14</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/80c38828.html 查看此页面以获得更佳的排版。</b></p><hr><p>“You jump, I jump.”</p>
+]]></content><summary type="html"><p>又被疫情锁在家里了……</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>《泰坦尼克号》：跨越世纪的经典</title><link href="https://his2nd.life/posts/80c38828.html"/><id>https://his2nd.life/posts/80c38828.html</id><published>2021-01-15 11:40:14</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/80c38828.html 查看此页面以获得更佳的排版。</b></p><hr><p>“You jump, I jump.”</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -6980,7 +6980,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  然而，电影所展示的只是几个方面，是艺术加工的结果。<strong>但真实的情况又是怎么样的</strong>？或许我该找资料看看了。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>“You jump, I jump.”</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/></entry><entry><title>使用 Pkav HTTP Fuzzer 对校园网进行「安全测试」</title><link href="https://his2nd.life/posts/3380cd35.html"/><id>https://his2nd.life/posts/3380cd35.html</id><published>2020-12-23 23:25:47</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/3380cd35.html 查看此页面以获得更佳的排版。</b></p><hr><p>记得改掉默认密码！</p>
+]]></content><summary type="html"><p>“You jump, I jump.”</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/></entry><entry><title>使用 Pkav HTTP Fuzzer 对校园网进行「安全测试」</title><link href="https://his2nd.life/posts/3380cd35.html"/><id>https://his2nd.life/posts/3380cd35.html</id><published>2020-12-23 23:25:47</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/3380cd35.html 查看此页面以获得更佳的排版。</b></p><hr><p>记得改掉默认密码！</p>
 <span id="more"></span>
 <hr>
 <p>  <strong>Pkav HTTP Fuzzer 程序仅供安全测试使用！</strong></p>
@@ -7032,7 +7032,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 </ul>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>记得改掉默认密码！</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>《后翼弃兵》：现在，我发现我喜欢上了另一个 Elizabeth……</title><link href="https://his2nd.life/posts/efc1f250.html"/><id>https://his2nd.life/posts/efc1f250.html</id><published>2020-12-22 22:10:17</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/efc1f250.html 查看此页面以获得更佳的排版。</b></p><hr><p>女主角这表情和动作也太撩了……</p>
+]]></content><summary type="html"><p>记得改掉默认密码！</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>《后翼弃兵》：现在，我发现我喜欢上了另一个 Elizabeth……</title><link href="https://his2nd.life/posts/efc1f250.html"/><id>https://his2nd.life/posts/efc1f250.html</id><published>2020-12-22 22:10:17</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/efc1f250.html 查看此页面以获得更佳的排版。</b></p><hr><p>女主角这表情和动作也太撩了……</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -7442,7 +7442,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>女主角这表情和动作也太撩了……</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/></entry><entry><title>《天外世界》：Obsidian Entertainment 的无厘头「以太连续剧」</title><link href="https://his2nd.life/posts/26b6de5e.html"/><id>https://his2nd.life/posts/26b6de5e.html</id><published>2020-11-25 23:18:38</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/26b6de5e.html 查看此页面以获得更佳的排版。</b></p><hr><p>「既已见过曾经沧海，何不看看天涯芳草？」</p>
+]]></content><summary type="html"><p>女主角这表情和动作也太撩了……</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/></entry><entry><title>《天外世界》：Obsidian Entertainment 的无厘头「以太连续剧」</title><link href="https://his2nd.life/posts/26b6de5e.html"/><id>https://his2nd.life/posts/26b6de5e.html</id><published>2020-11-25 23:18:38</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/26b6de5e.html 查看此页面以获得更佳的排版。</b></p><hr><p>「既已见过曾经沧海，何不看看天涯芳草？」</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -7607,7 +7607,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  今天凌晨的 Xbox 和贝塞斯达联合发布会上，Obsidian Entertainment 正式公布了《天外世界 2》，虽然很胡逼地承认了，他们目前做出来的就只有这个标题。好吧，那就等吧！</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>「既已见过曾经沧海，何不看看天涯芳草？」</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>办理中国工商银行信用卡并订阅港版 Adobe 摄影计划</title><link href="https://his2nd.life/posts/41057ef8.html"/><id>https://his2nd.life/posts/41057ef8.html</id><published>2020-11-18 17:36:48</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/41057ef8.html 查看此页面以获得更佳的排版。</b></p><hr><p>中国工商银行的宇宙星座卡校园版是申请门槛最低的大学生信用卡，但缺点是默认 0 额度。</p>
+]]></content><summary type="html"><p>「既已见过曾经沧海，何不看看天涯芳草？」</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>办理中国工商银行信用卡并订阅港版 Adobe 摄影计划</title><link href="https://his2nd.life/posts/41057ef8.html"/><id>https://his2nd.life/posts/41057ef8.html</id><published>2020-11-18 17:36:48</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/41057ef8.html 查看此页面以获得更佳的排版。</b></p><hr><p>中国工商银行的宇宙星座卡校园版是申请门槛最低的大学生信用卡，但缺点是默认 0 额度。</p>
 <span id="more"></span>
 <hr>
 <p>  双十一的时候入手了一款富士胶片的入门级无反相机，打算订阅港版 Adobe 摄影计划玩一玩摄影。</p>
@@ -7622,7 +7622,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 </ul>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>中国工商银行的宇宙星座卡校园版是申请门槛最低的大学生信用卡，但缺点是默认 0 额度。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/></entry><entry><title>《尤比克》：《时代》周刊评 1923 年来百佳长篇小说之一</title><link href="https://his2nd.life/posts/1f20be12.html"/><id>https://his2nd.life/posts/1f20be12.html</id><published>2020-11-04 21:18:05</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/1f20be12.html 查看此页面以获得更佳的排版。</b></p><hr><p>「利用现代尖端科技，逆转物质退化，经济实惠，共管式公寓屋主都能承受。尤比克在全球各大居家艺术门店有售。请到常去购物的店里垂询。」</p>
+]]></content><summary type="html"><p>中国工商银行的宇宙星座卡校园版是申请门槛最低的大学生信用卡，但缺点是默认 0 额度。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/></entry><entry><title>《尤比克》：《时代》周刊评 1923 年来百佳长篇小说之一</title><link href="https://his2nd.life/posts/1f20be12.html"/><id>https://his2nd.life/posts/1f20be12.html</id><published>2020-11-04 21:18:05</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/1f20be12.html 查看此页面以获得更佳的排版。</b></p><hr><p>「利用现代尖端科技，逆转物质退化，经济实惠，共管式公寓屋主都能承受。尤比克在全球各大居家艺术门店有售。请到常去购物的店里垂询。」</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -7634,7 +7634,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  我也希望能在将来阅读到更多菲利普·迪克的杰作。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>「利用现代尖端科技，逆转物质退化，经济实惠，共管式公寓屋主都能承受。尤比克在全球各大居家艺术门店有售。请到常去购物的店里垂询。」</p></summary><category term="书籍" scheme="https://his2nd.life/categories/books/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>用 Blender 制作一个卡通风格小屋</title><link href="https://his2nd.life/posts/17e3a8da.html"/><id>https://his2nd.life/posts/17e3a8da.html</id><published>2020-10-10 17:28:42</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/17e3a8da.html 查看此页面以获得更佳的排版。</b></p><hr><p>卡通风格小屋。</p>
+]]></content><summary type="html"><p>「利用现代尖端科技，逆转物质退化，经济实惠，共管式公寓屋主都能承受。尤比克在全球各大居家艺术门店有售。请到常去购物的店里垂询。」</p></summary><category term="书籍" scheme="https://his2nd.life/categories/books/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>用 Blender 制作一个卡通风格小屋</title><link href="https://his2nd.life/posts/17e3a8da.html"/><id>https://his2nd.life/posts/17e3a8da.html</id><published>2020-10-10 17:28:42</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/17e3a8da.html 查看此页面以获得更佳的排版。</b></p><hr><p>卡通风格小屋。</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -7657,7 +7657,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  顺便说一句。尽管 SheepIt 禁止上传裸露内容，我还是发现有一次我在帮别人渲染小色图（女主角是《半条命 2》的艾莉克斯）。只要人品好，色图不用找，它自己就往电脑上跑，哈哈！可惜我不能保存高清图片。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>卡通风格小屋。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="3D" scheme="https://his2nd.life/tags/3d/"/><category term="Blender" scheme="https://his2nd.life/tags/blender/"/></entry><entry><title>「跟着弗里曼！」</title><link href="https://his2nd.life/posts/d19e5dcb.html"/><id>https://his2nd.life/posts/d19e5dcb.html</id><published>2020-10-07 21:03:24</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/d19e5dcb.html 查看此页面以获得更佳的排版。</b></p><hr><p>我就知道我物理学得很好！好吧，我是指物理超度。（拿起撬棍）</p>
+]]></content><summary type="html"><p>卡通风格小屋。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="3D" scheme="https://his2nd.life/tags/3d/"/><category term="Blender" scheme="https://his2nd.life/tags/blender/"/></entry><entry><title>「跟着弗里曼！」</title><link href="https://his2nd.life/posts/d19e5dcb.html"/><id>https://his2nd.life/posts/d19e5dcb.html</id><published>2020-10-07 21:03:24</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/d19e5dcb.html 查看此页面以获得更佳的排版。</b></p><hr><p>我就知道我物理学得很好！好吧，我是指物理超度。（拿起撬棍）</p>
 <span id="more"></span>
 <hr>
 
@@ -7741,7 +7741,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>截图 10</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>我就知道我物理学得很好！好吧，我是指物理超度。（拿起撬棍）</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>你好啊，国际空间站！</title><link href="https://his2nd.life/posts/229f0585.html"/><id>https://his2nd.life/posts/229f0585.html</id><published>2020-10-04 19:46:14</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/229f0585.html 查看此页面以获得更佳的排版。</b></p><hr><p>ARISS Satellite SSTV planned for October 4-8</p>
+]]></content><summary type="html"><p>我就知道我物理学得很好！好吧，我是指物理超度。（拿起撬棍）</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>你好啊，国际空间站！</title><link href="https://his2nd.life/posts/229f0585.html"/><id>https://his2nd.life/posts/229f0585.html</id><published>2020-10-04 19:46:14</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/229f0585.html 查看此页面以获得更佳的排版。</b></p><hr><p>ARISS Satellite SSTV planned for October 4-8</p>
 <span id="more"></span>
 <hr>
 <p>  拿着我的廉价对讲机在哈尔滨的高层建筑楼顶接收到了两张国际空间站发送的慢扫描电视图像，一张完整的，一张残的。这次活动和去年 12 月的那次一样，可以申请证书，但是以我这个质量来看，拉倒吧。怨我，本来以前是买了一个 100 多块钱的折叠天线的，有一次背文言文课下注释背不下来，暴怒，一拳捶下去，正下方的天线就遭殃了……于是只好继续用原装天线。</p>
@@ -7766,7 +7766,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片 3</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>ARISS Satellite SSTV planned for October 4-8</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="业余无线电" scheme="https://his2nd.life/tags/amateur-radio/"/></entry><entry><title>结束，是另一个开始……</title><link href="https://his2nd.life/posts/a14ea6f7.html"/><id>https://his2nd.life/posts/a14ea6f7.html</id><published>2020-10-02 16:28:34</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/a14ea6f7.html 查看此页面以获得更佳的排版。</b></p><hr><p>「因为没有哪个世界，是猎魔人应付不了的。」</p>
+]]></content><summary type="html"><p>ARISS Satellite SSTV planned for October 4-8</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="业余无线电" scheme="https://his2nd.life/tags/amateur-radio/"/></entry><entry><title>结束，是另一个开始……</title><link href="https://his2nd.life/posts/a14ea6f7.html"/><id>https://his2nd.life/posts/a14ea6f7.html</id><published>2020-10-02 16:28:34</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/a14ea6f7.html 查看此页面以获得更佳的排版。</b></p><hr><p>「因为没有哪个世界，是猎魔人应付不了的。」</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -7779,7 +7779,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  今年《风暴季节》（前文的《暴风雨季》）出版了简中译本，凌晨读完了。杰洛特有没有在“苹果树岛”（你瞧，我不再使用直角引号了）复活，其实仍是个悬念。终章写，在杰洛特死后的一百多年，妮妙在艾瑞图萨求学路上遭遇危险，被一位白发男子解救，这位白发男子有匹枣红色的坐骑。根据这两点来看，他像是杰洛特，但他的行为举止和性格都不像是杰洛特，估计是作者耍的一点小心思吧。奇怪的是，简中译本后面的“希瑞之生平”写明了此人是杰洛特，让我怀疑这是出版社加的内容而不是作者亲笔所为；而 <a class="link"   href="https://witcher.huijiwiki.com/wiki/%E5%A6%AE%E5%A6%99" >“猎魔人中文维基” <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 也是写明了此人是杰洛特，<a class="link"   href="https://witcher.fandom.com/wiki/IDR_UL_Ex_IX_0008_BETA" >Fandom <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 写的是“unnamed white-haired witcher”，比较严谨，可它仍然链接向杰洛特的页面。他们是怎么确定此人就是杰洛特的，难道作者给过官方答复？我不太明白。在我心中，白狼和女术士的传奇就结束于“苹果树岛”了。（当然，这里排除了游戏的续写）</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>「因为没有哪个世界，是猎魔人应付不了的。」</p></summary><category term="书籍" scheme="https://his2nd.life/categories/books/"/></entry><entry><title>「亮瀑镇霸凌事件」</title><link href="https://his2nd.life/posts/11494ddb.html"/><id>https://his2nd.life/posts/11494ddb.html</id><published>2020-09-26 22:16:21</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/11494ddb.html 查看此页面以获得更佳的排版。</b></p><hr><p>你他妈的管这叫「简单难度」？</p>
+]]></content><summary type="html"><p>「因为没有哪个世界，是猎魔人应付不了的。」</p></summary><category term="书籍" scheme="https://his2nd.life/categories/books/"/></entry><entry><title>「亮瀑镇霸凌事件」</title><link href="https://his2nd.life/posts/11494ddb.html"/><id>https://his2nd.life/posts/11494ddb.html</id><published>2020-09-26 22:16:21</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/11494ddb.html 查看此页面以获得更佳的排版。</b></p><hr><p>你他妈的管这叫「简单难度」？</p>
 <span id="more"></span>
 <hr>
 
@@ -7840,7 +7840,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>你他妈的管这叫「简单难度」？</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="奇幻" scheme="https://his2nd.life/tags/fantasy/"/></entry><entry><title>破镜能否重圆？</title><link href="https://his2nd.life/posts/fc0033b5.html"/><id>https://his2nd.life/posts/fc0033b5.html</id><published>2020-09-18 14:52:01</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/fc0033b5.html 查看此页面以获得更佳的排版。</b></p><hr><p>“There’s always a lighthouse. There’s always a man, there’s always a city…”</p>
+]]></content><summary type="html"><p>你他妈的管这叫「简单难度」？</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="奇幻" scheme="https://his2nd.life/tags/fantasy/"/></entry><entry><title>破镜能否重圆？</title><link href="https://his2nd.life/posts/fc0033b5.html"/><id>https://his2nd.life/posts/fc0033b5.html</id><published>2020-09-18 14:52:01</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/fc0033b5.html 查看此页面以获得更佳的排版。</b></p><hr><p>“There’s always a lighthouse. There’s always a man, there’s always a city…”</p>
 <span id="more"></span>
 <hr>
 <p>  最近在学吉他，就唱了一首 <em>Will the Circle Be Unbroken</em>，用以纪念伊丽莎白（我每次想到她都会难过），唱得不好听，弹得也不好。这是在我弹唱了几十遍以来第一个错误较少的版本。</p>
@@ -7874,7 +7874,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  好了，我似乎想不出什么可以说的了，也许以后我还会试着录一首 <em>You Belong to Me</em> 吧……</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>“There’s always a lighthouse. There’s always a man, there’s always a city…”</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="音乐" scheme="https://his2nd.life/categories/music/"/></entry><entry><title>《量子破碎》：另一款关于量子力学与时间穿越的游戏</title><link href="https://his2nd.life/posts/54e661eb.html"/><id>https://his2nd.life/posts/54e661eb.html</id><published>2020-09-16 18:38:45</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/54e661eb.html 查看此页面以获得更佳的排版。</b></p><hr><p>今天杰克救贝丝了吗？</p>
+]]></content><summary type="html"><p>“There’s always a lighthouse. There’s always a man, there’s always a city…”</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="音乐" scheme="https://his2nd.life/categories/music/"/></entry><entry><title>《量子破碎》：另一款关于量子力学与时间穿越的游戏</title><link href="https://his2nd.life/posts/54e661eb.html"/><id>https://his2nd.life/posts/54e661eb.html</id><published>2020-09-16 18:38:45</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/54e661eb.html 查看此页面以获得更佳的排版。</b></p><hr><p>今天杰克救贝丝了吗？</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -7901,13 +7901,13 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 </ol>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>今天杰克救贝丝了吗？</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>本站已切换至新主题——Ayer</title><link href="https://his2nd.life/posts/8f27d900.html"/><id>https://his2nd.life/posts/8f27d900.html</id><published>2020-09-10 18:26:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/8f27d900.html 查看此页面以获得更佳的排版。</b></p><hr><p>换主题了。</p>
+]]></content><summary type="html"><p>今天杰克救贝丝了吗？</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>本站已切换至新主题——Ayer</title><link href="https://his2nd.life/posts/8f27d900.html"/><id>https://his2nd.life/posts/8f27d900.html</id><published>2020-09-10 18:26:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/8f27d900.html 查看此页面以获得更佳的排版。</b></p><hr><p>换主题了。</p>
 <span id="more"></span>
 <p>  Next 主题的 Bug 有点多，我换了 <a class="link"   href="https://github.com/Shen-Yu" >Eric Shen <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 大大开发的这款 <a class="link"   href="https://github.com/Shen-Yu/hexo-theme-ayer" >Ayer <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 主题，既简洁又漂亮。</p>
 <p>  这款主题是我朋友 <a class="link"   href="https://looooading.github.io/" >looooading <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 先使用的，我也在 GitHub 上给它提交了几个小的改进。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>换主题了。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>记一次破解中国联通光猫的经历</title><link href="https://his2nd.life/posts/e9e71ad5.html"/><id>https://his2nd.life/posts/e9e71ad5.html</id><published>2020-09-06 14:01:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/e9e71ad5.html 查看此页面以获得更佳的排版。</b></p><hr><p>这个光猫可比之前那个光猫强多了，之前那个光猫阉割得不像话，我早就放弃了。</p>
+]]></content><summary type="html"><p>换主题了。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>记一次破解中国联通光猫的经历</title><link href="https://his2nd.life/posts/e9e71ad5.html"/><id>https://his2nd.life/posts/e9e71ad5.html</id><published>2020-09-06 14:01:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/e9e71ad5.html 查看此页面以获得更佳的排版。</b></p><hr><p>这个光猫可比之前那个光猫强多了，之前那个光猫阉割得不像话，我早就放弃了。</p>
 <span id="more"></span>
 <hr>
 <p>  这个光猫的型号是 <code>HG8321R</code>，是一款中国联通定制的华为光猫。</p>
@@ -7936,7 +7936,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  至此，光猫破解完成，感谢网友提供的工具与参考教程。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>这个光猫可比之前那个光猫强多了，之前那个光猫阉割得不像话，我早就放弃了。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>“Will the circle be unbroken?”</title><link href="https://his2nd.life/posts/c85e4f8e.html"/><id>https://his2nd.life/posts/c85e4f8e.html</id><published>2020-08-26 21:43:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/c85e4f8e.html 查看此页面以获得更佳的排版。</b></p><hr><p>别了，伊丽莎白。</p>
+]]></content><summary type="html"><p>这个光猫可比之前那个光猫强多了，之前那个光猫阉割得不像话，我早就放弃了。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>“Will the circle be unbroken?”</title><link href="https://his2nd.life/posts/c85e4f8e.html"/><id>https://his2nd.life/posts/c85e4f8e.html</id><published>2020-08-26 21:43:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/c85e4f8e.html 查看此页面以获得更佳的排版。</b></p><hr><p>别了，伊丽莎白。</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -8104,7 +8104,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>别了，伊丽莎白。</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>相别十年，今 敏仍会带给我们最真切的感动</title><link href="https://his2nd.life/posts/8592adae.html"/><id>https://his2nd.life/posts/8592adae.html</id><published>2020-08-24 23:36:17</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/8592adae.html 查看此页面以获得更佳的排版。</b></p><hr><p>「因为我喜欢追寻着那个人的自己。」</p>
+]]></content><summary type="html"><p>别了，伊丽莎白。</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>相别十年，今 敏仍会带给我们最真切的感动</title><link href="https://his2nd.life/posts/8592adae.html"/><id>https://his2nd.life/posts/8592adae.html</id><published>2020-08-24 23:36:17</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/8592adae.html 查看此页面以获得更佳的排版。</b></p><hr><p>「因为我喜欢追寻着那个人的自己。」</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -8292,7 +8292,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>「因为我喜欢追寻着那个人的自己。」</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="动画" scheme="https://his2nd.life/tags/animation/"/></entry><entry><title>超简单，让你的 Hexo 博客支持 PWA</title><link href="https://his2nd.life/posts/d4598179.html"/><id>https://his2nd.life/posts/d4598179.html</id><published>2020-08-18 15:38:00</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/d4598179.html 查看此页面以获得更佳的排版。</b></p><hr><p>“Progressive Web Apps are web apps that use emerging web browser APIs and features along with traditional progressive enhancement strategy to bring a native app-like user experience to cross-platform web applications.”</p>
+]]></content><summary type="html"><p>「因为我喜欢追寻着那个人的自己。」</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="动画" scheme="https://his2nd.life/tags/animation/"/></entry><entry><title>超简单，让你的 Hexo 博客支持 PWA</title><link href="https://his2nd.life/posts/d4598179.html"/><id>https://his2nd.life/posts/d4598179.html</id><published>2020-08-18 15:38:00</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/d4598179.html 查看此页面以获得更佳的排版。</b></p><hr><p>“Progressive Web Apps are web apps that use emerging web browser APIs and features along with traditional progressive enhancement strategy to bring a native app-like user experience to cross-platform web applications.”</p>
 <span id="more"></span>
 <hr>
 <p>  在以往，为 Hexo 博客添加 PWA 支持是有些麻烦的，需要手动配置许多东西、修改页面模板等，甚至有的解决方案已经不再支持最新的 Hexo 版本。</p>
@@ -8324,7 +8324,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>“Progressive Web Apps are web apps that use emerging web browser APIs and features along with traditional progressive enhancement strategy to bring a native app-like user experience to cross-platform web applications.”</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/><category term="前端" scheme="https://his2nd.life/tags/front-end/"/></entry><entry><title>来自 CD PROJEKT RED 的另一款佳作——《王权的陨落》</title><link href="https://his2nd.life/posts/389125ed.html"/><id>https://his2nd.life/posts/389125ed.html</id><published>2020-08-18 00:17:00</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/389125ed.html 查看此页面以获得更佳的排版。</b></p><hr><p>「为了莱里亚！」</p>
+]]></content><summary type="html"><p>“Progressive Web Apps are web apps that use emerging web browser APIs and features along with traditional progressive enhancement strategy to bring a native app-like user experience to cross-platform web applications.”</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/><category term="前端" scheme="https://his2nd.life/tags/front-end/"/></entry><entry><title>来自 CD PROJEKT RED 的另一款佳作——《王权的陨落》</title><link href="https://his2nd.life/posts/389125ed.html"/><id>https://his2nd.life/posts/389125ed.html</id><published>2020-08-18 00:17:00</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/389125ed.html 查看此页面以获得更佳的排版。</b></p><hr><p>「为了莱里亚！」</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -8383,7 +8383,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>「为了莱里亚！」</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="奇幻" scheme="https://his2nd.life/tags/fantasy/"/></entry><entry><title>长白山之行：一场说走就走的旅行</title><link href="https://his2nd.life/posts/b03398a9.html"/><id>https://his2nd.life/posts/b03398a9.html</id><published>2020-08-16 14:40:00</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/b03398a9.html 查看此页面以获得更佳的排版。</b></p><hr><p>其实不只是长白山……</p>
+]]></content><summary type="html"><p>「为了莱里亚！」</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="奇幻" scheme="https://his2nd.life/tags/fantasy/"/></entry><entry><title>长白山之行：一场说走就走的旅行</title><link href="https://his2nd.life/posts/b03398a9.html"/><id>https://his2nd.life/posts/b03398a9.html</id><published>2020-08-16 14:40:00</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/b03398a9.html 查看此页面以获得更佳的排版。</b></p><hr><p>其实不只是长白山……</p>
 <span id="more"></span>
 <hr>
 <h2 id="第一天">第一天</h2>
@@ -8680,7 +8680,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  路上撞死一只蝴蝶。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>其实不只是长白山……</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="游记" scheme="https://his2nd.life/tags/travel-note/"/></entry><entry><title>关于《昆特牌》文本反和谐失效问题的探讨及卡牌数据热更新原理的猜测</title><link href="https://his2nd.life/posts/2f6e2472.html"/><id>https://his2nd.life/posts/2f6e2472.html</id><published>2020-08-06 14:49:00</published><updated>2023-04-03 22:18:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/2f6e2472.html 查看此页面以获得更佳的排版。</b></p><hr><p>高 等 凡 匹 尔</p>
+]]></content><summary type="html"><p>其实不只是长白山……</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="游记" scheme="https://his2nd.life/tags/travel-note/"/></entry><entry><title>关于《昆特牌》文本反和谐失效问题的探讨及卡牌数据热更新原理的猜测</title><link href="https://his2nd.life/posts/2f6e2472.html"/><id>https://his2nd.life/posts/2f6e2472.html</id><published>2020-08-06 14:49:00</published><updated>2023-04-03 22:18:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/2f6e2472.html 查看此页面以获得更佳的排版。</b></p><hr><p>高 等 凡 匹 尔</p>
 <span id="more"></span>
 <hr>
 <p>  本文首发于 <a class="link"   href="https://www.iyingdi.com/web/bbspost/detail/2286843" >旅法师营地 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
@@ -8707,7 +8707,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>  <strong>学英语，或者老老实实地喝麦汁吧……</strong></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>高 等 凡 匹 尔</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>“Ground Control to Major Tom.”</title><link href="https://his2nd.life/posts/903c9ad6.html"/><id>https://his2nd.life/posts/903c9ad6.html</id><published>2020-07-26 23:30:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/903c9ad6.html 查看此页面以获得更佳的排版。</b></p><hr><p>阿方索·卡隆《地心引力》（2013）</p>
+]]></content><summary type="html"><p>高 等 凡 匹 尔</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>“Ground Control to Major Tom.”</title><link href="https://his2nd.life/posts/903c9ad6.html"/><id>https://his2nd.life/posts/903c9ad6.html</id><published>2020-07-26 23:30:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/903c9ad6.html 查看此页面以获得更佳的排版。</b></p><hr><p>阿方索·卡隆《地心引力》（2013）</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -8786,7 +8786,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>阿方索·卡隆《地心引力》（2013）</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>Red Dead Redemption 2：终获救赎</title><link href="https://his2nd.life/posts/17845455.html"/><id>https://his2nd.life/posts/17845455.html</id><published>2020-07-13 16:17:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/17845455.html 查看此页面以获得更佳的排版。</b></p><hr><p>“I gave you all I had……”</p>
+]]></content><summary type="html"><p>阿方索·卡隆《地心引力》（2013）</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>Red Dead Redemption 2：终获救赎</title><link href="https://his2nd.life/posts/17845455.html"/><id>https://his2nd.life/posts/17845455.html</id><published>2020-07-13 16:17:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/17845455.html 查看此页面以获得更佳的排版。</b></p><hr><p>“I gave you all I had……”</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -8852,7 +8852,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>“I gave you all I had……”</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/></entry><entry><title>大友克洋《回忆三部曲》（1995）</title><link href="https://his2nd.life/posts/9a66c72c.html"/><id>https://his2nd.life/posts/9a66c72c.html</id><published>2020-07-10 01:13:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/9a66c72c.html 查看此页面以获得更佳的排版。</b></p><hr><p>「记忆不是用来逃避的场所。」</p>
+]]></content><summary type="html"><p>“I gave you all I had……”</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/></entry><entry><title>大友克洋《回忆三部曲》（1995）</title><link href="https://his2nd.life/posts/9a66c72c.html"/><id>https://his2nd.life/posts/9a66c72c.html</id><published>2020-07-10 01:13:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/9a66c72c.html 查看此页面以获得更佳的排版。</b></p><hr><p>「记忆不是用来逃避的场所。」</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -8869,7 +8869,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
   垃圾回收船的船员随着求救信号里播放的苏联歌剧定位到了一个废弃了近一个世纪的太空设施汇集成的星球雏形。船员进入废墟一探究竟，开始产生幻觉，不断看到美妙又诡异的景象，被一步步引去废墟的核心。这一切竟是人工智能的阴谋。颇有些《星际牛仔》和《无垠的太空》的味道。我也惊讶地发现：本章的编剧是我最喜欢的动画导演——今 敏。</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>「记忆不是用来逃避的场所。」</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/><category term="动画" scheme="https://his2nd.life/tags/animation/"/></entry><entry><title>再您妈的见！</title><link href="https://his2nd.life/posts/3ae1ad08.html"/><id>https://his2nd.life/posts/3ae1ad08.html</id><published>2020-07-02 20:19:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/3ae1ad08.html 查看此页面以获得更佳的排版。</b></p><hr><p>拜拜了您呐～</p>
+]]></content><summary type="html"><p>「记忆不是用来逃避的场所。」</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/><category term="动画" scheme="https://his2nd.life/tags/animation/"/></entry><entry><title>再您妈的见！</title><link href="https://his2nd.life/posts/3ae1ad08.html"/><id>https://his2nd.life/posts/3ae1ad08.html</id><published>2020-07-02 20:19:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/3ae1ad08.html 查看此页面以获得更佳的排版。</b></p><hr><p>拜拜了您呐～</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -8886,7 +8886,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>拜拜了您呐～</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/></entry><entry><title>《石之心》通关</title><link href="https://his2nd.life/posts/c51fdb4b.html"/><id>https://his2nd.life/posts/c51fdb4b.html</id><published>2020-06-25 22:49:00</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/c51fdb4b.html 查看此页面以获得更佳的排版。</b></p><hr><p>「《石之心》主线剧情的灵感来源可能出自德国作家威廉·豪夫（Wilhelm Hauff）所著的童话《冷酷的心》（Das kalte Herz，又译“安了石头心的彼得”），写一个烧炭工由于虚荣和贪图享受，把自己的心跟恶魔换了一颗石头的心，变得拥有很多财宝却冷酷无情，但苦恼于仍然得不到幸福和别人的尊重，最终在森林藏宝人的帮助下换回了自己的心，感受到“贫穷而知足，比财宝成堆而怀着一颗冷酷的心更好。”。」</p>
+]]></content><summary type="html"><p>拜拜了您呐～</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/></entry><entry><title>《石之心》通关</title><link href="https://his2nd.life/posts/c51fdb4b.html"/><id>https://his2nd.life/posts/c51fdb4b.html</id><published>2020-06-25 22:49:00</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/c51fdb4b.html 查看此页面以获得更佳的排版。</b></p><hr><p>「《石之心》主线剧情的灵感来源可能出自德国作家威廉·豪夫（Wilhelm Hauff）所著的童话《冷酷的心》（Das kalte Herz，又译“安了石头心的彼得”），写一个烧炭工由于虚荣和贪图享受，把自己的心跟恶魔换了一颗石头的心，变得拥有很多财宝却冷酷无情，但苦恼于仍然得不到幸福和别人的尊重，最终在森林藏宝人的帮助下换回了自己的心，感受到“贫穷而知足，比财宝成堆而怀着一颗冷酷的心更好。”。」</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -8964,7 +8964,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>「《石之心》主线剧情的灵感来源可能出自德国作家威廉·豪夫（Wilhelm Hauff）所著的童话《冷酷的心》（Das kalte Herz，又译“安了石头心的彼得”），写一个烧炭工由于虚荣和贪图享受，把自己的心跟恶魔换了一颗石头的心，变得拥有很多财宝却冷酷无情，但苦恼于仍然得不到幸福和别人的尊重，最终在森林藏宝人的帮助下换回了自己的心，感受到“贫穷而知足，比财宝成堆而怀着一颗冷酷的心更好。”。」</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="奇幻" scheme="https://his2nd.life/tags/fantasy/"/></entry><entry><title>简单美化 Windows Terminal</title><link href="https://his2nd.life/posts/1da6d1b2.html"/><id>https://his2nd.life/posts/1da6d1b2.html</id><published>2020-05-31 11:29:00</published><updated>2023-01-09 10:04:26</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/1da6d1b2.html 查看此页面以获得更佳的排版。</b></p><hr><p>前阵子微软发布了 Windows Terminal 的正式版本，但是这长相也太“规矩”了，浓眉大眼的，咱们得给它稍稍打扮一下。</p>
+]]></content><summary type="html"><p>「《石之心》主线剧情的灵感来源可能出自德国作家威廉·豪夫（Wilhelm Hauff）所著的童话《冷酷的心》（Das kalte Herz，又译“安了石头心的彼得”），写一个烧炭工由于虚荣和贪图享受，把自己的心跟恶魔换了一颗石头的心，变得拥有很多财宝却冷酷无情，但苦恼于仍然得不到幸福和别人的尊重，最终在森林藏宝人的帮助下换回了自己的心，感受到“贫穷而知足，比财宝成堆而怀着一颗冷酷的心更好。”。」</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="奇幻" scheme="https://his2nd.life/tags/fantasy/"/></entry><entry><title>简单美化 Windows Terminal</title><link href="https://his2nd.life/posts/1da6d1b2.html"/><id>https://his2nd.life/posts/1da6d1b2.html</id><published>2020-05-31 11:29:00</published><updated>2023-01-09 10:04:26</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/1da6d1b2.html 查看此页面以获得更佳的排版。</b></p><hr><p>前阵子微软发布了 Windows Terminal 的正式版本，但是这长相也太“规矩”了，浓眉大眼的，咱们得给它稍稍打扮一下。</p>
 <span id="more"></span>
 <hr>
 <p>2023/1/6 更新：</p>
@@ -9045,7 +9045,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 </ul>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>前阵子微软发布了 Windows Terminal 的正式版本，但是这长相也太“规矩”了，浓眉大眼的，咱们得给它稍稍打扮一下。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/></entry><entry><title>一款来自委内瑞拉的独立游戏——VA-11 Hall-A: Cyberpunk Bartender Action</title><link href="https://his2nd.life/posts/1a632100.html"/><id>https://his2nd.life/posts/1a632100.html</id><published>2020-05-27 00:53:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/1a632100.html 查看此页面以获得更佳的排版。</b></p><hr><p>你有故事，我有酒。</p>
+]]></content><summary type="html"><p>前阵子微软发布了 Windows Terminal 的正式版本，但是这长相也太“规矩”了，浓眉大眼的，咱们得给它稍稍打扮一下。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/></entry><entry><title>一款来自委内瑞拉的独立游戏——VA-11 Hall-A: Cyberpunk Bartender Action</title><link href="https://his2nd.life/posts/1a632100.html"/><id>https://his2nd.life/posts/1a632100.html</id><published>2020-05-27 00:53:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/1a632100.html 查看此页面以获得更佳的排版。</b></p><hr><p>你有故事，我有酒。</p>
 <span id="more"></span>
 <hr>
 <p><strong>警告</strong>：以下内容包含<strong>剧透</strong>！</p>
@@ -9226,7 +9226,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>你有故事，我有酒。</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>《疑犯追踪》全剧终</title><link href="https://his2nd.life/posts/461ea060.html"/><id>https://his2nd.life/posts/461ea060.html</id><published>2020-05-24 02:25:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/461ea060.html 查看此页面以获得更佳的排版。</b></p><hr><p>“Everyone dies alone.”</p>
+]]></content><summary type="html"><p>你有故事，我有酒。</p></summary><category term="游戏" scheme="https://his2nd.life/categories/games/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>《疑犯追踪》全剧终</title><link href="https://his2nd.life/posts/461ea060.html"/><id>https://his2nd.life/posts/461ea060.html</id><published>2020-05-24 02:25:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/461ea060.html 查看此页面以获得更佳的排版。</b></p><hr><p>“Everyone dies alone.”</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -9557,7 +9557,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>“Everyone dies alone.”</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>城探 Vol.2：哈尔滨废弃幼儿园</title><link href="https://his2nd.life/posts/ec3339e4.html"/><id>https://his2nd.life/posts/ec3339e4.html</id><published>2020-05-17 19:07:00</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/ec3339e4.html 查看此页面以获得更佳的排版。</b></p><hr><p>「经历过战争也好，守护过天真也罢。房子一直是房子，仍然会有人不以为意，企图用污浊掩埋它；也会有人对它不断探索，将它作为喧嚣中的光亮、浮世绘中的点睛。尘土会埋藏过往，但掩盖不了生来不安分的心。」——「海森堡」</p>
+]]></content><summary type="html"><p>“Everyone dies alone.”</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>城探 Vol.2：哈尔滨废弃幼儿园</title><link href="https://his2nd.life/posts/ec3339e4.html"/><id>https://his2nd.life/posts/ec3339e4.html</id><published>2020-05-17 19:07:00</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/ec3339e4.html 查看此页面以获得更佳的排版。</b></p><hr><p>「经历过战争也好，守护过天真也罢。房子一直是房子，仍然会有人不以为意，企图用污浊掩埋它；也会有人对它不断探索，将它作为喧嚣中的光亮、浮世绘中的点睛。尘土会埋藏过往，但掩盖不了生来不安分的心。」——「海森堡」</p>
 <span id="more"></span>
 <hr>
 <p>  5 月 17 日，雨。</p>
@@ -9776,7 +9776,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>「经历过战争也好，守护过天真也罢。房子一直是房子，仍然会有人不以为意，企图用污浊掩埋它；也会有人对它不断探索，将它作为喧嚣中的光亮、浮世绘中的点睛。尘土会埋藏过往，但掩盖不了生来不安分的心。」——「海森堡」</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="城市探险" scheme="https://his2nd.life/tags/urban-exploration/"/></entry><entry><title>《疑犯追踪》第四季第 11 集</title><link href="https://his2nd.life/posts/5720da94.html"/><id>https://his2nd.life/posts/5720da94.html</id><published>2020-05-12 01:12:25</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/5720da94.html 查看此页面以获得更佳的排版。</b></p><hr><p>「人，不是棋子。」</p>
+]]></content><summary type="html"><p>「经历过战争也好，守护过天真也罢。房子一直是房子，仍然会有人不以为意，企图用污浊掩埋它；也会有人对它不断探索，将它作为喧嚣中的光亮、浮世绘中的点睛。尘土会埋藏过往，但掩盖不了生来不安分的心。」——「海森堡」</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="城市探险" scheme="https://his2nd.life/tags/urban-exploration/"/></entry><entry><title>《疑犯追踪》第四季第 11 集</title><link href="https://his2nd.life/posts/5720da94.html"/><id>https://his2nd.life/posts/5720da94.html</id><published>2020-05-12 01:12:25</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/5720da94.html 查看此页面以获得更佳的排版。</b></p><hr><p>「人，不是棋子。」</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -9906,7 +9906,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>「人，不是棋子。」</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>教你从「每日交作业」小程序中「偷答案」</title><link href="https://his2nd.life/posts/e9849f02.html"/><id>https://his2nd.life/posts/e9849f02.html</id><published>2020-05-06 07:46:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/e9849f02.html 查看此页面以获得更佳的排版。</b></p><hr><p>不再藏了，我要把我会的那点搞事绝活都教一教！反正百度也爬不了 GitHub Pages！</p>
+]]></content><summary type="html"><p>「人，不是棋子。」</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>教你从「每日交作业」小程序中「偷答案」</title><link href="https://his2nd.life/posts/e9849f02.html"/><id>https://his2nd.life/posts/e9849f02.html</id><published>2020-05-06 07:46:00</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/e9849f02.html 查看此页面以获得更佳的排版。</b></p><hr><p>不再藏了，我要把我会的那点搞事绝活都教一教！反正百度也爬不了 GitHub Pages！</p>
 <span id="more"></span>
 <hr>
 <p>  我们的功臣还是 Fiddler。</p>
@@ -9958,7 +9958,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 </ol>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>不再藏了，我要把我会的那点搞事绝活都教一教！反正百度也爬不了 GitHub Pages！</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>《西部世界》第三季，终</title><link href="https://his2nd.life/posts/8c99d049.html"/><id>https://his2nd.life/posts/8c99d049.html</id><published>2020-05-05 07:29:15</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/8c99d049.html 查看此页面以获得更佳的排版。</b></p><hr><p>「我选择看到美好。」</p>
+]]></content><summary type="html"><p>不再藏了，我要把我会的那点搞事绝活都教一教！反正百度也爬不了 GitHub Pages！</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>《西部世界》第三季，终</title><link href="https://his2nd.life/posts/8c99d049.html"/><id>https://his2nd.life/posts/8c99d049.html</id><published>2020-05-05 07:29:15</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/8c99d049.html 查看此页面以获得更佳的排版。</b></p><hr><p>「我选择看到美好。」</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -10148,7 +10148,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>「我选择看到美好。」</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>看完了《死亡诗社》，我流泪了</title><link href="https://his2nd.life/posts/21fa5621.html"/><id>https://his2nd.life/posts/21fa5621.html</id><published>2020-05-05 02:10:26</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/21fa5621.html 查看此页面以获得更佳的排版。</b></p><hr><p>“O Captain! My Captain!”</p>
+]]></content><summary type="html"><p>「我选择看到美好。」</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/><category term="科幻" scheme="https://his2nd.life/tags/science-fiction/"/></entry><entry><title>看完了《死亡诗社》，我流泪了</title><link href="https://his2nd.life/posts/21fa5621.html"/><id>https://his2nd.life/posts/21fa5621.html</id><published>2020-05-05 02:10:26</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/21fa5621.html 查看此页面以获得更佳的排版。</b></p><hr><p>“O Captain! My Captain!”</p>
 <span id="more"></span>
 <hr>
 <blockquote>
@@ -10275,7 +10275,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>“O Captain! My Captain!”</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/></entry><entry><title>细数那些年我创建的小项目</title><link href="https://his2nd.life/posts/35a15276.html"/><id>https://his2nd.life/posts/35a15276.html</id><published>2020-03-26 20:55:43</published><updated>2023-08-08 22:04:14</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/35a15276.html 查看此页面以获得更佳的排版。</b></p><hr><p>这他妈才是梦开始的地方！</p>
+]]></content><summary type="html"><p>“O Captain! My Captain!”</p></summary><category term="影视" scheme="https://his2nd.life/categories/films-and-televisions/"/></entry><entry><title>细数那些年我创建的小项目</title><link href="https://his2nd.life/posts/35a15276.html"/><id>https://his2nd.life/posts/35a15276.html</id><published>2020-03-26 20:55:43</published><updated>2023-08-08 22:04:14</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/35a15276.html 查看此页面以获得更佳的排版。</b></p><hr><p>这他妈才是梦开始的地方！</p>
 <span id="more"></span>
 <hr>
 <p>  以下这些（大多数）是开源项目，不开源的项目没法儿在这列出。</p>
@@ -10356,13 +10356,13 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p>不数了，麻烦……</p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>这他妈才是梦开始的地方！</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/><category term="前端" scheme="https://his2nd.life/tags/front-end/"/><category term="HTML" scheme="https://his2nd.life/tags/html/"/><category term="CSS" scheme="https://his2nd.life/tags/css/"/><category term="JavaScript" scheme="https://his2nd.life/tags/javascript/"/><category term="Python" scheme="https://his2nd.life/tags/python/"/><category term=".NET" scheme="https://his2nd.life/tags/dot-net/"/><category term="UWP" scheme="https://his2nd.life/tags/uwp/"/><category term="C#" scheme="https://his2nd.life/tags/csharp/"/></entry><entry><title>已启用新域名</title><link href="https://his2nd.life/posts/b8e75a54.html"/><id>https://his2nd.life/posts/b8e75a54.html</id><published>2020-03-17 22:11:56</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/b8e75a54.html 查看此页面以获得更佳的排版。</b></p><hr><p>“他的第二人生”</p>
+]]></content><summary type="html"><p>这他妈才是梦开始的地方！</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/><category term="前端" scheme="https://his2nd.life/tags/front-end/"/><category term="HTML" scheme="https://his2nd.life/tags/html/"/><category term="CSS" scheme="https://his2nd.life/tags/css/"/><category term="JavaScript" scheme="https://his2nd.life/tags/javascript/"/><category term="Python" scheme="https://his2nd.life/tags/python/"/><category term=".NET" scheme="https://his2nd.life/tags/dot-net/"/><category term="UWP" scheme="https://his2nd.life/tags/uwp/"/><category term="C#" scheme="https://his2nd.life/tags/csharp/"/></entry><entry><title>已启用新域名</title><link href="https://his2nd.life/posts/b8e75a54.html"/><id>https://his2nd.life/posts/b8e75a54.html</id><published>2020-03-17 22:11:56</published><updated>2022-11-19 21:54:03</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/b8e75a54.html 查看此页面以获得更佳的排版。</b></p><hr><p>“他的第二人生”</p>
 <span id="more"></span>
 <p>  本站已启用新域名：his2nd.life。</p>
 <p><strong>不幸的是，访问人数也因此全都清零了。</strong></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>“他的第二人生”</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>记 3 月 15 日江桥漫步</title><link href="https://his2nd.life/posts/e73fdf2b.html"/><id>https://his2nd.life/posts/e73fdf2b.html</id><published>2020-03-15 19:36:24</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/e73fdf2b.html 查看此页面以获得更佳的排版。</b></p><hr><p>冻死我了。</p>
+]]></content><summary type="html"><p>“他的第二人生”</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/></entry><entry><title>记 3 月 15 日江桥漫步</title><link href="https://his2nd.life/posts/e73fdf2b.html"/><id>https://his2nd.life/posts/e73fdf2b.html</id><published>2020-03-15 19:36:24</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/e73fdf2b.html 查看此页面以获得更佳的排版。</b></p><hr><p>冻死我了。</p>
 <span id="more"></span>
 <hr>
 <p>  两部手机全部阵亡。</p>
@@ -10458,7 +10458,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>冻死我了。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>玩坏亮眼课堂（下）：亮眼助手</title><link href="https://his2nd.life/posts/301f019c.html"/><id>https://his2nd.life/posts/301f019c.html</id><published>2020-03-08 22:20:36</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/301f019c.html 查看此页面以获得更佳的排版。</b></p><hr><p>本项目已停止维护。</p>
+]]></content><summary type="html"><p>冻死我了。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/></entry><entry><title>玩坏亮眼课堂（下）：亮眼助手</title><link href="https://his2nd.life/posts/301f019c.html"/><id>https://his2nd.life/posts/301f019c.html</id><published>2020-03-08 22:20:36</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/301f019c.html 查看此页面以获得更佳的排版。</b></p><hr><p>本项目已停止维护。</p>
 <span id="more"></span>
 <hr>
 <p><figure class="image-caption"><img  
@@ -10509,7 +10509,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>本项目已停止维护。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/><category term="前端" scheme="https://his2nd.life/tags/front-end/"/><category term="JavaScript" scheme="https://his2nd.life/tags/javascript/"/></entry><entry><title>玩坏亮眼课堂（上）</title><link href="https://his2nd.life/posts/655b340f.html"/><id>https://his2nd.life/posts/655b340f.html</id><published>2020-03-01 00:00:47</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/655b340f.html 查看此页面以获得更佳的排版。</b></p><hr><p>🤫</p>
+]]></content><summary type="html"><p>本项目已停止维护。</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/><category term="前端" scheme="https://his2nd.life/tags/front-end/"/><category term="JavaScript" scheme="https://his2nd.life/tags/javascript/"/></entry><entry><title>玩坏亮眼课堂（上）</title><link href="https://his2nd.life/posts/655b340f.html"/><id>https://his2nd.life/posts/655b340f.html</id><published>2020-03-01 00:00:47</published><updated>2023-01-09 10:13:08</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/655b340f.html 查看此页面以获得更佳的排版。</b></p><hr><p>🤫</p>
 <span id="more"></span>
 <hr>
 <p>  <strong><a href="https://his2nd.life/technologies/301f019c.html"><s>3 月 9 日凌晨更新：已开发出 Chrome 扩展程序。每个人都能用，不用再装 Fiddler 了！</s></a></strong></p>
@@ -10647,7 +10647,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
 <p><a href="https://github.com/bianyukun1213/VforVVClass"><s>JavaScript 脚本链接</s></a></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>🤫</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/><category term="前端" scheme="https://his2nd.life/tags/front-end/"/><category term="JavaScript" scheme="https://his2nd.life/tags/javascript/"/></entry><entry><title>城探 Vol.0：哈尔滨废弃学校</title><link href="https://his2nd.life/posts/e4b7c50c.html"/><id>https://his2nd.life/posts/e4b7c50c.html</id><published>2020-02-01 20:11:43</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/e4b7c50c.html 查看此页面以获得更佳的排版。</b></p><hr><p>第一期之后来了个第零期在历史上也算不上什么罕见的操作了。</p>
+]]></content><summary type="html"><p>🤫</p></summary><category term="技术" scheme="https://his2nd.life/categories/technologies/"/><category term="网络" scheme="https://his2nd.life/tags/network/"/><category term="前端" scheme="https://his2nd.life/tags/front-end/"/><category term="JavaScript" scheme="https://his2nd.life/tags/javascript/"/></entry><entry><title>城探 Vol.0：哈尔滨废弃学校</title><link href="https://his2nd.life/posts/e4b7c50c.html"/><id>https://his2nd.life/posts/e4b7c50c.html</id><published>2020-02-01 20:11:43</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/e4b7c50c.html 查看此页面以获得更佳的排版。</b></p><hr><p>第一期之后来了个第零期在历史上也算不上什么罕见的操作了。</p>
 <span id="more"></span>
 <hr>
 <p>  2019 年 10 月 4 日去的，就先不配文字了。</p>
@@ -10751,7 +10751,7 @@ M/7VhG0vPVRC8tWCJpXq6JkcKbWgtgT1Keb8lRzY5JMdC3ieOjLyFDMVRF+fts1J
                 ><figcaption>图片</figcaption></figure></p>
 <hr>
 <p>  完。</p>
-]]></content><summary type="html"><p>第一期之后来了个第零期在历史上也算不上什么罕见的操作了。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/><category term="城市探险" scheme="https://his2nd.life/tags/urban-exploration/"/></entry><entry><title>城探 Vol.1：哈尔滨废弃娱乐场所</title><link href="https://his2nd.life/posts/f3e89a08.html"/><id>https://his2nd.life/posts/f3e89a08.html</id><published>2020-01-21 00:03:48</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>可 https://his2nd.life/posts/f3e89a08.html 查看此页面以获得更佳的排版。</b></p><hr><p>「有保安，终止交易。」</p>
+]]></content><summary type="html"><p>第一期之后来了个第零期在历史上也算不上什么罕见的操作了。</p></summary><category term="生活" scheme="https://his2nd.life/categories/life/"/><category term="溜达溜达" scheme="https://his2nd.life/tags/cause-im-a-wanderer/"/><category term="城市探险" scheme="https://his2nd.life/tags/urban-exploration/"/></entry><entry><title>城探 Vol.1：哈尔滨废弃娱乐场所</title><link href="https://his2nd.life/posts/f3e89a08.html"/><id>https://his2nd.life/posts/f3e89a08.html</id><published>2020-01-21 00:03:48</published><updated>2022-11-19 21:54:02</updated><content type="html"><![CDATA[<p><b>推荐访问 https://his2nd.life/posts/f3e89a08.html 查看此页面以获得更佳的排版。</b></p><hr><p>「有保安，终止交易。」</p>
 <span id="more"></span>
 <hr>
 <p>  去年十一的时候，我在 QQ 群里发现了这处宝藏。群里的规矩不让透露位置，于是我自己观察图片背景，在卫星地图上找到了它。趁着 20 号还有空，就和「老爹」一起去一探究竟。回来将照片传到博客上，给大家分享一下。</p>
