@@ -311,7 +311,7 @@ function runAfterContentVisible(onSwupPageView) {
         if (res)
             window.location.replace(`${siteUrl}go-home/`);
     });
-    if (pathname === '/hollow/') {
+    if (pathname === '/timeline/') {
         // mastodonTimeline 保存了 DOM 的引用，swup 换页再换回来，引用过时，buildTimeline 不好使，需要新建。
         // if (!mastodonTimeline) {
         mastodonTimeline = new MastodonApi({
@@ -414,7 +414,7 @@ setInterval(() => {
         else
             $('#layui-theme-dark').removeAttr('href');
         // 切换 mastodonTimeline 主题。
-        if (window.location.pathname === '/hollow/') {
+        if (window.location.pathname === '/timeline/') {
             mastodonTimeline.DEFAULT_THEME = newThemeColorScheme;
             mastodonTimeline.setTheme();
         }
