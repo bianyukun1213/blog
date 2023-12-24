@@ -447,7 +447,7 @@ if (debugOn) {
         },
         getHiddenPagesAsync: async function (forced) {
             let hiddenPages = [];
-            let decryptedSiteMeta = await this.decryptSiteMeta(forced);
+            let decryptedSiteMeta = await this.decryptSiteMetaAsync(forced);
             for (const page of decryptedSiteMeta.pages) {
                 if (page.hidden)
                     hiddenPages.push(page);
