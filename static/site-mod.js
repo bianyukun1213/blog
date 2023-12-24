@@ -332,7 +332,7 @@ function runAfterContentVisible(onSwupPageView) {
             markdown_blockquote: false,
             hide_counter_bar: false,
             text_max_lines: "0",
-            link_see_more: "See more posts at Mastodon"
+            link_see_more: "在 m.cmx.im 查看更多嘟文"
         });
         // } else {
         //     mastodonTimeline.buildTimeline();
