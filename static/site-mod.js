@@ -103,9 +103,16 @@ const smDataV2 = {
     showInitialPopup: true,
     debugLog: false
 };
+const smDataV3 = {
+    templateVer: 3,
+    settings: {},
+    showInitialPopup: true,
+    debug: false
+};
 function makeSmData() {
     // return JSON.parse(JSON.stringify(smDataV1));
-    return JSON.parse(JSON.stringify(smDataV2));
+    // return JSON.parse(JSON.stringify(smDataV2));
+    return JSON.parse(JSON.stringify(smDataV3));
 }
 function getSmSettings() {
     return getSmData().settings;
@@ -122,6 +129,15 @@ function migrateSmDataFromV1ToV2(v1) {
     let tmp = JSON.parse(JSON.stringify(v1));
     // v2 新增了 debugLog 字段。
     tmp.debugLog = false;
+    tmp.templateVer = 2;
+    return tmp;
+}
+function migrateSmDataFromV2ToV3(v2) {
+    let tmp = JSON.parse(JSON.stringify(v2));
+    // v3 将 debug 字段重命名为 debug。
+    tmp.debug = tmp.debugLog;
+    delete tmp.debugLog;
+    tmp.templateVer = 3;
     return tmp;
 }
 function migrateSmData(oldSmData) {
@@ -130,6 +146,8 @@ function migrateSmData(oldSmData) {
         oldSmData = migrateSmDataFromNoneToV1(oldSmData);
     if (oldSmData.templateVer < 2)
         oldSmData = migrateSmDataFromV1ToV2(oldSmData);
+    if (oldSmData.templateVer < 3)
+        oldSmData = migrateSmDataFromV2ToV3(oldSmData);
     return oldSmData;
 }
 // 按最新的数据模板校验。
@@ -137,8 +155,8 @@ function validateSmData(invalidSmData) {
     let validSmData = makeSmData(); // 以干净的模板作为基底。
     let invalidShowInitialPopup = invalidSmData.showInitialPopup;
     validSmData.showInitialPopup = invalidShowInitialPopup === false || invalidShowInitialPopup === 'false' ? false : true; // 从 local storage 读的是字符串，转成 bool。
-    let invalidDebugLog = invalidSmData.debugLog;
-    validSmData.debugLog = invalidDebugLog === true || invalidDebugLog === 'true' ? true : false; // 从 local storage 读的是字符串，转成 bool。
+    let invalidDebug = invalidSmData.debug;
+    validSmData.debug = invalidDebug === true || invalidDebug === 'true' ? true : false; // 从 local storage 读的是字符串，转成 bool。
     let invalidSettings = invalidSmData.settings;
     // ...
     return validSmData;
@@ -192,6 +210,13 @@ async function getSiteMetaAsync(forced) {
         return siteMetaCache;
     }
 }
+function decryptPageMeta(pageMeta) {
+    try {
+        return JSON.parse(CryptoJS.AES.decrypt(pageMeta.encryptedData, aesKey).toString(CryptoJS.enc.Utf8));
+    } catch (error) {
+        return {};
+    }
+}
 async function getCurMetaAsync(forced) {
     const siteMeta = await getSiteMetaAsync(forced);
     const fixedPathname = getFixedPathname();
@@ -204,13 +229,8 @@ async function getCurMetaAsync(forced) {
         // 此时 fixedPathname 要么以 / 结尾，要么以 .html 结尾。
         let decrypted = item;
         // 如果数据是加密的。
-        if (typeof decrypted.encryptedData !== 'undefined' && decrypted.encryptedData !== null) {
-            try {
-                decrypted = JSON.parse(CryptoJS.AES.decrypt(decrypted.encryptedData, aesKey).toString(CryptoJS.enc.Utf8));
-            } catch (error) {
-                decrypted = item;
-            }
-        }
+        if (typeof decrypted.encryptedData !== 'undefined' && decrypted.encryptedData !== null)
+            decrypted = decryptPageMeta(decrypted);
         if (decrypted.path === fixedPathname.slice(1) || decrypted.path === fixedPathname.slice(1) + 'index.html') {
             curMeta.type = 'page';
             curMeta.meta = decrypted;
@@ -222,13 +242,8 @@ async function getCurMetaAsync(forced) {
         for (const item of postMeta) {
             let decrypted = item;
             // 如果数据是加密的。
-            if (typeof decrypted.encryptedData !== 'undefined' && decrypted.encryptedData !== null) {
-                try {
-                    decrypted = JSON.parse(CryptoJS.AES.decrypt(decrypted.encryptedData, aesKey).toString(CryptoJS.enc.Utf8));
-                } catch (error) {
-                    decrypted = item;
-                }
-            }
+            if (typeof decrypted.encryptedData !== 'undefined' && decrypted.encryptedData !== null)
+                decrypted = decryptPageMeta(decrypted);
             if (decrypted.path === fixedPathname.slice(1)) {
                 curMeta.type = 'post';
                 curMeta.meta = decrypted;
@@ -292,6 +307,21 @@ function getThemeColorScheme() {
 }
 // 页面加载后再执行的操作：
 function runAfterContentVisible(onSwupPageView) {
+    // 监听搜索框输入事件，根据条件开启调试。需要在页面加载后监听，因为 site-mod.js 在头部注入，执行时还没有搜索框。
+    $('.search-input').on('input', function () {
+        if ($(this).val() === 'debugon' && !debugOn) {
+            let smData = getSmData();
+            smData.debug = true;
+            setSmData(smData);
+            window.location.reload();
+        }
+        else if ($(this).val() === 'debugoff' && debugOn) {
+            let smData = getSmData();
+            smData.debug = false;
+            setSmData(smData);
+            window.location.reload();
+        }
+    });
     // 隐藏开启 Javascript 的提示。
     $('#javascript-alert').hide();
     // 修正 pathname，以解决不带 .html 不显示评论，并且已保存了密码的文章也不能自动解密的问题。
@@ -394,8 +424,43 @@ setSmData(getSmData());
 let siteMetaCache = {};
 let userRegionTextCache = '';
 let themeColorScheme = getThemeColorScheme();
-const debugLog = getSmData().debugLog;
-const smLog = debugLog ? (...params) => { console.log(new Date().toLocaleTimeString() + ' |', ...params); } : () => { };
+let vConsole = {};
+let smDebug = {};
+let smLog = () => { };
+const debugOn = getSmData().debug;
+if (debugOn) {
+    vConsole = new window.VConsole();
+    smDebug = {
+        decryptSiteMetaAsync: async function (forced) {
+            let decryptedSiteMeta = await getSiteMetaAsync(forced);
+            decryptedSiteMeta.pages = decryptedSiteMeta.pages.map((page) => {
+                if (typeof page.encryptedData !== 'undefined' && page.encryptedData !== null)
+                    page = decryptPageMeta(page);
+                return page;
+            });
+            decryptedSiteMeta.posts = decryptedSiteMeta.posts.map((post) => {
+                if (typeof post.encryptedData !== 'undefined' && post.encryptedData !== null)
+                    post = decryptPageMeta(post);
+                return post;
+            });
+            return decryptedSiteMeta;
+        },
+        getHiddenPagesAsync: async function (forced) {
+            let hiddenPages = [];
+            let decryptedSiteMeta = await this.decryptSiteMeta(forced);
+            for (const page of decryptedSiteMeta.pages) {
+                if (page.hidden)
+                    hiddenPages.push(page);
+            }
+            for (const post of decryptedSiteMeta.posts) {
+                if (post.hidden)
+                    hiddenPages.push(post);
+            }
+            return hiddenPages;
+        }
+    };
+    smLog = (...params) => { console.log(new Date().toLocaleTimeString() + ' |', ...params); };
+}
 let mastodonTimeline;
 // 轮询检测 local storage 变化，实现 Layui 跟随 Redefine 明暗。
 // 原来用的是监听，实际上比较麻烦，见：
