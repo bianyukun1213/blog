@@ -423,7 +423,8 @@ setSmData(getSmData());
 // 初始化站点元数据。
 let siteMetaCache = {};
 let userRegionTextCache = '';
-let themeColorScheme = getThemeColorScheme();
+// let themeColorScheme = getThemeColorScheme();
+let themeColorScheme = ''; // 初值设为空，这样首次即能触发 newThemeColorScheme !== themeColorScheme。
 let vConsole = {};
 let smDebug = {};
 let smLog = () => { };
