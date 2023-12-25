@@ -484,6 +484,8 @@ setInterval(() => {
             mastodonTimeline.DEFAULT_THEME = newThemeColorScheme;
             mastodonTimeline.setTheme();
         }
+        if (!$.isPlainObject(vConsole))
+            vConsole.setOption('theme', newThemeColorScheme);
     }
     themeColorScheme = newThemeColorScheme;
 }, 1000);
