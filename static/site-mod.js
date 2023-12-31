@@ -341,6 +341,53 @@ function runAfterContentVisible(onSwupPageView) {
         if (res)
             window.location.replace(`${siteUrl}go-home/`);
     });
+    // swup 会使内联 javascript 失效，导致 masonry 无法自适应。检测到 masonry 就刷新，就能正常显示。
+    if (onSwupPageView && $('.image-masonry').length > 0)
+        window.location.reload();
+    // if (onSwupPageView) {
+    //     let imgMasonries = $('.image-masonry');
+    //     for (const masonry of imgMasonries) {
+    //         let scriptEle = masonry.nextElementSibling;
+    //         if (scriptEle.tagName === 'SCRIPT') {
+    //             let script = scriptEle.innerText;
+    //             scriptEle.remove();
+    //             $(masonry).after(`<script>${script}</script>`);
+    //         }
+    //     }
+    // }
+    // 去除无用的图片注释。
+    let captions = $('.image-caption');
+    for (const cap of captions) {
+        let img = cap.children[0];
+        if (img.hasAttribute('title'))
+            cap.children[1].innerText = img.title;
+        else
+            cap.children[1].remove();
+    }
+    // 修正开往链接，全部改为由当前页面跳转，否则算什么“开往”？！
+    $('a[href="https://www.travellings.cn/go.html"]').attr('target', '_self');
+    // // 修复 Redefine 单页模式下的 Artitalk。
+    // if ($('#artitalk_main').length > 0) {
+    //     new Artitalk({
+    //         appId: leanCloudAppId,
+    //         appKey: leanCloudAppKey,
+    //         serverURL: artitalkServerUrl,
+    //         pageSize: 50,
+    //         shuoPla: '写点什么？',
+    //         avatarPla: '头像 Url',
+    //         color1: '#4c8dae',
+    //         color2: '#db5a6b'
+    //     });
+    // }
+    // 修复移动端网易云音乐外链。
+    if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+        let iframes = $('iframe');
+        for (let frm of iframes)
+            if (frm.src.includes('music.163.com/'))
+                frm.src = frm.src.replace('music.163.com/', 'music.163.com/m/');
+    }
+    // 修复移动端下在解密文章的输入框点击回车后焦点跑到评论区，而不解密的问题。
+    $('.hbe-input-field').attr('enterkeyhint', 'done');
     if (pathname === '/timeline/') {
         // mastodonTimeline 保存了 DOM 的引用，swup 换页再换回来，引用过时，buildTimeline 不好使，需要新建。
         // if (!mastodonTimeline) {
@@ -368,39 +415,6 @@ function runAfterContentVisible(onSwupPageView) {
         //     mastodonTimeline.buildTimeline();
         // }
     }
-    // 修正开往链接，全部改为由当前页面跳转，否则算什么“开往”？！
-    $('a[href="https://www.travellings.cn/go.html"]').attr('target', '_self');
-    // 去除无用的图片注释。
-    let captions = $('.image-caption');
-    for (const cap of captions) {
-        let img = cap.children[0];
-        if (img.hasAttribute('title'))
-            cap.children[1].innerText = img.title;
-        else
-            cap.children[1].remove();
-    }
-    // // 修复 Redefine 单页模式下的 Artitalk。
-    // if ($('#artitalk_main').length > 0) {
-    //     new Artitalk({
-    //         appId: leanCloudAppId,
-    //         appKey: leanCloudAppKey,
-    //         serverURL: artitalkServerUrl,
-    //         pageSize: 50,
-    //         shuoPla: '写点什么？',
-    //         avatarPla: '头像 Url',
-    //         color1: '#4c8dae',
-    //         color2: '#db5a6b'
-    //     });
-    // }
-    // 修复移动端网易云音乐外链。
-    if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-        let iframes = $('iframe');
-        for (let frm of iframes)
-            if (frm.src.includes('music.163.com/'))
-                frm.src = frm.src.replace('music.163.com/', 'music.163.com/m/');
-    }
-    // 修复移动端下在解密文章的输入框点击回车后焦点跑到评论区，而不解密的问题。
-    $('.hbe-input-field').attr('enterkeyhint', 'done');
     // 加载 Layui 组件，用到 Layui 的都写在回调函数里，回调函数是异步执行的。
     layui.use(() => {
         let layer = layui.layer;
