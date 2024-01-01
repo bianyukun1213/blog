@@ -1,6 +1,5 @@
 // 这里做一些对站点的整体修改。
 
-
 // const siteUrl = 'https://his2nd.life/';
 const siteUrl = `${window.location.origin}/`;
 
@@ -14,7 +13,6 @@ const aesKey = '#$!2KENZ*#bLGy';
 
 const leanCloudAppId = 'TjlywOgAHj9rcaw3nbUeV561-MdYXbMMI';
 const leanCloudAppKey = 'I0J0aMw0p6O2gEv0WmeiJwsc';
-// const artitalkServerUrl = 'https://artitalk.his2nd.life';
 
 // jQuery Ajax 包装：
 // 把以前做 daddys-here 的代码改吧改吧，见 https://github.com/bianyukun1213/daddys-here/blob/main/src/index.html#L739。
@@ -224,7 +222,10 @@ async function getCurMetaAsync(forced) {
     const postMeta = siteMeta.posts;
     let curMeta = {};
     let curMetaFound = false;
-    for (const item of pageMeta) {
+
+    const pageMetaLength = pageMeta.length;
+    for (let i = 0; i < pageMetaLength; i++) {
+        const item = pageMeta[i];
         // 举例：比较 links/index.html 与 /links/，应该能够对应上。
         // 此时 fixedPathname 要么以 / 结尾，要么以 .html 结尾。
         let decrypted = item;
@@ -239,7 +240,9 @@ async function getCurMetaAsync(forced) {
         }
     }
     if (!curMetaFound) {
-        for (const item of postMeta) {
+        const postMetaLength = postMeta.length;
+        for (let i = 0; i < postMetaLength; i++) {
+            const item = postMeta[i];
             let decrypted = item;
             // 如果数据是加密的。
             if (typeof decrypted.encryptedData !== 'undefined' && decrypted.encryptedData !== null)
@@ -277,7 +280,9 @@ async function checkRegionBlacklistAsync(forced) {
             let res = await getPromise;
             userRegionTextCache = JSON.stringify(res);
         }
-        for (const region of curMeta.meta.regionBlacklist) {
+        const curMetaMetaRegionBlacklistLength = curMeta.meta.regionBlacklist.length;
+        for (let i = 0; i < curMetaMetaRegionBlacklistLength; i++) {
+            const region = curMeta.meta.regionBlacklist[i];
             if (userRegionTextCache.includes(region))
                 return true;
         }
@@ -286,9 +291,6 @@ async function checkRegionBlacklistAsync(forced) {
     else {
         return false;
     }
-}
-function sleep(sleepTime) {
-    for (var start = new Date; new Date - start <= sleepTime;) { }
 }
 function getThemeColorScheme() {
     const redefineStorage = localStorage.getItem('REDEFINE-THEME-STATUS');
@@ -326,16 +328,11 @@ function runAfterContentVisible(onSwupPageView) {
     $('#javascript-alert').hide();
     // 修正 pathname，以解决不带 .html 不显示评论，并且已保存了密码的文章也不能自动解密的问题。
     const pathname = window.location.pathname;
-    let fixedPathname = getFixedPathname();
+    const fixedPathname = getFixedPathname();
     if (pathname !== fixedPathname) {
         window.location.replace(window.location.origin + fixedPathname); // 跳转。
         return; // 从 replace 到实际跳转有一段时间，没必要让代码继续执行，因此 return。
     }
-    // // Artitalk 跳转：如果当前是单页模式下触发的 Artitalk 页面加载，就真地重新加载一次，以避免 Lean Cloud Storage SDK 多次初始化的问题。
-    // if (pathname === '/hollow/' && onSwupPageView) {
-    //     window.location.reload();
-    //     return;
-    // }
     // 检查用户属地。
     checkRegionBlacklistAsync().then((res) => {
         if (res)
@@ -344,47 +341,37 @@ function runAfterContentVisible(onSwupPageView) {
     // swup 会使内联 javascript 失效，导致 masonry 无法自适应。检测到 masonry 就刷新，就能正常显示。
     if (onSwupPageView && $('.image-masonry').length > 0)
         window.location.reload();
-    // if (onSwupPageView) {
-    //     let imgMasonries = $('.image-masonry');
-    //     for (const masonry of imgMasonries) {
-    //         let scriptEle = masonry.nextElementSibling;
-    //         if (scriptEle.tagName === 'SCRIPT') {
-    //             let script = scriptEle.innerText;
-    //             scriptEle.remove();
-    //             $(masonry).after(`<script>${script}</script>`);
-    //         }
-    //     }
-    // }
     // 去除无用的图片注释。
     let captions = $('.image-caption');
-    for (const cap of captions) {
+    const captionsLength = captions.length;
+    for (let i = 0; i < captionsLength; i++) {
+        const cap = captions[i];
         let img = cap.children[0];
         if (img.hasAttribute('title'))
             cap.children[1].innerText = img.title;
         else
             cap.children[1].remove();
     }
+    // 去除图片注释后，masonry 之间的间隙不会更新，需要重新计算。
+    const imageMasonryScripts = $('.image-masonry-script');
+    const imageMasonryScriptsLength = imageMasonryScripts.length;
+    for (let i = 0; i < imageMasonryScriptsLength; i++) {
+        const script = imageMasonryScripts[i];
+        const instanceName = script.id.split('-')[3];
+        if (!!instanceName)
+            window['macyAt' + instanceName].recalculate(true);
+    }
     // 修正开往链接，全部改为由当前页面跳转，否则算什么“开往”？！
     $('a[href="https://www.travellings.cn/go.html"]').attr('target', '_self');
-    // // 修复 Redefine 单页模式下的 Artitalk。
-    // if ($('#artitalk_main').length > 0) {
-    //     new Artitalk({
-    //         appId: leanCloudAppId,
-    //         appKey: leanCloudAppKey,
-    //         serverURL: artitalkServerUrl,
-    //         pageSize: 50,
-    //         shuoPla: '写点什么？',
-    //         avatarPla: '头像 Url',
-    //         color1: '#4c8dae',
-    //         color2: '#db5a6b'
-    //     });
-    // }
     // 修复移动端网易云音乐外链。
     if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
         let iframes = $('iframe');
-        for (let frm of iframes)
+        const iframesLength = iframes.length;
+        for (let i = 0; i < iframesLength; i++) {
+            const frm = iframes[i];
             if (frm.src.includes('music.163.com/'))
                 frm.src = frm.src.replace('music.163.com/', 'music.163.com/m/');
+        }
     }
     // 修复移动端下在解密文章的输入框点击回车后焦点跑到评论区，而不解密的问题。
     $('.hbe-input-field').attr('enterkeyhint', 'done');
@@ -392,15 +379,15 @@ function runAfterContentVisible(onSwupPageView) {
         // mastodonTimeline 保存了 DOM 的引用，swup 换页再换回来，引用过时，buildTimeline 不好使，需要新建。
         // if (!mastodonTimeline) {
         mastodonTimeline = new MastodonApi({
-            container_body_id: "mt-body",
-            spinner_class: "loading-spinner",
+            container_body_id: 'mt-body',
+            spinner_class: 'loading-spinner',
             default_theme: themeColorScheme,
-            instance_url: "https://m.cmx.im",
-            timeline_type: "profile",
-            user_id: "107989258291762102",
-            profile_name: "@Hollis",
-            hashtag_name: "",
-            toots_limit: "20",
+            instance_url: 'https://m.cmx.im',
+            timeline_type: 'profile',
+            user_id: '107989258291762102',
+            profile_name: '@Hollis',
+            hashtag_name: '',
+            toots_limit: '20',
             hide_unlisted: false,
             hide_reblog: false,
             hide_replies: false,
@@ -408,8 +395,8 @@ function runAfterContentVisible(onSwupPageView) {
             hide_emojos: false,
             markdown_blockquote: false,
             hide_counter_bar: false,
-            text_max_lines: "0",
-            link_see_more: "在 m.cmx.im 查看更多嘟文"
+            text_max_lines: '0',
+            link_see_more: '在 m.cmx.im 查看更多嘟文'
         });
         // } else {
         //     mastodonTimeline.buildTimeline();
@@ -463,11 +450,15 @@ if (debugOn) {
         getHiddenPagesAsync: async function (forced) {
             let hiddenPages = [];
             let decryptedSiteMeta = await this.decryptSiteMetaAsync(forced);
-            for (const page of decryptedSiteMeta.pages) {
+            const decryptedSiteMetaPagesLength = decryptedSiteMeta.pages.length;
+            for (let i = 0; i < decryptedSiteMetaPagesLength; i++) {
+                const page = decryptedSiteMeta.pages[i];
                 if (page.hidden)
                     hiddenPages.push(page);
             }
-            for (const post of decryptedSiteMeta.posts) {
+            const decryptedSiteMetaPostsLength = decryptedSiteMeta.posts.length;
+            for (let i = 0; i < decryptedSiteMetaPostsLength; i++) {
+                const post = decryptedSiteMeta.posts[i];
                 if (post.hidden)
                     hiddenPages.push(post);
             }
