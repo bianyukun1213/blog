@@ -341,28 +341,6 @@ function runAfterContentVisible(onSwupPageView) {
     // swup 会使内联 javascript 失效，导致 masonry 无法自适应。检测到 masonry 就刷新，就能正常显示。
     if (onSwupPageView && $('.image-masonry').length > 0)
         window.location.reload();
-    // 去除无用的图片注释。
-    let captions = $('.image-caption');
-    const captionsLength = captions.length;
-    for (let i = 0; i < captionsLength; i++) {
-        const cap = captions[i];
-        let img = cap.children[0];
-        if (img.hasAttribute('title'))
-            cap.children[1].innerText = img.title;
-        else
-            cap.children[1].remove();
-    }
-    // 去除图片注释后，masonry 之间的间隙不会更新，需要重新计算。
-    const imageMasonryScripts = $('.image-masonry-script');
-    const imageMasonryScriptsLength = imageMasonryScripts.length;
-    for (let i = 0; i < imageMasonryScriptsLength; i++) {
-        const script = imageMasonryScripts[i];
-        const instanceName = script.id.split('-')[3];
-        if (!!instanceName)
-            window['macyAt' + instanceName].recalculate(true);
-    }
-    // 修正开往链接，全部改为由当前页面跳转，否则算什么“开往”？！
-    $('a[href="https://www.travellings.cn/go.html"]').attr('target', '_self');
     // 修复移动端网易云音乐外链。
     if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
         let iframes = $('iframe');
@@ -373,8 +351,6 @@ function runAfterContentVisible(onSwupPageView) {
                 frm.src = frm.src.replace('music.163.com/', 'music.163.com/m/');
         }
     }
-    // 修复移动端下在解密文章的输入框点击回车后焦点跑到评论区，而不解密的问题。
-    $('.hbe-input-field').attr('enterkeyhint', 'done');
     if (pathname === '/timeline/') {
         // mastodonTimeline 保存了 DOM 的引用，swup 换页再换回来，引用过时，buildTimeline 不好使，需要新建。
         // if (!mastodonTimeline) {
