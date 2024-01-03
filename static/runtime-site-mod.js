@@ -189,7 +189,7 @@ function getFixedPathname() {
         fixedPathname = fixedPathname.replace('index.html', '');
     return fixedPathname;
 }
-// 获取站点元数据，如果在单页模式下已有元数据，就不再获取。
+// 获取站点元数据，如果在 sesstionStorage 下已有元数据，就不再获取。
 async function getSiteMetaAsync(forced) {
     if (JSON.stringify(siteMetaCache) === '{}' || forced) {
         let loadingIndex = layer.load(0, { shade: [1, '#202124'], scrollbar: false });
@@ -203,10 +203,9 @@ async function getSiteMetaAsync(forced) {
         });
         let res = await getPromise;
         siteMetaCache = res;
-        return res;
-    } else {
-        return siteMetaCache;
+        sessionStorage.setItem('siteMetaCache', JSON.stringify(siteMetaCache));
     }
+    return siteMetaCache;
 }
 function decryptPageMeta(pageMeta) {
     try {
@@ -277,6 +276,7 @@ async function checkRegionBlacklistAsync(forced) {
             });
             let res = await getPromise;
             userRegionTextCache = JSON.stringify(res);
+            sessionStorage.setItem('userRegionTextCache', userRegionTextCache);
         }
         const curMetaMetaRegionBlacklistLength = curMeta.meta.regionBlacklist.length;
         for (let i = 0; i < curMetaMetaRegionBlacklistLength; i++) {
@@ -306,7 +306,7 @@ function getThemeColorScheme() {
     }
 }
 // 页面加载后再执行的操作：
-function runAfterContentVisible(onSwupPageView) {
+function runAfterContentVisible() {
     // 监听搜索框输入事件，根据条件开启调试。需要在页面加载后监听，因为 site-mod.js 在头部注入，执行时还没有搜索框。
     $('.search-input').on('input', function () {
         if ($(this).val() === 'debugon' && !debugOn) {
@@ -369,31 +369,31 @@ function runAfterContentVisible(onSwupPageView) {
         }
     }
     if (pathname === '/timeline/') {
-        // mastodonTimeline 保存了 DOM 的引用，swup 换页再换回来，引用过时，buildTimeline 不好使，需要新建。
-        // if (!mastodonTimeline) {
-        mastodonTimeline = new MastodonApi({
-            container_body_id: 'mt-body',
-            spinner_class: 'loading-spinner',
-            default_theme: themeColorScheme,
-            instance_url: 'https://m.cmx.im',
-            timeline_type: 'profile',
-            user_id: '107989258291762102',
-            profile_name: '@Hollis',
-            hashtag_name: '',
-            toots_limit: '20',
-            hide_unlisted: false,
-            hide_reblog: false,
-            hide_replies: false,
-            hide_preview_link: false,
-            hide_emojos: false,
-            markdown_blockquote: false,
-            hide_counter_bar: false,
-            text_max_lines: '0',
-            link_see_more: '在 m.cmx.im 查看更多嘟文'
-        });
-        // } else {
-        //     mastodonTimeline.buildTimeline();
-        // }
+        // runtime-site-mod.js 加载 Mastodon 时间线，比较方便控制主题切换。
+        if (!mastodonTimeline) {
+            mastodonTimeline = new MastodonApi({
+                container_body_id: 'mt-body',
+                spinner_class: 'loading-spinner',
+                default_theme: themeColorScheme,
+                instance_url: 'https://m.cmx.im',
+                timeline_type: 'profile',
+                user_id: '107989258291762102',
+                profile_name: '@Hollis',
+                hashtag_name: '',
+                toots_limit: '20',
+                hide_unlisted: false,
+                hide_reblog: false,
+                hide_replies: false,
+                hide_preview_link: false,
+                hide_emojos: false,
+                markdown_blockquote: false,
+                hide_counter_bar: false,
+                text_max_lines: '0',
+                link_see_more: '在 m.cmx.im 查看更多嘟文'
+            });
+        } else {
+            mastodonTimeline.buildTimeline();
+        }
     }
     // 加载 Layui 组件，用到 Layui 的都写在回调函数里，回调函数是异步执行的。
     layui.use(() => {
@@ -416,7 +416,12 @@ function runAfterContentVisible(onSwupPageView) {
 setSmData(getSmData());
 // 初始化站点元数据。
 let siteMetaCache = {};
-let userRegionTextCache = '';
+try {
+    siteMetaCache = JSON.parse(sessionStorage.getItem('siteMetaCache')) || {};
+} catch (error) {
+    siteMetaCache = {};
+}
+let userRegionTextCache = sessionStorage.getItem('userRegionTextCache') || '';
 // let themeColorScheme = getThemeColorScheme();
 let themeColorScheme = ''; // 初值设为空，这样首次即能触发 newThemeColorScheme !== themeColorScheme。
 let vConsole = {};
@@ -488,15 +493,7 @@ setInterval(() => {
     themeColorScheme = newThemeColorScheme;
 }, 1000);
 // 监听页面加载完成事件。
-$(document).ready(() => {
-    // try {
-    //     // 由于使用了 Redefine 的单页模式，设置 swup 钩子。
-    //     swup.hooks.on('page:view', () => runAfterContentVisible(true));
-    // } catch (error) {
-    //     console.error('swup hook error: ', error);
-    // }
-    runAfterContentVisible();
-});
+$(document).ready(runAfterContentVisible);
 // 监听 hexo-blog-encrypt 插件的解密事件，自动刷新页面以使部分内容正确显示。
 $(window).on('hexo-blog-decrypt', (e) => {
     if (!window.location.hash.includes('#on-decryption-reload')) {
