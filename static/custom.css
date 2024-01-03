@@ -17,6 +17,11 @@
     color: red;
 }
 
+/* 博客改为 GoatCounter 计数，没有此项。需要加 !important 以覆盖 Tailwind CSS 样式。 */
+#busuanzi_container_site_uv {
+    display: none !important;
+}
+
 /* .admonition {
     padding: 24px 24px 24px 32px;
     margin: 24px 0;

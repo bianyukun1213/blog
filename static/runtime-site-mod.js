@@ -1,7 +1,9 @@
 // 这里做一些对站点的整体修改。
 
-// const siteUrl = 'https://his2nd.life/';
-const siteUrl = `${window.location.origin}/`;
+// const siteUrl = 'https://his2nd.life';
+const siteUrl = `${window.location.origin}`;
+
+const counterUrl = 'https://gc.his2nd.life/counter'
 
 const layuiThemeDarkCdn = 'https://unpkg.com/layui-theme-dark/dist/layui-theme-dark.css';
 
@@ -18,28 +20,28 @@ const leanCloudAppKey = 'I0J0aMw0p6O2gEv0WmeiJwsc';
 // 把以前做 daddys-here 的代码改吧改吧，见 https://github.com/bianyukun1213/daddys-here/blob/main/src/index.html#L739。
 function smRequest(options) {
     options = options || {};
-    let baseUrl = options.baseUrl || siteUrl.slice(0, -1);
-    let entry = options.entry || '';
-    let url = baseUrl + entry; // 新增：合并 baseUrl 和 entry。
-    let method = options.method || 'GET';
-    let async = typeof options.async === 'undefined' ? true : !!options.async; // 新增：默认异步请求。jQ 强烈不建议使用同步请求。
-    let cache = typeof options.cache === 'undefined' ? true : !!options.cache; // 新增：默认允许使用缓存。
-    let contentType = options.contentType || 'application/json';
-    let data = options.data || {};
-    let timeout = $.isNumeric(options.timeout) ? options.timeout : 5000; // 新增：可配置 timeout。
-    let success = (result, status, xhr) => {
+    const baseUrl = options.baseUrl || siteUrl;
+    const entry = options.entry || '';
+    const url = baseUrl + entry; // 新增：合并 baseUrl 和 entry。
+    const method = options.method || 'GET';
+    const async = typeof options.async === 'undefined' ? false : !!options.async; // 新增：默认同步请求，因为我封装了一个异步版本。jQ 强烈不建议使用同步请求。
+    const cache = typeof options.cache === 'undefined' ? true : !!options.cache; // 新增：默认允许使用缓存。
+    const contentType = options.contentType || 'application/json';
+    const data = options.data || {};
+    const timeout = $.isNumeric(options.timeout) ? options.timeout : 5000; // 新增：可配置 timeout。
+    const success = (result, status, xhr) => {
         smLog(`${options.method} ${url} 请求成功：`, JSON.parse(JSON.stringify(result))); // 之后任何对 result 的修改都会影响这里，所以打印的时候“复制”一份来打印原样。
         if ($.isFunction(options.success)) {
             options.success(result);
         }
     };
-    let fail = (xhr, status, error) => {
+    const fail = (xhr, status, error) => {
         smLog(`${options.method} ${url} 请求失败：${status}, `, error);
         if ($.isFunction(options.fail)) {
             options.fail(status);
         }
     };
-    let complete = (xhr, status) => {
+    const complete = (xhr, status) => {
         if ($.isFunction(options.complete)) {
             options.complete();
         }
@@ -337,9 +339,22 @@ function runAfterContentVisible(onSwupPageView) {
         if (res)
             window.location.replace(`${siteUrl}go-home/`);
     });
-    // // swup 会使内联 javascript 失效，导致 masonry 无法自适应。检测到 masonry 就刷新，就能正常显示。
-    // if (onSwupPageView && $('.image-masonry').length > 0)
-    //     window.location.reload();
+    smGetAsync({
+        baseUrl: counterUrl,
+        entry: '/TOTAL.json',
+        cache: false, // 不要从缓存读取。
+        timeout: 8000
+    }).then((res) => {
+        $('#busuanzi_value_site_pv').text(res.count);
+    });
+    smGetAsync({
+        baseUrl: counterUrl,
+        entry: `/${encodeURIComponent(window.location.pathname)}.json`,
+        cache: false, // 不要从缓存读取。
+        timeout: 8000
+    }).then((res) => {
+        $('#busuanzi_value_page_pv').text(res.count);
+    });
     // 修复移动端网易云音乐外链。
     if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
         let iframes = $('iframe');
