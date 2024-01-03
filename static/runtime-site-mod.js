@@ -3,7 +3,7 @@
 // const siteUrl = 'https://his2nd.life';
 const siteUrl = `${window.location.origin}`;
 
-const counterUrl = 'https://gc.his2nd.life/counter'
+const counterUrl = 'https://gc.his2nd.life/counter';
 
 const layuiThemeDarkCdn = 'https://unpkg.com/layui-theme-dark/dist/layui-theme-dark.css';
 
@@ -23,39 +23,37 @@ function smRequest(options) {
     const baseUrl = options.baseUrl || siteUrl;
     const entry = options.entry || '';
     const url = baseUrl + entry; // 新增：合并 baseUrl 和 entry。
-    const method = options.method || 'GET';
     const async = typeof options.async === 'undefined' ? false : !!options.async; // 新增：默认同步请求，因为我封装了一个异步版本。jQ 强烈不建议使用同步请求。
-    const cache = typeof options.cache === 'undefined' ? true : !!options.cache; // 新增：默认允许使用缓存。
-    const contentType = options.contentType || 'application/json';
     const data = options.data || {};
     const timeout = $.isNumeric(options.timeout) ? options.timeout : 5000; // 新增：可配置 timeout。
-    const success = (result, status, xhr) => {
-        smLog(`${options.method} ${url} 请求成功：`, JSON.parse(JSON.stringify(result))); // 之后任何对 result 的修改都会影响这里，所以打印的时候“复制”一份来打印原样。
+    const success = (data, textStatus, jqXhr) => {
+        smLog(`${options.method} ${url} 请求成功：`, JSON.parse(JSON.stringify(data))); // 之后任何对 data 的修改都会影响这里，所以打印的时候“复制”一份来打印原样。
         if ($.isFunction(options.success)) {
-            options.success(result);
+            options.success(data, textStatus, jqXhr);
         }
     };
-    const fail = (xhr, status, error) => {
-        smLog(`${options.method} ${url} 请求失败：${status}, `, error);
+    const fail = (jqXhr, textStatus, errorThrown) => {
+        smLog(`${options.method} ${url} 请求失败：`, jqXhr, textStatus, errorThrown);
         if ($.isFunction(options.fail)) {
-            options.fail(status);
+            options.fail(jqXhr, textStatus, errorThrown);
         }
     };
-    const complete = (xhr, status) => {
+    const complete = (dataOrJqXhr, textStatus, jqXhrOrErrorThrown) => {
         if ($.isFunction(options.complete)) {
-            options.complete();
+            options.complete(dataOrJqXhr, textStatus, jqXhrOrErrorThrown);
         }
     };
     $.ajax({
         url: url,
-        type: method,
+        type: options.method, // 用默认的。
         async: async,
-        cache: cache,
-        contentType: contentType,
+        cache: options.cache, // 用默认的。
+        contentType: options.contentType, // 用默认的。
+        dataType: options.dataType, // 用默认的。
         data: data,
         timeout: timeout,
         beforeSend: () => {
-            smLog(`发送 Ajax 请求：${method} ${url} ，数据：`, data); // 逗号前加个空格，不然“，数据：”就被 Chrome 控制台识别进 url 了，点击直接打开的页面就错了。
+            smLog(`发送 Ajax 请求：${options.method} ${url} ，数据：`, data); // 逗号前加个空格，不然“，数据：”就被 Chrome 控制台识别进 url 了，点击直接打开的页面就错了。
         }
     }).done(success).fail(fail).always(complete);
 }
@@ -269,7 +267,6 @@ async function checkRegionBlacklistAsync(forced) {
                 baseUrl: 'https://www.douyacun.com',
                 entry: '/api/openapi/geo/location',
                 cache: false, // 不要从缓存读取。
-                // contentType: 'text/plain', 如果返回的确实是 JSON，调这里没用。
                 data: {
                     token: geoApiToken
                 },
@@ -346,6 +343,8 @@ function runAfterContentVisible(onSwupPageView) {
         timeout: 8000
     }).then((res) => {
         $('#busuanzi_value_site_pv').text(res.count);
+    }).catch((jqXHR, textStatus, errorThrown) => {
+        $('#busuanzi_value_site_pv').text('-');
     });
     smGetAsync({
         baseUrl: counterUrl,
@@ -354,6 +353,8 @@ function runAfterContentVisible(onSwupPageView) {
         timeout: 8000
     }).then((res) => {
         $('#busuanzi_value_page_pv').text(res.count);
+    }).catch((jqXhr, textStatus, errorThrown) => {
+        $('#busuanzi_value_page_pv').text('-');
     });
     // 修复移动端网易云音乐外链。
     if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
