@@ -222,7 +222,6 @@ async function getCurMetaAsync(forced) {
     const postMeta = siteMeta.posts;
     let curMeta = {};
     let curMetaFound = false;
-
     const pageMetaLength = pageMeta.length;
     for (let i = 0; i < pageMetaLength; i++) {
         const item = pageMeta[i];
@@ -338,9 +337,9 @@ function runAfterContentVisible(onSwupPageView) {
         if (res)
             window.location.replace(`${siteUrl}go-home/`);
     });
-    // swup 会使内联 javascript 失效，导致 masonry 无法自适应。检测到 masonry 就刷新，就能正常显示。
-    if (onSwupPageView && $('.image-masonry').length > 0)
-        window.location.reload();
+    // // swup 会使内联 javascript 失效，导致 masonry 无法自适应。检测到 masonry 就刷新，就能正常显示。
+    // if (onSwupPageView && $('.image-masonry').length > 0)
+    //     window.location.reload();
     // 修复移动端网易云音乐外链。
     if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
         let iframes = $('iframe');
