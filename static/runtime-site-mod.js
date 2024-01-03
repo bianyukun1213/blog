@@ -334,7 +334,7 @@ function runAfterContentVisible(onSwupPageView) {
     // 检查用户属地。
     checkRegionBlacklistAsync().then((res) => {
         if (res)
-            window.location.replace(`${siteUrl}go-home/`);
+            window.location.replace(`${siteUrl}/go-home/`);
     });
     smGetAsync({
         baseUrl: counterUrl,
