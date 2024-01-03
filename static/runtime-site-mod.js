@@ -336,6 +336,7 @@ function runAfterContentVisible(onSwupPageView) {
         if (res)
             window.location.replace(`${siteUrl}/go-home/`);
     });
+    // 获取全站访问计数。
     smGetAsync({
         baseUrl: counterUrl,
         entry: '/TOTAL.json',
@@ -346,6 +347,7 @@ function runAfterContentVisible(onSwupPageView) {
     }).catch((jqXHR, textStatus, errorThrown) => {
         $('#busuanzi_value_site_pv').text('-');
     });
+    // 获取当前页面访问计数。
     smGetAsync({
         baseUrl: counterUrl,
         entry: `/${encodeURIComponent(window.location.pathname)}.json`,
@@ -487,12 +489,12 @@ setInterval(() => {
 }, 1000);
 // 监听页面加载完成事件。
 $(document).ready(() => {
-    try {
-        // 由于使用了 Redefine 的单页模式，设置 swup 钩子。
-        swup.hooks.on('page:view', () => runAfterContentVisible(true));
-    } catch (error) {
-        console.error('swup hook error: ', error);
-    }
+    // try {
+    //     // 由于使用了 Redefine 的单页模式，设置 swup 钩子。
+    //     swup.hooks.on('page:view', () => runAfterContentVisible(true));
+    // } catch (error) {
+    //     console.error('swup hook error: ', error);
+    // }
     runAfterContentVisible();
 });
 // 监听 hexo-blog-encrypt 插件的解密事件，自动刷新页面以使部分内容正确显示。
