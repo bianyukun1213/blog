@@ -307,42 +307,6 @@ function getThemeColorScheme() {
             return 'light';
     }
 }
-// 修改动态 HTML。
-// 正常应该在 h2l-injector-filter-site-mod.js 里通过 before_render:html 修，但如果是动态的就得在这修，比如解密后的页面内容——此时也会连带着重复修一遍 before_render:html 已经修过的内容。
-function modifyDynamicHtml() {
-    // 去除无用的图片注释。
-    let captions = $('.image-caption');
-    const captionsLength = captions.length;
-    for (let i = 0; i < captionsLength; i++) {
-        const cap = captions[i];
-        let img = cap.children[0];
-        if (img.hasAttribute('title'))
-            cap.children[1].innerText = img.title;
-        else
-            cap.children[1].remove();
-    }
-    // 去除图片注释后，masonry 之间的间隙不会更新，需要重新计算。
-    const imageMasonryScripts = $('.image-masonry-script');
-    const imageMasonryScriptsLength = imageMasonryScripts.length;
-    for (let i = 0; i < imageMasonryScriptsLength; i++) {
-        const script = imageMasonryScripts[i];
-        const instanceName = script.id.split('-')[3];
-        if (!!instanceName)
-            window['macyAt' + instanceName].recalculate(true);
-    }
-    // 修正开往链接，全部改为由当前页面跳转，否则算什么“开往”？！
-    $('a[href="https://www.travellings.cn/go.html"]').attr('target', '_self');
-    // 修复移动端网易云音乐外链。
-    if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-        let iframes = $('iframe');
-        const iframesLength = iframes.length;
-        for (let i = 0; i < iframesLength; i++) {
-            const frm = iframes[i];
-            if (frm.src.includes('music.163.com/'))
-                frm.src = frm.src.replace('music.163.com/', 'music.163.com/m/');
-        }
-    }
-}
 // 页面加载后再执行的操作：
 function runAfterContentVisible(onSwupPageView) {
     // 监听搜索框输入事件，根据条件开启调试。需要在页面加载后监听，因为 site-mod.js 在头部注入，执行时还没有搜索框。
@@ -377,8 +341,16 @@ function runAfterContentVisible(onSwupPageView) {
     // swup 会使内联 javascript 失效，导致 masonry 无法自适应。检测到 masonry 就刷新，就能正常显示。
     if (onSwupPageView && $('.image-masonry').length > 0)
         window.location.reload();
-    // 修改动态 HTML。
-    modifyDynamicHtml();
+    // 修复移动端网易云音乐外链。
+    if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+        let iframes = $('iframe');
+        const iframesLength = iframes.length;
+        for (let i = 0; i < iframesLength; i++) {
+            const frm = iframes[i];
+            if (frm.src.includes('music.163.com/'))
+                frm.src = frm.src.replace('music.163.com/', 'music.163.com/m/');
+        }
+    }
     if (pathname === '/timeline/') {
         // mastodonTimeline 保存了 DOM 的引用，swup 换页再换回来，引用过时，buildTimeline 不好使，需要新建。
         // if (!mastodonTimeline) {
