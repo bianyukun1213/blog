@@ -1,1 +1,58 @@
-export const config={usrTypeSpeed:theme.home_banner.subtitle.typing_speed,usrBackSpeed:theme.home_banner.subtitle.backing_speed,usrBackDelay:theme.home_banner.subtitle.backing_delay,usrStartDelay:theme.home_banner.subtitle.starting_delay,usrLoop:theme.home_banner.subtitle.loop,usrSmartBackspace:theme.home_banner.subtitle.smart_backspace,usrHitokotoAPI:theme.home_banner.subtitle.hitokoto.api};export default function initTyped(e){const{usrTypeSpeed:t,usrBackSpeed:a,usrBackDelay:o,usrStartDelay:s,usrLoop:n,usrSmartBackspace:r,usrHitokotoAPI:c}=config;if(theme.home_banner.subtitle.hitokoto.enable)fetch(c).then((e=>e.json())).then((c=>{var p;p=c.hitokoto,new Typed("#"+e,{strings:[p],typeSpeed:t||100,smartBackspace:r||!1,backSpeed:a||80,backDelay:o||1500,loop:n||!1,startDelay:s||500})})).catch(console.error);else{const c=[...theme.home_banner.subtitle.text];if(document.getElementById(e)){new Typed("#"+e,{strings:c,typeSpeed:t||100,smartBackspace:r||!1,backSpeed:a||80,backDelay:o||1500,loop:n||!1,startDelay:s||500})}}}
+/*
+author: @jiangwen5945 & EvanNotFound
+*/
+export const config = {
+  usrTypeSpeed: theme.home_banner.subtitle.typing_speed,
+  usrBackSpeed: theme.home_banner.subtitle.backing_speed,
+  usrBackDelay: theme.home_banner.subtitle.backing_delay,
+  usrStartDelay: theme.home_banner.subtitle.starting_delay,
+  usrLoop: theme.home_banner.subtitle.loop,
+  usrSmartBackspace: theme.home_banner.subtitle.smart_backspace,
+  usrHitokotoAPI: theme.home_banner.subtitle.hitokoto.api,
+};
+
+export default function initTyped(id) {
+  const {
+    usrTypeSpeed,
+    usrBackSpeed,
+    usrBackDelay,
+    usrStartDelay,
+    usrLoop,
+    usrSmartBackspace,
+    usrHitokotoAPI,
+  } = config;
+
+  function typing(dataList) {
+    const st = new Typed("#" + id, {
+      strings: [dataList],
+      typeSpeed: usrTypeSpeed || 100,
+      smartBackspace: usrSmartBackspace || false,
+      backSpeed: usrBackSpeed || 80,
+      backDelay: usrBackDelay || 1500,
+      loop: usrLoop || false,
+      startDelay: usrStartDelay || 500,
+    });
+  }
+
+  if (theme.home_banner.subtitle.hitokoto.enable) {
+    fetch(usrHitokotoAPI)
+      .then((response) => response.json())
+      .then((data) => {
+        typing(data.hitokoto);
+      })
+      .catch(console.error);
+  } else {
+    const sentenceList = [...theme.home_banner.subtitle.text];
+    if (document.getElementById(id)) {
+      const st = new Typed("#" + id, {
+        strings: sentenceList,
+        typeSpeed: usrTypeSpeed || 100,
+        smartBackspace: usrSmartBackspace || false,
+        backSpeed: usrBackSpeed || 80,
+        backDelay: usrBackDelay || 1500,
+        loop: usrLoop || false,
+        startDelay: usrStartDelay || 500,
+      });
+    }
+  }
+}

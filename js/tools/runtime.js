@@ -1,1 +1,28 @@
-const footerRuntime=()=>{const e=theme.footerStart;window.setTimeout(footerRuntime,1e3);const t=new Date(e),n=((new Date).getTime()-t.getTime())/864e5,o=Math.floor(n),m=24*(n-o),r=Math.floor(m),i=60*(m-r),d=Math.floor(60*(m-r)),u=Math.floor(60*(i-d)),a=document.getElementById("runtime_days"),s=document.getElementById("runtime_hours"),M=document.getElementById("runtime_minutes"),c=document.getElementById("runtime_seconds");a&&(a.innerHTML=o),s&&(s.innerHTML=r),M&&(M.innerHTML=d),c&&(c.innerHTML=u)};window.addEventListener("DOMContentLoaded",footerRuntime);
+const footerRuntime = () => {
+  const startTime = theme.footerStart;
+  window.setTimeout(footerRuntime, 1000); // passing function reference instead of string
+
+  const X = new Date(startTime);
+  const Y = new Date();
+  const T = Y.getTime() - X.getTime();
+  const M = 24 * 60 * 60 * 1000;
+  const a = T / M;
+  const A = Math.floor(a);
+  const b = (a - A) * 24;
+  const B = Math.floor(b);
+  const c = (b - B) * 60;
+  const C = Math.floor((b - B) * 60);
+  const D = Math.floor((c - C) * 60);
+
+  const runtime_days = document.getElementById("runtime_days");
+  const runtime_hours = document.getElementById("runtime_hours");
+  const runtime_minutes = document.getElementById("runtime_minutes");
+  const runtime_seconds = document.getElementById("runtime_seconds");
+
+  if (runtime_days) runtime_days.innerHTML = A;
+  if (runtime_hours) runtime_hours.innerHTML = B;
+  if (runtime_minutes) runtime_minutes.innerHTML = C;
+  if (runtime_seconds) runtime_seconds.innerHTML = D;
+};
+
+window.addEventListener("DOMContentLoaded", footerRuntime);

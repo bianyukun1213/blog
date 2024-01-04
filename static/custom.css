@@ -1,4 +1,4 @@
-#javascript-alert {
+noscript#javascript-alert {
     position: fixed;
     z-index: 8848;
     left: 0;
@@ -9,8 +9,8 @@
     color: white;
 }
 
-#javascript-alert p::before,
-#javascript-alert p::after {
+noscript#javascript-alert p::before,
+noscript#javascript-alert p::after {
     content: '[!!!]';
     margin: 16px;
     font-weight: bold;
