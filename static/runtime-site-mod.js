@@ -347,10 +347,13 @@ function runAfterContentVisible() {
     }).catch((jqXHR, textStatus, errorThrown) => {
         $('#busuanzi_value_site_pv').text('-');
     });
+    let pvPathname = window.location.pathname;
+    if (pvPathname.endsWith('/'))
+        pvPathname = pvPathname.slice(0, -1); // GoatCounter 服务端计数时会自动去除末尾的 /，所以查询时也要去除。
     // 获取当前页面访问计数。
     smGetAsync({
         baseUrl: counterUrl,
-        entry: `/${encodeURIComponent(window.location.pathname)}.json`,
+        entry: `/${encodeURIComponent(pvPathname)}.json`,
         cache: false, // 不要从缓存读取。
         timeout: 8000
     }).then((res) => {
