@@ -3,18 +3,29 @@ noscript#javascript-alert {
     z-index: 8848;
     left: 0;
     top: 0;
-    /* width: 600px; */
-    /* height: 100px; */
+    /* width: 100%;
+    height: 100%; */
     background-color: black;
     color: white;
 }
 
+/* noscript#javascript-alert p{
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+} */
+
 noscript#javascript-alert p::before,
 noscript#javascript-alert p::after {
-    content: '[!!!]';
+    content: '[!!]';
     margin: 16px;
     font-weight: bold;
-    color: red;
+    color: yellow;
+}
+
+div.main-content.region-block-hidden {
+    display: none;
 }
 
 /* .admonition {

@@ -1,3 +1,5 @@
+'user strict';
+
 // 这里做一些对站点的整体修改。
 
 // const siteUrl = 'https://his2nd.life';
@@ -18,42 +20,38 @@ const leanCloudAppKey = 'I0J0aMw0p6O2gEv0WmeiJwsc';
 
 // jQuery Ajax 包装：
 // 把以前做 daddys-here 的代码改吧改吧，见 https://github.com/bianyukun1213/daddys-here/blob/main/src/index.html#L739。
-function smRequest(options) {
+function smRequest(options, async) {
     options = options || {};
     const baseUrl = options.baseUrl || siteUrl;
     const entry = options.entry || '';
     const url = baseUrl + entry; // 新增：合并 baseUrl 和 entry。
-    const async = typeof options.async === 'undefined' ? false : !!options.async; // 新增：默认同步请求，因为我封装了一个异步版本。jQ 强烈不建议使用同步请求。
     const data = options.data || {};
     const timeout = $.isNumeric(options.timeout) ? options.timeout : 5000; // 新增：可配置 timeout。
     const success = (data, textStatus, jqXhr) => {
-        smLog(`${options.method} ${url} 请求成功：`, JSON.parse(JSON.stringify(data))); // 之后任何对 data 的修改都会影响这里，所以打印的时候“复制”一份来打印原样。
-        if ($.isFunction(options.success)) {
+        smLogDebug(`${options.method} ${url} 请求成功：`, JSON.parse(JSON.stringify(data))); // 之后任何对 data 的修改都会影响这里，所以打印的时候“复制”一份来打印原样。
+        if ($.isFunction(options.success))
             options.success(data, textStatus, jqXhr);
-        }
     };
     const fail = (jqXhr, textStatus, errorThrown) => {
-        smLog(`${options.method} ${url} 请求失败：`, jqXhr, textStatus, errorThrown);
-        if ($.isFunction(options.fail)) {
+        smLogError(`${options.method} ${url} 请求失败：`, jqXhr, textStatus, errorThrown);
+        if ($.isFunction(options.fail))
             options.fail(jqXhr, textStatus, errorThrown);
-        }
     };
     const complete = (dataOrJqXhr, textStatus, jqXhrOrErrorThrown) => {
-        if ($.isFunction(options.complete)) {
+        if ($.isFunction(options.complete))
             options.complete(dataOrJqXhr, textStatus, jqXhrOrErrorThrown);
-        }
     };
     $.ajax({
         url: url,
         type: options.method, // 用默认的。
-        async: async,
+        async: !!async, // 我想默认用同步。jQ 默认是异步，undefined 应该就变成异步了。
         cache: options.cache, // 用默认的。
         contentType: options.contentType, // 用默认的。
         dataType: options.dataType, // 用默认的。
         data: data,
         timeout: timeout,
         beforeSend: () => {
-            smLog(`发送 Ajax 请求：${options.method} ${url} ，数据：`, data); // 逗号前加个空格，不然“，数据：”就被 Chrome 控制台识别进 url 了，点击直接打开的页面就错了。
+            smLogDebug(`发送 Ajax 请求：${options.method} ${url} ，数据：`, data); // 逗号前加个空格，不然“，数据：”就被 Chrome 控制台识别进 url 了，点击直接打开的页面就错了。
         }
     }).done(success).fail(fail).always(complete);
 }
@@ -62,7 +60,10 @@ async function smRequestAsync(options) {
     return new Promise((resolve, reject) => {
         options.success = resolve;
         options.fail = reject;
-        smRequest(options);
+        smRequest(options, true);
+    }).catch((error) => {
+        smLogError('异步请求出错：', error);
+        // return Promise.reject(e);
     });
 }
 function smGet(options) {
@@ -90,27 +91,51 @@ function smDelete(options) {
     options.method = 'DELETE';
     smRequest(options);
 }
-const smDataV1 = {
-    templateVer: 1,
-    settings: {},
-    showInitialPopup: true
-};
-const smDataV2 = {
-    templateVer: 2,
-    settings: {},
-    showInitialPopup: true,
-    debugLog: false
-};
-const smDataV3 = {
-    templateVer: 3,
-    settings: {},
-    showInitialPopup: true,
-    debug: false
+const smDataTemplates = {
+    get latest() {
+        return this.v4;
+    },
+    get v1() {
+        return {
+            templateVer: 1,
+            settings: {},
+            showInitialPopup: true
+        };
+    },
+    get v2() {
+        return {
+            templateVer: 2,
+            settings: {},
+            showInitialPopup: true,
+            debugLog: false
+        };
+    },
+    get v3() {
+        return {
+            templateVer: 3,
+            settings: {},
+            showInitialPopup: true,
+            debug: false
+        };
+    },
+    get v4() {
+        return {
+            templateVer: 4,
+            settings: {
+                doNotTrack: false
+            },
+            initialized: false,
+            debug: false,
+            debugVars: {}
+        };
+    }
 };
 function makeSmData() {
     // return JSON.parse(JSON.stringify(smDataV1));
     // return JSON.parse(JSON.stringify(smDataV2));
-    return JSON.parse(JSON.stringify(smDataV3));
+    // return JSON.parse(JSON.stringify(smDataV3));
+    // return JSON.parse(JSON.stringify(smDataTemplates.latest));
+    return smDataTemplates.latest;
 }
 function getSmSettings() {
     return getSmData().settings;
@@ -121,24 +146,42 @@ function setSmSettings(smSettings) {
     setSmData(smData);
 }
 function migrateSmDataFromNoneToV1(none) {
-    return JSON.parse(JSON.stringify(smDataV1));
+    smLogDebug('新建 smData v1。');
+    // return JSON.parse(JSON.stringify(smDataTemplates.v1));
+    return smDataTemplates.v1;
 }
 function migrateSmDataFromV1ToV2(v1) {
-    let tmp = JSON.parse(JSON.stringify(v1));
+    // let tmp = JSON.parse(JSON.stringify(v1));
+    smLogDebug('smData 迁移至 v2。');
+    let tmp = v1;
     // v2 新增了 debugLog 字段。
     tmp.debugLog = false;
     tmp.templateVer = 2;
     return tmp;
 }
 function migrateSmDataFromV2ToV3(v2) {
-    let tmp = JSON.parse(JSON.stringify(v2));
+    // let tmp = JSON.parse(JSON.stringify(v2));
+    smLogDebug('smData 迁移至 v3。');
+    let tmp = v2;
     // v3 将 debug 字段重命名为 debug。
     tmp.debug = tmp.debugLog;
     delete tmp.debugLog;
     tmp.templateVer = 3;
     return tmp;
 }
+function migrateSmDataFromV3ToV4(v3) {
+    // let tmp = JSON.parse(JSON.stringify(v3));
+    smLogDebug('smData 迁移至 v4。');
+    let tmp = v3;
+    // v4 新增 debugVars、settings 的 doNotTrack，showInitialPopup 改为 initialized。
+    tmp.debugVars = {};
+    tmp.initialized = !tmp.showInitialPopup;
+    delete tmp.showInitialPopup;
+    tmp.templateVer = 4;
+    return tmp;
+}
 function migrateSmData(oldSmData) {
+    smLogDebug('开始迁移 smData：', oldSmData);
     if (oldSmData.templateVer === null || typeof oldSmData.templateVer === 'undefined' || oldSmData.templateVer < 1)
         // 这种肯定是 localStorage 里的 smData 被修改过导致版本号连 1 都不是，就新生成一个 v1 的。
         oldSmData = migrateSmDataFromNoneToV1(oldSmData);
@@ -146,16 +189,22 @@ function migrateSmData(oldSmData) {
         oldSmData = migrateSmDataFromV1ToV2(oldSmData);
     if (oldSmData.templateVer < 3)
         oldSmData = migrateSmDataFromV2ToV3(oldSmData);
+    if (oldSmData.templateVer < 4)
+        oldSmData = migrateSmDataFromV3ToV4(oldSmData);
     return oldSmData;
 }
 // 按最新的数据模板校验。
 function validateSmData(invalidSmData) {
+    smLogDebug('开始校验 smData：', invalidSmData);
     let validSmData = makeSmData(); // 以干净的模板作为基底。
-    let invalidShowInitialPopup = invalidSmData.showInitialPopup;
-    validSmData.showInitialPopup = invalidShowInitialPopup === false || invalidShowInitialPopup === 'false' ? false : true; // 从 local storage 读的是字符串，转成 bool。
+    let invalidInitialized = invalidSmData.initialized;
+    validSmData.initialized = invalidInitialized === true || invalidInitialized === 'true' ? true : false; // 如果从 local storage 读的是字符串，（被人改过）转成 bool。
     let invalidDebug = invalidSmData.debug;
-    validSmData.debug = invalidDebug === true || invalidDebug === 'true' ? true : false; // 从 local storage 读的是字符串，转成 bool。
+    validSmData.debug = invalidDebug === true || invalidDebug === 'true' ? true : false; // 如果从 local storage 读的是字符串，（被人改过）转成 bool。
+    // let invalidDebugVars = invalidSmData.debugVars;
+    validSmData.debugVars = invalidSmData.debugVars; // 不检查 debugVars，让 smDebug 自己检查。debugVars 的内容与 templateVer 无关。
     let invalidSettings = invalidSmData.settings;
+    validSmData.settings.doNotTrack = invalidSettings.doNotTrack === true || invalidSettings.doNotTrack === 'true' ? true : false;
     // ...
     return validSmData;
 }
@@ -163,13 +212,10 @@ function validateSmData(invalidSmData) {
 function getSmData() {
     let newSmData = makeSmData();
     let smData = newSmData;
-    let rawSmData = localStorage.getItem('smData');
-    if (rawSmData !== null) {
-        try {
-            smData = JSON.parse(rawSmData);
-        } catch (error) {
-            smData = newSmData;
-        }
+    try {
+        smData = JSON.parse(localStorage.getItem('smData')) || newSmData;
+    } catch (error) {
+        smData = newSmData;
     }
     if (smData.templateVer < newSmData.templateVer)
         smData = migrateSmData(smData);
@@ -179,8 +225,8 @@ function getSmData() {
 function setSmData(smData) {
     localStorage.setItem('smData', JSON.stringify(smData));
 }
-function getFixedPathname() {
-    const pathname = window.location.pathname;
+function getFixedPathname(pathnameIn) {
+    const pathname = pathnameIn || window.location.pathname;
     let fixedPathname = pathname;
     if (!fixedPathname.endsWith('/') && !fixedPathname.endsWith('.html'))
         fixedPathname += '.html'; // 为结尾不带 / 或 .html 的页面添加 .html。
@@ -191,17 +237,21 @@ function getFixedPathname() {
 }
 // 获取站点元数据，如果在 sesstionStorage 下已有元数据，就不再获取。
 async function getSiteMetaAsync(forced) {
-    if (JSON.stringify(siteMetaCache) === '{}' || forced) {
-        let loadingIndex = layer.load(0, { shade: [1, '#202124'], scrollbar: false });
+    if ($.isPlainObject(siteMetaCache) || forced) {
+        let loadingIndex = smUi.showLoadingPopup();
         let getPromise = smGetAsync({
             entry: '/site-meta.json',
             cache: false, // 不要从缓存读取。
             timeout: 8000
         });
         getPromise.finally(() => {
-            layer.close(loadingIndex);
+            smUi.closeLayer(loadingIndex);
         });
         let res = await getPromise;
+        if (typeof res === 'undefined' || res === null) {
+            smLogError('站点元数据为空：', res);
+            return {};
+        }
         siteMetaCache = res;
         sessionStorage.setItem('siteMetaCache', JSON.stringify(siteMetaCache));
     }
@@ -214,54 +264,67 @@ function decryptPageMeta(pageMeta) {
         return {};
     }
 }
-async function getCurMetaAsync(forced) {
-    const siteMeta = await getSiteMetaAsync(forced);
-    const fixedPathname = getFixedPathname();
-    const pageMeta = siteMeta.pages;
-    const postMeta = siteMeta.posts;
+async function getCurMetaAsync(forced, pathnameIn) {
+    const targetPathname = pathnameIn || getFixedPathname();
     let curMeta = {};
     let curMetaFound = false;
-    const pageMetaLength = pageMeta.length;
-    for (let i = 0; i < pageMetaLength; i++) {
-        const item = pageMeta[i];
-        // 举例：比较 links/index.html 与 /links/，应该能够对应上。
-        // 此时 fixedPathname 要么以 / 结尾，要么以 .html 结尾。
-        let decrypted = item;
-        // 如果数据是加密的。
-        if (typeof decrypted.encryptedData !== 'undefined' && decrypted.encryptedData !== null)
-            decrypted = decryptPageMeta(decrypted);
-        if (decrypted.path === fixedPathname.slice(1) || decrypted.path === fixedPathname.slice(1) + 'index.html') {
-            curMeta.type = 'page';
-            curMeta.meta = decrypted;
+    try {
+        // 优先从 head 的 meta 获取。
+        if (getFixedPathname(targetPathname) === getFixedPathname() && !forced) {
+            const metaContent = $('meta[name=h2l-embedded-meta]')?.attr('content');
+            curMeta = JSON.parse(decodeURIComponent(metaContent));
             curMetaFound = true;
-            break;
+            smLogDebug('在 head 中获取到嵌入的页面元数据：', curMeta);
+            return curMeta;
         }
+    } catch (error) {
+        smLogWarn('获取嵌入的页面元数据失败：', error);
     }
-    if (!curMetaFound) {
-        const postMetaLength = postMeta.length;
-        for (let i = 0; i < postMetaLength; i++) {
-            const item = postMeta[i];
-            let decrypted = item;
-            // 如果数据是加密的。
-            if (typeof decrypted.encryptedData !== 'undefined' && decrypted.encryptedData !== null)
-                decrypted = decryptPageMeta(decrypted);
-            if (decrypted.path === fixedPathname.slice(1)) {
-                curMeta.type = 'post';
-                curMeta.meta = decrypted;
-                curMetaFound = true;
-                break;
+    finally {
+        if (!curMetaFound) {
+            const siteMeta = await getSiteMetaAsync(forced);
+            if ($.isEmptyObject(siteMeta)) {
+                smLogWarn('站点元数据空白，无法获取当前页面的元数据：', siteMeta);
+                return siteMeta;
+            }
+            const pageMeta = siteMeta.all;
+            const pageMetaLength = pageMeta.length;
+            for (let i = 0; i < pageMetaLength; i++) {
+                const item = pageMeta[i];
+                // 举例：比较 links/index.html 与 /links/，应该能够对应上。
+                // 此时 targetPathname 要么以 / 结尾，要么以 .html 结尾。
+                let decrypted = item;
+                // 如果数据是加密的。
+                if (typeof decrypted.encryptedData !== 'undefined' && decrypted.encryptedData !== null)
+                    decrypted = decryptPageMeta(decrypted);
+                if (decrypted.path === targetPathname.slice(1) || decrypted.path === targetPathname.slice(1) + 'index.html') {
+                    curMeta.type = 'PAGE';
+                    curMeta = decrypted;
+                    curMetaFound = true;
+                    smLogDebug('在站点元数据中获取到页面元数据：', curMeta);
+                    return curMeta;
+                }
             }
         }
+        if (!curMetaFound) {
+            smLogWarn('未找到页面元数据。');
+            return curMeta; // 没找到的空值。
+        }
     }
-    smLog('获取到当前页面/文章的元数据：', curMeta);
-    return curMeta;
 }
-async function checkRegionBlacklistAsync(forced) {
+async function isCurrentRegionBlockedAsync(forced) {
+    // 调试模式下可以跳过区域检查。
+    if (smDebug.vars && smDebug.vars.skipRegionCheck) {
+        smLogInfo('跳过区域检查。');
+        return 'NOT_BLOCKED';
+    }
     const curMeta = await getCurMetaAsync(forced);
+    if ($.isEmptyObject(curMeta))
+        return 'UNKNOWN';
     // 检查用户地区是否在黑名单内。
-    if (!$.isEmptyObject(curMeta) && $.isArray(curMeta.meta.regionBlacklist) && curMeta.meta.regionBlacklist.length > 0) {
+    if ($.isArray(curMeta.regionBlacklist) && curMeta.regionBlacklist.length > 0) {
         if (userRegionTextCache === '' || forced) {
-            let loadingIndex = layer.load(0, { shade: [1, '#202124'], scrollbar: false });
+            let loadingIndex = smUi.showLoadingPopup();
             let getPromise = smGetAsync({
                 baseUrl: 'https://www.douyacun.com',
                 entry: '/api/openapi/geo/location',
@@ -272,22 +335,26 @@ async function checkRegionBlacklistAsync(forced) {
                 timeout: 5000
             });
             getPromise.finally(() => {
-                layer.close(loadingIndex);
+                smUi.closeLayer(loadingIndex);
             });
             let res = await getPromise;
+            if (typeof res === 'undefined' || res === null) {
+                smLogError('属地为空：', res);
+                return 'UNKNOWN';
+            }
             userRegionTextCache = JSON.stringify(res);
             sessionStorage.setItem('userRegionTextCache', userRegionTextCache);
         }
-        const curMetaMetaRegionBlacklistLength = curMeta.meta.regionBlacklist.length;
+        const curMetaMetaRegionBlacklistLength = curMeta.regionBlacklist.length;
         for (let i = 0; i < curMetaMetaRegionBlacklistLength; i++) {
-            const region = curMeta.meta.regionBlacklist[i];
+            const region = curMeta.regionBlacklist[i];
             if (userRegionTextCache.includes(region))
-                return true;
+                return 'BLOCKED';
         }
-        return false;
+        return 'NOT_BLOCKED';
     }
     else {
-        return false;
+        return 'NOT_BLOCKED';
     }
 }
 function getThemeColorScheme() {
@@ -305,8 +372,8 @@ function getThemeColorScheme() {
             return 'light';
     }
 }
-// 页面加载后再执行的操作：
-function runAfterContentVisible() {
+// 页面后再执行的操作：
+function afterPageReady() {
     // 监听搜索框输入事件，根据条件开启调试。需要在页面加载后监听，因为 site-mod.js 在头部注入，执行时还没有搜索框。
     $('.search-input').on('input', function () {
         if ($(this).val() === 'debugon' && !debugOn) {
@@ -331,11 +398,6 @@ function runAfterContentVisible() {
         window.location.replace(window.location.origin + fixedPathname); // 跳转。
         return; // 从 replace 到实际跳转有一段时间，没必要让代码继续执行，因此 return。
     }
-    // 检查用户属地。
-    checkRegionBlacklistAsync().then((res) => {
-        if (res)
-            window.location.replace(`${siteUrl}/go-home/`);
-    });
     // 获取全站访问计数。
     smGetAsync({
         baseUrl: counterUrl,
@@ -344,7 +406,8 @@ function runAfterContentVisible() {
         timeout: 8000
     }).then((res) => {
         $('#busuanzi_value_site_pv').text(res.count);
-    }).catch((jqXHR, textStatus, errorThrown) => {
+    }).catch((error) => {
+        smLogError('获取全站访问计数出错：', error);
         $('#busuanzi_value_site_pv').text('-');
     });
     let pvPathname = window.location.pathname;
@@ -358,7 +421,8 @@ function runAfterContentVisible() {
         timeout: 8000
     }).then((res) => {
         $('#busuanzi_value_page_pv').text(res.count);
-    }).catch((jqXhr, textStatus, errorThrown) => {
+    }).catch((error) => {
+        mLogError('获取当前页面访问计数出错：', error);
         $('#busuanzi_value_page_pv').text('-');
     });
     // 修复移动端网易云音乐外链。
@@ -398,25 +462,53 @@ function runAfterContentVisible() {
             mastodonTimeline.buildTimeline();
         }
     }
-    // 加载 Layui 组件，用到 Layui 的都写在回调函数里，回调函数是异步执行的。
-    layui.use(() => {
-        let layer = layui.layer;
-        let smData = getSmData();
-        if (smData.showInitialPopup) {
-            let alertIndex = layer.alert(
-                '您好！这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。点击“确定”永久关闭本弹窗。',
-                { title: '初次访问', icon: 0, maxWidth: 500, closeBtn: 0, scrollbar: false },
-                () => {
-                    let smData = getSmData(); // 用户阅读完才会点击确定按钮，这段时间内 smData 可能改变，获取最新值。
-                    smData.showInitialPopup = false;
-                    setSmData(smData);
-                    layer.close(alertIndex);
-                });
-        }
+}
+function afterUiReady() {
+    // let i = smUi.showLoadingPopup();
+    // setTimeout(() => {
+    //     smUi.closeLayer(i);
+    // }, 5000);
+    // smUi.layer.
+    // 检查用户属地。
+    isCurrentRegionBlockedAsync().then((res) => {
+        if (res === 'BLOCKED')
+            window.location.replace(`${siteUrl}/go-home/`);
+        else if (res === 'NOT_BLOCKED')
+            $('.main-content').show();
     });
 }
+let smLogDebug = () => { };
+const debugOn = getSmData().debug;
+smLogDebug = (...params) => { if (debugOn) console.debug(new Date().toLocaleTimeString() + ' |', ...params); };
+let smLog = (...params) => { console.log(new Date().toLocaleTimeString() + ' |', ...params); };
+let smLogInfo = (...params) => { console.info(new Date().toLocaleTimeString() + ' |', ...params); };
+let smLogWarn = (...params) => { console.warn(new Date().toLocaleTimeString() + ' |', ...params); };
+let smLogError = (...params) => { console.error(new Date().toLocaleTimeString() + ' |', ...params); };
 // 初始化 site-mod 数据。
 setSmData(getSmData());
+let track = true;
+if (!getSmData().initialized) {
+    track = false;
+    smLogDebug('站点未初始化，取消跟踪。');
+}
+if ('doNotTrack' in navigator && navigator.doNotTrack === '1') {
+    track = false;
+    smLogDebug('浏览器设置了不跟踪，取消跟踪。');
+}
+if (getSmSettings().doNotTrack) {
+    track = false;
+    smLogDebug('用户设置了不跟踪，取消跟踪。');
+}
+// 这么写不好使。
+// window.goatcounter = {
+//     no_onload: track
+// };
+if (!track) {
+    // Redefine 的计数脚本（被我改成了 GoatCounter）在 body 里，本脚本在 head_end，先于它执行，因此可以取消追踪。
+    window.goatcounter = {
+        no_onload: false
+    };
+}
 // 初始化站点元数据。
 let siteMetaCache = {};
 try {
@@ -429,28 +521,38 @@ let userRegionTextCache = sessionStorage.getItem('userRegionTextCache') || '';
 let themeColorScheme = ''; // 初值设为空，这样首次即能触发 newThemeColorScheme !== themeColorScheme。
 let vConsole = {};
 let smDebug = {};
-let smLog = () => { };
-const debugOn = getSmData().debug;
-if (debugOn) {
+if (getSmData().debug) {
     vConsole = new window.VConsole();
     smDebug = {
+        get varsTemplate() {
+            return {
+                skipRegionCheck: false
+            };
+        },
+        get vars() {
+            return this._vars;
+        },
+        _vars: Symbol('vars'),
         decryptSiteMetaAsync: async function (forced) {
             let decryptedSiteMeta = await getSiteMetaAsync(forced);
-            decryptedSiteMeta.pages = decryptedSiteMeta.pages.map((page) => {
+            if ($.isEmptyObject(decryptedSiteMeta)) {
+                smLogWarn('站点元数据空白，无法解密：', decryptedSiteMeta);
+                return decryptedSiteMeta;
+            }
+            decryptedSiteMeta.all = decryptedSiteMeta.all.map((page) => {
                 if (typeof page.encryptedData !== 'undefined' && page.encryptedData !== null)
                     page = decryptPageMeta(page);
                 return page;
-            });
-            decryptedSiteMeta.posts = decryptedSiteMeta.posts.map((post) => {
-                if (typeof post.encryptedData !== 'undefined' && post.encryptedData !== null)
-                    post = decryptPageMeta(post);
-                return post;
             });
             return decryptedSiteMeta;
         },
         getHiddenPagesAsync: async function (forced) {
             let hiddenPages = [];
             let decryptedSiteMeta = await this.decryptSiteMetaAsync(forced);
+            if ($.isEmptyObject(decryptedSiteMeta)) {
+                smLogWarn('解密后的站点元数据空白，无法获取隐藏页面：', decryptedSiteMeta);
+                return [];
+            }
             const decryptedSiteMetaPagesLength = decryptedSiteMeta.pages.length;
             for (let i = 0; i < decryptedSiteMetaPagesLength; i++) {
                 const page = decryptedSiteMeta.pages[i];
@@ -464,9 +566,52 @@ if (debugOn) {
                     hiddenPages.push(post);
             }
             return hiddenPages;
+        },
+        checkVars: function (vars) {
+            if (typeof vars === 'undefined' || vars === null)
+                return false;
+            if (vars.skipRegionCheck === true || vars.skipRegionCheck === false)
+                return true;
+            else
+                return false;
+        },
+        checkVarsInStorage: function () {
+            return this.checkVars(getSmData().debugVars);
+        },
+        loadVars: function () {
+            let vars = getSmData().debugVars;
+            if (this.checkVars(vars)) {
+                this._vars = vars;
+            }
+            else {
+                smLogWarn('localStorage 中的 debugVars 无效，将重置：', vars);
+                this.resetVars();
+            }
+        },
+        setVars: function (vars) {
+            if (this.checkVars(vars)) {
+                this._vars = vars;
+                let smData = getSmData();
+                smData.debugVars = vars;
+                setSmData(smData);
+            }
+            else {
+                smLogError('传入的 debugVars 无效，无法设置：', vars);
+            }
+        },
+        resetVars: function () {
+            // 深拷贝一份，不然 varsTemplate 在先调用 resetVars 再调用 setVar（setVars）后会被改。
+            // this.setVars(JSON.parse(JSON.stringify(this.varsTemplate)));
+            this.setVars(this.varsTemplate);
+        },
+        setVar: function (key, value) {
+            let tmpVars = this.vars;
+            tmpVars[key] = value;
+            this.setVars(tmpVars);
         }
     };
-    smLog = (...params) => { console.log(new Date().toLocaleTimeString() + ' |', ...params); };
+    smDebug.loadVars();
+    // smLogDebug = (...params) => { console.debug(new Date().toLocaleTimeString() + ' |', ...params); };
 }
 let mastodonTimeline;
 // 轮询检测 local storage 变化，实现 Layui 跟随 Redefine 明暗。
@@ -496,7 +641,20 @@ setInterval(() => {
     themeColorScheme = newThemeColorScheme;
 }, 1000);
 // 监听页面加载完成事件。
-$(document).ready(runAfterContentVisible);
+$(document).ready(() => {
+    afterPageReady();
+    layui.use(() => {
+        const layer = layui.layer;
+        window.smUi = {};
+        window.smUi.closeLayer = (layerIndex) => {
+            layer.close(layerIndex);
+        };
+        window.smUi.showLoadingPopup = () => {
+            return layer.load(0, { shade: [1, '#202124'], scrollbar: false });
+        };
+        afterUiReady();
+    });
+});
 // 监听 hexo-blog-encrypt 插件的解密事件，自动刷新页面以使部分内容正确显示。
 $(window).on('hexo-blog-decrypt', (e) => {
     if (!window.location.hash.includes('#on-decryption-reload')) {
