@@ -589,16 +589,9 @@ if (getSmSettings().doNotTrack) {
     track = false;
     smLogDebug('用户设置了不跟踪，取消跟踪。');
 }
-// 这么写不好使。
 window.goatcounter = {
     no_onload: !track
 };
-// if (!track) {
-//     // Redefine 的计数脚本（被我改成了 GoatCounter）在 body 里，本脚本在 head_end，先于它执行，因此可以取消追踪。
-//     window.goatcounter = {
-//         no_onload: true
-//     };
-// }
 // 初始化站点元数据。
 let siteMetaCache = {};
 try {
