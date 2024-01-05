@@ -483,42 +483,9 @@ let smLogWarn = (...params) => { console.warn(new Date().toLocaleTimeString() + 
 let smLogError = (...params) => { console.error(new Date().toLocaleTimeString() + ' |', ...params); };
 // 初始化 site-mod 数据。
 setSmData(getSmData());
-let track = true;
-if (!getSmData().initialized) {
-    track = false;
-    smLogDebug('站点未初始化，取消跟踪。');
-}
-if ('doNotTrack' in navigator && navigator.doNotTrack === '1') {
-    track = false;
-    smLogDebug('浏览器设置了不跟踪，取消跟踪。');
-}
-if (getSmSettings().doNotTrack) {
-    track = false;
-    smLogDebug('用户设置了不跟踪，取消跟踪。');
-}
-// 这么写不好使。
-// window.goatcounter = {
-//     no_onload: track
-// };
-if (!track) {
-    // Redefine 的计数脚本（被我改成了 GoatCounter）在 body 里，本脚本在 head_end，先于它执行，因此可以取消追踪。
-    window.goatcounter = {
-        no_onload: false
-    };
-}
-// 初始化站点元数据。
-let siteMetaCache = {};
-try {
-    siteMetaCache = JSON.parse(sessionStorage.getItem('siteMetaCache')) || {};
-} catch (error) {
-    siteMetaCache = {};
-}
-let userRegionTextCache = sessionStorage.getItem('userRegionTextCache') || '';
-// let themeColorScheme = getThemeColorScheme();
-let themeColorScheme = ''; // 初值设为空，这样首次即能触发 newThemeColorScheme !== themeColorScheme。
 let vConsole = {};
 let smDebug = {};
-if (getSmData().debug) {
+if (debugOn) {
     vConsole = new window.VConsole();
     smDebug = {
         get varsTemplate() {
@@ -608,8 +575,40 @@ if (getSmData().debug) {
         }
     };
     smDebug.loadVars();
-    // smLogDebug = (...params) => { console.debug(new Date().toLocaleTimeString() + ' |', ...params); };
 }
+let track = true;
+if (!getSmData().initialized) {
+    track = false;
+    smLogDebug('站点未初始化，取消跟踪。');
+}
+if ('doNotTrack' in navigator && navigator.doNotTrack === '1') {
+    track = false;
+    smLogDebug('浏览器设置了不跟踪，取消跟踪。');
+}
+if (getSmSettings().doNotTrack) {
+    track = false;
+    smLogDebug('用户设置了不跟踪，取消跟踪。');
+}
+// 这么写不好使。
+window.goatcounter = {
+    no_onload: !track
+};
+// if (!track) {
+//     // Redefine 的计数脚本（被我改成了 GoatCounter）在 body 里，本脚本在 head_end，先于它执行，因此可以取消追踪。
+//     window.goatcounter = {
+//         no_onload: true
+//     };
+// }
+// 初始化站点元数据。
+let siteMetaCache = {};
+try {
+    siteMetaCache = JSON.parse(sessionStorage.getItem('siteMetaCache')) || {};
+} catch (error) {
+    siteMetaCache = {};
+}
+let userRegionTextCache = sessionStorage.getItem('userRegionTextCache') || '';
+// let themeColorScheme = getThemeColorScheme();
+let themeColorScheme = ''; // 初值设为空，这样首次即能触发 newThemeColorScheme !== themeColorScheme。
 let mastodonTimeline;
 // 轮询检测 local storage 变化，实现 Layui 跟随 Redefine 明暗。
 // 原来用的是监听，实际上比较麻烦，见：
