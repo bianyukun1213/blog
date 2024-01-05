@@ -272,7 +272,7 @@ async function getCurMetaAsync(forced, pathnameIn) {
         // 优先从 head 的 meta 获取。
         if (getFixedPathname(targetPathname) === getFixedPathname() && !forced) {
             const metaContent = $('meta[name=h2l-embedded-meta]')?.attr('content');
-            curMeta = JSON.parse(decodeURIComponent(metaContent));
+            curMeta = decryptPageMeta(JSON.parse(decodeURIComponent(metaContent)));
             curMetaFound = true;
             smLogDebug('在 head 中获取到嵌入的页面元数据：', curMeta);
             return curMeta;
@@ -312,9 +312,9 @@ async function getCurMetaAsync(forced, pathnameIn) {
         }
     }
 }
-async function isCurrentRegionBlockedAsync(forced) {
-    // 调试模式下可以跳过区域检查。
-    if (smDebug.vars && smDebug.vars.skipRegionCheck) {
+async function checkPageRegionBlockAsync(forced) {
+    // 调试模式下可以跳过区域检查。其实可以不检查 debugOn，因为 smDebug 不为空就已经代表 debugOn 了。
+    if (debugOn && smDebug.vars && smDebug.vars.skipRegionCheck) {
         smLogInfo('跳过区域检查。');
         return 'NOT_BLOCKED';
     }
@@ -422,7 +422,7 @@ function afterPageReady() {
     }).then((res) => {
         $('#busuanzi_value_page_pv').text(res.count);
     }).catch((error) => {
-        mLogError('获取当前页面访问计数出错：', error);
+        smLogError('获取当前页面访问计数出错：', error);
         $('#busuanzi_value_page_pv').text('-');
     });
     // 修复移动端网易云音乐外链。
@@ -464,13 +464,10 @@ function afterPageReady() {
     }
 }
 function afterUiReady() {
-    // let i = smUi.showLoadingPopup();
-    // setTimeout(() => {
-    //     smUi.closeLayer(i);
-    // }, 5000);
-    // smUi.layer.
+    if (!getSmData().initialized)
+        smUi.showInitPopup();
     // 检查用户属地。
-    isCurrentRegionBlockedAsync().then((res) => {
+    checkPageRegionBlockAsync().then((res) => {
         if (res === 'BLOCKED')
             window.location.replace(`${siteUrl}/go-home/`);
         else if (res === 'NOT_BLOCKED')
@@ -651,6 +648,21 @@ $(document).ready(() => {
         };
         window.smUi.showLoadingPopup = () => {
             return layer.load(0, { shade: [1, '#202124'], scrollbar: false });
+        };
+        window.smUi.showInitPopup = () => {
+            const li = layer.alert(
+                '您好！这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。点击“确定”永久关闭本弹窗。',
+                { title: '初次访问', icon: 0, maxWidth: 500, closeBtn: 0, scrollbar: false },
+                (index, layero, that) => {
+                    let smData = getSmData(); // 用户阅读完才会点击确定按钮，这段时间内 smData 可能改变，获取最新值。
+                    smData.initialized = true;
+                    setSmData(smData);
+                    layer.close(index);
+                });
+            if (!$('#layui-layer1').is(':visible'))
+                if (confirm('您好！检测到初始化弹窗未显示。您是否使用了广告拦截插件？本站不含广告，但使用的 Layui 组件可能被某些不完善的广告拦截规则拦截。请您为本站添加白名单，否则可能无法正常浏览。待弹窗加载，完成设置及初始化后，将默认您已知晓相关信息，不再检测广告拦截。\n\n点击“确定”刷新页面。'))
+                    window.location.reload();
+            return li;
         };
         afterUiReady();
     });
