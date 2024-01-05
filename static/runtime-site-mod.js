@@ -313,9 +313,9 @@ async function getCurMetaAsync(forced, pathnameIn) {
     }
 }
 async function checkPageRegionBlockAsync(forced) {
-    // 调试模式下可以跳过区域检查。其实可以不检查 debugOn，因为 smDebug 不为空就已经代表 debugOn 了。
+    // 调试模式下可以跳过属地检查。其实可以不检查 debugOn，因为 smDebug 不为空就已经代表 debugOn 了。
     if (debugOn && smDebug.vars && smDebug.vars.skipRegionCheck) {
-        smLogInfo('跳过区域检查。');
+        smLogInfo('跳过属地检查。');
         return 'NOT_BLOCKED';
     }
     const curMeta = await getCurMetaAsync(forced);
