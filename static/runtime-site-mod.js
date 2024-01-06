@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 
 // 这里做一些对站点的整体修改。
 
@@ -102,6 +102,9 @@ const smDataTemplates = {
             showInitialPopup: true
         };
     },
+    migrateFromVoidToV1: function () {
+        return smDataTemplates.v1;
+    },
     get v2() {
         return {
             templateVer: 2,
@@ -110,6 +113,13 @@ const smDataTemplates = {
             debugLog: false
         };
     },
+    migrateFromV1ToV2: function (v1) {
+        let v2 = v1;
+        // v2 新增了 debugLog 字段。
+        v2.debugLog = false;
+        v2.templateVer = 2;
+        return v2;
+    },
     get v3() {
         return {
             templateVer: 3,
@@ -117,6 +127,14 @@ const smDataTemplates = {
             showInitialPopup: true,
             debug: false
         };
+    },
+    migrateFromV2ToV3: function (v2) {
+        let v3 = v2;
+        // v3 将 debug 字段重命名为 debug。
+        v3.debug = v3.debugLog;
+        delete v3.debugLog;
+        v3.templateVer = 3;
+        return v3;
     },
     get v4() {
         return {
@@ -128,13 +146,18 @@ const smDataTemplates = {
             debug: false,
             debugVars: {}
         };
+    },
+    migrateFromV3ToV4: function (v3) {
+        let v4 = v3;
+        // v4 新增 debugVars、settings 的 doNotTrack，showInitialPopup 改为 initialized。
+        v4.debugVars = {};
+        v4.initialized = !v4.showInitialPopup;
+        delete v4.showInitialPopup;
+        v4.templateVer = 4;
+        return v4;
     }
 };
 function makeSmData() {
-    // return JSON.parse(JSON.stringify(smDataV1));
-    // return JSON.parse(JSON.stringify(smDataV2));
-    // return JSON.parse(JSON.stringify(smDataV3));
-    // return JSON.parse(JSON.stringify(smDataTemplates.latest));
     return smDataTemplates.latest;
 }
 function getSmSettings() {
@@ -145,52 +168,17 @@ function setSmSettings(smSettings) {
     smData.settings = smSettings;
     setSmData(smData);
 }
-function migrateSmDataFromNoneToV1(none) {
-    smLogDebug('新建 smData v1。');
-    // return JSON.parse(JSON.stringify(smDataTemplates.v1));
-    return smDataTemplates.v1;
-}
-function migrateSmDataFromV1ToV2(v1) {
-    // let tmp = JSON.parse(JSON.stringify(v1));
-    smLogDebug('smData 迁移至 v2。');
-    let tmp = v1;
-    // v2 新增了 debugLog 字段。
-    tmp.debugLog = false;
-    tmp.templateVer = 2;
-    return tmp;
-}
-function migrateSmDataFromV2ToV3(v2) {
-    // let tmp = JSON.parse(JSON.stringify(v2));
-    smLogDebug('smData 迁移至 v3。');
-    let tmp = v2;
-    // v3 将 debug 字段重命名为 debug。
-    tmp.debug = tmp.debugLog;
-    delete tmp.debugLog;
-    tmp.templateVer = 3;
-    return tmp;
-}
-function migrateSmDataFromV3ToV4(v3) {
-    // let tmp = JSON.parse(JSON.stringify(v3));
-    smLogDebug('smData 迁移至 v4。');
-    let tmp = v3;
-    // v4 新增 debugVars、settings 的 doNotTrack，showInitialPopup 改为 initialized。
-    tmp.debugVars = {};
-    tmp.initialized = !tmp.showInitialPopup;
-    delete tmp.showInitialPopup;
-    tmp.templateVer = 4;
-    return tmp;
-}
 function migrateSmData(oldSmData) {
     smLogDebug('开始迁移 smData：', oldSmData);
-    if (oldSmData.templateVer === null || typeof oldSmData.templateVer === 'undefined' || oldSmData.templateVer < 1)
+    if (typeof oldSmData.templateVer === 'undefined' || oldSmData.templateVer === null || oldSmData.templateVer < 1)
         // 这种肯定是 localStorage 里的 smData 被修改过导致版本号连 1 都不是，就新生成一个 v1 的。
-        oldSmData = migrateSmDataFromNoneToV1(oldSmData);
+        oldSmData = smDataTemplates.migrateFromVoidToV1(oldSmData);
     if (oldSmData.templateVer < 2)
-        oldSmData = migrateSmDataFromV1ToV2(oldSmData);
+        oldSmData = smDataTemplates.migrateFromV1ToV2(oldSmData);
     if (oldSmData.templateVer < 3)
-        oldSmData = migrateSmDataFromV2ToV3(oldSmData);
+        oldSmData = smDataTemplates.migrateFromV2ToV3(oldSmData);
     if (oldSmData.templateVer < 4)
-        oldSmData = migrateSmDataFromV3ToV4(oldSmData);
+        oldSmData = smDataTemplates.migrateFromV3ToV4(oldSmData);
     return oldSmData;
 }
 // 按最新的数据模板校验。
@@ -202,8 +190,8 @@ function validateSmData(invalidSmData) {
     let invalidDebug = invalidSmData.debug;
     validSmData.debug = invalidDebug === true || invalidDebug === 'true' ? true : false; // 如果从 local storage 读的是字符串，（被人改过）转成 bool。
     // let invalidDebugVars = invalidSmData.debugVars;
-    validSmData.debugVars = invalidSmData.debugVars; // 不检查 debugVars，让 smDebug 自己检查。debugVars 的内容与 templateVer 无关。
-    let invalidSettings = invalidSmData.settings;
+    validSmData.debugVars = invalidSmData.debugVars || {}; // 不检查 debugVars，让 smDebug 自己检查。debugVars 的内容与 templateVer 无关。
+    let invalidSettings = invalidSmData.settings || {};
     validSmData.settings.doNotTrack = invalidSettings.doNotTrack === true || invalidSettings.doNotTrack === 'true' ? true : false;
     // ...
     return validSmData;
@@ -225,6 +213,19 @@ function getSmData() {
 function setSmData(smData) {
     localStorage.setItem('smData', JSON.stringify(smData));
 }
+function isTrackingAvailable() {
+    let dataCollection = true;
+    if (!getSmData().initialized) {
+        dataCollection = false;
+    }
+    if ('doNotTrack' in navigator && navigator.doNotTrack === '1') {
+        dataCollection = false;
+    }
+    if (getSmSettings().doNotTrack) {
+        dataCollection = false;
+    }
+    return dataCollection;
+}
 function getFixedPathname(pathnameIn) {
     const pathname = pathnameIn || window.location.pathname;
     let fixedPathname = pathname;
@@ -237,8 +238,8 @@ function getFixedPathname(pathnameIn) {
 }
 // 获取站点元数据，如果在 sesstionStorage 下已有元数据，就不再获取。
 async function getSiteMetaAsync(forced) {
-    if ($.isPlainObject(siteMetaCache) || forced) {
-        let loadingIndex = smUi.showLoadingPopup();
+    if ($.isEmptyObject(siteMetaCache) || forced) {
+        let loadingIndex = smUi.showLoading();
         let getPromise = smGetAsync({
             entry: '/site-meta.json',
             cache: false, // 不要从缓存读取。
@@ -254,6 +255,7 @@ async function getSiteMetaAsync(forced) {
         }
         siteMetaCache = res;
         sessionStorage.setItem('siteMetaCache', JSON.stringify(siteMetaCache));
+        smLogDebug('已更新站点元数据缓存：', siteMetaCache);
     }
     return siteMetaCache;
 }
@@ -264,52 +266,50 @@ function decryptPageMeta(pageMeta) {
         return {};
     }
 }
-async function getCurMetaAsync(forced, pathnameIn) {
+async function getPageMetaAsync(forced, pathnameIn) {
     const targetPathname = pathnameIn || getFixedPathname();
-    let curMeta = {};
-    let curMetaFound = false;
+    let pageMeta = {};
+    let pageMetaFound = false;
     try {
         // 优先从 head 的 meta 获取。
         if (getFixedPathname(targetPathname) === getFixedPathname() && !forced) {
             const metaContent = $('meta[name=h2l-embedded-meta]')?.attr('content');
-            curMeta = decryptPageMeta(JSON.parse(decodeURIComponent(metaContent)));
-            curMetaFound = true;
-            smLogDebug('在 head 中获取到嵌入的页面元数据：', curMeta);
-            return curMeta;
+            pageMeta = JSON.parse(decodeURIComponent(metaContent));
+            if (typeof pageMeta.encryptedData !== 'undefined' && pageMeta.encryptedData !== null)
+                pageMeta = decryptPageMeta(pageMeta);
+            pageMetaFound = true;
+            smLogDebug('在 head 中获取到嵌入的页面元数据：', pageMeta);
+            return pageMeta;
         }
     } catch (error) {
         smLogWarn('获取嵌入的页面元数据失败：', error);
     }
-    finally {
-        if (!curMetaFound) {
-            const siteMeta = await getSiteMetaAsync(forced);
-            if ($.isEmptyObject(siteMeta)) {
-                smLogWarn('站点元数据空白，无法获取当前页面的元数据：', siteMeta);
-                return siteMeta;
-            }
-            const pageMeta = siteMeta.all;
-            const pageMetaLength = pageMeta.length;
-            for (let i = 0; i < pageMetaLength; i++) {
-                const item = pageMeta[i];
-                // 举例：比较 links/index.html 与 /links/，应该能够对应上。
-                // 此时 targetPathname 要么以 / 结尾，要么以 .html 结尾。
-                let decrypted = item;
-                // 如果数据是加密的。
-                if (typeof decrypted.encryptedData !== 'undefined' && decrypted.encryptedData !== null)
-                    decrypted = decryptPageMeta(decrypted);
-                if (decrypted.path === targetPathname.slice(1) || decrypted.path === targetPathname.slice(1) + 'index.html') {
-                    curMeta.type = 'PAGE';
-                    curMeta = decrypted;
-                    curMetaFound = true;
-                    smLogDebug('在站点元数据中获取到页面元数据：', curMeta);
-                    return curMeta;
-                }
+    if (!pageMetaFound) {
+        const siteMeta = await getSiteMetaAsync(forced);
+        if ($.isEmptyObject(siteMeta)) {
+            smLogWarn('站点元数据空白，无法获取页面元数据：', siteMeta);
+            return siteMeta;
+        }
+        let allMeta = siteMeta.all;
+        const allMetaLength = allMeta.length;
+        for (let i = 0; i < allMetaLength; i++) {
+            let item = allMeta[i];
+            // 举例：比较 links/index.html 与 /links/，应该能够对应上。
+            // 此时 targetPathname 要么以 / 结尾，要么以 .html 结尾。
+            // 如果数据是加密的。
+            if (typeof item.encryptedData !== 'undefined' && item.encryptedData !== null)
+                item = decryptPageMeta(item);
+            if (item.path === targetPathname.slice(1) || item.path === targetPathname.slice(1) + 'index.html') {
+                pageMeta = item;
+                pageMetaFound = true;
+                smLogDebug('在站点元数据中获取到页面元数据：', pageMeta);
+                return pageMeta;
             }
         }
-        if (!curMetaFound) {
-            smLogWarn('未找到页面元数据。');
-            return curMeta; // 没找到的空值。
-        }
+    }
+    if (!pageMetaFound) {
+        smLogWarn('未找到页面元数据。');
+        return pageMeta; // 没找到的空值。
     }
 }
 async function checkPageRegionBlockAsync(forced) {
@@ -318,13 +318,13 @@ async function checkPageRegionBlockAsync(forced) {
         smLogInfo('跳过属地检查。');
         return 'NOT_BLOCKED';
     }
-    const curMeta = await getCurMetaAsync(forced);
+    const curMeta = await getPageMetaAsync(forced);
     if ($.isEmptyObject(curMeta))
         return 'UNKNOWN';
     // 检查用户地区是否在黑名单内。
     if ($.isArray(curMeta.regionBlacklist) && curMeta.regionBlacklist.length > 0) {
         if (userRegionTextCache === '' || forced) {
-            let loadingIndex = smUi.showLoadingPopup();
+            let loadingIndex = smUi.showLoading();
             let getPromise = smGetAsync({
                 baseUrl: 'https://www.douyacun.com',
                 entry: '/api/openapi/geo/location',
@@ -372,8 +372,15 @@ function getThemeColorScheme() {
             return 'light';
     }
 }
-// 页面后再执行的操作：
+// 页面加载后再执行的操作：
 function afterPageReady() {
+    // 修正 pathname，以解决不带 .html 不显示评论，并且已保存了密码的文章也不能自动解密的问题。
+    const pathname = window.location.pathname;
+    const fixedPathname = getFixedPathname();
+    if (pathname !== fixedPathname) {
+        window.location.replace(window.location.origin + fixedPathname); // 跳转。
+        return; // 从 replace 到实际跳转有一段时间，没必要让代码继续执行，因此 return。
+    }
     // 监听搜索框输入事件，根据条件开启调试。需要在页面加载后监听，因为 site-mod.js 在头部注入，执行时还没有搜索框。
     $('.search-input').on('input', function () {
         if ($(this).val() === 'debugon' && !debugOn) {
@@ -389,15 +396,6 @@ function afterPageReady() {
             window.location.reload();
         }
     });
-    // 隐藏开启 Javascript 的提示。
-    $('#javascript-alert').hide();
-    // 修正 pathname，以解决不带 .html 不显示评论，并且已保存了密码的文章也不能自动解密的问题。
-    const pathname = window.location.pathname;
-    const fixedPathname = getFixedPathname();
-    if (pathname !== fixedPathname) {
-        window.location.replace(window.location.origin + fixedPathname); // 跳转。
-        return; // 从 replace 到实际跳转有一段时间，没必要让代码继续执行，因此 return。
-    }
     // 获取全站访问计数。
     smGetAsync({
         baseUrl: counterUrl,
@@ -465,15 +463,34 @@ function afterPageReady() {
 }
 function afterUiReady() {
     if (!getSmData().initialized)
-        smUi.showInitPopup();
+        smUi.openInitPopup();
+    // 给 Redefine 夹个私货，新增一个按钮用来打开设置页面。
+    $('.hidden-tools-list').append('<li id="btn-show-settings-popup" class="right-bottom-tools tool-sm-settings flex justify-center items-center"><i class="fa-solid fa-wrench"></i></li>');
+    $('#btn-show-settings-popup').click(() => {
+        smUi.openSettingsPopup();
+        return false; // 阻止默认动作。
+    });
     // 检查用户属地。
     checkPageRegionBlockAsync().then((res) => {
         if (res === 'BLOCKED')
             window.location.replace(`${siteUrl}/go-home/`);
-        else if (res === 'NOT_BLOCKED')
+        else if (res === 'NOT_BLOCKED') {
             $('.main-content').show();
+            // 重新计算图片瀑布流。
+            $('.image-masonry-script').each(function () {
+                let masonryId = this.id.replace('image-masonry-script-', '');
+                window[`macyAt${masonryId}`].recalculate();
+            });
+        }
     });
 }
+
+
+
+// 脚本开始。
+
+
+
 let smLogDebug = () => { };
 const debugOn = getSmData().debug;
 smLogDebug = (...params) => { if (debugOn) console.debug(new Date().toLocaleTimeString() + ' |', ...params); };
@@ -481,8 +498,26 @@ let smLog = (...params) => { console.log(new Date().toLocaleTimeString() + ' |',
 let smLogInfo = (...params) => { console.info(new Date().toLocaleTimeString() + ' |', ...params); };
 let smLogWarn = (...params) => { console.warn(new Date().toLocaleTimeString() + ' |', ...params); };
 let smLogError = (...params) => { console.error(new Date().toLocaleTimeString() + ' |', ...params); };
-// 初始化 site-mod 数据。
-setSmData(getSmData());
+// 初始化 site-mod 数据，检测数据变更。
+(() => {
+    let smDataRawStr = localStorage.getItem('smData');
+    let smDataRawStrEmpty = true;
+    let smSettingsRaw = {};
+    if (smDataRawStr) {
+        smDataRawStrEmpty = false;
+        try {
+            smSettingsRaw = JSON.parse(smDataRawStr).settings || {};
+        } catch (error) {
+            smSettingsRaw = {};
+        }
+    }
+    setSmData(getSmData());
+    const smSettings = getSmSettings();
+    // 使用了 lodash 的 isEqual 。
+    if (!smDataRawStrEmpty && !_.isEqual(smSettings, smSettingsRaw))
+        // Layui 此时还未加载，弹窗不可用。等到 Layui 加载，执行 afterUiReady 时，页面可能已经历刷新，就检测不到变化了。
+        alert('数据迁移与校验导致设置变更，您可打开设置窗口调整新的设置。');
+})();
 let vConsole = {};
 let smDebug = {};
 if (debugOn) {
@@ -576,21 +611,8 @@ if (debugOn) {
     };
     smDebug.loadVars();
 }
-let track = true;
-if (!getSmData().initialized) {
-    track = false;
-    smLogDebug('站点未初始化，取消跟踪。');
-}
-if ('doNotTrack' in navigator && navigator.doNotTrack === '1') {
-    track = false;
-    smLogDebug('浏览器设置了不跟踪，取消跟踪。');
-}
-if (getSmSettings().doNotTrack) {
-    track = false;
-    smLogDebug('用户设置了不跟踪，取消跟踪。');
-}
 window.goatcounter = {
-    no_onload: !track
+    no_onload: !isTrackingAvailable()
 };
 // 初始化站点元数据。
 let siteMetaCache = {};
@@ -624,7 +646,7 @@ setInterval(() => {
             mastodonTimeline.DEFAULT_THEME = newThemeColorScheme;
             mastodonTimeline.setTheme();
         }
-        if (!$.isPlainObject(vConsole))
+        if (!$.isEmptyObject(vConsole))
             vConsole.setOption('theme', newThemeColorScheme);
     }
     themeColorScheme = newThemeColorScheme;
@@ -634,26 +656,142 @@ $(document).ready(() => {
     afterPageReady();
     layui.use(() => {
         const layer = layui.layer;
+        const form = layui.form;
         window.smUi = {};
         window.smUi.closeLayer = (layerIndex) => {
             layer.close(layerIndex);
         };
-        window.smUi.showLoadingPopup = () => {
+        window.smUi.showLoading = () => {
             return layer.load(0, { shade: [1, '#202124'], scrollbar: false });
         };
-        window.smUi.showInitPopup = () => {
-            const li = layer.alert(
-                '您好！这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。点击“确定”永久关闭本弹窗。',
-                { title: '初次访问', icon: 0, maxWidth: 500, closeBtn: 0, scrollbar: false },
-                (index, layero, that) => {
-                    let smData = getSmData(); // 用户阅读完才会点击确定按钮，这段时间内 smData 可能改变，获取最新值。
-                    smData.initialized = true;
-                    setSmData(smData);
-                    layer.close(index);
-                });
+        // '您好！这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。点击“确定”永久关闭本弹窗。',
+        window.smUi.openInitPopup = () => {
+            const li = layer.open({
+                type: 1,
+                title: '初始化',
+                content: `
+                <div class="smui-container">
+                    <div class="smui-content">
+                      <p>您好！这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。此外，在完成初始化前，可能有些设置您想要调整，可点击左下角按钮进入设置。</p>
+                      <p>点击“了解”永久关闭本弹窗。</p>
+                    </div>
+                    <div class="smui-func smui-clearfix">
+                      <hr>
+                      <div class="smui-func-left">
+                        <button id="btn-enter-settings" class="layui-btn layui-btn-primary layui-border-blue">进入设置</button>
+                      </div>
+                      <div class="smui-func-right">
+                        <button id="btn-complete-initialization" class="layui-btn">了解</button>
+                      </div>
+                    </div>
+                </div>
+                `,
+                area: ['350px', 'auto'],
+                closeBtn: 0,
+                shadeClose: false,
+                resize: false,
+                scrollbar: false,
+                moveEnd: () => {
+                    layer.closeAll('tips'); // 移动此弹窗时应该关闭所有 tips。
+                },
+                success: (layero, index, that) => {
+                    $('#btn-complete-initialization').click(() => {
+                        let smData = getSmData(); // 获取实时的。
+                        smData.initialized = true;
+                        setSmData(smData);
+                        layer.close(index);
+                        return false; // 阻止默认动作。
+                    });
+                    $('#btn-enter-settings').click(() => {
+                        smUi.openSettingsPopup();
+                        return false; // 阻止默认动作。
+                    });
+                }
+            });
             if (!$('#layui-layer1').is(':visible'))
                 if (confirm('您好！检测到初始化弹窗未显示。您是否使用了广告拦截插件？本站不含广告，但使用的 Layui 组件可能被某些不完善的广告拦截规则拦截。请您为本站添加白名单，否则可能无法正常浏览。待弹窗加载，完成设置及初始化后，将默认您已知晓相关信息，不再检测广告拦截。\n\n点击“确定”刷新页面。'))
                     window.location.reload();
+            return li;
+        };
+        window.smUi.openSettingsPopup = () => {
+            const bindings = {
+                dataCollection: 'sm-setting-data-collection'
+            };
+            const li = layer.open({
+                type: 1,
+                title: '设置',
+                content: `
+                <div class="smui-container">
+                    <div class="layui-form" lay-filter="sm-settings">
+                      <div class="layui-form-item">
+                        <label id="lbl-sm-setting-data-collection" class="layui-form-label">数据收集
+                          <i class="layui-icon layui-icon-question"></i>
+                        </label>
+                        <div class="layui-input-block">
+                          <input type="checkbox" name="${bindings.dataCollection}" lay-skin="switch" title="已允许|已禁止">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="smui-func smui-clearfix">
+                      <hr>
+                      <div class="smui-func-left">
+                        <button id="btn-clear-local-storage" class="layui-btn layui-btn-primary layui-border-red">清空本地存储</button>
+                      </div>
+                      <div class="smui-func-right">
+                        <button id="btn-save-sm-settings" class="layui-btn">保存并刷新</button>
+                      </div>
+                    </div>
+                </div>
+                `,
+                area: ['350px', 'auto'],
+                closeBtn: 1,
+                shadeClose: true,
+                resize: false,
+                scrollbar: false,
+                moveEnd: () => {
+                    layer.closeAll('tips'); // 移动此弹窗时应该关闭所有 tips。
+                },
+                success: (layero, index, that) => {
+                    const settingsRead = getSmSettings();
+                    // doNotTrack 和“数据收集”是反的。
+                    if (!settingsRead.doNotTrack)
+                        $(`input[name="${bindings.dataCollection}"]`).attr('checked', '');
+                    // 动态生成的控件需要调用 render 渲染。它实际上是根据原生组件生成了一个美化的。设置好值后再渲染。
+                    form.render();
+                    $('#lbl-sm-setting-data-collection').click(() => {
+                        layer.tips(
+                            '本站使用 GoatCounter 计数脚本；它可能会收集您的属地、UA、来源、语言、屏幕大小等数据。如果禁止数据收集，脚本将不会发送它们。此处显示的是用户设置；如果浏览器设置了“禁止跟踪”或站点未完成初始化，也将不会发送。然而，此项设置无法阻止潜在的第三方资源收集数据。此外，在特定页面，本站会从第三方接口获取您的属地用于验证，但不会收集它。',
+                            '#lbl-sm-setting-data-collection',
+                            {
+                                tips: 1, // 向上弹。
+                                time: 0, // 文字很长，取消计时关闭。
+                                shade: 0.3, // 必须大于 0 才能点击遮罩关闭。
+                                shadeClose: true
+                            }
+                        );
+                        return false; // 阻止默认动作。
+                    });
+                    $('#btn-save-sm-settings').click(() => {
+                        form.submit('sm-settings', (data) => {
+                            const userOptions = data.field;
+                            let settingsToWrite = getSmSettings(); // 获取实时的。
+                            // doNotTrack 和“数据收集”是反的。
+                            settingsToWrite.doNotTrack = userOptions[bindings.dataCollection] === 'on' ? false : true;
+                            setSmSettings(settingsToWrite);
+                            layer.close(index);
+                            window.location.reload();
+                        });
+                        return false; // 阻止默认动作。
+                    });
+                    $('#btn-clear-local-storage').click(() => {
+                        if (confirm('所有设置都将丢失，站点将需要重新初始化，是否继续？')) {
+                            localStorage.clear();
+                            window.location.reload();
+                        }
+                        return false; // 阻止默认动作。
+                    });
+                }
+            });
             return li;
         };
         afterUiReady();

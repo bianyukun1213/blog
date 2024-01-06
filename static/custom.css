@@ -1,3 +1,20 @@
+.layui-layer {
+    font-size: 14px;
+    /* font-weight: 400; */
+    /* 前者是 layui-theme-dark 变量，后者是 Layui 颜色。 */
+    color: var(--lay-color-text-2, rgba(0, 0, 0, 0.85));
+}
+
+.layui-layer *,
+.layui-layer *::before,
+.layui-layer *::after {
+    box-sizing: unset;
+    font-size: unset;
+    /* font-weight: unset; */
+}
+
+/* 上面的样式用来修正主题覆盖的插件样式。修复布局就已经够麻烦的了；颜色的话，考虑到还有深色模式…… */
+
 noscript#javascript-alert {
     position: fixed;
     z-index: 8848;
@@ -8,13 +25,6 @@ noscript#javascript-alert {
     background-color: black;
     color: white;
 }
-
-/* noscript#javascript-alert p{
-    position: absolute;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-} */
 
 noscript#javascript-alert p::before,
 noscript#javascript-alert p::after {
@@ -28,63 +38,32 @@ div.main-content.region-block-hidden {
     display: none;
 }
 
-/* .admonition {
-    padding: 24px 24px 24px 32px;
-    margin: 24px 0;
-    font-size: 16px;
-    line-height: 24px;
-    background-color: gray;
-    color: white;
+.smui-clearfix::before,
+.smui-clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
-.admonition p {
-    padding: 0;
+.smui-container {
+    padding: 16px;
+    /* position: relative; */
+}
+
+.smui-content {
     margin: 0;
-}
-
-.admonition .admonition-title {
     margin-bottom: 16px;
-    font-size: 20px;
-    line-height: 20px;
-    font-weight: bold;
 }
 
-.admonition.danger {
-    border-left: 4px #e22500 solid;
-    background-color: rgba(226, 37, 0, 0.2);
-} */
-
-/* 单独用的话直接给 .admonition.danger 设置红色就行了；这里是为了给样式提高优先级，避免被主题样式覆盖。 */
-/* .admonition.danger * {
-    color: #e22500;
+.smui-func hr {
+    margin: 0;
+    margin-bottom: 16px;
 }
 
-.admonition.danger .admonition-title::before {
-    content: '[危] ';
+.smui-func .smui-func-left {
+    float: left;
 }
 
-.admonition.warning {
-    border-left: 4px #fc0 solid;
-    background-color: rgba(255, 204, 0, 0.2);
+.smui-func .smui-func-right {
+    float: right;
 }
-
-.admonition.warning * {
-    color: #fc0;
-}
-
-.admonition.warning .admonition-title::before {
-    content: '[警] ';
-}
-
-.admonition.info {
-    border-left: 4px #0088e0 solid;
-    background-color: rgba(0, 136, 224, 0.2);
-}
-
-.admonition.info * {
-    color: #0088e0;
-}
-
-.admonition.info .admonition-title::before {
-    content: '[信] ';
-} */
