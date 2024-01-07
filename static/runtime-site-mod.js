@@ -216,6 +216,11 @@ function setSmData(smData) {
 function genRandomStr() {
     return Math.random().toString(36).slice(-8);
 }
+function isMobile() {
+    return !!navigator.userAgent.match(
+        /(phone|pad|pod|Mobile|iPhone|iPad|iPod|ios|Android|Windows Phone|Symbian|BlackBerry|WebOS|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG)/i
+    );
+}
 function isTrackingAvailable() {
     let dataCollection = true;
     if (!getSmData().initialized) {
@@ -384,7 +389,8 @@ function adjustVConsoleSwitchPosition(reset) {
     const windowHeight = $(window).height();
     const switchX = Number(localStorage.getItem('vConsole_switch_x'));
     const switchY = Number(localStorage.getItem('vConsole_switch_y'));
-    if ((switchX === 0 && switchY === 20) || (switchWidth + switchX > windowWidth) || (switchHeight + switchY > windowHeight) || reset)
+    // 桌面端定钉死在左下角，移动端判断超出屏幕就移回左下角。
+    if ((switchX === 0 && switchY === 20) || (switchWidth + switchX > windowWidth) || (switchHeight + switchY > windowHeight) || !isMobile() || reset)
         vConsole.setSwitchPosition(windowWidth - (switchWidth + 20), 20);
 }
 // 页面加载后再执行的操作：
@@ -444,7 +450,7 @@ function afterPageReady() {
         $('#busuanzi_value_page_pv').text('-');
     });
     // 修复移动端网易云音乐外链。
-    if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+    if (isMobile()) {
         let iframes = $('iframe');
         const iframesLength = iframes.length;
         for (let i = 0; i < iframesLength; i++) {
