@@ -86,7 +86,7 @@
 .layui-layer *::before,
 .layui-layer *::after {
     box-sizing: unset;
-    font-size: unset;
+    /* font-size: unset; */
     /* font-weight: unset; */
 }
 

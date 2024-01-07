@@ -664,6 +664,12 @@ $(document).ready(() => {
             closeLayer: (layerIndex) => {
                 layer.close(layerIndex);
             },
+            closeLastLayer: () => {
+                layer.closeLast();
+            },
+            closeAllLayers: () => {
+                layer.closeAll();
+            },
             showLoading: () => {
                 return layer.load(0, { shade: [1, '#202124'], scrollbar: false });
             },
