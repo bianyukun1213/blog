@@ -221,18 +221,29 @@ function isMobile() {
         /(phone|pad|pod|Mobile|iPhone|iPad|iPod|ios|Android|Windows Phone|Symbian|BlackBerry|WebOS|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG)/i
     );
 }
-function isTrackingAvailable() {
-    let dataCollection = true;
+function isTrackingAvailable(detailed) {
+    let details = {
+        available: true,
+        initializationPassed: true,
+        broswerPassed: true,
+        settingsPassed: true
+    }
     if (!getSmData().initialized) {
-        dataCollection = false;
+        details.available = false;
+        details.initializationPassed = false;
     }
     if ('doNotTrack' in navigator && navigator.doNotTrack === '1') {
-        dataCollection = false;
+        details.available = false;
+        details.broswerPassed = false;
     }
     if (getSmSettings().doNotTrack) {
-        dataCollection = false;
+        details.available = false;
+        details.settingsPassed = false;
     }
-    return dataCollection;
+    if (detailed)
+        return details;
+    else
+        return details.available;
 }
 function getFixedPathname(pathnameIn) {
     const pathname = pathnameIn || window.location.pathname;
@@ -788,6 +799,15 @@ $(document).ready(() => {
                         layer.closeAll('tips'); // 移动此弹窗时应该关闭所有 tips。
                     },
                     success: (layero, index, that) => {
+                        const trackingRes = isTrackingAvailable(true);
+                        let trackingResTxt = `数据收集当前${trackingRes.available ? '已启用。' : '已禁用，因为'}`;
+                        if (!trackingRes.initializationPassed)
+                            trackingResTxt += '站点未初始化、';
+                        if (!trackingRes.broswerPassed)
+                            trackingResTxt += '浏览器请求不要跟踪、';
+                        if (!trackingRes.settingsPassed)
+                            trackingResTxt += '您禁止收集、';
+                        trackingResTxt = trackingResTxt.slice(0, -1) + '。';
                         const settingsRead = getSmSettings();
                         // doNotTrack 和“数据收集”是反的。
                         if (!settingsRead.doNotTrack)
@@ -796,7 +816,7 @@ $(document).ready(() => {
                         form.render();
                         $(layero).find('.lbl-sm-setting-data-collection').click((e) => {
                             layer.tips(
-                                '本站使用 GoatCounter 计数脚本；它可能会收集您的属地、UA、来源、语言、屏幕大小等数据。如果禁止数据收集，脚本将不会发送这些信息。此处显示的是用户设置；如果浏览器请求不要跟踪或站点未完成初始化，也将不会发送相关信息。然而，此项设置无法阻止可能的第三方资源收集数据。此外，在特定页面，本站会从第三方接口获取您的属地信息用于验证，但不会收集它。',
+                                `本站使用的计数脚本可能会收集您的属地、UA、来源、语言、屏幕大小等数据。除此处禁止外，浏览器请求不要跟踪或站点未完成初始化，也将导致数据收集禁用。此设置不影响必要的属地检查及潜在的第三方数据收集。<br>${trackingResTxt}`,
                                 e.target,
                                 {
                                     tips: 1, // 向上弹。
