@@ -375,6 +375,18 @@ function getThemeColorScheme() {
             return 'light';
     }
 }
+function adjustVConsoleSwitchPosition(reset) {
+    if (!vConsole)
+        return;
+    const switchWidth = 113;
+    const switchHeight = 31;
+    const windowWidth = $(window).width();
+    const windowHeight = $(window).height();
+    const switchX = Number(localStorage.getItem('vConsole_switch_x'));
+    const switchY = Number(localStorage.getItem('vConsole_switch_y'));
+    if ((switchX === 0 && switchY === 20) || (switchWidth + switchX > windowWidth) || (switchHeight + switchY > windowHeight) || reset)
+        vConsole.setSwitchPosition(windowWidth - switchWidth, 20);
+}
 // 页面加载后再执行的操作：
 function afterPageReady() {
     // 修正 pathname，以解决不带 .html 不显示评论，并且已保存了密码的文章也不能自动解密的问题。
@@ -399,6 +411,11 @@ function afterPageReady() {
             window.location.reload();
         }
     });
+    /* PC 端 vConsole 默认在右下角，挡元素。 */
+    $(window).resize(()=>{
+        adjustVConsoleSwitchPosition();
+    });
+    adjustVConsoleSwitchPosition();
     // 获取全站访问计数。
     smGetAsync({
         baseUrl: counterUrl,
