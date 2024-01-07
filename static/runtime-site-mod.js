@@ -213,6 +213,9 @@ function getSmData() {
 function setSmData(smData) {
     localStorage.setItem('smData', JSON.stringify(smData));
 }
+function genRandomStr() {
+    return Math.random().toString(36).slice(-8);
+}
 function isTrackingAvailable() {
     let dataCollection = true;
     if (!getSmData().initialized) {
@@ -584,10 +587,10 @@ if (debugOn) {
             }
             else {
                 smLogWarn('localStorage 中的 debugVars 无效，将重置：', vars);
-                this.resetVars();
+                this.resetDebugVars();
             }
         },
-        setVars: function (vars) {
+        setDebugVars: function (vars) {
             if (this.checkVars(vars)) {
                 this._vars = vars;
                 let smData = getSmData();
@@ -598,15 +601,15 @@ if (debugOn) {
                 smLogError('传入的 debugVars 无效，无法设置：', vars);
             }
         },
-        resetVars: function () {
-            // 深拷贝一份，不然 varsTemplate 在先调用 resetVars 再调用 setVar（setVars）后会被改。
-            // this.setVars(JSON.parse(JSON.stringify(this.varsTemplate)));
-            this.setVars(this.varsTemplate);
+        resetDebugVars: function () {
+            // 深拷贝一份，不然 varsTemplate 在先调用 resetDebugVars 再调用 setDebugVar（setDebugVars）后会被改。
+            // this.setDebugVars(JSON.parse(JSON.stringify(this.varsTemplate)));
+            this.setDebugVars(this.varsTemplate);
         },
-        setVar: function (key, value) {
+        setDebugVar: function (key, value) {
             let tmpVars = this.vars;
             tmpVars[key] = value;
-            this.setVars(tmpVars);
+            this.setDebugVars(tmpVars);
         }
     };
     smDebug.loadVars();
@@ -657,142 +660,147 @@ $(document).ready(() => {
     layui.use(() => {
         const layer = layui.layer;
         const form = layui.form;
-        window.smUi = {};
-        window.smUi.closeLayer = (layerIndex) => {
-            layer.close(layerIndex);
-        };
-        window.smUi.showLoading = () => {
-            return layer.load(0, { shade: [1, '#202124'], scrollbar: false });
-        };
-        // '您好！这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。点击“确定”永久关闭本弹窗。',
-        window.smUi.openInitPopup = () => {
-            const li = layer.open({
-                type: 1,
-                title: '初始化',
-                content: `
-                <div class="smui-container">
-                    <div class="smui-content">
-                      <p>您好！这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。此外，在完成初始化前，可能有些设置您想要调整，可点击左下角按钮进入设置。</p>
-                      <p>点击“了解”永久关闭本弹窗。</p>
-                    </div>
-                    <div class="smui-func smui-clearfix">
-                      <hr>
-                      <div class="smui-func-left">
-                        <button id="btn-enter-settings" class="layui-btn layui-btn-primary layui-border-blue">进入设置</button>
-                      </div>
-                      <div class="smui-func-right">
-                        <button id="btn-complete-initialization" class="layui-btn">了解</button>
-                      </div>
-                    </div>
-                </div>
-                `,
-                area: ['350px', 'auto'],
-                closeBtn: 0,
-                shadeClose: false,
-                resize: false,
-                scrollbar: false,
-                moveEnd: () => {
-                    layer.closeAll('tips'); // 移动此弹窗时应该关闭所有 tips。
-                },
-                success: (layero, index, that) => {
-                    $('#btn-complete-initialization').click(() => {
-                        let smData = getSmData(); // 获取实时的。
-                        smData.initialized = true;
-                        setSmData(smData);
-                        layer.close(index);
-                        return false; // 阻止默认动作。
-                    });
-                    $('#btn-enter-settings').click(() => {
-                        smUi.openSettingsPopup();
-                        return false; // 阻止默认动作。
-                    });
-                }
-            });
-            if (!$('#layui-layer1').is(':visible'))
-                if (confirm('您好！检测到初始化弹窗未显示。您是否使用了广告拦截插件？本站不含广告，但使用的 Layui 组件可能被某些不完善的广告拦截规则拦截。请您为本站添加白名单，否则可能无法正常浏览。待弹窗加载，完成设置及初始化后，将默认您已知晓相关信息，不再检测广告拦截。\n\n点击“确定”刷新页面。'))
-                    window.location.reload();
-            return li;
-        };
-        window.smUi.openSettingsPopup = () => {
-            const bindings = {
-                dataCollection: 'sm-setting-data-collection'
-            };
-            const li = layer.open({
-                type: 1,
-                title: '设置',
-                content: `
-                <div class="smui-container">
-                    <div class="layui-form" lay-filter="sm-settings">
-                      <div class="layui-form-item">
-                        <label id="lbl-sm-setting-data-collection" class="layui-form-label">数据收集
-                          <i class="layui-icon layui-icon-question"></i>
-                        </label>
-                        <div class="layui-input-block">
-                          <input type="checkbox" name="${bindings.dataCollection}" lay-skin="switch" title="已允许|已禁止">
+        window.smUi = {
+            closeLayer: (layerIndex) => {
+                layer.close(layerIndex);
+            },
+            showLoading: () => {
+                return layer.load(0, { shade: [1, '#202124'], scrollbar: false });
+            },
+            // '您好！这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。点击“确定”永久关闭本弹窗。',
+            openInitPopup: () => {
+                const li = layer.open({
+                    type: 1,
+                    title: '读者须知',
+                    content: `
+                    <div class="smui-container">
+                        <div class="smui-content">
+                          <p>您好！</p>
+                          <p>这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。</p>
+                          <p>此外，在完成初始化前，如果您想要调整数据收集等设置，请点击左下角按钮，否则站点将以默认设置工作。</p>
+                          <br>
+                          <p>点击“了解”完成初始化并永久关闭本弹窗。</p>
                         </div>
-                      </div>
+                        <div class="smui-func smui-clearfix">
+                          <hr>
+                          <div class="smui-func-left">
+                            <button class="btn-enter-settings layui-btn layui-btn-primary layui-border-blue">设置</button>
+                          </div>
+                          <div class="smui-func-right">
+                            <button class="btn-complete-initialization layui-btn">了解</button>
+                          </div>
+                        </div>
                     </div>
-                    <div class="smui-func smui-clearfix">
-                      <hr>
-                      <div class="smui-func-left">
-                        <button id="btn-clear-local-storage" class="layui-btn layui-btn-primary layui-border-red">清空本地存储</button>
-                      </div>
-                      <div class="smui-func-right">
-                        <button id="btn-save-sm-settings" class="layui-btn">保存并刷新</button>
-                      </div>
-                    </div>
-                </div>
-                `,
-                area: ['350px', 'auto'],
-                closeBtn: 1,
-                shadeClose: true,
-                resize: false,
-                scrollbar: false,
-                moveEnd: () => {
-                    layer.closeAll('tips'); // 移动此弹窗时应该关闭所有 tips。
-                },
-                success: (layero, index, that) => {
-                    const settingsRead = getSmSettings();
-                    // doNotTrack 和“数据收集”是反的。
-                    if (!settingsRead.doNotTrack)
-                        $(`input[name="${bindings.dataCollection}"]`).attr('checked', '');
-                    // 动态生成的控件需要调用 render 渲染。它实际上是根据原生组件生成了一个美化的。设置好值后再渲染。
-                    form.render();
-                    $('#lbl-sm-setting-data-collection').click(() => {
-                        layer.tips(
-                            '本站使用 GoatCounter 计数脚本；它可能会收集您的属地、UA、来源、语言、屏幕大小等数据。如果禁止数据收集，脚本将不会发送它们。此处显示的是用户设置；如果浏览器设置了“禁止跟踪”或站点未完成初始化，也将不会发送。然而，此项设置无法阻止潜在的第三方资源收集数据。此外，在特定页面，本站会从第三方接口获取您的属地用于验证，但不会收集它。',
-                            '#lbl-sm-setting-data-collection',
-                            {
-                                tips: 1, // 向上弹。
-                                time: 0, // 文字很长，取消计时关闭。
-                                shade: 0.3, // 必须大于 0 才能点击遮罩关闭。
-                                shadeClose: true
-                            }
-                        );
-                        return false; // 阻止默认动作。
-                    });
-                    $('#btn-save-sm-settings').click(() => {
-                        form.submit('sm-settings', (data) => {
-                            const userOptions = data.field;
-                            let settingsToWrite = getSmSettings(); // 获取实时的。
-                            // doNotTrack 和“数据收集”是反的。
-                            settingsToWrite.doNotTrack = userOptions[bindings.dataCollection] === 'on' ? false : true;
-                            setSmSettings(settingsToWrite);
+                    `,
+                    area: ['350px', 'auto'],
+                    closeBtn: 0,
+                    shadeClose: false,
+                    resize: false,
+                    scrollbar: false,
+                    moveEnd: () => {
+                        layer.closeAll('tips'); // 移动此弹窗时应该关闭所有 tips。
+                    },
+                    success: (layero, index, that) => {
+                        // 得考虑有多个同样的弹窗弹出的情况，按钮写 id 不合适。
+                        $(layero).find('.btn-complete-initialization').click(() => {
+                            let smData = getSmData(); // 获取实时的。
+                            smData.initialized = true;
+                            setSmData(smData);
                             layer.close(index);
-                            window.location.reload();
+                            return false; // 阻止默认动作。
                         });
-                        return false; // 阻止默认动作。
-                    });
-                    $('#btn-clear-local-storage').click(() => {
-                        if (confirm('所有设置都将丢失，站点将需要重新初始化，是否继续？')) {
-                            localStorage.clear();
-                            window.location.reload();
-                        }
-                        return false; // 阻止默认动作。
-                    });
-                }
-            });
-            return li;
+                        $(layero).find('.btn-enter-settings').click(() => {
+                            smUi.openSettingsPopup();
+                            return false; // 阻止默认动作。
+                        });
+                    }
+                });
+                if (!$('#layui-layer1').is(':visible'))
+                    if (confirm('您好！\n检测到初始化弹窗未显示。您是否使用了广告拦截插件？本站不含广告，但使用的 Layui 组件可能被某些不完善的广告拦截规则拦截。请您为本站添加白名单，否则可能无法正常浏览。\n待弹窗加载，完成初始化后，将默认您已知晓相关信息，不再检测广告拦截。\n\n点击“确定”刷新页面。'))
+                        window.location.reload();
+                return li;
+            },
+            openSettingsPopup: () => {
+                const bindings = {
+                    dataCollection: 'sm-setting-data-collection'
+                };
+                const li = layer.open({
+                    type: 1,
+                    title: '设置',
+                    content: `
+                    <div class="smui-container">
+                        <div class="layui-form" lay-filter="sm-settings">
+                          <div class="layui-form-item">
+                            <label class="lbl-sm-setting-data-collection layui-form-label" style="cursor:pointer;">数据收集
+                              <i class="layui-icon layui-icon-question"></i>
+                            </label>
+                            <div class="layui-input-block">
+                              <input type="checkbox" name="${bindings.dataCollection}" lay-skin="switch" title="已允许|已禁止">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="smui-func smui-clearfix">
+                          <hr>
+                          <div class="smui-func-left">
+                            <button class="btn-clear-local-storage layui-btn layui-btn-primary layui-border-red">清空本地存储</button>
+                          </div>
+                          <div class="smui-func-right">
+                            <button class="btn-save-sm-settings layui-btn">保存并刷新</button>
+                          </div>
+                        </div>
+                    </div>
+                    `,
+                    area: ['350px', 'auto'],
+                    closeBtn: 1,
+                    shadeClose: true,
+                    resize: false,
+                    scrollbar: false,
+                    moveEnd: () => {
+                        layer.closeAll('tips'); // 移动此弹窗时应该关闭所有 tips。
+                    },
+                    success: (layero, index, that) => {
+                        const settingsRead = getSmSettings();
+                        // doNotTrack 和“数据收集”是反的。
+                        if (!settingsRead.doNotTrack)
+                            $(`input[name="${bindings.dataCollection}"]`).attr('checked', '');
+                        // 动态生成的控件需要调用 render 渲染。它实际上是根据原生组件生成了一个美化的。设置好值后再渲染。
+                        form.render();
+                        $(layero).find('.lbl-sm-setting-data-collection').click((e) => {
+                            layer.tips(
+                                '本站使用 GoatCounter 计数脚本；它可能会收集您的属地、UA、来源、语言、屏幕大小等数据。如果禁止数据收集，脚本将不会发送这些信息。此处显示的是用户设置；如果浏览器请求不要跟踪或站点未完成初始化，也将不会发送相关信息。然而，此项设置无法阻止可能的第三方资源收集数据。此外，在特定页面，本站会从第三方接口获取您的属地信息用于验证，但不会收集它。',
+                                e.target,
+                                {
+                                    tips: 1, // 向上弹。
+                                    time: 0, // 文字很长，取消计时关闭。
+                                    shade: 0.3, // 必须大于 0 才能点击遮罩关闭。
+                                    shadeClose: true
+                                }
+                            );
+                            return false; // 阻止默认动作。
+                        });
+                        $(layero).find('.btn-save-sm-settings').click(() => {
+                            form.submit('sm-settings', (data) => {
+                                const userOptions = data.field;
+                                let settingsToWrite = getSmSettings(); // 获取实时的。
+                                // doNotTrack 和“数据收集”是反的。
+                                settingsToWrite.doNotTrack = userOptions[bindings.dataCollection] === 'on' ? false : true;
+                                setSmSettings(settingsToWrite);
+                                layer.close(index);
+                                window.location.reload();
+                            });
+                            return false; // 阻止默认动作。
+                        });
+                        $(layero).find('.btn-clear-local-storage').click(() => {
+                            if (confirm('所有设置都将丢失，站点将需要重新初始化，是否继续？')) {
+                                localStorage.clear();
+                                window.location.reload();
+                            }
+                            return false; // 阻止默认动作。
+                        });
+                    }
+                });
+                return li;
+            }
         };
         afterUiReady();
     });
