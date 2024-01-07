@@ -376,16 +376,16 @@ function getThemeColorScheme() {
     }
 }
 function adjustVConsoleSwitchPosition(reset) {
-    if (!vConsole)
+    if ($.isEmptyObject(vConsole))
         return;
-    const switchWidth = 113;
+    const switchWidth = 93;
     const switchHeight = 31;
     const windowWidth = $(window).width();
     const windowHeight = $(window).height();
     const switchX = Number(localStorage.getItem('vConsole_switch_x'));
     const switchY = Number(localStorage.getItem('vConsole_switch_y'));
     if ((switchX === 0 && switchY === 20) || (switchWidth + switchX > windowWidth) || (switchHeight + switchY > windowHeight) || reset)
-        vConsole.setSwitchPosition(windowWidth - switchWidth, 20);
+        vConsole.setSwitchPosition(windowWidth - (switchWidth + 20), 20);
 }
 // 页面加载后再执行的操作：
 function afterPageReady() {
@@ -412,7 +412,7 @@ function afterPageReady() {
         }
     });
     /* PC 端 vConsole 默认在右下角，挡元素。 */
-    $(window).resize(()=>{
+    $(window).resize(() => {
         adjustVConsoleSwitchPosition();
     });
     adjustVConsoleSwitchPosition();
