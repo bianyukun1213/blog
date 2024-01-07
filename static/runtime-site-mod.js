@@ -696,7 +696,7 @@ $(document).ready(() => {
                     type: 1,
                     title: '读者须知',
                     content: `
-                    <div class="smui-container">
+                    <div class="smui-container smui-init-popup-container">
                         <div class="smui-content">
                           <p>您好！</p>
                           <p>这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。</p>
@@ -738,7 +738,7 @@ $(document).ready(() => {
                         });
                     }
                 });
-                if (!$('#layui-layer1').is(':visible'))
+                if (!$('.smui-init-popup-container').is(':visible'))
                     if (confirm('您好！\n检测到初始化弹窗未显示。您是否使用了广告拦截插件？本站不含广告，但使用的 Layui 组件可能被某些不完善的广告拦截规则拦截。请您为本站添加白名单，否则可能无法正常浏览。\n待弹窗加载，完成初始化后，将默认您已知晓相关信息，不再检测广告拦截。\n\n点击“确定”刷新页面。'))
                         window.location.reload();
                 return li;
@@ -751,7 +751,7 @@ $(document).ready(() => {
                     type: 1,
                     title: '设置',
                     content: `
-                    <div class="smui-container">
+                    <div class="smui-container smui-settings-container">
                         <div class="layui-form" lay-filter="sm-settings">
                           <div class="layui-form-item">
                             <label class="lbl-sm-setting-data-collection layui-form-label" style="cursor:pointer;">数据收集
