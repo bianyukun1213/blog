@@ -746,6 +746,9 @@ $(document).ready(() => {
                             let smData = getSmData(); // 获取实时的。
                             smData.initialized = true;
                             setSmData(smData);
+                            // 标记初始化完成后，如果跟踪可用，立即计数一次。
+                            if (isTrackingAvailable())
+                                goatcounter.count();
                             layer.close(index);
                             return false; // 阻止默认动作。
                         });
@@ -816,7 +819,7 @@ $(document).ready(() => {
                         form.render();
                         $(layero).find('.lbl-sm-setting-data-collection').click((e) => {
                             layer.tips(
-                                `本站使用的计数脚本可能收集属地、UA、来源、语言、屏幕大小等数据。除此处禁止外，浏览器请求不要跟踪或站点未完成初始化，也将导致数据收集禁用，访问不被脚本记录。此设置不影响少数必要的属地检查及潜在的第三方数据收集。<br>${trackingResTxt}`,
+                                `本站使用的计数脚本可能收集属地、UA、来源、语言、屏幕大小等数据。除此处禁止外，浏览器请求不要跟踪或站点未完成初始化也将导致数据收集禁用，访问不被脚本记录。此设置不影响少数必要的属地检查及潜在的第三方数据收集。<br>${trackingResTxt}`,
                                 e.target,
                                 {
                                     tips: 1, // 向上弹。
