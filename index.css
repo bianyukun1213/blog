@@ -1,0 +1,16 @@
+#content-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#site-list {
+    padding: 0;
+    list-style: none;
+}
+
+#site-list li {
+    margin-bottom: 16px;
+}

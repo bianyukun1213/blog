@@ -1,0 +1,156 @@
+/* 搜索图标 hover 变色。 */
+.search.search-popup-trigger:hover i {
+    color: var(--primary-color) !important;
+}
+
+/* 搜索框键盘、关闭图标 hover 变色。 */
+.search-header .search-input-field-pre:hover,
+.search-header .popup-btn-close:hover {
+    color: var(--primary-color) !important;
+}
+
+/* 搜索结果链接 hover 变色。 */
+.search-result-list a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* 小屏下汉堡菜单 hover 中间条变色。 */
+.navbar-bar:hover .navbar-bar-middle {
+    background: var(--primary-color) !important;
+}
+
+/* 小屏下打开的汉堡菜单 hover 中间条不变色。 */
+.navbar-drawer-show:has(.navbar-bar:hover) .navbar-bar-middle {
+    background: inherit !important;
+}
+
+/* 小屏下汉堡菜单 hover 上下条变色。 */
+.navbar-bar:hover .navbar-bar-middle::before,.navbar-bar:hover .navbar-bar-middle::after {
+    background: var(--primary-color) !important;
+}
+
+/* 小屏下汉堡菜单里导航栏下方“标签”“分类”“文章”hover 变色。 */
+.navbar-container .navbar-drawer .statistics .item:hover div {
+    color: var(--primary-color);
+}
+
+/* 大屏下 side-bar“标签”“分类”“文章”圆角。 */
+.sidebar-content .statistics .item {
+    border-radius: 9px;
+}
+
+/* 大屏下 side-bar“标签”“分类”“文章”hover 背景变色。 */
+.sidebar-content .statistics .item:hover {
+    background-color: var(--background-color-transparent-80);
+}
+
+/* 大屏下 side-bar“标签”“分类”“文章”hover 文字变色。 */
+.sidebar-content .statistics .item:hover div {
+    color: var(--primary-color);
+}
+
+/* 文章 TOC 激活项末尾的“…”变色。 */
+.post-toc .nav .nav-item:has(a.active-current) {
+    color: var(--primary-color);
+}
+
+/* 文章 TOC hover 项末尾的“…”变色。 */
+.post-toc .nav .nav-item:hover {
+    color: var(--primary-color);
+}
+
+/* 文章 TOC hover 项文字变色。 */
+.post-toc .nav .nav-item:hover span {
+    color: var(--primary-color)
+}
+
+/* 首篇文章的下一篇按钮调整至右边。 */
+.article-nav:has(.article-next:first-of-type) {
+    flex-direction: row-reverse;
+}
+
+/* 页面图片标注居中。 */
+.page-template-container figure.image-caption figcaption {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--third-text-color);
+}
+
+/* 上面的样式用来修正主题样式。 */
+
+.layui-layer {
+    font-size: 14px;
+    /* font-weight: 400; */
+    /* 前者是 layui-theme-dark 变量，后者是 Layui 颜色。 */
+    color: var(--lay-color-text-2, rgba(0, 0, 0, 0.85));
+}
+
+.layui-layer *,
+.layui-layer *::before,
+.layui-layer *::after {
+    box-sizing: unset;
+    /* font-size: unset; */
+    /* font-weight: unset; */
+}
+
+.layui-layer .layui-btn,
+.layui-layer .layui-input,
+.layui-layer .layui-select,
+.layui-layer .layui-textarea,
+.layui-layer .layui-upload-button{
+    box-sizing: border-box;
+}
+
+/* 上面的样式用来修正主题覆盖的插件样式。修复布局就已经够麻烦的了；颜色的话，考虑到还有深色模式…… */
+
+noscript#javascript-alert {
+    position: fixed;
+    z-index: 8848;
+    left: 0;
+    top: 0;
+    background-color: black;
+    color: white;
+}
+
+noscript#javascript-alert p::before,
+noscript#javascript-alert p::after {
+    content: '[!]';
+    margin: 16px;
+    font-weight: bold;
+    color: yellow;
+}
+
+div.main-content.region-block-hidden {
+    display: none;
+}
+
+.smui-clearfix::before,
+.smui-clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.smui-container {
+    padding: 16px;
+}
+
+.smui-content {
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+.smui-func hr {
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+.smui-func .smui-func-left {
+    float: left;
+}
+
+.smui-func .smui-func-right {
+    float: right;
+}

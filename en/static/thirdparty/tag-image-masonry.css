@@ -1,0 +1,4 @@
+/* 增加权重，覆盖主题样式。 */
+.image-masonry .image-masonry-img-wrapper .image-masonry-img {
+    margin: 0;
+}
