@@ -1,3 +1,11 @@
+#site-title {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+}
+
 #content-container {
     position: absolute;
     top: 50%;
