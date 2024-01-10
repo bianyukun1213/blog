@@ -1116,7 +1116,7 @@ $(document).ready(() => {
                             form.submit('lang-switch', (data) => {
                                 const targetLangKey = data.field[nameBindings.targetLang];
                                 const targetPath = langs[targetLangKey];
-                                window.location.pathname = `/${targetLangKey}/${targetPath}`;
+                                window.location.pathname = encodeURI(`/${targetLangKey}/${targetPath}`);
                             });
                             return false; // 阻止默认动作。
                         });
