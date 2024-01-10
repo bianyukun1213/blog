@@ -1,0 +1,2 @@
+Sitemap: https://his2nd.life/zh-CN/sitemap.xml
+Sitemap: https://his2nd.life/en/sitemap.xml
