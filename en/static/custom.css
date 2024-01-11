@@ -99,11 +99,17 @@
 .layui-layer .layui-input,
 .layui-layer .layui-select,
 .layui-layer .layui-textarea,
-.layui-layer .layui-upload-button{
+.layui-layer .layui-upload-button {
     box-sizing: border-box;
 }
 
-/* 上面的样式用来修正主题覆盖的插件样式。修复布局就已经够麻烦的了；颜色的话，考虑到还有深色模式…… */
+/* Twikoo 的加载圆圈不是居中的，只在他们官方文档页居中。这段样式就是从文档页扒的。 */
+.twikoo .el-loading-spinner .circular {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 上面的样式用来修正（主题覆盖的）插件样式。修复布局就已经够麻烦的了；颜色的话，考虑到还有深色模式…… */
 
 noscript#javascript-alert {
     position: fixed;
