@@ -41,7 +41,7 @@ function updatePossibleLinkTip() {
         if (lang === 'zh-CN')
             document.getElementById('possible-link-tip').innerText = '您还可以尝试访问以下可能的链接：';
         else
-            document.getElementById('possible-link-tip').innerText = 'You can also try visiting the following possible links:';
+            document.getElementById('possible-link-tip').innerText = 'You can also try visiting the following possible link(s):';
         for (const possibleLink of possibleLinks) {
             const li = document.createElement('li');
             li.innerHTML = `<a href="${possibleLink}#excluded=${encodeURIComponent(JSON.stringify(excluded))}">${possibleLink}</a>`;
