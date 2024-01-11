@@ -10,7 +10,7 @@ function updateTip(seconds) {
     if (lang === 'zh-CN')
         document.getElementById('jump-tip').innerText = `${seconds} 秒后自动跳转到中文站……`;
     else
-        document.getElementById('jump-tip').innerText = `Automatically jump to English site after ${seconds}s…`;
+        document.getElementById('jump-tip').innerText = `Automatically jump to the English site after ${seconds}s…`;
 }
 let lang = '';
 if (navigator.language.startsWith('zh'))

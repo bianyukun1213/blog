@@ -30,7 +30,7 @@ a:active {
     position: absolute;
     top: 25%;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
     text-align: center;
 }
 
