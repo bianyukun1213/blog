@@ -52,7 +52,7 @@ function updatePossibleLinkTip() {
         if (lang === 'zh-CN')
             document.getElementById('possible-link-tip').innerText = '回去选择站点：';
         else
-            document.getElementById('possible-link-tip').innerText = 'Go back to select a site:';
+            document.getElementById('possible-link-tip').innerText = 'Go back and select a site:';
         const li = document.createElement('li');
         li.innerHTML = `<a href="/">${lang === 'zh-CN' ? '咱们走！' : 'Let’s go!'}</a>`;
         document.getElementById('possible-links').appendChild(li);
