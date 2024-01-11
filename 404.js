@@ -8,7 +8,7 @@ function updatePageTitle() {
 function updatePossibleLinkTip() {
     let excluded = [];
     try {
-        excluded = JSON.parse(decodeURIComponent(window.location.hash.replace('#excluded=', '')));
+        excluded = JSON.parse(decodeURIComponent(new URLSearchParams(window.location.search).get('excluded'))) || [];
     } catch (error) {
         excluded = [];
     }
@@ -44,7 +44,7 @@ function updatePossibleLinkTip() {
             document.getElementById('possible-link-tip').innerText = 'You can also try visiting the following possible link(s):';
         for (const possibleLink of possibleLinks) {
             const li = document.createElement('li');
-            li.innerHTML = `<a href="${possibleLink}#excluded=${encodeURIComponent(JSON.stringify(excluded))}">${possibleLink}</a>`;
+            li.innerHTML = `<a href="${possibleLink}?excluded=${encodeURIComponent(JSON.stringify(excluded))}">${possibleLink}</a>`;
             document.getElementById('possible-links').appendChild(li);
         }
     }
