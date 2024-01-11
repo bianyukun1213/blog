@@ -1,3 +1,31 @@
+body {
+    color: black;
+    background-color: white;
+}
+
+a:link {
+    color: #27b783;
+}
+
+a:visited {
+    color: #ff4263;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+a:active {
+    color: #ff4263;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: #e3e3e3;
+        background: #15191d;
+    }
+}
+
 #not-found-title {
     position: absolute;
     top: 25%;
@@ -17,6 +45,7 @@
 #possible-links {
     padding: 0;
     list-style: none;
+    font-size: 20px;
 }
 
 #possible-links li {
