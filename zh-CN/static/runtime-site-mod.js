@@ -126,7 +126,7 @@ const smI18n = {
             if (!trackingDetails.initializationPassed)
                 trackingResTxtPart2 += 'the site is not initialized, ';
             if (!trackingDetails.broswerPassed)
-                trackingResTxtPart2 += `${trackingResTxtPart2.length > 0 ? 'and ' : ''}the browser requests “Do Not Track”, `;
+                trackingResTxtPart2 += `${trackingResTxtPart2.length > 0 ? 'and ' : ''}the browser sends DNT requests, `;
             if (!trackingDetails.settingsPassed) {
                 trackingResTxtPart2 = trackingResTxtPart2.replace('and the browser', 'the browser');
                 trackingResTxtPart2 += `${trackingResTxtPart2.length > 0 ? 'and ' : ''}you prohibited it. `;
