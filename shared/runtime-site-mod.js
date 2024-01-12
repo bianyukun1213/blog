@@ -406,7 +406,8 @@ function getSmData() {
     let newSmData = makeSmData();
     let smData = newSmData;
     try {
-        smData = JSON.parse(localStorage.getItem(`smData@${getSiteLang()}`)) || newSmData;
+        // smData = JSON.parse(localStorage.getItem(`smData@${getSiteLang()}`)) || newSmData;
+        smData = JSON.parse(localStorage.getItem('smData')) || newSmData;
     } catch (error) {
         smData = newSmData;
     }
@@ -416,7 +417,8 @@ function getSmData() {
     return smData;
 }
 function setSmData(smData) {
-    localStorage.setItem(`smData@${getSiteLang()}`, JSON.stringify(smData));
+    // localStorage.setItem(`smData@${getSiteLang()}`, JSON.stringify(smData));
+    localStorage.setItem('smData', JSON.stringify(smData));
 }
 function genRandomStr() {
     return Math.random().toString(36).slice(-8);
@@ -483,7 +485,8 @@ async function getSiteMetaAsync(forced) {
             return {};
         }
         siteMetaCache = res;
-        sessionStorage.setItem(`siteMetaCache@${getSiteLang()}`, JSON.stringify(siteMetaCache));
+        // sessionStorage.setItem(`siteMetaCache@${getSiteLang()}`, JSON.stringify(siteMetaCache));
+        sessionStorage.setItem('siteMetaCache', JSON.stringify(siteMetaCache));
         smLogDebug('已更新站点元数据缓存：', siteMetaCache);
     }
     return siteMetaCache;
@@ -763,7 +766,8 @@ let smLogWarn = (...params) => { console.warn(new Date().toLocaleTimeString() + 
 let smLogError = (...params) => { console.error(new Date().toLocaleTimeString() + ' |', ...params); };
 // 初始化 site-mod 数据，检测数据变更。
 (() => {
-    let smDataRawStr = localStorage.getItem(`smData@${getSiteLang()}`);
+    // let smDataRawStr = localStorage.getItem(`smData@${getSiteLang()}`);
+    let smDataRawStr = localStorage.getItem('smData');
     let smDataRawStrEmpty = true;
     let smSettingsRaw = {};
     if (smDataRawStr) {
@@ -880,7 +884,8 @@ window.goatcounter = {
 // 初始化站点元数据。
 let siteMetaCache = {};
 try {
-    siteMetaCache = JSON.parse(sessionStorage.getItem(`siteMetaCache@${getSiteLang()}`)) || {};
+    // siteMetaCache = JSON.parse(sessionStorage.getItem(`siteMetaCache@${getSiteLang()}`)) || {};
+    siteMetaCache = JSON.parse(sessionStorage.getItem('siteMetaCache')) || {};
 } catch (error) {
     siteMetaCache = {};
 }
