@@ -1011,7 +1011,7 @@ $(document).ready(() => {
                             <button class="btn-clear-local-storage layui-btn layui-btn-primary layui-border-red">${smI18n.settPopBtnClearLocalStor()}</button>
                           </div>
                           <div class="smui-func-right">
-                            <button class="btn-save-sm-settings layui-btn">${smI18n.settPopBtnSave()}<button>
+                            <button class="btn-save-sm-settings layui-btn">${smI18n.settPopBtnSave()}</button>
                           </div>
                         </div>
                     </div>
@@ -1089,7 +1089,7 @@ $(document).ready(() => {
                         <div class="smui-func smui-clearfix">
                           <hr>
                           <div class="smui-func-right">
-                            <button class="btn-switch-language layui-btn">${smI18n.langSwitchPopBtnSwitch()}<button>
+                            <button class="btn-switch-language layui-btn">${smI18n.langSwitchPopBtnSwitch()}</button>
                           </div>
                         </div>
                     </div>
