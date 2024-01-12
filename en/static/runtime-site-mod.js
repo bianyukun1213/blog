@@ -1031,10 +1031,11 @@ $(document).ready(() => {
                             $(`input[name="${nameBindings.dataCollection}"]`).attr('checked', '');
                         // 动态生成的控件需要调用 render 渲染。它实际上是根据原生组件生成了一个美化的。设置好值后再渲染。
                         form.render();
-                        $(layero).find('.lbl-sm-setting-data-collection').click((e) => {
+                        $(layero).find('.lbl-sm-setting-data-collection').click(function (e) {
                             layer.tips(
                                 smI18n.settPopTipHtmlDataCollec(isTrackingAvailable(true)),
-                                e.target,
+                                // e.target,
+                                this,
                                 {
                                     tips: 1, // 向上弹。
                                     time: 0, // 文字很长，取消计时关闭。
