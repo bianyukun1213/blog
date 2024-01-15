@@ -25,7 +25,8 @@
 }
 
 /* 小屏下汉堡菜单 hover 上下条变色。 */
-.navbar-bar:hover .navbar-bar-middle::before,.navbar-bar:hover .navbar-bar-middle::after {
+.navbar-bar:hover .navbar-bar-middle::before,
+.navbar-bar:hover .navbar-bar-middle::after {
     background: var(--primary-color) !important;
 }
 
@@ -103,6 +104,78 @@
     box-sizing: border-box;
 }
 
+.layui-row:before,
+.layui-row:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.layui-col-xs1,
+.layui-col-xs2,
+.layui-col-xs3,
+.layui-col-xs4,
+.layui-col-xs5,
+.layui-col-xs6,
+.layui-col-xs7,
+.layui-col-xs8,
+.layui-col-xs9,
+.layui-col-xs10,
+.layui-col-xs11,
+.layui-col-xs12,
+.layui-col-sm1,
+.layui-col-sm2,
+.layui-col-sm3,
+.layui-col-sm4,
+.layui-col-sm5,
+.layui-col-sm6,
+.layui-col-sm7,
+.layui-col-sm8,
+.layui-col-sm9,
+.layui-col-sm10,
+.layui-col-sm11,
+.layui-col-sm12,
+.layui-col-md1,
+.layui-col-md2,
+.layui-col-md3,
+.layui-col-md4,
+.layui-col-md5,
+.layui-col-md6,
+.layui-col-md7,
+.layui-col-md8,
+.layui-col-md9,
+.layui-col-md10,
+.layui-col-md11,
+.layui-col-md12,
+.layui-col-lg1,
+.layui-col-lg2,
+.layui-col-lg3,
+.layui-col-lg4,
+.layui-col-lg5,
+.layui-col-lg6,
+.layui-col-lg7,
+.layui-col-lg8,
+.layui-col-lg9,
+.layui-col-lg10,
+.layui-col-lg11,
+.layui-col-lg12,
+.layui-col-xl1,
+.layui-col-xl2,
+.layui-col-xl3,
+.layui-col-xl4,
+.layui-col-xl5,
+.layui-col-xl6,
+.layui-col-xl7,
+.layui-col-xl8,
+.layui-col-xl9,
+.layui-col-xl10,
+.layui-col-xl11,
+.layui-col-xl12 {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+}
+
 /* Twikoo 的加载圆圈不是居中的，只在他们官方文档页居中。这段样式就是从文档页扒的。 */
 .twikoo .el-loading-spinner .circular {
     margin-left: auto;
@@ -110,6 +183,56 @@
 }
 
 /* 上面的样式用来修正（主题覆盖的）插件样式。修复布局就已经够麻烦的了；颜色的话，考虑到还有深色模式…… */
+
+/* 按钮不一定在 smui-container 里，所以这里强制应用样式。 */
+/* 按钮设置 Redefine 主色。 */
+.layui-btn {
+    background-color: var(--primary-color) !important;
+}
+
+/* 覆盖上一条，修复描边型按钮背景变色，且暗色模式效果优先。 */
+.layui-btn-primary {
+    background-color: var(--lay-color-bg-4, rgba(0, 0, 0, 0)) !important;
+}
+
+/* 开关设置 Redefine 选择色。 */
+.layui-form-onswitch {
+    border-color: var(--selection-color) !important;
+    background-color: var(--selection-color) !important;
+}
+
+/* input 聚焦描边设置 Redefine 选择色。 */
+.layui-input:focus,
+.layui-textarea:focus {
+    border-color: var(--selection-color) !important;
+}
+
+/* 下拉菜单选中项设置 Redefine 选择色，且暗色模式效果优先。这里得嵌套 var，不然不好使。 */
+.layui-form-select dl dd.layui-this {
+    color: var(--lay-color-text-1, var(--selection-color)) !important;
+}
+
+/* 由右对齐改为左对齐。 */
+.smui-container .layui-form-label {
+    text-align: left;
+}
+
+/* 此处有点击事件。 */
+.smui-container.smui-settings-container .layui-form-label.label-sm-setting-data-collection {
+    cursor: pointer;
+}
+
+/* 英文下“Data Collection”需 120px 才不折叠。 */
+.smui-container.smui-settings-container.smui-lang-en .layui-form-label.label-sm-setting-data-collection {
+    width: 120px;
+}
+
+/* 155px 左边距对应上面 150px 宽度。 */
+.smui-container.smui-settings-container.smui-lang-en .layui-input-block.block-sm-setting-data-collection {
+    margin-left: 150px;
+}
+
+/* 上面的样式用来根据实际需求覆盖 Layui 样式。 */
 
 noscript#javascript-alert {
     position: fixed;
@@ -134,7 +257,7 @@ div.main-content.region-block-hidden {
 
 .smui-clearfix::before,
 .smui-clearfix::after {
-    content: "";
+    content: '';
     display: table;
     clear: both;
 }
@@ -159,4 +282,9 @@ div.main-content.region-block-hidden {
 
 .smui-func .smui-func-right {
     float: right;
+}
+
+/* 切换语言图标设置 Redefine 主色。 */
+#icon-switch-lang:hover {
+    color: var(--primary-color);
 }

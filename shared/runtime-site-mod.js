@@ -25,6 +25,12 @@ const smI18n = {
     isZh: function () {
         return getSiteLang() === 'zh-CN' ? true : false;
     },
+    langStyleClass: function () {
+        if (this.isZh())
+            return 'smui-lang-zh';
+        if (this.isEn())
+            return 'smui-lang-en';
+    },
     timelineLinkViewMore: function () {
         if (this.isEn()) {
             return 'View more twoots at m.cmx.im';
@@ -73,7 +79,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    initPopBtnEnterSett: function () {
+    initPopButtonEnterSettings: function () {
         if (this.isEn()) {
             return 'Settings';
         }
@@ -82,7 +88,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    initPopBtnOk: function () {
+    initPopButtonOk: function () {
         if (this.isEn()) {
             return 'OK';
         }
@@ -91,7 +97,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    initPopConfirmTurnOffAntiAd: function () {
+    initPopConfirmTurnOffAntiAdExtension: function () {
         if (this.isEn()) {
             return 'Hello!\nThe initialization pop-up is detected as not being displayed. Are you using an ad-blocking plugin? This site is ad-free, but the Layui component used may be blocked by some imperfect ad-blocking rules. Please add a whitelist for this site, otherwise you may not be able to browse normally.\nAfter the pop-up loads and completes initialization, you will be informed by default and no longer be detected for ad-blocking.\n\nClick “OK” to refresh the page.';
         }
@@ -109,7 +115,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    settPopLableDataCollec: function () {
+    settPopLableDataCollection: function () {
         if (this.isEn()) {
             return 'Data Collection';
         }
@@ -118,7 +124,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    settPopTipHtmlDataCollec: function (trackingDetails) {
+    settPopTipHtmlDataCollection: function (trackingDetails) {
         if (this.isEn()) {
             let tip = 'The counting script used on this site may collect data such as region, User-Agent, refer(r)er, language, screen size, etc. In addition to the disablement here, “Do Not Track” requests or incomplete initialization of the site will also result in data collection being disabled and visits not being logged by the script. This setting does not affect the few necessary region checks and potential third-party data collections.<br>';
             let trackingResTxtPart1 = `Data Collection is currenly ${trackingDetails.available ? 'enabled. ' : 'disabled, because '}`;
@@ -149,7 +155,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    settPopSwitchDataCollec: function () {
+    settPopSwitchDataCollection: function () {
         if (this.isEn()) {
             return 'Allowed|Prohibited';
         }
@@ -158,7 +164,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    settPopBtnClearLocalStor: function () {
+    settPopButtonClearLocalStorage: function () {
         if (this.isEn()) {
             return 'Clear local storage';
         }
@@ -176,7 +182,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    settPopBtnSave: function () {
+    settPopButtonSave: function () {
         if (this.isEn()) {
             return 'Save & refresh';
         }
@@ -203,7 +209,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    langSwitchPopLableAvaiLangs: function () {
+    langSwitchPopLableAvailableLangs: function () {
         if (this.isEn()) {
             return 'Available in';
         }
@@ -212,7 +218,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    langSwitchPopBtnSwitch: function () {
+    langSwitchPopButtonSwitch: function () {
         if (this.isEn()) {
             return 'Switch';
         }
@@ -723,8 +729,8 @@ function afterUiReady() {
     if (!getSmData().initialized)
         smUi.openInitPopup();
     // 给 Redefine 夹个私货，新增一个按钮用来打开设置页面。
-    $('.hidden-tools-list').append('<li id="btn-show-settings-popup" class="right-bottom-tools tool-sm-settings flex justify-center items-center"><i class="fa-solid fa-wrench"></i></li>');
-    $('#btn-show-settings-popup').click(() => {
+    $('.hidden-tools-list').append('<li id="button-show-settings-popup" class="right-bottom-tools tool-sm-settings flex justify-center items-center"><i class="fa-solid fa-wrench"></i></li>');
+    $('#button-show-settings-popup').click(() => {
         smUi.openSettingsPopup();
         return false; // 阻止默认动作。
     });
@@ -939,17 +945,17 @@ $(document).ready(() => {
                     type: 1,
                     title: smI18n.initPopTitle(),
                     content: `
-                    <div class="smui-container smui-init-popup-container">
+                    <div class="smui-container smui-init-popup-container ${smI18n.langStyleClass()}">
                         <div class="smui-content">
                           ${smI18n.initPopContentHtml()}
                         </div>
                         <div class="smui-func smui-clearfix">
                           <hr>
                           <div class="smui-func-left">
-                            <button class="btn-enter-settings layui-btn layui-btn-primary layui-border-blue">${smI18n.initPopBtnEnterSett()}</button>
+                            <button class="smui-button-enter-settings layui-btn layui-btn-primary layui-border-blue">${smI18n.initPopButtonEnterSettings()}</button>
                           </div>
                           <div class="smui-func-right">
-                            <button class="btn-complete-initialization layui-btn">${smI18n.initPopBtnOk()}</button>
+                            <button class="smui-button-complete-initialization layui-btn">${smI18n.initPopButtonOk()}</button>
                           </div>
                         </div>
                     </div>
@@ -964,7 +970,7 @@ $(document).ready(() => {
                     },
                     success: (layero, index, that) => {
                         // 得考虑有多个同样的弹窗弹出的情况，按钮写 id 不合适。
-                        $(layero).find('.btn-complete-initialization').click(() => {
+                        $(layero).find('.smui-button-complete-initialization').click(() => {
                             let smData = getSmData(); // 获取实时的。
                             smData.initialized = true;
                             setSmData(smData);
@@ -974,14 +980,14 @@ $(document).ready(() => {
                             layer.close(index);
                             return false; // 阻止默认动作。
                         });
-                        $(layero).find('.btn-enter-settings').click(() => {
+                        $(layero).find('.smui-button-enter-settings').click(() => {
                             smUi.openSettingsPopup();
                             return false; // 阻止默认动作。
                         });
                     }
                 });
                 if (!$('.smui-init-popup-container').is(':visible'))
-                    if (confirm(smI18n.initPopConfirmTurnOffAntiAd()))
+                    if (confirm(smI18n.initPopConfirmTurnOffAntiAdExtension()))
                         window.location.reload();
                 return li;
             },
@@ -992,26 +998,25 @@ $(document).ready(() => {
                 const li = layer.open({
                     type: 1,
                     title: smI18n.settPopTitle(),
-                    // .lbl-sm-setting-data-collection 需要 125px 的宽度，不然英文下换行。
                     content: `
-                    <div class="smui-container smui-settings-container">
+                    <div class="smui-container smui-settings-container ${smI18n.langStyleClass()}">
                         <div class="layui-form" lay-filter="sm-settings">
                           <div class="layui-form-item">
-                            <label class="lbl-sm-setting-data-collection layui-form-label" style="width:125px;cursor:pointer;">${smI18n.settPopLableDataCollec()}
+                            <label class="label-sm-setting-data-collection layui-form-label">${smI18n.settPopLableDataCollection()}
                               <i class="layui-icon layui-icon-question"></i>
                             </label>
-                            <div class="layui-input-block">
-                              <input type="checkbox" name="${nameBindings.dataCollection}" lay-skin="switch" title="${smI18n.settPopSwitchDataCollec()}">
+                            <div class="block-sm-setting-data-collection layui-input-block">
+                              <input type="checkbox" name="${nameBindings.dataCollection}" lay-skin="switch" title="${smI18n.settPopSwitchDataCollection()}">
                             </div>
                           </div>
                         </div>
                         <div class="smui-func smui-clearfix">
                           <hr>
                           <div class="smui-func-left">
-                            <button class="btn-clear-local-storage layui-btn layui-btn-primary layui-border-red">${smI18n.settPopBtnClearLocalStor()}</button>
+                            <button class="smui-button-clear-local-storage layui-btn layui-btn-primary layui-border-red">${smI18n.settPopButtonClearLocalStorage()}</button>
                           </div>
                           <div class="smui-func-right">
-                            <button class="btn-save-sm-settings layui-btn">${smI18n.settPopBtnSave()}</button>
+                            <button class="smui-button-save-sm-settings layui-btn">${smI18n.settPopButtonSave()}</button>
                           </div>
                         </div>
                     </div>
@@ -1031,9 +1036,9 @@ $(document).ready(() => {
                             $(`input[name="${nameBindings.dataCollection}"]`).attr('checked', '');
                         // 动态生成的控件需要调用 render 渲染。它实际上是根据原生组件生成了一个美化的。设置好值后再渲染。
                         form.render();
-                        $(layero).find('.lbl-sm-setting-data-collection').click(function (e) {
+                        $(layero).find('.label-sm-setting-data-collection').click(function (e) {
                             layer.tips(
-                                smI18n.settPopTipHtmlDataCollec(isTrackingAvailable(true)),
+                                smI18n.settPopTipHtmlDataCollection(isTrackingAvailable(true)),
                                 // e.target,
                                 this,
                                 {
@@ -1045,7 +1050,7 @@ $(document).ready(() => {
                             );
                             return false; // 阻止默认动作。
                         });
-                        $(layero).find('.btn-save-sm-settings').click(() => {
+                        $(layero).find('.smui-button-save-sm-settings').click(() => {
                             form.submit('sm-settings', (data) => {
                                 const userOptions = data.field;
                                 let settingsToWrite = getSmSettings(); // 获取实时的。
@@ -1057,7 +1062,7 @@ $(document).ready(() => {
                             });
                             return false; // 阻止默认动作。
                         });
-                        $(layero).find('.btn-clear-local-storage').click(() => {
+                        $(layero).find('.smui-button-clear-local-storage').click(() => {
                             if (confirm(smI18n.settPopConfirmStorageClear())) {
                                 localStorage.clear();
                                 window.location.reload();
@@ -1076,10 +1081,10 @@ $(document).ready(() => {
                     type: 1,
                     title: smI18n.langSwitchPopTitle(),
                     content: `
-                    <div class="smui-container smui-lang-switch-container">
+                    <div class="smui-container smui-lang-switch-container ${smI18n.langStyleClass()}">
                         <div class="layui-form" lay-filter="lang-switch">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">${smI18n.langSwitchPopLableAvaiLangs()}</label>
+                                <label class="layui-form-label">${smI18n.langSwitchPopLableAvailableLangs()}</label>
                                 <div class="layui-input-block">
                                     <select name="${nameBindings.targetLang}">
                                     </select>
@@ -1089,7 +1094,7 @@ $(document).ready(() => {
                         <div class="smui-func smui-clearfix">
                           <hr>
                           <div class="smui-func-right">
-                            <button class="btn-switch-language layui-btn">${smI18n.langSwitchPopBtnSwitch()}</button>
+                            <button class="smui-button-switch-language layui-btn">${smI18n.langSwitchPopButtonSwitch()}</button>
                           </div>
                         </div>
                     </div>
@@ -1113,7 +1118,7 @@ $(document).ready(() => {
                                 $(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}">${langKey}</option>`);
                         }
                         form.render();
-                        $(layero).find('.btn-switch-language').click(() => {
+                        $(layero).find('.smui-button-switch-language').click(() => {
                             form.submit('lang-switch', (data) => {
                                 const targetLangKey = data.field[nameBindings.targetLang];
                                 const targetPath = langs[targetLangKey];
