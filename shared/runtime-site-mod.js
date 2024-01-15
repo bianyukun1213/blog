@@ -706,6 +706,7 @@ function afterPageReady() {
                 hide_unlisted: false,
                 hide_reblog: false,
                 hide_replies: false,
+                hide_video_preview: false,
                 hide_preview_link: false,
                 hide_emojos: false,
                 markdown_blockquote: false,
