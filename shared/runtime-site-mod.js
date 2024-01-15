@@ -825,12 +825,6 @@ if (debugOn) {
                 if (page.hidden)
                     hiddenPages.push(page);
             }
-            const decryptedSiteMetaPostsLength = decryptedSiteMeta.posts.length;
-            for (let i = 0; i < decryptedSiteMetaPostsLength; i++) {
-                const post = decryptedSiteMeta.posts[i];
-                if (post.hidden)
-                    hiddenPages.push(post);
-            }
             return hiddenPages;
         },
         checkVars: function (vars) {
