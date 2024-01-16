@@ -222,14 +222,14 @@
     cursor: pointer;
 }
 
-/* 英文下“Data Analytics”需 120px 才不折叠。 */
+/* 英文下“Data Analytics”需 110px 才不折叠。 */
 .smui-container.smui-settings-container.smui-lang-en .layui-form-label.label-sm-setting-data-analytics {
-    width: 120px;
+    width: 110px;
 }
 
-/* 155px 左边距对应上面 150px 宽度。 */
+/* 155px 左边距对应上面 140px 宽度。 */
 .smui-container.smui-settings-container.smui-lang-en .layui-input-block.block-sm-setting-data-analytics {
-    margin-left: 150px;
+    margin-left: 140px;
 }
 
 /* 上面的样式用来根据实际需求覆盖 Layui 样式。 */
