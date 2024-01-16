@@ -218,17 +218,17 @@
 }
 
 /* 此处有点击事件。 */
-.smui-container.smui-settings-container .layui-form-label.label-sm-setting-data-collection {
+.smui-container.smui-settings-container .layui-form-label.label-sm-setting-data-analytics {
     cursor: pointer;
 }
 
-/* 英文下“Data Collection”需 120px 才不折叠。 */
-.smui-container.smui-settings-container.smui-lang-en .layui-form-label.label-sm-setting-data-collection {
+/* 英文下“Data Analytics”需 120px 才不折叠。 */
+.smui-container.smui-settings-container.smui-lang-en .layui-form-label.label-sm-setting-data-analytics {
     width: 120px;
 }
 
 /* 155px 左边距对应上面 150px 宽度。 */
-.smui-container.smui-settings-container.smui-lang-en .layui-input-block.block-sm-setting-data-collection {
+.smui-container.smui-settings-container.smui-lang-en .layui-input-block.block-sm-setting-data-analytics {
     margin-left: 150px;
 }
 

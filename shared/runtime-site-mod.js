@@ -63,7 +63,7 @@ const smI18n = {
             return `
             <p>Hello!</p>
             <p>This may be your first visit to this site. Most of the resources on this site are hosted abroad and may not load properly under the network environment in mainland China. If you visit this site in mainland China, it is recommended to use a proxy. (International visitors, however, may experience slow image loading since images are stored in mainland China.)</p>
-            <p>In addition, before completing the initialization, if you want to adjust the settings such as Data Collection, please click the button at the bottom left corner, otherwise the site will work with the default settings. After the initialization is completed, you can also find the settings in the lower right corner of the page.</p>
+            <p>In addition, before completing the initialization, if you want to adjust the settings such as Data Analytics, please click the button at the bottom left corner, otherwise the site will work with the default settings. After the initialization is completed, you can also find the settings in the lower right corner of the page.</p>
             <br>
             <p>Click “OK” to complete the initialization and permanently close this pop-up.</p>
             `;
@@ -72,7 +72,7 @@ const smI18n = {
             return `
             <p>您好！</p>
             <p>这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。（国际访客则可能会遇到图片加载缓慢的问题，因为图片存储在中国大陆。）</p>
-            <p>此外，在完成初始化前，如果您想要调整数据收集等设置，请点击左下角按钮，否则站点将以默认设置工作。初始化完成后，您也可以在页面右下角找到设置。</p>
+            <p>此外，在完成初始化前，如果您想要调整数据分析等设置，请点击左下角按钮，否则站点将以默认设置工作。初始化完成后，您也可以在页面右下角找到设置。</p>
             <br>
             <p>点击“了解”完成初始化并永久关闭本弹窗。</p>
             `;
@@ -115,19 +115,19 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    settPopLableDataCollection: function () {
+    settPopLableDataAnalytics: function () {
         if (this.isEn()) {
-            return 'Data Collection';
+            return 'Data Analytics';
         }
         if (this.isZh()) {
-            return '数据收集';
+            return '数据分析';
         }
         return this.notTranslated();
     },
-    settPopTipHtmlDataCollection: function (trackingDetails) {
+    settPopTipHtmlDataAnalytics: function (trackingDetails) {
         if (this.isEn()) {
-            let tip = 'The counting script used on this site may collect data such as region, User-Agent, refer(r)er, language, screen size, etc. In addition to the disablement here, “Do Not Track” requests or incomplete initialization of the site will also result in data collection being disabled and visits not being logged by the script. This setting does not affect the few necessary region checks and potential third-party data collections.<br>';
-            let trackingResTxtPart1 = `Data Collection is currenly ${trackingDetails.available ? 'enabled. ' : 'disabled, because '}`;
+            let tip = 'The counting script used on this site may collect and analyze data such as region, User-Agent, refer(r)er, language, screen size, etc. In addition to the disablement here, “Do Not Track” requests or incomplete initialization of the site will also result in Data Analytics being disabled and visits not being logged. This setting does not affect the few necessary region checks and potential third-party data analytics.<br>';
+            let trackingResTxtPart1 = `Data Analytics is currenly ${trackingDetails.available ? 'enabled. ' : 'disabled, because '}`;
             let trackingResTxtPart2 = '';
             if (!trackingDetails.initializationPassed)
                 trackingResTxtPart2 += 'the site is not initialized, ';
@@ -142,20 +142,20 @@ const smI18n = {
             return tip + trackingResTxtWhole;
         }
         if (this.isZh()) {
-            let tip = '本站使用的计数脚本可能收集区域、UA、来源、语言、屏幕大小等数据。除此处禁止外，浏览器请求不要跟踪或站点未完成初始化也将导致数据收集禁用，访问不被脚本记录。此设置不影响少数必要的区域检查及潜在的第三方数据收集。<br>';
-            let trackingResTxt = `数据收集当前${trackingDetails.available ? '已启用。' : '已禁用，因为'}`;
+            let tip = '本站使用的计数脚本可能收集并分析区域、UA、来源、语言、屏幕大小等数据。除此处禁止外，浏览器请求不要跟踪或站点未完成初始化也将导致数据分析禁用，访问不被记录。此设置不影响少数必要的区域检查及潜在的第三方数据分析。<br>';
+            let trackingResTxt = `数据分析当前${trackingDetails.available ? '已启用。' : '已禁用，因为'}`;
             if (!trackingDetails.initializationPassed)
                 trackingResTxt += '站点未初始化、';
             if (!trackingDetails.broswerPassed)
                 trackingResTxt += '浏览器请求不要跟踪、';
             if (!trackingDetails.settingsPassed)
-                trackingResTxt += '您禁止收集、';
+                trackingResTxt += '您禁止数据分析、';
             trackingResTxt = trackingResTxt.slice(0, -1) + '。';
             return tip + trackingResTxt;
         }
         return this.notTranslated();
     },
-    settPopSwitchDataCollection: function () {
+    settPopSwitchDataAnalytics: function () {
         if (this.isEn()) {
             return 'Allowed|Prohibited';
         }
@@ -993,7 +993,7 @@ $(document).ready(() => {
             },
             openSettingsPopup: () => {
                 const nameBindings = {
-                    dataCollection: 'sm-setting-data-collection'
+                    dataAnalytics: 'sm-setting-data-analytics'
                 };
                 const li = layer.open({
                     type: 1,
@@ -1002,11 +1002,11 @@ $(document).ready(() => {
                     <div class="smui-container smui-settings-container ${smI18n.langStyleClass()}">
                         <div class="layui-form" lay-filter="sm-settings">
                           <div class="layui-form-item">
-                            <label class="label-sm-setting-data-collection layui-form-label">${smI18n.settPopLableDataCollection()}
+                            <label class="label-sm-setting-data-analytics layui-form-label">${smI18n.settPopLableDataAnalytics()}
                               <i class="layui-icon layui-icon-question"></i>
                             </label>
-                            <div class="block-sm-setting-data-collection layui-input-block">
-                              <input type="checkbox" name="${nameBindings.dataCollection}" lay-skin="switch" title="${smI18n.settPopSwitchDataCollection()}">
+                            <div class="block-sm-setting-data-analytics layui-input-block">
+                              <input type="checkbox" name="${nameBindings.dataAnalytics}" lay-skin="switch" title="${smI18n.settPopSwitchDataAnalytics()}">
                             </div>
                           </div>
                         </div>
@@ -1031,14 +1031,14 @@ $(document).ready(() => {
                     },
                     success: (layero, index, that) => {
                         const settingsRead = getSmSettings();
-                        // doNotTrack 和“数据收集”是反的。
+                        // doNotTrack 和“数据分析”是反的。
                         if (!settingsRead.doNotTrack)
-                            $(`input[name="${nameBindings.dataCollection}"]`).attr('checked', '');
+                            $(`input[name="${nameBindings.dataAnalytics}"]`).attr('checked', '');
                         // 动态生成的控件需要调用 render 渲染。它实际上是根据原生组件生成了一个美化的。设置好值后再渲染。
                         form.render();
-                        $(layero).find('.label-sm-setting-data-collection').click(function (e) {
+                        $(layero).find('.label-sm-setting-data-analytics').click(function (e) {
                             layer.tips(
-                                smI18n.settPopTipHtmlDataCollection(isTrackingAvailable(true)),
+                                smI18n.settPopTipHtmlDataAnalytics(isTrackingAvailable(true)),
                                 // e.target,
                                 this,
                                 {
@@ -1054,8 +1054,8 @@ $(document).ready(() => {
                             form.submit('sm-settings', (data) => {
                                 const userOptions = data.field;
                                 let settingsToWrite = getSmSettings(); // 获取实时的。
-                                // doNotTrack 和“数据收集”是反的。
-                                settingsToWrite.doNotTrack = userOptions[nameBindings.dataCollection] === 'on' ? false : true;
+                                // doNotTrack 和“数据分析”是反的。
+                                settingsToWrite.doNotTrack = userOptions[nameBindings.dataAnalytics] === 'on' ? false : true;
                                 setSmSettings(settingsToWrite);
                                 layer.close(index);
                                 window.location.reload();
