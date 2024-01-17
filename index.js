@@ -20,11 +20,13 @@ else
     lang = 'en';
 document.getElementsByTagName('html')[0].lang = lang;
 updatePageTitle();
-let secondsRemain = 5;
-setInterval(() => {
-    if (secondsRemain <= 0) {
-        window.location.pathname = `/${lang}`;
-        return; // 距离跳转还有短暂的一点时间，不再更新秒数。
-    }
-    updateTip(secondsRemain--);
-}, 1000);
+if (new URLSearchParams(window.location.search).get('noAutoJump') !== 'true') {
+    let secondsRemain = 5;
+    setInterval(() => {
+        if (secondsRemain <= 0) {
+            window.location.pathname = `/${lang}`;
+            return; // 距离跳转还有短暂的一点时间，不再更新秒数。
+        }
+        updateTip(secondsRemain--);
+    }, 1000);
+}
