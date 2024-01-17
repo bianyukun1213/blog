@@ -7,7 +7,7 @@ const siteUrl = `${window.location.origin}/${getSiteLang()}`;
 
 const counterUrl = 'https://gc.his2nd.life/counter';
 
-const layuiThemeDarkCdn = '/shared/dependencies/layui-theme-dark.css';
+const layuiThemeDarkCdn = '/shared/dependencies/layui/css/layui-theme-dark.css';
 
 // 明晃晃写，毕竟这些措施都只能稍稍保护一下。
 
