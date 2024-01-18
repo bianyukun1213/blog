@@ -79,7 +79,30 @@
     color: var(--third-text-color);
 }
 
-/* 上面的样式用来修正主题样式。 */
+/* 将自定义页面的标题字体与 Redefine 内置页面标题字体统一。 */
+.markdown-body .h1,
+.markdown-body .h2,
+.markdown-body .h3,
+.markdown-body .h4,
+.markdown-body .h5,
+.markdown-body .h6,
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+    /* font-family: Satoshi-Variable, sans-serif, 'Noto Sans SC', sans-serif, sans-serif; */
+    font-family: Satoshi-Variable, Noto Sans SC, -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial;
+    /* font-family: unset; */
+}
+
+/* layui-theme-dark 会给 hr 加一条底边，这里取消掉。 */
+.markdown-body hr {
+    border-bottom: unset !important;
+}
+
+/* 上面的样式用来修正主题样式（有时是被插件搞坏的）。 */
 
 .layui-layer {
     font-size: 14px;
