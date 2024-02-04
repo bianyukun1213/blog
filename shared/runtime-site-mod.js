@@ -124,7 +124,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    settPopTipHtmlDataAnalytics: function (trackingDetails) {
+    settPopTipDataAnalyticsHtml: function (trackingDetails) {
         if (this.isEn()) {
             let tip = 'The counting script used on this site may collect and analyze data such as region, User-Agent, refer(r)er, language, screen size, etc. In addition to the disablement here, “Do Not Track” requests or incomplete initialization of the site will also result in Data Analytics being disabled and visits not being logged. This setting does not affect the comment module, the few necessary region checks and potential third-party data analytics.<br>';
             let trackingResTxtPart1 = `Data Analytics is currenly ${trackingDetails.available ? 'enabled. ' : 'disabled, because '}`;
@@ -1057,7 +1057,7 @@ $(document).ready(() => {
                         form.render();
                         $(layero).find('.label-sm-setting-data-analytics').click(function (e) {
                             layer.tips(
-                                escapeHtml(smI18n.settPopTipHtmlDataAnalytics(isTrackingAvailable(true))), // Layui 不会自动转义。
+                                smI18n.settPopTipDataAnalyticsHtml(isTrackingAvailable(true)), // 不应转义，这里写的本来就该是 html。
                                 // e.target,
                                 this,
                                 {
