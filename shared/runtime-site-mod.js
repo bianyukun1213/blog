@@ -229,6 +229,16 @@ const smI18n = {
     }
 };
 
+function escapeHtml(str) {
+    let s = '';
+    if (str.length == 0) return '';
+    s = str.replace(/&/g, '&amp;');
+    s = s.replace(/</g, '&lt;');
+    s = s.replace(/>/g, '&gt;');
+    s = s.replace(/\'/g, '&apos;');
+    s = s.replace(/\"/g, '&quot;');
+    return s;
+}
 // jQuery Ajax 包装：
 // 把以前做 daddys-here 的代码改吧改吧，见 https://github.com/bianyukun1213/daddys-here/blob/main/src/index.html#L739。
 function smRequest(options, async) {
@@ -470,8 +480,8 @@ function fixPathname(pathnameIn) {
 function getSiteLang() {
     return window.location.pathname.split('/')[1];
 }
-function removePathnameLangPrefix(pathnameIn) {
-    return pathnameIn.replace(`/${getSiteLang()}`, '');
+function removeLangPrefix(str) {
+    return str.replace(`/${getSiteLang()}`, '');
 }
 // 获取站点元数据，如果在 sesstionStorage 下已有元数据，就不再获取。
 async function getSiteMetaAsync(forced) {
@@ -538,7 +548,7 @@ async function getPageMetaAsync(forced, pathnameIn) {
             if (typeof item.encryptedData !== 'undefined' && item.encryptedData !== null)
                 item = decryptPageMeta(item);
             const decodedPathname = decodeURI(targetPathname);
-            if (item.path === removePathnameLangPrefix(decodedPathname).slice(1) || item.path === removePathnameLangPrefix(decodedPathname).slice(1) + 'index.html') {
+            if (item.path === removeLangPrefix(decodedPathname).slice(1) || item.path === removeLangPrefix(decodedPathname).slice(1) + 'index.html') {
                 pageMeta = item;
                 pageMetaFound = true;
                 smLogDebug('在站点元数据中获取到页面元数据：', pageMeta);
@@ -706,7 +716,7 @@ function afterPageReady() {
                 frm.src = frm.src.replace('music.163.com/', 'music.163.com/m/');
         }
     }
-    if (removePathnameLangPrefix(pathname) === '/timeline/') {
+    if (removeLangPrefix(pathname) === '/timeline/') {
         // runtime-site-mod.js 加载 Mastodon 时间线，比较方便控制主题切换。
         if (!mastodonTimeline) {
             mastodonTimeline = new MastodonApi({
@@ -728,7 +738,7 @@ function afterPageReady() {
                 markdown_blockquote: false,
                 hide_counter_bar: false,
                 text_max_lines: '0',
-                link_see_more: smI18n.timelineLinkViewMore()
+                link_see_more: escapeHtml(smI18n.timelineLinkViewMore()) // 确实需要转义。
             });
         } else {
             mastodonTimeline.buildTimeline();
@@ -747,8 +757,7 @@ function afterUiReady() {
     getPageAvailableLangsAsync().then((langs) => {
         if (!$.isEmptyObject(langs)) {
             // 如果当前文章、页面另外语言可用，就添加切换图标。
-            $('.main-content:has(.article-content-container)').append(`<div id="icon-switch-lang" title="${smI18n.pageContentIconTitleSwitchLang()}"><i class="layui-icon layui-icon-tips"></i></div>`);
-            $('.main-content:has(.page-template-container)').append(`<div id="icon-switch-lang" title="${smI18n.pageContentIconTitleSwitchLang()}"><i class="layui-icon layui-icon-tips"></i></div>`);
+            $('.main-content:has(.article-content-container), .main-content:has(.page-template-container)').append(`<div id="icon-switch-lang" title="${escapeHtml(smI18n.pageContentIconTitleSwitchLang())}"><i class="layui-icon layui-icon-tips"></i></div>`);
             $('#icon-switch-lang').css({ position: 'absolute', top: '16px', right: '16px', cursor: 'pointer' }).click(() => smUi.openLangSwitchPopup(langs));
             $('#icon-switch-lang i').css({ fontSize: '20px' });
         }
@@ -921,7 +930,7 @@ setInterval(() => {
         else
             $('#layui-theme-dark').removeAttr('href');
         // 切换 mastodonTimeline 主题。
-        if (removePathnameLangPrefix(window.location.pathname) === '/timeline/') {
+        if (removeLangPrefix(window.location.pathname) === '/timeline/') {
             mastodonTimeline.DEFAULT_THEME = newThemeColorScheme;
             mastodonTimeline.setTheme();
         }
@@ -953,7 +962,7 @@ $(document).ready(() => {
             openInitPopup: () => {
                 const li = layer.open({
                     type: 1,
-                    title: smI18n.initPopTitle(),
+                    title: escapeHtml(smI18n.initPopTitle()),
                     content: `
                     <div class="smui-container smui-init-popup-container ${smI18n.langStyleClass()}">
                         <div class="smui-content">
@@ -962,10 +971,10 @@ $(document).ready(() => {
                         <div class="smui-func smui-clearfix">
                           <hr>
                           <div class="smui-func-left">
-                            <button class="smui-button-enter-settings layui-btn layui-btn-primary layui-border-blue">${smI18n.initPopButtonEnterSettings()}</button>
+                            <button class="smui-button-enter-settings layui-btn layui-btn-primary layui-border-blue">${escapeHtml(smI18n.initPopButtonEnterSettings())}</button>
                           </div>
                           <div class="smui-func-right">
-                            <button class="smui-button-complete-initialization layui-btn">${smI18n.initPopButtonOk()}</button>
+                            <button class="smui-button-complete-initialization layui-btn">${escapeHtml(smI18n.initPopButtonOk())}</button>
                           </div>
                         </div>
                     </div>
@@ -1007,26 +1016,26 @@ $(document).ready(() => {
                 };
                 const li = layer.open({
                     type: 1,
-                    title: smI18n.settPopTitle(),
+                    title: escapeHtml(smI18n.settPopTitle()),
                     content: `
                     <div class="smui-container smui-settings-container ${smI18n.langStyleClass()}">
                         <div class="layui-form" lay-filter="sm-settings">
                           <div class="layui-form-item">
-                            <label class="label-sm-setting-data-analytics layui-form-label">${smI18n.settPopLableDataAnalytics()}
+                            <label class="label-sm-setting-data-analytics layui-form-label">${escapeHtml(smI18n.settPopLableDataAnalytics())}
                               <i class="layui-icon layui-icon-question"></i>
                             </label>
                             <div class="block-sm-setting-data-analytics layui-input-block">
-                              <input type="checkbox" name="${nameBindings.dataAnalytics}" lay-skin="switch" title="${smI18n.settPopSwitchDataAnalytics()}">
+                              <input type="checkbox" name="${nameBindings.dataAnalytics}" lay-skin="switch" title="${escapeHtml(smI18n.settPopSwitchDataAnalytics())}">
                             </div>
                           </div>
                         </div>
                         <div class="smui-func smui-clearfix">
                           <hr>
                           <div class="smui-func-left">
-                            <button class="smui-button-clear-local-storage layui-btn layui-btn-primary layui-border-red">${smI18n.settPopButtonClearLocalStorage()}</button>
+                            <button class="smui-button-clear-local-storage layui-btn layui-btn-primary layui-border-red">${escapeHtml(smI18n.settPopButtonClearLocalStorage())}</button>
                           </div>
                           <div class="smui-func-right">
-                            <button class="smui-button-save-sm-settings layui-btn">${smI18n.settPopButtonSave()}</button>
+                            <button class="smui-button-save-sm-settings layui-btn">${escapeHtml(smI18n.settPopButtonSave())}</button>
                           </div>
                         </div>
                     </div>
@@ -1048,7 +1057,7 @@ $(document).ready(() => {
                         form.render();
                         $(layero).find('.label-sm-setting-data-analytics').click(function (e) {
                             layer.tips(
-                                smI18n.settPopTipHtmlDataAnalytics(isTrackingAvailable(true)),
+                                escapeHtml(smI18n.settPopTipHtmlDataAnalytics(isTrackingAvailable(true))), // Layui 不会自动转义。
                                 // e.target,
                                 this,
                                 {
@@ -1083,18 +1092,18 @@ $(document).ready(() => {
                 });
                 return li;
             },
-            openLangSwitchPopup: (langs) => {
+            openLangSwitchPopup: (langsOrForced) => {
                 const nameBindings = {
                     targetLang: 'lang-switch-target-lang'
                 };
                 const li = layer.open({
                     type: 1,
-                    title: smI18n.langSwitchPopTitle(),
+                    title: escapeHtml(smI18n.langSwitchPopTitle()),
                     content: `
                     <div class="smui-container smui-lang-switch-container ${smI18n.langStyleClass()}">
                         <div class="layui-form" lay-filter="lang-switch">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">${smI18n.langSwitchPopLableAvailableLangs()}</label>
+                                <label class="layui-form-label">${escapeHtml(smI18n.langSwitchPopLableAvailableLangs())}</label>
                                 <div class="layui-input-block">
                                     <select name="${nameBindings.targetLang}">
                                     </select>
@@ -1104,7 +1113,7 @@ $(document).ready(() => {
                         <div class="smui-func smui-clearfix">
                           <hr>
                           <div class="smui-func-right">
-                            <button class="smui-button-switch-language layui-btn">${smI18n.langSwitchPopButtonSwitch()}</button>
+                            <button class="smui-button-switch-language layui-btn">${escapeHtml(smI18n.langSwitchPopButtonSwitch())}</button>
                           </div>
                         </div>
                     </div>
@@ -1117,8 +1126,10 @@ $(document).ready(() => {
                     moveEnd: () => {
                         layer.closeAll('tips'); // 移动此弹窗时应该关闭所有 tips。
                     },
-                    success: (layero, index, that) => {
-                        const availableLangs = Object.getOwnPropertyNames(langs);
+                    success: async (layero, index, that) => {
+                        // langsOrForced 是 object 并且不为空，就用；否则现场获取可用语言，是否 forced 取决于 langsOrForced 的值是否是布尔 true。
+                        langsOrForced = $.isPlainObject(langsOrForced) && !$.isEmptyObject(langsOrForced) ? langsOrForced : await getPageAvailableLangsAsync(langsOrForced === true ? true : false);
+                        const availableLangs = Object.getOwnPropertyNames(langsOrForced);
                         const langsLength = availableLangs.length;
                         for (let i = 0; i < langsLength; i++) {
                             const langKey = availableLangs[i];
@@ -1127,11 +1138,18 @@ $(document).ready(() => {
                             else
                                 $(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}">${langKey}</option>`);
                         }
+                        if (availableLangs.length === 0) { // 如果当前页面可用语言为空，则手动添加一个“当前语言”的项。
+                            $(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${getSiteLang()}" selected>${getSiteLang()}</option>`);
+                        }
                         form.render();
                         $(layero).find('.smui-button-switch-language').click(() => {
                             form.submit('lang-switch', (data) => {
                                 const targetLangKey = data.field[nameBindings.targetLang];
-                                const targetPath = langs[targetLangKey];
+                                const targetPath = langsOrForced[targetLangKey];
+                                if (targetLangKey === getSiteLang()) { // 语言不变切个屁。
+                                    layer.close(index);
+                                    return;
+                                }
                                 window.location.pathname = encodeURI(`/${targetLangKey}/${targetPath}`);
                             });
                             return false; // 阻止默认动作。
