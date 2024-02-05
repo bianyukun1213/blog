@@ -50,19 +50,39 @@
     color: var(--primary-color);
 }
 
+/* 文章 TOC 项末尾的“…”颜色修正。 */
+.post-toc .nav .nav-item {
+    color: var(--third-text-color);
+}
+
 /* 文章 TOC 激活项末尾的“…”变色。 */
-.post-toc .nav .nav-item:has(a.active-current) {
+.post-toc .nav .nav-item:has(> a.active-current) {
     color: var(--primary-color);
 }
 
-/* 文章 TOC hover 项末尾的“…”变色。 */
-.post-toc .nav .nav-item:hover {
+/* 文章 TOC 激活项子项末尾的“…”变回正常颜色。 */
+.post-toc .nav .nav-item:has(> a.active-current) .nav-item {
+    color: var(--third-text-color);
+}
+
+/* 文章 TOC hover 项末尾的“…”变色，若这个 hover 项内没有 hover 的子项。 */
+.post-toc .nav .nav-item:hover:not(:has(.nav-child .nav-item:hover)) {
     color: var(--primary-color);
 }
 
-/* 文章 TOC hover 项文字变色。 */
-.post-toc .nav .nav-item:hover span {
-    color: var(--primary-color)
+/* hover 项内未 hover 的子项的“…”恢复正常颜色。 */
+.post-toc .nav .nav-item:hover .nav-child .nav-item:not(:hover) {
+    color: var(--third-text-color);
+}
+
+/* 文章 TOC hover 项文字变色，若这个 hover 项内没有 hover 的子项。 */
+.post-toc .nav .nav-item:hover:not(:has(.nav-child .nav-item:hover)) span {
+    color: var(--primary-color);
+}
+
+/* hover 项内未 hover 的子项恢复正常颜色。 */
+.post-toc .nav .nav-item:hover .nav-child .nav-item:not(:hover) span {
+    color: var(--third-text-color);
 }
 
 /* 首篇文章的下一篇按钮调整至右边。 */
@@ -70,13 +90,18 @@
     flex-direction: row-reverse;
 }
 
-/* 页面图片标注居中。 */
+/* 页面图片标注居中，此项将在 2.6.1 修复。 */
 .page-template-container figure.image-caption figcaption {
     margin-top: 5px;
     margin-bottom: 10px;
     text-align: center;
     font-size: 0.9rem;
     color: var(--third-text-color);
+}
+
+/* 去掉 toc 未展开时，文章右上方工具栏与文章主体的间隙，使外观与无 toc 文章一致。*/
+.post-page-container:not(.show-toc) .toc-content-container {
+    padding: 0;
 }
 
 /* 将自定义页面的标题字体与 Redefine 内置页面标题字体统一。 */
@@ -307,7 +332,23 @@ div.main-content.region-block-hidden {
     float: right;
 }
 
-/* 切换语言图标设置 Redefine 主色。 */
+/* 此处也是对 Redefine 的修改，目的是方便绝对定位的语言切换图标定位。 */
+.article-content-container, .page-template-container {
+    position: relative;
+}
+
+#icon-switch-lang {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+}
+
+#icon-switch-lang i {
+    font-size: 20px;
+}
+
+/* 语言切换图标设置 Redefine 主色。 */
 #icon-switch-lang:hover {
     color: var(--primary-color);
 }

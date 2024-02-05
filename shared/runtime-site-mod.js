@@ -757,9 +757,8 @@ function afterUiReady() {
     getPageAvailableLangsAsync().then((langs) => {
         if (!$.isEmptyObject(langs)) {
             // 如果当前文章、页面另外语言可用，就添加切换图标。
-            $('.main-content:has(.article-content-container), .main-content:has(.page-template-container)').append(`<div id="icon-switch-lang" title="${escapeHtml(smI18n.pageContentIconTitleSwitchLang())}"><i class="layui-icon layui-icon-tips"></i></div>`);
-            $('#icon-switch-lang').css({ position: 'absolute', top: '16px', right: '16px', cursor: 'pointer' }).click(() => smUi.openLangSwitchPopup(langs));
-            $('#icon-switch-lang i').css({ fontSize: '20px' });
+            $('.article-content-container, .page-template-container').append(`<div id="icon-switch-lang" title="${escapeHtml(smI18n.pageContentIconTitleSwitchLang())}"><i class="layui-icon layui-icon-tips"></i></div>`);
+            $('#icon-switch-lang').click(() => smUi.openLangSwitchPopup(langs));
         }
     });
     // 检查用户区域。
