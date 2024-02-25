@@ -7,7 +7,7 @@ const siteUrl = `${window.location.origin}/${getSiteLang()}`;
 
 const counterUrl = 'https://gc.his2nd.life/counter';
 
-const layuiThemeDarkCdn = '/shared/dependencies/layui/css/layui-theme-dark.css';
+const layuiThemeDarkCdn = 'https://unpkg.com/layui-theme-dark/dist/layui-theme-dark.css';
 
 // 明晃晃写，毕竟这些措施都只能稍稍保护一下。
 
@@ -126,8 +126,8 @@ const smI18n = {
     },
     settPopTipDataAnalyticsHtml: function (trackingDetails) {
         if (this.isEn()) {
-            let tip = 'The counting script used on this site may collect and analyze data such as region, User-Agent, refer(r)er, language, screen size, etc. In addition to the disablement here, “Do Not Track” requests or incomplete initialization of the site will also result in Data Analytics being disabled and visits not being logged. This setting does not affect the comment module, the few necessary region checks and potential third-party data analytics.<br>';
-            let trackingResTxtPart1 = `Data Analytics is currenly ${trackingDetails.available ? 'enabled. ' : 'disabled, because '}`;
+            const tip = 'The counting script used on this site may collect and analyze data such as region, User-Agent, refer(r)er, language, screen size, etc. In addition to the disablement here, “Do Not Track” requests or incomplete initialization of the site will also result in Data Analytics being disabled and visits not being logged. This setting does not affect the comment module, the few necessary region checks and potential third-party data analytics.<br>';
+            const trackingResTxtPart1 = `Data Analytics is currenly ${trackingDetails.available ? 'enabled. ' : 'disabled, because '}`;
             let trackingResTxtPart2 = '';
             if (!trackingDetails.initializationPassed)
                 trackingResTxtPart2 += 'the site is not initialized, ';
@@ -142,8 +142,8 @@ const smI18n = {
             return tip + trackingResTxtWhole;
         }
         if (this.isZh()) {
-            let tip = '本站使用的计数脚本可能收集并分析区域、UA、来源、语言、屏幕大小等数据。除此处禁止外，浏览器请求不要跟踪或站点未完成初始化也将导致数据分析禁用，访问不被记录。此设置不影响评论模块、少数必要的区域检查及潜在的第三方数据分析。<br>';
-            let trackingResTxt = `数据分析当前${trackingDetails.available ? '已启用。' : '已禁用，因为'}`;
+            const tip = '本站使用的计数脚本可能收集并分析区域、UA、来源、语言、屏幕大小等数据。除此处禁止外，浏览器请求不要跟踪或站点未完成初始化也将导致数据分析禁用，访问不被记录。此设置不影响评论模块、少数必要的区域检查及潜在的第三方数据分析。<br>';
+            const trackingResTxt = `数据分析当前${trackingDetails.available ? '已启用。' : '已禁用，因为'}`;
             if (!trackingDetails.initializationPassed)
                 trackingResTxt += '站点未初始化、';
             if (!trackingDetails.broswerPassed)
@@ -486,8 +486,8 @@ function removeLangPrefix(str) {
 // 获取站点元数据，如果在 sesstionStorage 下已有元数据，就不再获取。
 async function getSiteMetaAsync(forced) {
     if ($.isEmptyObject(siteMetaCache) || siteMetaCache.site.language !== getSiteLang() || forced) {
-        let loadingIndex = smUi.showLoading();
-        let getPromise = smGetAsync({
+        const loadingIndex = smUi.showLoading();
+        const getPromise = smGetAsync({
             entry: '/site-meta.json',
             cache: false, // 不要从缓存读取。
             timeout: 8000
@@ -495,7 +495,7 @@ async function getSiteMetaAsync(forced) {
         getPromise.finally(() => {
             smUi.closeLayer(loadingIndex);
         });
-        let res = await getPromise;
+        const res = await getPromise;
         if (typeof res === 'undefined' || res === null) {
             smLogError('站点元数据为空：', res);
             return {};
@@ -538,7 +538,7 @@ async function getPageMetaAsync(forced, pathnameIn) {
             smLogWarn('站点元数据空白，无法获取页面元数据：', siteMeta);
             return siteMeta;
         }
-        let pagesMeta = siteMeta.pages;
+        const pagesMeta = siteMeta.pages;
         const allMetaLength = pagesMeta.length;
         for (let i = 0; i < allMetaLength; i++) {
             let item = pagesMeta[i];
@@ -579,8 +579,8 @@ async function checkPageRegionBlockAsync(forced) {
     // 检查用户地区是否在黑名单内。
     if ($.isArray(curMeta.regionBlacklist) && curMeta.regionBlacklist.length > 0) {
         if (userRegionTextCache === '' || forced) {
-            let loadingIndex = smUi.showLoading();
-            let getPromise = smGetAsync({
+            const loadingIndex = smUi.showLoading();
+            const getPromise = smGetAsync({
                 baseUrl: 'https://www.douyacun.com',
                 entry: '/api/openapi/geo/location',
                 cache: false, // 不要从缓存读取。
@@ -592,7 +592,7 @@ async function checkPageRegionBlockAsync(forced) {
             getPromise.finally(() => {
                 smUi.closeLayer(loadingIndex);
             });
-            let res = await getPromise;
+            const res = await getPromise;
             if (typeof res === 'undefined' || res === null) {
                 smLogError('区域为空：', res);
                 return 'UNKNOWN';
@@ -668,6 +668,13 @@ function afterPageReady() {
     $(window).resize(() => {
         adjustVConsoleSwitchPosition();
     });
+    // 监听 Redefine 的 .article-content-container 大小变化动画结束事件，否则文章有 TOC 时，TOC 展开会挤压图片瀑布流，布局不正常。
+    $('.article-content-container').on('transitionend webkitTransitionEnd oTransitionEnd', function () {
+        $('.image-masonry-script').each(function () {
+            const masonryId = this.id.replace('image-masonry-script-', '');
+            window[`macyAt${masonryId}`].recalculate(true);
+        });
+    });
     // 自己加载 twikoo，传入语言信息。
     if ($('.twikoo-container').length > 0) {
         twikoo.init({
@@ -711,7 +718,7 @@ function afterPageReady() {
         let iframes = $('iframe');
         const iframesLength = iframes.length;
         for (let i = 0; i < iframesLength; i++) {
-            const frm = iframes[i];
+            let frm = iframes[i];
             if (frm.src.includes('music.163.com/'))
                 frm.src = frm.src.replace('music.163.com/', 'music.163.com/m/');
         }
@@ -765,14 +772,8 @@ function afterUiReady() {
     checkPageRegionBlockAsync().then((res) => {
         if (res === 'BLOCKED')
             window.location.replace(`/${getSiteLang()}/go-back-home/`);
-        else if (res === 'NOT_BLOCKED') {
+        else if (res === 'NOT_BLOCKED')
             $('.main-content').show();
-            // 重新计算图片瀑布流。
-            $('.image-masonry-script').each(function () {
-                let masonryId = this.id.replace('image-masonry-script-', '');
-                window[`macyAt${masonryId}`].recalculate();
-            });
-        }
     });
 }
 
@@ -792,7 +793,7 @@ let smLogError = (...params) => { console.error(new Date().toLocaleTimeString() 
 // 初始化 site-mod 数据，检测数据变更。
 (() => {
     // let smDataRawStr = localStorage.getItem(`smData@${getSiteLang()}`);
-    let smDataRawStr = localStorage.getItem('smData');
+    const smDataRawStr = localStorage.getItem('smData');
     let smDataRawStrEmpty = true;
     let smSettingsRaw = {};
     if (smDataRawStr) {
@@ -864,7 +865,7 @@ if (debugOn) {
             return this.checkVars(getSmData().debugVars);
         },
         loadVars: function () {
-            let vars = getSmData().debugVars;
+            const vars = getSmData().debugVars;
             if (this.checkVars(vars)) {
                 this._vars = vars;
             }
@@ -876,7 +877,7 @@ if (debugOn) {
         setDebugVars: function (vars) {
             if (this.checkVars(vars)) {
                 this._vars = vars;
-                let smData = getSmData();
+                const smData = getSmData();
                 smData.debugVars = vars;
                 setSmData(smData);
             }
