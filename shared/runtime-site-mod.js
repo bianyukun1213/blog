@@ -143,7 +143,7 @@ const smI18n = {
         }
         if (this.isZh()) {
             const tip = '本站使用的计数脚本可能收集并分析区域、UA、来源、语言、屏幕大小等数据。除此处禁止外，浏览器请求不要跟踪或站点未完成初始化也将导致数据分析禁用，访问不被记录。此设置不影响评论模块、少数必要的区域检查及潜在的第三方数据分析。<br>';
-            const trackingResTxt = `数据分析当前${trackingDetails.available ? '已启用。' : '已禁用，因为'}`;
+            let trackingResTxt = `数据分析当前${trackingDetails.available ? '已启用。' : '已禁用，因为'}`;
             if (!trackingDetails.initializationPassed)
                 trackingResTxt += '站点未初始化、';
             if (!trackingDetails.broswerPassed)
