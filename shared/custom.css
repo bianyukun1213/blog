@@ -326,7 +326,8 @@
 }
 
 /* 此处有点击事件。 */
-.smui-container.smui-settings-container .layui-form-label.label-sm-setting-data-analytics {
+.smui-container.smui-settings-container .layui-form-label.label-sm-setting-data-analytics,
+.smui-container.smui-settings-container .layui-form-label.label-sm-setting-ai-generated-excerpt {
     cursor: pointer;
 }
 
@@ -335,9 +336,29 @@
     width: 110px;
 }
 
-/* 155px 左边距对应上面 140px 宽度。 */
+/* 140px 左边距对应上面 110px 宽度。 */
 .smui-container.smui-settings-container.smui-lang-en .layui-input-block.block-sm-setting-data-analytics {
     margin-left: 140px;
+}
+
+/* 中文下“AI-generated Excerpt”需 110px 才不折叠。 */
+.smui-container.smui-settings-container.smui-lang-zh .layui-form-label.label-sm-setting-ai-generated-excerpt {
+    width: 110px;
+}
+
+/* 140px 左边距对应上面 110px 宽度。 */
+.smui-container.smui-settings-container.smui-lang-zh .layui-input-block.block-sm-setting-ai-generated-excerpt {
+    margin-left: 140px;
+}
+
+/* 英文下“AI-generated Excerpt”需 160px 才不折叠。 */
+.smui-container.smui-settings-container.smui-lang-en .layui-form-label.label-sm-setting-ai-generated-excerpt {
+    width: 160px;
+}
+
+/* 190px 左边距对应上面 160px 宽度。 */
+.smui-container.smui-settings-container.smui-lang-en .layui-input-block.block-sm-setting-ai-generated-excerpt {
+    margin-left: 190px;
 }
 
 /* 上面的样式用来根据实际需求覆盖 Layui 样式。 */
@@ -357,6 +378,33 @@ noscript#javascript-alert p::after {
     margin: 16px;
     font-weight: bold;
     color: yellow;
+}
+
+.ai-generated-excerpt {
+    padding: 0px;
+    margin: 16px 0;
+    border: 2px solid #0088e0;
+    border-radius: 10px;
+}
+
+/* 增加权重，覆盖主题样式。 */
+.ai-generated-excerpt .title {
+    padding: 16px;
+    margin: 0;
+    margin-bottom: 16px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 24px;
+    background-color: rgba(0, 136, 224, 0.2);
+}
+
+.ai-generated-excerpt .content {
+    padding: 0;
+    margin: 16px;
+    font-size: 16px;
+    line-height: 24px;
 }
 
 div.main-content.region-block-hidden {
