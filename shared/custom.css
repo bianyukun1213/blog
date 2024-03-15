@@ -381,28 +381,36 @@ noscript#javascript-alert p::after {
 }
 
 .ai-generated-excerpt {
-    padding: 0px;
+    padding: 0;
     margin: 16px 0;
     border: 2px solid #0088e0;
     border-radius: 10px;
 }
 
-/* 增加权重，覆盖主题样式。 */
 .ai-generated-excerpt .title {
     padding: 16px;
     margin: 0;
-    margin-bottom: 16px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    background-color: rgba(0, 136, 224, 0.2);
+}
+
+.ai-generated-excerpt .title p {
+    padding: 0;
+    margin: 0;
     font-size: 20px;
     font-weight: bold;
     line-height: 24px;
-    background-color: rgba(0, 136, 224, 0.2);
 }
 
 .ai-generated-excerpt .content {
     padding: 0;
     margin: 16px;
+}
+
+.ai-generated-excerpt .content p {
+    padding: 0;
+    margin: 0;
     font-size: 16px;
     line-height: 24px;
 }
