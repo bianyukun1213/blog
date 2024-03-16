@@ -363,6 +363,14 @@
 
 /* 上面的样式用来根据实际需求覆盖 Layui 样式。 */
 
+.h-card,
+.u-url,
+.dt-published,
+.dt-updated,
+.p-summary {
+    display: none;
+}
+
 noscript#javascript-alert {
     position: fixed;
     z-index: 8848;
