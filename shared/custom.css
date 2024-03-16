@@ -366,8 +366,10 @@
 .h-card,
 .u-url,
 .dt-published,
-.dt-updated,
-.p-summary {
+.dt-updated
+
+/*,.p-summary*/
+    {
     display: none;
 }
 
