@@ -88,6 +88,11 @@ function smPost(options) {
     options.method = 'POST';
     smRequest(options);
 }
+async function smPostAsync(options) {
+    options = options || {};
+    options.method = 'POST';
+    return smRequestAsync(options);
+}
 function smPut(options) {
     options = options || {};
     options.method = 'PUT';
@@ -609,15 +614,17 @@ function afterUiReady() {
             $('.comment-area-title').contents()[0].nodeValue = commentTitle;
             $('#interaction-system-switch').text(smI18n.interactionSwitchWebmentions());
             $('.twikoo-container').show();
+            $('#smui-form-webmention-post').hide();
             $('#webmentions').hide();
-            $('#webmentions-empty-tip').hide();
+            // $('#webmentions-empty-tip').hide();
             $('.comment-area-title').removeClass('on-webmentions');
         } else {
             $('.comment-area-title').contents()[0].nodeValue = smI18n.interactionSwitchWebmentions();
             $('#interaction-system-switch').text(commentTitle);
             $('.twikoo-container').hide();
+            $('#smui-form-webmention-post').show();
             $('#webmentions').show();
-            $('#webmentions-empty-tip').show();
+            // $('#webmentions-empty-tip').show();
             $('.comment-area-title').addClass('on-webmentions');
         }
     };
@@ -626,6 +633,9 @@ function afterUiReady() {
         switchInteractionSystem();
     });
     smUi.createWebmentionPostForm($('#webmentions'));
+    // const webmentionPostFormId = smUi.createWebmentionPostForm($('#webmentions'));
+    // if (webmentionPostFormId)
+    //     $('#' + webmentionPostFormId).hide();
     // $('.comment-area-title').after(`<div id="webmentions-empty-tip" class="alertbox alertbox-warning"><p>${smI18n.webmentionsEmptyTip()}</p></div>`);
     // $('#webmentions-empty-tip').hide();
     // 静态页面中是评论，Webmentions 是动态添加的。如果设置了默认互动系统为 Webmentions，就直接切换。
@@ -1058,23 +1068,56 @@ $(document).ready(() => {
                 return li;
             },
             createWebmentionPostForm: function (elementAfter) {
+                if ($('#smui-form-webmention-post').length !== 0)
+                    return;
                 const nameBindings = {
                     webmentionPostArticleUrl: 'webmention-post-article-url'
                 };
                 $(elementAfter).before(
                     `
-                    <form class="layui-form" lay-filter="webmention-post" action="" method="post" target="_blank">
-                        <div class="smui-content">如果你给本文写了回应，可以在此提交文章 URL 以向我发送 Webmention。</div>
+                    <div id="smui-form-webmention-post" class="layui-form" lay-filter="webmention-post">
+                        <div class="smui-content">${smI18n.webmentionPostFormTipHtml()}</div>
                         <div class="smui-wrapper-webmention-post">
                             <div class="smui-form-item-webmention-post layui-form-item">
-                                <input class="smui-input-${nameBindings.webmentionPostArticleUrl} layui-input" name="${nameBindings.webmentionPostArticleUrl}" autocomplete="off" placeholder="https://your-site.com/some-post.html" lay-affix="clear" lay-verify="required|url"  lay-reqtext="请填写文章 URL">
+                                <input class="smui-input-${nameBindings.webmentionPostArticleUrl} layui-input" name="${nameBindings.webmentionPostArticleUrl}" autocomplete="off" placeholder="${smI18n.webmentionPostFormInputArticleUrlPlaceholder()}" lay-affix="clear" lay-verify="required|article-url"  lay-reqtext="${smI18n.webmentionPostFormInputArticleUrlReqText()}">
                             </div>
-                            <button type="button" class="smui-button-webmention-post-submit layui-btn" lay-submit>提交</button>
+                            <button type="button" class="smui-button-webmention-post-submit layui-btn" lay-filter="webmention-post" lay-submit>${smI18n.webmentionPostFormButtonSubmit()}</button>
                         </div>
-                    </form>
+                    </div>
                     `
                 );
+                $('#smui-form-webmention-post').hide();
                 form.render();
+                form.verify({
+                    // Layui 有 URL 验证。创建这个完全是为了提示的 i18n。
+                    'article-url': (value, elem) => {
+                        // 自定义规则和自定义提示方式。
+                        if (!/^(https?:\/\/(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+\.)+[a-zA-Z]+)(:\d+)?(\/.*)?(\?.*)?(#.*)?$/.test(value)) {
+                            layer.msg(smI18n.webmentionPostArticleUrlReqText(), { icon: 5, anim: 6 }); // 默认风格基本就是这个样式。
+                            return true; // 返回 true 即可阻止 form 默认的提示风格。
+                        }
+                    }
+                });
+                form.on('submit(webmention-post)', (data) => {
+                    const field = data.field;
+                    const loadingIndex = smUi.showLoading();
+                    const postPromise = smPostAsync({
+                        baseUrl: 'https://webmention.io',
+                        entry: '/his2nd.life/webmention',
+                        timeout: 8000,
+                        data: {
+                            source: field[nameBindings.webmentionPostArticleUrl],
+                            target: window.location.href.replace(window.location.hash, '')
+                        }
+                    });
+                    postPromise.catch((error) => {
+                        smLogError('发送 Webmention 失败：', error);
+                    }).finally(() => {
+                        smUi.closeLayer(loadingIndex);
+                    });
+                    return false;
+                });
+                // return 'smui-form-webmention-post';
             }
         };
         afterUiReady();

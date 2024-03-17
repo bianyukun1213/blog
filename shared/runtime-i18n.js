@@ -28,6 +28,42 @@ const smI18n = {
     //     }
     //     return this.notTranslated();
     // },
+    webmentionPostFormTipHtml: function () {
+        if (this.isEn()) {
+            return '<p>If you have written a Response to this article, you can submit the article URL here to send me a Webmention.</p>';
+        }
+        if (this.isZh()) {
+            return '<p>如果你给本文写了回应，可以在此提交文章 URL 以向我发送 Webmention。</p>';
+        }
+        return this.notTranslated();
+    },
+    webmentionPostFormInputArticleUrlPlaceholder: function () {
+        if (this.isEn()) {
+            return 'https://your-website.com/some-post.html';
+        }
+        if (this.isZh()) {
+            return 'https://your-website.com/some-post.html';
+        }
+        return this.notTranslated();
+    },
+    webmentionPostFormInputArticleUrlReqText: function () {
+        if (this.isEn()) {
+            return 'Please fill in the article URL!';
+        }
+        if (this.isZh()) {
+            return '请填写文章 URL！';
+        }
+        return this.notTranslated();
+    },
+    webmentionPostFormButtonSubmit: function () {
+        if (this.isEn()) {
+            return 'Submit';
+        }
+        if (this.isZh()) {
+            return '提交';
+        }
+        return this.notTranslated();
+    },
     webmentionjsStrings: function (key) {
         if (this.isEn()) {
             return key;
@@ -35,7 +71,7 @@ const smI18n = {
         if (this.isZh()) {
             switch (key) {
                 case 'replied':
-                    return '了回复';
+                    return '回复了';
                 case 'liked':
                     return '喜欢了';
                 case 'reposted':
