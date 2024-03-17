@@ -24,7 +24,7 @@ const smI18n = {
             return 'Area below will display as blank when Webmentions are loading or responding with empty data.';
         }
         if (this.isZh()) {
-            return 'Webmentions 正在加载或返回空数据时，下方页面空白。';
+            return 'Webmentions 正在加载或返回空数据时，下方页面将显示空白。';
         }
         return this.notTranslated();
     },
