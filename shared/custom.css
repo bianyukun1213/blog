@@ -558,13 +558,17 @@ div.main-content.region-block-hidden {
 
 #interaction-system-switch {
     margin-left: 4px;
-    font-size: 20px;
+    font-size: 16px;
     text-decoration: underline;
     cursor: pointer;
 }
 
 #interaction-system-switch::before {
     content: '/';
+}
+
+#smui-form-webmention-post {
+    margin-bottom: 16px;
 }
 
 .smui-wrapper-webmention-post {
@@ -574,7 +578,10 @@ div.main-content.region-block-hidden {
 
 .smui-form-item-webmention-post {
     flex-grow: 1;
+    /* 取消默认 margin。 */
+    margin: 0;
     margin-right: 16px;
     /* layui-form-item 的 margin-bottom 是 15px，我这里和 margin-right 一致。 */
-    margin-bottom: 16px;
+    /* 还是注释掉了。注释后 flex 换行会不协调，但是 margin-bottom 给了 #smui-form-webmention-post 后默认情况下更协调了。 */
+    /* margin-bottom: 16px; */
 }

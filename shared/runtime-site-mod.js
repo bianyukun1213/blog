@@ -616,7 +616,6 @@ function afterUiReady() {
             $('.twikoo-container').show();
             $('#smui-form-webmention-post').hide();
             $('#webmentions').hide();
-            // $('#webmentions-empty-tip').hide();
             $('.comment-area-title').removeClass('on-webmentions');
         } else {
             $('.comment-area-title').contents()[0].nodeValue = smI18n.interactionSwitchWebmentions();
@@ -624,7 +623,6 @@ function afterUiReady() {
             $('.twikoo-container').hide();
             $('#smui-form-webmention-post').show();
             $('#webmentions').show();
-            // $('#webmentions-empty-tip').show();
             $('.comment-area-title').addClass('on-webmentions');
         }
     };
@@ -633,11 +631,6 @@ function afterUiReady() {
         switchInteractionSystem();
     });
     smUi.createWebmentionPostForm($('#webmentions'));
-    // const webmentionPostFormId = smUi.createWebmentionPostForm($('#webmentions'));
-    // if (webmentionPostFormId)
-    //     $('#' + webmentionPostFormId).hide();
-    // $('.comment-area-title').after(`<div id="webmentions-empty-tip" class="alertbox alertbox-warning"><p>${smI18n.webmentionsEmptyTip()}</p></div>`);
-    // $('#webmentions-empty-tip').hide();
     // 静态页面中是评论，Webmentions 是动态添加的。如果设置了默认互动系统为 Webmentions，就直接切换。
     if (getSmSettings().defaultInteractionSystem === 'WEBMENTIONS')
         switchInteractionSystem();
@@ -1117,7 +1110,6 @@ $(document).ready(() => {
                     });
                     return false;
                 });
-                // return 'smui-form-webmention-post';
             }
         };
         afterUiReady();

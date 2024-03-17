@@ -19,15 +19,6 @@ const smI18n = {
         if (this.isZh())
             return 'smui-lang-zh';
     },
-    // webmentionsEmptyTip: function () {
-    //     if (this.isEn()) {
-    //         return 'Area below will display as blank when Webmentions are loading or responding with empty data.';
-    //     }
-    //     if (this.isZh()) {
-    //         return 'Webmentions 正在加载或返回空数据时，下方页面将显示空白。';
-    //     }
-    //     return this.notTranslated();
-    // },
     webmentionPostFormTipHtml: function () {
         if (this.isEn()) {
             return '<p>If you have written a Response to this article, you can submit the article URL here to send me a Webmention.</p>';
