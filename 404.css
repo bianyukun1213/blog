@@ -42,6 +42,10 @@ a:active {
     text-align: center;
 }
 
+.h-card {
+    display: none;
+}
+
 #possible-links {
     padding: 0;
     list-style: none;

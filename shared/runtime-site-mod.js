@@ -623,6 +623,7 @@ function afterUiReady() {
     };
     $('.comment-area-title').append(`<a id="interaction-system-switch">${smI18n.interactionSwitchWebmentions()}</a>`);
     $('.comment-area-title').after(`<div id="webmentions-empty-tip" class="alertbox alertbox-warning"><p>${smI18n.webmentionsEmptyTip()}</p></div>`);
+    $('#webmentions-empty-tip').hide();
     $('#interaction-system-switch').click(() => {
         switchInteractionSystem();
     });
