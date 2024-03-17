@@ -1,77 +1,99 @@
 #webmentions {
-    margin: 0;
     position: relative;
-    z-index: 100;
-    line-height: 1.2em;
-}
-
-#webmentions .comments {
-    max-height: 20em;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    font-size: 80%;
+    margin: 0;
+    padding: 0;
 }
 
 #webmentions h2 {
-    font-size: medium;
-    margin: 0;
-    padding: 2px;
-    background: #ccc;
-}
-
-#webmentions .reacts img {
-    margin: 3px -1ex 1px 0;
-}
-
-#webmentions img.missing {
-    background: white;
-    border: dashed black 1px;
+    margin-bottom: 32px;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 #webmentions ul {
-    list-style-type: none;
     margin: 0;
-    padding: 4px;
+    list-style-type: none;
 }
 
-#webmentions li {
-    text-indent: -1em;
-    padding-left: 1em;
-}
 
-#webmentions a.reaction {
-    position: relative;
+#webmentions .reaction {
+    display: block;
+    float: left;
     text-decoration: none;
-    text-shadow: 0px 0px 3px white;
-    margin-right: 0;
-    letter-spacing: -1ex;
-    margin-right: 1ex;
 }
 
-#webmentions a.reaction img {
-    max-height: 1.3em;
-    width: auto;
-    margin-right: -1ex;
-    border-radius: 25%;
+#webmentions .reaction img {
+    /* 在我的博客下覆盖被 reset 的样式。 */
+    display: inline;
+    /* 在我的博客下覆盖被 reset 的样式。 */
+    vertical-align: baseline;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-right: -16px;
+    border-radius: 5px;
 }
 
-#webmentions a.reaction sub {
-    font-size: 50%;
+#webmentions .source {
+    display: block;
+    float: left;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 #webmentions .comments li {
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    margin-bottom: 48px;
+}
+
+#webmentions .comments li::after {
+    content: '';
+    height: 0;
+    clear: both;
     overflow: hidden;
+    display: block;
+    visibility: hidden;
+}
+
+#webmentions .comments li .reaction {
+    margin-right: 8px;
+    margin-bottom: 16px;
 }
 
 #webmentions .comments li .text {
-    color: #555;
-    font-style: italic;
-    text-decoration: none;
+    display: block;
+    width: 100%;
+    clear: left;
+}
+
+#webmentions .comments li .text::before {
+    content: '“';
+    color: gray;
+}
+
+#webmentions .comments li .text::after {
+    content: '”';
+    color: gray;
 }
 
 #webmentions .comments li .name {
-    color: #111;
+    display: block;
+    width: 100%;
+    clear: left;
+    font-style: italic;
+    font-weight: bold;
+    color: gray;
 }
 
+#webmentions .reacts::after {
+    content: '';
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+}
+
+#webmentions .reacts .reaction {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}

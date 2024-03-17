@@ -341,7 +341,7 @@
     margin-left: 140px;
 }
 
-/* 中文下“AI-generated Excerpt”需 110px 才不折叠。 */
+/* 中文下“AI 生成的摘要”需 110px 才不折叠。 */
 .smui-container.smui-settings-container.smui-lang-zh .layui-form-label.label-sm-setting-ai-generated-excerpt {
     width: 110px;
 }
@@ -358,6 +358,26 @@
 
 /* 190px 左边距对应上面 160px 宽度。 */
 .smui-container.smui-settings-container.smui-lang-en .layui-input-block.block-sm-setting-ai-generated-excerpt {
+    margin-left: 190px;
+}
+
+/* 中文下“默认互动系统”需 90px 才不折叠。 */
+.smui-container.smui-settings-container.smui-lang-zh .layui-form-label.label-sm-setting-default-interaction-system {
+    width: 90px;
+}
+
+/* 120px 左边距对应上面 90px 宽度。 */
+.smui-container.smui-settings-container.smui-lang-zh .layui-input-block.block-sm-setting-default-interaction-system {
+    margin-left: 120px;
+}
+
+/* 英文下“Default Interaction System”需 160px 才不折叠。 */
+.smui-container.smui-settings-container.smui-lang-en .layui-form-label.label-sm-setting-default-interaction-system {
+    width: 160px;
+}
+
+/* 190px 左边距对应上面 160px 宽度。 */
+.smui-container.smui-settings-container.smui-lang-en .layui-input-block.block-sm-setting-default-interaction-system {
     margin-left: 190px;
 }
 
@@ -479,4 +499,15 @@ div.main-content.region-block-hidden {
 /* 语言切换图标设置 Redefine 主色。 */
 #icon-switch-lang:hover {
     color: var(--primary-color);
+}
+
+#interaction-system-switch {
+    margin-left: 4px;
+    font-size: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#interaction-system-switch::before {
+    content: '/';
 }

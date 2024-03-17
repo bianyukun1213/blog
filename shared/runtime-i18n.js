@@ -1,18 +1,75 @@
+'use strict';
+
 const smI18n = {
+    getSiteLang: function () {
+        return window.location.pathname.split('/')[1];
+    },
     notTranslated: function () {
         return 'NOT_TRANSLATED';
     },
     isEn: function () {
-        return getSiteLang() === 'en' ? true : false;
+        return this.getSiteLang() === 'en' ? true : false;
     },
     isZh: function () {
-        return getSiteLang() === 'zh-CN' ? true : false;
+        return this.getSiteLang() === 'zh-CN' ? true : false;
     },
     langStyleClass: function () {
-        if (this.isZh())
-            return 'smui-lang-zh';
         if (this.isEn())
             return 'smui-lang-en';
+        if (this.isZh())
+            return 'smui-lang-zh';
+    },
+    webmentionsEmptyTip: function () {
+        if (this.isEn()) {
+            return 'Area below will display as blank when Webmentions are loading or responding with empty data.';
+        }
+        if (this.isZh()) {
+            return 'Webmentions 正在加载或返回空数据时，下方页面空白。';
+        }
+        return this.notTranslated();
+    },
+    webmentionjsStrings: function (key) {
+        if (this.isEn()) {
+            return key;
+        }
+        if (this.isZh()) {
+            switch (key) {
+                case 'replied':
+                    return '已回复';
+                case 'liked':
+                    return '已表示喜欢';
+                case 'reposted':
+                    return '已转发';
+                case 'reacted':
+                    return '已反应';
+                case 'bookmarked':
+                    return '已加入书签';
+                case 'mentioned':
+                    return '已提及';
+                case 'RSVPed':
+                    return '已响应事件';
+                case 'followed':
+                    return '已关注';
+                case 'Responses':
+                    return '回应';
+                case 'mention':
+                    return '提及';
+                case 'Reactions':
+                    return '反应';
+                default:
+                    return key;
+            }
+        }
+        return key;
+    },
+    interactionSwitchWebmentions: function () {
+        if (this.isEn()) {
+            return 'Webmentions';
+        }
+        if (this.isZh()) {
+            return 'Webmentions';
+        }
+        return this.notTranslated();
     },
     timelineLinkViewMore: function () {
         if (this.isEn()) {
@@ -174,6 +231,38 @@ const smI18n = {
         }
         return this.notTranslated();
     },
+    settPopLableDefaultInteractionSystem: function () {
+        if (this.isEn()) {
+            return 'Default Interaction System';
+        }
+        if (this.isZh()) {
+            return '默认互动系统';
+        }
+        return this.notTranslated();
+    },
+    settPopSelectOptionDefaultInteractionSystem: function (key) {
+        if (this.isEn()) {
+            switch (key) {
+                case 'COMMENTS':
+                    return 'Comments';
+                case 'WEBMENTIONS':
+                    return 'Webmentions';
+                default:
+                    return this.notTranslated();
+            }
+        }
+        if (this.isZh()) {
+            switch (key) {
+                case 'COMMENTS':
+                    return '评论';
+                case 'WEBMENTIONS':
+                    return 'Webmentions';
+                default:
+                    return this.notTranslated();
+            }
+        }
+        return this.notTranslated();
+    },
     settPopButtonClearLocalStorage: function () {
         if (this.isEn()) {
             return 'Clear local storage';
@@ -224,7 +313,7 @@ const smI18n = {
             return 'Available in';
         }
         if (this.isZh()) {
-            return '可用语言：';
+            return '可用语言';
         }
         return this.notTranslated();
     },
