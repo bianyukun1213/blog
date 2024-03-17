@@ -19,15 +19,15 @@ const smI18n = {
         if (this.isZh())
             return 'smui-lang-zh';
     },
-    webmentionsEmptyTip: function () {
-        if (this.isEn()) {
-            return 'Area below will display as blank when Webmentions are loading or responding with empty data.';
-        }
-        if (this.isZh()) {
-            return 'Webmentions 正在加载或返回空数据时，下方页面将显示空白。';
-        }
-        return this.notTranslated();
-    },
+    // webmentionsEmptyTip: function () {
+    //     if (this.isEn()) {
+    //         return 'Area below will display as blank when Webmentions are loading or responding with empty data.';
+    //     }
+    //     if (this.isZh()) {
+    //         return 'Webmentions 正在加载或返回空数据时，下方页面将显示空白。';
+    //     }
+    //     return this.notTranslated();
+    // },
     webmentionjsStrings: function (key) {
         if (this.isEn()) {
             return key;
@@ -35,21 +35,21 @@ const smI18n = {
         if (this.isZh()) {
             switch (key) {
                 case 'replied':
-                    return '已回复';
+                    return '了回复';
                 case 'liked':
-                    return '已表示喜欢';
+                    return '喜欢了';
                 case 'reposted':
-                    return '已转发';
+                    return '转发了';
                 case 'reacted':
-                    return '已反应';
+                    return '反应了';
                 case 'bookmarked':
-                    return '已加入书签';
+                    return '加入了书签';
                 case 'mentioned':
-                    return '已提及';
+                    return '提及了';
                 case 'RSVPed':
-                    return '已响应事件';
+                    return '响应了事件';
                 case 'followed':
-                    return '已关注';
+                    return '关注了';
                 case 'Responses':
                     return '回应';
                 case 'mention':

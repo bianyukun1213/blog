@@ -622,11 +622,12 @@ function afterUiReady() {
         }
     };
     $('.comment-area-title').append(`<a id="interaction-system-switch">${smI18n.interactionSwitchWebmentions()}</a>`);
-    $('.comment-area-title').after(`<div id="webmentions-empty-tip" class="alertbox alertbox-warning"><p>${smI18n.webmentionsEmptyTip()}</p></div>`);
-    $('#webmentions-empty-tip').hide();
     $('#interaction-system-switch').click(() => {
         switchInteractionSystem();
     });
+    smUi.createWebmentionPostForm($('#webmentions'));
+    // $('.comment-area-title').after(`<div id="webmentions-empty-tip" class="alertbox alertbox-warning"><p>${smI18n.webmentionsEmptyTip()}</p></div>`);
+    // $('#webmentions-empty-tip').hide();
     // 静态页面中是评论，Webmentions 是动态添加的。如果设置了默认互动系统为 Webmentions，就直接切换。
     if (getSmSettings().defaultInteractionSystem === 'WEBMENTIONS')
         switchInteractionSystem();
@@ -824,7 +825,7 @@ $(document).ready(() => {
                     type: 1,
                     title: escapeHtml(smI18n.initPopTitle()),
                     content: `
-                    <div class="smui-container smui-init-popup-container ${smI18n.langStyleClass()}">
+                    <div class="smui-container smui-container-init-popup ${smI18n.langStyleClass()}">
                         <div class="smui-content">
                           ${smI18n.initPopContentHtml()}
                         </div>
@@ -880,27 +881,27 @@ $(document).ready(() => {
                     type: 1,
                     title: escapeHtml(smI18n.settPopTitle()),
                     content: `
-                    <div class="smui-container smui-settings-container ${smI18n.langStyleClass()}">
+                    <div class="smui-container smui-container-settings ${smI18n.langStyleClass()}">
                         <div class="layui-form" lay-filter="sm-settings">
                           <div class="layui-form-item">
-                            <label class="label-${nameBindings.dataAnalytics} layui-form-label">${escapeHtml(smI18n.settPopLableDataAnalytics())}
+                            <label class="smui-label-${nameBindings.dataAnalytics} layui-form-label">${escapeHtml(smI18n.settPopLableDataAnalytics())}
                               <i class="layui-icon layui-icon-question"></i>
                             </label>
-                            <div class="block-${nameBindings.dataAnalytics} layui-input-block">
+                            <div class="smui-block-${nameBindings.dataAnalytics} layui-input-block">
                               <input type="checkbox" name="${nameBindings.dataAnalytics}" lay-skin="switch" title="${escapeHtml(smI18n.settPopSwitchDataAnalytics())}">
                             </div>
                           </div>
                           <div class="layui-form-item">
-                            <label class="label-${nameBindings.aiGeneratedExcerpt} layui-form-label">${escapeHtml(smI18n.settPopLableAiGeneratedExcerpt())}
+                            <label class="smui-label-${nameBindings.aiGeneratedExcerpt} layui-form-label">${escapeHtml(smI18n.settPopLableAiGeneratedExcerpt())}
                               <i class="layui-icon layui-icon-question"></i>
                             </label>
-                            <div class="block-${nameBindings.aiGeneratedExcerpt} layui-input-block">
+                            <div class="smui-block-${nameBindings.aiGeneratedExcerpt} layui-input-block">
                               <input type="checkbox" name="${nameBindings.aiGeneratedExcerpt}" lay-skin="switch" title="${escapeHtml(smI18n.settPopSwitchAiGeneratedExcerpt())}">
                             </div>
                           </div>
                           <div class="layui-form-item">
-                            <label class="label-${nameBindings.defaultInteractionSystem} layui-form-label">${escapeHtml(smI18n.settPopLableDefaultInteractionSystem())}</label>
-                            <div class="block-${nameBindings.defaultInteractionSystem} layui-input-block">
+                            <label class="smui-label-${nameBindings.defaultInteractionSystem} layui-form-label">${escapeHtml(smI18n.settPopLableDefaultInteractionSystem())}</label>
+                            <div class="smui-block-${nameBindings.defaultInteractionSystem} layui-input-block">
                                 <select name="${nameBindings.defaultInteractionSystem}">
                                     <option value="COMMENTS">${smI18n.settPopSelectOptionDefaultInteractionSystem('COMMENTS')}</option>
                                     <option value="WEBMENTIONS">${smI18n.settPopSelectOptionDefaultInteractionSystem('WEBMENTIONS')}</option>
@@ -951,7 +952,7 @@ $(document).ready(() => {
                             );
                             return false; // 阻止默认动作。
                         });
-                        $(layero).find(`.label-${nameBindings.aiGeneratedExcerpt}`).click(function (e) {
+                        $(layero).find(`.smui-label-${nameBindings.aiGeneratedExcerpt}`).click(function (e) {
                             layer.tips(
                                 smI18n.settPopTipAiGeneratedExcerptHtml(), // 不应转义，这里写的本来就该是 html。
                                 // e.target,
@@ -998,11 +999,11 @@ $(document).ready(() => {
                     type: 1,
                     title: escapeHtml(smI18n.langSwitchPopTitle()),
                     content: `
-                    <div class="smui-container smui-lang-switch-container ${smI18n.langStyleClass()}">
+                    <div class="smui-container smui-container-lang-switch ${smI18n.langStyleClass()}">
                         <div class="layui-form" lay-filter="lang-switch">
                             <div class="layui-form-item">
                                 <label class="layui-form-label">${escapeHtml(smI18n.langSwitchPopLableAvailableLangs())}</label>
-                                <div class="block-${nameBindings.targetLang} layui-input-block">
+                                <div class="smui-block-${nameBindings.targetLang} layui-input-block">
                                     <select name="${nameBindings.targetLang}">
                                     </select>
                                 </div>
@@ -1055,6 +1056,25 @@ $(document).ready(() => {
                     }
                 });
                 return li;
+            },
+            createWebmentionPostForm: function (elementAfter) {
+                const nameBindings = {
+                    webmentionPostArticleUrl: 'webmention-post-article-url'
+                };
+                $(elementAfter).before(
+                    `
+                    <form class="layui-form" lay-filter="webmention-post" action="" method="post" target="_blank">
+                        <div class="smui-content">如果你给本文写了回应，可以在此提交文章 URL 以向我发送 Webmention。</div>
+                        <div class="smui-wrapper-webmention-post">
+                            <div class="smui-form-item-webmention-post layui-form-item">
+                                <input class="smui-input-${nameBindings.webmentionPostArticleUrl} layui-input" name="${nameBindings.webmentionPostArticleUrl}" autocomplete="off" placeholder="https://your-site.com/some-post.html" lay-affix="clear" lay-verify="required|url"  lay-reqtext="请填写文章 URL">
+                            </div>
+                            <button type="button" class="smui-button-webmention-post-submit layui-btn" lay-submit>提交</button>
+                        </div>
+                    </form>
+                    `
+                );
+                form.render();
             }
         };
         afterUiReady();
