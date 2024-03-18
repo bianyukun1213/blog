@@ -349,12 +349,12 @@
 
 /* 按钮不一定在 smui-container 里，所以这里强制应用样式。 */
 /* 按钮设置 Redefine 主色。 */
-.layui-btn {
+.layui-btn:not(.layui-btn-disabled) {
     background-color: var(--primary-color) !important;
 }
 
 /* 覆盖上一条，修复描边型按钮背景变色，且暗色模式效果优先。 */
-.layui-btn-primary {
+.layui-btn-primary:not(.layui-btn-disabled) {
     background-color: var(--lay-color-bg-4, rgba(0, 0, 0, 0)) !important;
 }
 
@@ -563,12 +563,14 @@ div.main-content.region-block-hidden {
     cursor: pointer;
 }
 
-#interaction-system-switch::before {
-    content: '/';
+@media (max-width: 768px) {
+    #interaction-system-switch {
+        font-size: 14px;
+    }
 }
 
-#smui-form-webmention-post {
-    margin-bottom: 16px;
+#interaction-system-switch::before {
+    content: '/';
 }
 
 .smui-wrapper-webmention-post {
@@ -582,6 +584,18 @@ div.main-content.region-block-hidden {
     margin: 0;
     margin-right: 16px;
     /* layui-form-item 的 margin-bottom 是 15px，我这里和 margin-right 一致。 */
-    /* 还是注释掉了。注释后 flex 换行会不协调，但是 margin-bottom 给了 #smui-form-webmention-post 后默认情况下更协调了。 */
-    /* margin-bottom: 16px; */
+    margin-bottom: 16px;
+}
+
+.smui-button-webmention-post-submit {
+    margin-bottom: 16px;
+}
+
+/* 此处是对 webmention.css 的优化。 */
+/* Redefine 评论区标题有一个 768px 的媒体查询，在小屏幕下标题采用小字号。 */
+/* 所以这里也相应调小，显得更协调一些。 */
+@media (max-width: 768px) {
+    #webmentions h2 {
+        font-size: 18px;
+    }
 }

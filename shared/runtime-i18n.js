@@ -46,12 +46,39 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    webmentionPostFormButtonSubmit: function () {
+    webmentionPostFormButtonSubmitHtml: function () {
         if (this.isEn()) {
             return 'Submit';
         }
         if (this.isZh()) {
             return '提交';
+        }
+        return this.notTranslated();
+    },
+    webmentionPostFormButtonSubmittingHtml: function () {
+        if (this.isEn()) {
+            return 'Submitting <i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>';
+        }
+        if (this.isZh()) {
+            return '提交中 <i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>';
+        }
+        return this.notTranslated();
+    },
+    webmentionPostFormTipSubmissionSucceeded: function () {
+        if (this.isEn()) {
+            return 'Done!';
+        }
+        if (this.isZh()) {
+            return '完成！';
+        }
+        return this.notTranslated();
+    },
+    webmentionPostFormTipSubmissionFailed: function () {
+        if (this.isEn()) {
+            return 'Failed!';
+        }
+        if (this.isZh()) {
+            return '失败！';
         }
         return this.notTranslated();
     },

@@ -70,7 +70,7 @@ async function smRequestAsync(options) {
         smRequest(options, true);
     }).catch((error) => {
         smLogError('异步请求出错：', error);
-        // return Promise.reject(e);
+        return Promise.reject(error);
     });
 }
 function smGet(options) {
@@ -1072,9 +1072,9 @@ $(document).ready(() => {
                         <div class="smui-content">${smI18n.webmentionPostFormTipHtml()}</div>
                         <div class="smui-wrapper-webmention-post">
                             <div class="smui-form-item-webmention-post layui-form-item">
-                                <input class="smui-input-${nameBindings.webmentionPostArticleUrl} layui-input" name="${nameBindings.webmentionPostArticleUrl}" autocomplete="off" placeholder="${smI18n.webmentionPostFormInputArticleUrlPlaceholder()}" lay-affix="clear" lay-verify="required|article-url"  lay-reqtext="${smI18n.webmentionPostFormInputArticleUrlReqText()}">
+                                <input class="smui-input-${nameBindings.webmentionPostArticleUrl} layui-input" name="${nameBindings.webmentionPostArticleUrl}" autocomplete="off" placeholder="${smI18n.webmentionPostFormInputArticleUrlPlaceholder()}" lay-verify="required|article-url"  lay-reqtext="${smI18n.webmentionPostFormInputArticleUrlReqText()}">
                             </div>
-                            <button type="button" class="smui-button-webmention-post-submit layui-btn" lay-filter="webmention-post" lay-submit>${smI18n.webmentionPostFormButtonSubmit()}</button>
+                            <button type="button" class="smui-button-webmention-post-submit layui-btn" lay-filter="webmention-post" lay-submit>${smI18n.webmentionPostFormButtonSubmitHtml()}</button>
                         </div>
                     </div>
                     `
@@ -1086,15 +1086,18 @@ $(document).ready(() => {
                     'article-url': (value, elem) => {
                         // 自定义规则和自定义提示方式。
                         if (!/^(https?:\/\/(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+\.)+[a-zA-Z]+)(:\d+)?(\/.*)?(\?.*)?(#.*)?$/.test(value)) {
-                            layer.msg(smI18n.webmentionPostArticleUrlReqText(), { icon: 5, anim: 6 }); // 默认风格基本就是这个样式。
+                            layer.msg(smI18n.webmentionPostFormInputArticleUrlReqText(), { icon: 5, anim: 6 }); // 默认风格基本就是这个样式。
                             return true; // 返回 true 即可阻止 form 默认的提示风格。
                         }
                     }
                 });
                 form.on('submit(webmention-post)', (data) => {
                     const field = data.field;
-                    const loadingIndex = smUi.showLoading();
-                    const postPromise = smPostAsync({
+                    $(`.smui-input-${nameBindings.webmentionPostArticleUrl}`).attr('disabled', '');
+                    $('.smui-button-webmention-post-submit').attr('disabled', '');
+                    $('.smui-button-webmention-post-submit').addClass('layui-btn-disabled');
+                    $('.smui-button-webmention-post-submit').html(smI18n.webmentionPostFormButtonSubmittingHtml());
+                    smPostAsync({
                         baseUrl: 'https://webmention.io',
                         entry: '/his2nd.life/webmention',
                         timeout: 8000,
@@ -1102,11 +1105,16 @@ $(document).ready(() => {
                             source: field[nameBindings.webmentionPostArticleUrl],
                             target: window.location.href.replace(window.location.hash, '')
                         }
-                    });
-                    postPromise.catch((error) => {
+                    }).then(() => {
+                        layer.tips(smI18n.webmentionPostFormTipSubmissionSucceeded(), $('.smui-button-webmention-post-submit'), { tips: 1 });
+                    }).catch((error) => {
                         smLogError('发送 Webmention 失败：', error);
+                        layer.tips(smI18n.webmentionPostFormTipSubmissionFailed(), $('.smui-button-webmention-post-submit'), { tips: 1 });
                     }).finally(() => {
-                        smUi.closeLayer(loadingIndex);
+                        $('.smui-button-webmention-post-submit').html(smI18n.webmentionPostFormButtonSubmitHtml());
+                        $('.smui-button-webmention-post-submit').removeClass('layui-btn-disabled');
+                        $('.smui-button-webmention-post-submit').removeAttr('disabled');
+                        $(`.smui-input-${nameBindings.webmentionPostArticleUrl}`).removeAttr('disabled');
                     });
                     return false;
                 });
