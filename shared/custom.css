@@ -279,6 +279,19 @@
     box-sizing: border-box;
 }
 
+/* 修复 Redefine 主题覆盖的 mastodon 时间线头像样式。 */
+.mt-toot-avatar-image-big img,
+.mt-toot-avatar-image-small img {
+    border-radius: 0.25rem;
+    cursor: none;
+    margin: 0;
+}
+
+/* 修复 Redefine 主题覆盖的 mastodon 时间线底部链接样式。 */
+.mt-container a:not(.mt-toot-preview):hover {
+    text-decoration: underline !important;
+}
+
 /* 上面的样式用来修正（主题覆盖的）插件样式。有些修复放在了单独的样式文件中，如 tag-image-masonry.css。修复布局就已经够麻烦的了；颜色的话，考虑到还有深色模式…… */
 
 /* Twikoo 的加载圆圈不是居中的，只在他们官方文档页居中。这段样式就是从文档页扒的。 */
