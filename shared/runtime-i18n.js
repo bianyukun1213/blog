@@ -191,7 +191,7 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    initPopConfirmTurnOffAntiAdExtension: function () {
+    initPopConfirmTurnOffAntiadExtension: function () {
         if (this.isEn()) {
             return 'Hello!\nThe initialization pop-up is detected as not being displayed. Are you using an ad-blocking plugin? This site is ad-free, but the Layui component used may be blocked by some imperfect ad-blocking rules. Please add a whitelist for this site, otherwise you may not be able to browse normally.\nAfter the pop-up loads and completes initialization, you will be informed by default and no longer be detected for ad-blocking.\n\nClick “OK” to refresh the page.';
         }

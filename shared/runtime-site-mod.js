@@ -822,7 +822,6 @@ $(document).ready(() => {
             showLoading: () => {
                 return layer.load(0, { shade: [1, '#202124'], scrollbar: false });
             },
-            // '您好！这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。点击“确定”永久关闭本弹窗。',
             openInitPopup: () => {
                 const li = layer.open({
                     type: 1,
@@ -869,8 +868,8 @@ $(document).ready(() => {
                         });
                     }
                 });
-                if (!$('.smui-init-popup-container').is(':visible'))
-                    if (confirm(smI18n.initPopConfirmTurnOffAntiAdExtension()))
+                if (!$('.smui-container-init-popup').is(':visible'))
+                    if (confirm(smI18n.initPopConfirmTurnOffAntiadExtension()))
                         window.location.reload();
                 return li;
             },
