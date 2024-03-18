@@ -79,7 +79,7 @@
     display: block;
     width: 100%;
     clear: left;
-    font-style: italic;
+    /* font-style: italic; */
     font-weight: bold;
     color: gray;
 }
