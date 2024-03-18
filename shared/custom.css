@@ -459,10 +459,11 @@
 
 .h-card,
 .u-url,
-/* .u-bridgy-fed, */
+.p-summary,
 .p-author,
 .dt-published,
-.dt-updated {
+.dt-updated,
+.h2l-indieweb-interactions {
     display: none;
 }
 
