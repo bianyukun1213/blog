@@ -941,7 +941,7 @@ $(document).ready(() => {
                         $(`select[name="${nameBindings.defaultInteractionSystem}"] option[value="${settingsRead.defaultInteractionSystem}"]`).attr('selected', '');
                         // 动态生成的控件需要调用 render 渲染。它实际上是根据原生组件生成了一个美化的。设置好值后再渲染。
                         form.render();
-                        $(layero).find(`.label-${nameBindings.dataAnalytics}`).click(function (e) {
+                        $(layero).find(`.smui-label-${nameBindings.dataAnalytics}`).click(function (e) {
                             layer.tips(
                                 smI18n.settPopTipDataAnalyticsHtml(isTrackingAvailable(true)), // 不应转义，这里写的本来就该是 html。
                                 // e.target,
