@@ -24,7 +24,7 @@ const smI18n = {
             return '<p>If you have written a Response to this article, you can submit the article URL here to send me a Webmention.</p>';
         }
         if (this.isZh()) {
-            return '<p>如果你给本文写了回应，可以在此提交文章 URL 以向我发送 Webmention。</p>';
+            return '<p>如果你给本文写了回应（Response），可以在此提交文章 URL 以向我发送 Webmention。</p>';
         }
         return this.notTranslated();
     },
