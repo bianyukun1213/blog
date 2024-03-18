@@ -279,10 +279,16 @@
     box-sizing: border-box;
 }
 
-/* 修复 Redefine 主题覆盖的 mastodon 时间线头像样式。 */
+/* 修复 Redefine 主题覆盖的 mastodon 时间线头像、emoji 样式。 */
 .mt-toot-avatar-image-big img,
 .mt-toot-avatar-image-small img {
     border-radius: 0.25rem;
+    cursor: none;
+    margin: 0;
+}
+
+.mt-toot-header-user .custom-emoji,
+.mt-toot-text .custom-emoji {
     cursor: none;
     margin: 0;
 }
