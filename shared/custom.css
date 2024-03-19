@@ -458,12 +458,13 @@
 /* 上面的样式用来根据实际需求覆盖 Layui 样式。 */
 
 .h-card,
-.u-url,
-.p-summary,
-.p-author,
-.dt-published,
-.dt-updated,
-.h2l-indieweb-interactions {
+#main-h-entry .u-url,
+#main-h-entry .p-summary,
+#main-h-entry .p-author,
+#main-h-entry .dt-published,
+#main-h-entry .dt-updated,
+#main-h-entry .h2l-indieweb-interactions,
+#bridgy-h-entry {
     display: none;
 }
 
