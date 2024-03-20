@@ -21,9 +21,9 @@ const smI18n = {
     },
     webmentionPostFormTipHtml: function (syndications) {
         if (this.isEn()) {
-            const mainTip = '<p>If you have written a <a href="https://indieweb.org/responses" rel="noopener external nofollow noreferrer" target="_blank">response</a> to this article, you can submit the article URL here to send me a <a href="https://indieweb.org/Webmention" rel="noopener external nofollow noreferrer" target="_blank">Webmention</a>.</p>';
+            let mainTip = '<p>If you have written a <a href="https://indieweb.org/responses" rel="noopener external nofollow noreferrer" target="_blank">response</a> to this article, you can submit the article URL here to send me a <a href="https://indieweb.org/Webmention" rel="noopener external nofollow noreferrer" target="_blank">Webmention</a>.';
             if (syndications) {
-                let syndicationsTip = '<p>In addition to that, you can also try responding directly to the following <a href="https://indieweb.org/Category:syndication" rel="noopener external nofollow noreferrer" target="_blank">syndication(s), and wait for the data to be pulled</a>: ';
+                let syndicationsTip = 'In addition to this, you can also try responding directly to the following <a href="https://indieweb.org/Category:syndication" rel="noopener external nofollow noreferrer" target="_blank">syndication(s)</a> and wait for the data to be pulled: ';
                 for (const syndicationHost in syndications) {
                     if (syndications.hasOwnProperty(syndicationHost)) {
                         const syndicationUrl = syndications[syndicationHost];
@@ -31,14 +31,14 @@ const smI18n = {
                     }
                 }
                 syndicationsTip = syndicationsTip.slice(0, -2) + '.';
-                return mainTip + syndicationsTip;
+                mainTip += (' ' + syndicationsTip);
             }
-            return mainTip;
+            return mainTip + '</p>';
         }
         if (this.isZh()) {
-            const mainTip = '<p>如果你给本文写了<a href="https://indieweb.org/responses" rel="noopener external nofollow noreferrer" target="_blank">回应</a>，可以在此提交文章 URL 以向我发送 <a href="https://indieweb.org/Webmention" rel="noopener external nofollow noreferrer" target="_blank">Webmention</a>。</p>';
+            let mainTip = '<p>如果你给本文写了<a href="https://indieweb.org/responses" rel="noopener external nofollow noreferrer" target="_blank">回应</a>，可以在此提交文章 URL 以向我发送 <a href="https://indieweb.org/Webmention" rel="noopener external nofollow noreferrer" target="_blank">Webmention</a>。';
             if (syndications) {
-                let syndicationsTip = '<p>除此之外，你还可以尝试直接回应以下<a href="https://indieweb.org/Category:syndication" rel="noopener external nofollow noreferrer" target="_blank">副本，并等待数据拉取</a>：';
+                let syndicationsTip = '除此之外，你还可以尝试直接回应以下<a href="https://indieweb.org/Category:syndication" rel="noopener external nofollow noreferrer" target="_blank">副本</a>，并等待数据拉取：';
                 for (const syndicationHost in syndications) {
                     if (syndications.hasOwnProperty(syndicationHost)) {
                         const syndicationUrl = syndications[syndicationHost];
@@ -46,9 +46,9 @@ const smI18n = {
                     }
                 }
                 syndicationsTip = syndicationsTip.slice(0, -1) + '。';
-                return mainTip + syndicationsTip;
+                mainTip += syndicationsTip;
             }
-            return mainTip;
+            return mainTip + '</p>';
         }
         return this.notTranslated();
     },
