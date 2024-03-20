@@ -277,6 +277,9 @@ function setSmData(smData) {
 function genRandomStr() {
     return Math.random().toString(36).slice(-8);
 }
+function isTextUrl(text) {
+    return /^(https?:\/\/(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+\.)+[a-zA-Z]+)(:\d+)?(\/.*)?(\?.*)?(#.*)?$/.test(text);
+}
 function isMobile() {
     return !!navigator.userAgent.match(
         /(phone|pad|pod|Mobile|iPhone|iPad|iPod|ios|Android|Windows Phone|Symbian|BlackBerry|WebOS|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG)/i
@@ -1065,10 +1068,14 @@ $(document).ready(() => {
                 const nameBindings = {
                     webmentionPostArticleUrl: 'webmention-post-article-url'
                 };
+                const syndicationMarkups = $('.u-syndication');
+                let syndications = {};
+                for (const syndicationMarkup of syndicationMarkups)
+                    syndications[$(syndicationMarkup).text()] = $(syndicationMarkup).attr('href');
                 $(elementAfter).before(
                     `
                     <div id="smui-form-webmention-post" class="layui-form" lay-filter="webmention-post">
-                        <div class="smui-content">${smI18n.webmentionPostFormTipHtml()}</div>
+                        <div class="smui-content">${smI18n.webmentionPostFormTipHtml($.isEmptyObject(syndications) ? undefined : syndications)}</div>
                         <div class="smui-wrapper-webmention-post">
                             <div class="smui-form-item-webmention-post layui-form-item">
                                 <input class="smui-input-${nameBindings.webmentionPostArticleUrl} layui-input" name="${nameBindings.webmentionPostArticleUrl}" autocomplete="off" placeholder="${smI18n.webmentionPostFormInputArticleUrlPlaceholder()}" lay-verify="required|article-url"  lay-reqtext="${smI18n.webmentionPostFormInputArticleUrlReqText()}">
@@ -1084,7 +1091,7 @@ $(document).ready(() => {
                     // Layui 有 URL 验证。创建这个完全是为了提示的 i18n。
                     'article-url': (value, elem) => {
                         // 自定义规则和自定义提示方式。
-                        if (!/^(https?:\/\/(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+\.)+[a-zA-Z]+)(:\d+)?(\/.*)?(\?.*)?(#.*)?$/.test(value)) {
+                        if (!isTextUrl(value.trim())) {
                             layer.msg(smI18n.webmentionPostFormInputArticleUrlReqText(), { icon: 5, anim: 6 }); // 默认风格基本就是这个样式。
                             return true; // 返回 true 即可阻止 form 默认的提示风格。
                         }
@@ -1101,7 +1108,7 @@ $(document).ready(() => {
                         entry: '/his2nd.life/webmention',
                         timeout: 8000,
                         data: {
-                            source: field[nameBindings.webmentionPostArticleUrl],
+                            source: field[nameBindings.webmentionPostArticleUrl.trim()],
                             target: window.location.href.replace(window.location.hash, '')
                         }
                     }).then(() => {

@@ -19,12 +19,36 @@ const smI18n = {
         if (this.isZh())
             return 'smui-lang-zh';
     },
-    webmentionPostFormTipHtml: function () {
+    webmentionPostFormTipHtml: function (syndications) {
         if (this.isEn()) {
-            return '<p>If you have written a Response to this article, you can submit the article URL here to send me a Webmention.</p>';
+            const mainTip = '<p>If you have written a <a href="https://indieweb.org/responses" rel="noopener external nofollow noreferrer" target="_blank">response</a> to this article, you can submit the article URL here to send me a <a href="https://indieweb.org/Webmention" rel="noopener external nofollow noreferrer" target="_blank">Webmention</a>.</p>';
+            if (syndications) {
+                let syndicationsTip = '<p>In addition to that, you can also try responding directly to the following <a href="https://indieweb.org/Category:syndication" rel="noopener external nofollow noreferrer" target="_blank">syndication(s)</a>: ';
+                for (const syndicationHost in syndications) {
+                    if (syndications.hasOwnProperty(syndicationHost)) {
+                        const syndicationUrl = syndications[syndicationHost];
+                        syndicationsTip += `<a href="${syndicationUrl}" rel="noopener external nofollow noreferrer" target="_blank">${syndicationHost}</a>, `;
+                    }
+                }
+                syndicationsTip = syndicationsTip.slice(0, -2) + '.';
+                return mainTip + syndicationsTip;
+            }
+            return mainTip;
         }
         if (this.isZh()) {
-            return '<p>如果你给本文写了回应（Response），可以在此提交文章 URL 以向我发送 Webmention。</p>';
+            const mainTip = '<p>如果你给本文写了<a href="https://indieweb.org/responses" rel="noopener external nofollow noreferrer" target="_blank">回应</a>，可以在此提交文章 URL 以向我发送 <a href="https://indieweb.org/Webmention" rel="noopener external nofollow noreferrer" target="_blank">Webmention</a>。</p>';
+            if (syndications) {
+                let syndicationsTip = '<p>除此之外，你还可以尝试直接回应以下<a href="https://indieweb.org/Category:syndication" rel="noopener external nofollow noreferrer" target="_blank">副本</a>：';
+                for (const syndicationHost in syndications) {
+                    if (syndications.hasOwnProperty(syndicationHost)) {
+                        const syndicationUrl = syndications[syndicationHost];
+                        syndicationsTip += `<a href="${syndicationUrl}" rel="noopener external nofollow noreferrer" target="_blank">${syndicationHost}</a>、`;
+                    }
+                }
+                syndicationsTip = syndicationsTip.slice(0, -1) + '。';
+                return mainTip + syndicationsTip;
+            }
+            return mainTip;
         }
         return this.notTranslated();
     },
@@ -158,7 +182,6 @@ const smI18n = {
             <p>Hello!</p>
             <p>This may be your first visit to this site. Most of the resources on this site are hosted abroad and may not load properly under the network environment in mainland China. If you visit this site in mainland China, it is recommended to use a proxy. (International visitors, however, may experience slow image loading since images are stored in mainland China.)</p>
             <p>In addition, before completing the initialization, if you want to adjust the settings such as Data Analytics, please click the button at the bottom left corner, otherwise the site will work with the default settings. After the initialization is completed, you can also find the settings in the lower right corner of the page.</p>
-            <br>
             <p>Click “OK” to complete the initialization and permanently close this pop-up.</p>
             `;
         }
@@ -167,7 +190,6 @@ const smI18n = {
             <p>您好！</p>
             <p>这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。（国际访客则可能会遇到图片加载缓慢的问题，因为图片存储在中国大陆。）</p>
             <p>此外，在完成初始化前，如果您想要调整数据分析等设置，请点击左下角按钮，否则站点将以默认设置工作。初始化完成后，您也可以在页面右下角找到设置。</p>
-            <br>
             <p>点击“了解”完成初始化并永久关闭本弹窗。</p>
             `;
         }

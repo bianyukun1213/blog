@@ -459,11 +459,12 @@
 
 .h-card,
 #main-h-entry .u-url,
-#main-h-entry .p-summary,
+#main-h-entry .u-syndication,
 #main-h-entry .p-author,
 #main-h-entry .dt-published,
 #main-h-entry .dt-updated,
 #main-h-entry .h2l-indieweb-interactions,
+#main-h-entry .p-summary,
 #bridgy-h-entry {
     display: none;
 }
@@ -540,6 +541,11 @@ div.main-content.region-block-hidden {
     margin-bottom: 16px;
 }
 
+.smui-content p {
+    margin: 0;
+    margin-bottom: 16px;
+}
+
 .smui-func hr {
     margin: 0;
     margin-bottom: 16px;
@@ -590,6 +596,11 @@ div.main-content.region-block-hidden {
 
 #interaction-system-switch::before {
     content: '/';
+}
+
+#smui-form-webmention-post a {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .smui-wrapper-webmention-post {
