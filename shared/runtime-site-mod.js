@@ -611,32 +611,35 @@ function afterUiReady() {
             $('#icon-switch-lang').click(() => smUi.openLangSwitchPopup(langs));
         }
     });
-    const commentTitle = $('.comment-area-title').text();
-    const switchInteractionSystem = () => {
-        if ($('.comment-area-title').hasClass('on-webmentions')) {
-            $('.comment-area-title').contents()[0].nodeValue = commentTitle;
-            $('#interaction-system-switch').text(smI18n.interactionSwitchWebmentions());
-            $('.twikoo-container').show();
-            $('#smui-form-webmention-post').hide();
-            $('#webmentions').hide();
-            $('.comment-area-title').removeClass('on-webmentions');
-        } else {
-            $('.comment-area-title').contents()[0].nodeValue = smI18n.interactionSwitchWebmentions();
-            $('#interaction-system-switch').text(commentTitle);
-            $('.twikoo-container').hide();
-            $('#smui-form-webmention-post').show();
-            $('#webmentions').show();
-            $('.comment-area-title').addClass('on-webmentions');
-        }
-    };
-    $('.comment-area-title').append(`<a id="interaction-system-switch">${smI18n.interactionSwitchWebmentions()}</a>`);
-    $('#interaction-system-switch').click(() => {
-        switchInteractionSystem();
-    });
-    smUi.createWebmentionPostForm($('#webmentions'));
-    // 静态页面中是评论，Webmentions 是动态添加的。如果设置了默认互动系统为 Webmentions，就直接切换。
-    if (getSmSettings().defaultInteractionSystem === 'WEBMENTIONS')
-        switchInteractionSystem();
+    let commentTitle = $('.comment-area-title');
+    if (commentTitle.length !== 0) {
+        let commentTitleText = commentTitle.text();
+        const switchInteractionSystem = () => {
+            if (commentTitle.hasClass('on-webmentions')) {
+                commentTitle.contents()[0].nodeValue = commentTitleText;
+                $('#interaction-system-switch').text(smI18n.interactionSwitchWebmentions());
+                $('.twikoo-container').show();
+                $('#smui-form-webmention-post').hide();
+                $('#webmentions').hide();
+                commentTitle.removeClass('on-webmentions');
+            } else {
+                commentTitle.contents()[0].nodeValue = smI18n.interactionSwitchWebmentions();
+                $('#interaction-system-switch').text(commentTitleText);
+                $('.twikoo-container').hide();
+                $('#smui-form-webmention-post').show();
+                $('#webmentions').show();
+                commentTitle.addClass('on-webmentions');
+            }
+        };
+        commentTitle.append(`<a id="interaction-system-switch">${smI18n.interactionSwitchWebmentions()}</a>`);
+        $('#interaction-system-switch').click(() => {
+            switchInteractionSystem();
+        });
+        smUi.createWebmentionPostForm($('#webmentions'));
+        // 静态页面中是评论，Webmentions 是动态添加的。如果设置了默认互动系统为 Webmentions，就直接切换。
+        if (getSmSettings().defaultInteractionSystem === 'WEBMENTIONS')
+            switchInteractionSystem();
+    }
     // 检查用户区域。
     checkPageRegionBlockAsync().then((res) => {
         if (res === 'BLOCKED')
