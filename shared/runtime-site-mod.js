@@ -278,7 +278,7 @@ function genRandomStr() {
     return Math.random().toString(36).slice(-8);
 }
 function isTextUrl(text) {
-    return /^(https?:\/\/(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+\.)+[a-zA-Z]+)(:\d+)?(\/.*)?(\?.*)?(#.*)?$/.test(text);
+    return /^(http|https):\/\/[^ "]+$/.test(text);
 }
 function isMobile() {
     return !!navigator.userAgent.match(
