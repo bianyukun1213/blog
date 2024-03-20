@@ -464,8 +464,10 @@
 #main-h-entry .dt-published,
 #main-h-entry .dt-updated,
 #main-h-entry .h2l-indieweb-interactions,
-#main-h-entry .p-summary,
-#bridgy-h-entry {
+#main-h-entry .p-summary
+
+/* , #bridgy-h-entry */
+    {
     display: none;
 }
 
