@@ -1,3 +1,8 @@
+/* 给锚点跳转加 60px 偏移，否则跳转到的目标元素会被导航栏挡住。 */
+:target {
+    scroll-margin-top: 60px;
+}
+
 /* 搜索图标 hover 变色。 */
 .search.search-popup-trigger:hover i {
     color: var(--primary-color) !important;
@@ -89,15 +94,6 @@
 .article-nav:has(.article-next:first-of-type) {
     flex-direction: row-reverse;
 }
-
-/* 页面图片标注居中，此项已在 2.6.1 修复。 */
-/* .page-template-container figure.image-caption figcaption {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--third-text-color);
-} */
 
 /* 去掉 toc 未展开时，文章右上方工具栏与文章主体的间隙，使外观与无 toc 文章一致。*/
 .post-page-container:not(.show-toc) .toc-content-container {
