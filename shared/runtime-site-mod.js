@@ -15,6 +15,12 @@ const geoApiToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBY2NvdW50SWQiOiJkMD
 
 const aesKey = '#$!2KENZ*#bLGy';
 
+const minimumSupportedBrowserVersions = {
+    chrome: '105',
+    safari: '15.4',
+    firefox: '121'
+};
+
 function escapeHtml(str) {
     let s = '';
     if (str.length == 0) return '';
@@ -835,7 +841,7 @@ $(document).ready(() => {
                     content: `
                     <div class="smui-container smui-container-init-popup ${smI18n.langStyleClass()}">
                         <div class="smui-content">
-                          ${smI18n.initPopContentHtml()}
+                          ${smI18n.initPopContentHtml(minimumSupportedBrowserVersions)}
                         </div>
                         <div class="smui-func smui-clearfix">
                           <hr>
