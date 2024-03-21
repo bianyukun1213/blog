@@ -574,12 +574,13 @@ function afterPageReady() {
     }
     if (removeLangPrefix(pathname) === '/timeline/') {
         if (!mastodonTimeline) {
+            const instanceUrl = 'https://m.cmx.im';
             let locale = smI18n.getSiteLang();
             if (locale === 'en')
                 locale = 'en-US';
             mastodonTimeline = new MastodonTimeline.Init({
                 tContainerId: 'mt-container',
-                instanceUrl: 'https://m.cmx.im',
+                instanceUrl: instanceUrl,
                 timelineType: 'profile',
                 userId: '107989258291762102',
                 profileName: '@Hollis',
@@ -590,7 +591,7 @@ function afterPageReady() {
                 dateOptions: {
                     day: '2-digit',
                     month: '2-digit',
-                    year: "numeric",
+                    year: 'numeric',
                 },
                 carouselCloseTxt: escapeHtml(smI18n.timelineButtonCloseCarousel()),
                 carouselPrevTxt: escapeHtml(smI18n.timelineButtonCarouselPrevItem()),

@@ -253,7 +253,7 @@ const smI18n = {
             return `
             <p>您好！</p>
             <p>这可能是您初次访问本站。本站的大部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。（国际访客则可能会遇到图片加载缓慢的问题，因为图片存储在中国大陆。）</p>
-            <p>本站使用的部分特性需要 Chrome/Chromium ${minimumSupportedBrowserVersions.chrome}、Safari ${minimumSupportedBrowserVersions.safari}、Firefox ${minimumSupportedBrowserVersions.firefox} 及以上版本浏览器的支持。</p>
+            <p>本站使用的部分特性需要 Chrome/Chromium ${minimumSupportedBrowserVersions.chrome}、Safari ${minimumSupportedBrowserVersions.safari}、Firefox ${minimumSupportedBrowserVersions.firefox} 及以上版本的支持。</p>
             <p>此外，在完成初始化前，如果您想要调整数据分析等设置，请点击左下角按钮，否则站点将以默认设置工作。初始化完成后，您也可以在页面右下角找到设置。</p>
             <p>点击“${this.initPopButtonOk()}”完成初始化并永久关闭本弹窗。</p>
             `;
