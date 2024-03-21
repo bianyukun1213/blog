@@ -438,42 +438,89 @@
 
 /* 上面的样式用来根据实际需求覆盖 Layui 样式。 */
 
-/* 修复 Redefine 主题覆盖的 mastodon 时间线头像、emoji 样式。 */
-.mt-toot-avatar-image-big img,
-.mt-toot-avatar-image-small img {
+/* 我加的，修复 Redefine 主题覆盖的 mastodon 时间线头像、emoji 样式。 */
+.mt-post-avatar-image-big img,
+.mt-post-avatar-image-small img {
+    margin: 0;
     border-radius: 0.25rem;
-    cursor: none;
+    cursor: unset;
+}
+
+/* 我加的。 */
+.mt-post-header-user .mt-custom-emoji,
+.mt-post-text .mt-custom-emoji {
+    display: unset;
     margin: 0;
+    cursor: unset;
 }
 
-.mt-toot-header-user .custom-emoji,
-.mt-toot-text .custom-emoji {
-    cursor: none;
-    margin: 0;
+/* 我加的。 */
+.mt-container {
+    --mt-color-link: var(--primary-color) !important;
+    --mt-color-btn-bg: var(--primary-color) !important;
+    --mt-color-btn-bg-hover: var(--selection-color) !important;
 }
 
-/* 修复 Redefine 主题覆盖的 mastodon 时间线底部链接样式。 */
-.mt-container a:not(.mt-toot-preview):hover {
-    text-decoration: underline !important;
+/* 我加的，尽量实现类似于原版的效果。 */
+.mt-container .mt-post-header-user {
+    line-height: 1.2;
 }
 
-/* Redefine 和 mastodon 时间线都有 --link-color 变量，时间线的被覆盖了。这里干脆统一为 Redefine 主色。 */
 .mt-container a,
 .mt-container a:active,
 .mt-container a:link {
     text-decoration: none;
-    color: var(--primary-color);
+    color: var(--mt-color-link);
 }
 
+.mt-container a,
+.mt-container button,
+.mt-dialog button {
+    cursor: pointer;
+}
+
+/* !important 我加的，防止 Redefine 覆盖。 */
+.mt-container a:not(.mt-post-preview):hover {
+    text-decoration: underline !important;
+}
+
+/* !important 我加的，防止 Redefine 覆盖。 */
+.mt-container .mt-post-header-user>a:hover {
+    text-decoration: none !important;
+}
+
+/* 我加的。 */
 .mt-container a:hover {
-    color: var(--primary-color);
+    color: var(--mt-color-link);
 }
 
+/* 我加的。 */
 .mt-container a span {
-    color: var(--primary-color);
+    color: var(--mt-color-link);
 }
 
-/* 上面的样式用来根据实际需求覆盖 mastodon 时间线样式。 */
+.mt-container .mt-post-header-user>a {
+    color: var(--mt-color-content-txt) !important;
+    overflow-wrap: anywhere;
+}
+
+.mt-container .mt-post-header-user-account {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--mt-color-contrast-gray);
+}
+
+/* 我加的。 */
+.mt-container a.mt-btn-violet,
+.mt-container a.mt-btn-violet:hover,
+.mt-container a.mt-btn-violet:active {
+    text-decoration: none !important;
+    color: var(--mt-color-btn-txt)
+}
+
+/* 上面的样式用来根据实际需求修复/覆盖 mastodon 时间线样式。 */
 
 .h-card,
 #main-h-entry .u-url,

@@ -7,7 +7,7 @@ const siteUrl = `${window.location.origin}/${smI18n.getSiteLang()}`;
 
 const counterUrl = 'https://gc.his2nd.life/counter';
 
-const layuiThemeDarkCdn = 'https://unpkg.com/layui-theme-dark/dist/layui-theme-dark.css';
+const layuiThemeDarkCdn = 'https://npm.onmicrosoft.cn/layui-theme-dark/dist/layui-theme-dark.css';
 
 // 明晃晃写，毕竟这些措施都只能稍稍保护一下。
 
@@ -573,31 +573,36 @@ function afterPageReady() {
         }
     }
     if (removeLangPrefix(pathname) === '/timeline/') {
-        // runtime-site-mod.js 加载 Mastodon 时间线，比较方便控制主题切换。
         if (!mastodonTimeline) {
-            mastodonTimeline = new MastodonApi({
-                container_body_id: 'mt-body',
-                spinner_class: 'loading-spinner',
-                default_theme: themeColorScheme,
-                instance_url: 'https://m.cmx.im',
-                timeline_type: 'profile',
-                user_id: '107989258291762102',
-                profile_name: '@Hollis',
-                hashtag_name: '',
-                toots_limit: '20',
-                hide_unlisted: false,
-                hide_reblog: false,
-                hide_replies: false,
-                hide_video_preview: false,
-                hide_preview_link: false,
-                hide_emojos: false,
-                markdown_blockquote: false,
-                hide_counter_bar: false,
-                text_max_lines: '0',
-                link_see_more: escapeHtml(smI18n.timelineLinkViewMore()) // 确实需要转义。
+            let locale = smI18n.getSiteLang();
+            if (locale === 'en')
+                locale = 'en-US';
+            mastodonTimeline = new MastodonTimeline.Init({
+                tContainerId: 'mt-container',
+                instanceUrl: 'https://m.cmx.im',
+                timelineType: 'profile',
+                userId: '107989258291762102',
+                profileName: '@Hollis',
+                hashtagName: '',
+                spinnerClass: 'mt-loading-spinner',
+                defaultTheme: getThemeColorScheme(),
+                dateLocale: locale,
+                dateOptions: {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: "numeric",
+                },
+                carouselCloseTxt: escapeHtml(smI18n.timelineButtonCloseCarousel()),
+                carouselPrevTxt: escapeHtml(smI18n.timelineButtonCarouselPrevItem()),
+                carouselNextTxt: escapeHtml(smI18n.timelineButtonCarouselNextItem()),
+                btnShowMore: escapeHtml(smI18n.timelineButtonShowMore()),
+                btnShowLess: escapeHtml(smI18n.timelineButtonShowLess()),
+                btnShowContent: escapeHtml(smI18n.timelineButtonShowContent()),
+                btnSeeMore: escapeHtml(smI18n.timelineLinkSeeMore(instanceUrl.split('/')[2])),
+                btnReload: escapeHtml(smI18n.timelineButtonRefresh())
             });
         } else {
-            mastodonTimeline.buildTimeline();
+            mastodonTimeline.mtUpdate();
         }
     }
 }
@@ -806,10 +811,8 @@ setInterval(() => {
         else
             $('#layui-theme-dark').removeAttr('href');
         // 切换 mastodonTimeline 主题。
-        if (removeLangPrefix(window.location.pathname) === '/timeline/') {
-            mastodonTimeline.DEFAULT_THEME = newThemeColorScheme;
-            mastodonTimeline.setTheme();
-        }
+        if (removeLangPrefix(window.location.pathname) === '/timeline/')
+            mastodonTimeline.mtColorTheme(newThemeColorScheme);
         if (!$.isEmptyObject(vConsole))
             vConsole.setOption('theme', newThemeColorScheme);
     }

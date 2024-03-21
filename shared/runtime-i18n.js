@@ -149,12 +149,75 @@ const smI18n = {
         }
         return this.notTranslated();
     },
-    timelineLinkViewMore: function () {
+    timelineButtonCloseCarousel: function () {
         if (this.isEn()) {
-            return 'View more twoots at m.cmx.im';
+            return 'Close carousel';
         }
         if (this.isZh()) {
-            return '在 m.cmx.im 查看更多嘟文';
+            return '关闭大图';
+        }
+        return this.notTranslated();
+    },
+    timelineButtonCarouselPrevItem: function () {
+        if (this.isEn()) {
+            return 'Previous media item';
+        }
+        if (this.isZh()) {
+            return '前一项';
+        }
+        return this.notTranslated();
+    },
+    timelineButtonCarouselNextItem: function () {
+        if (this.isEn()) {
+            return 'Next media item';
+        }
+        if (this.isZh()) {
+            return '后一项';
+        }
+        return this.notTranslated();
+    },
+    timelineButtonShowMore: function () {
+        if (this.isEn()) {
+            return 'SHOW MORE';
+        }
+        if (this.isZh()) {
+            return '展开';
+        }
+        return this.notTranslated();
+    },
+    timelineButtonShowLess: function () {
+        if (this.isEn()) {
+            return 'SHOW LESS';
+        }
+        if (this.isZh()) {
+            return '折叠';
+        }
+        return this.notTranslated();
+    },
+    timelineButtonShowContent: function () {
+        if (this.isEn()) {
+            return 'SHOW CONTENT';
+        }
+        if (this.isZh()) {
+            return '显示内容';
+        }
+        return this.notTranslated();
+    },
+    timelineLinkSeeMore: function (instanceHost) {
+        if (this.isEn()) {
+            return `See more twoots at ${instanceHost}`;
+        }
+        if (this.isZh()) {
+            return `在 ${instanceHost} 查看更多嘟文`;
+        }
+        return this.notTranslated();
+    },
+    timelineButtonRefresh: function () {
+        if (this.isEn()) {
+            return 'Refresh';
+        }
+        if (this.isZh()) {
+            return '刷新';
         }
         return this.notTranslated();
     },
