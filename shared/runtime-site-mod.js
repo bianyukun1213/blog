@@ -13,7 +13,7 @@ const layuiThemeDarkCdn = 'https://unpkg.com/layui-theme-dark/dist/layui-theme-d
 
 const geoApiToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBY2NvdW50SWQiOiJkMDA2OGM4ZDFiNTM2ZmMzMjc2NmRiNWIzOTQ4NjFkYiJ9.ahNbkKBX2KIaalcvL6eRUBJVWA9NEfIesXNIhliN5Kc';
 
-const aesKey = '#$!2KENZ*#bLGy';
+const aesKey = 'Uznb#gi;ZezgSV0EcaER(uwf@NV+bh+3';
 
 const minimumSupportedBrowserVersions = {
     chrome: '105',
@@ -355,7 +355,7 @@ async function getSiteMetaAsync(forced) {
 }
 function decryptPageMeta(pageMeta) {
     try {
-        return JSON.parse(CryptoJS.AES.decrypt(pageMeta.encryptedData, aesKey).toString(CryptoJS.enc.Utf8));
+        return JSON.parse(CryptoJS.AES.decrypt(pageMeta.encryptedData, CryptoJS.enc.Utf8.parse(aesKey), { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 }).toString(CryptoJS.enc.Utf8));
     } catch (error) {
         return {};
     }
