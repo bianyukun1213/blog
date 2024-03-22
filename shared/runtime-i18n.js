@@ -22,13 +22,13 @@ const smI18n = {
     webmentionPostFormTipHtml: function (syndications) {
         if (this.isEn()) {
             let mainTip = '<p>If you have written a <a href="https://indieweb.org/responses" rel="noopener external nofollow noreferrer" target="_blank">response</a> to this article, you can submit your article URL here to send me a <a href="https://indieweb.org/Webmention" rel="noopener external nofollow noreferrer" target="_blank">Webmention</a>.';
-            if (syndications) {
+            if (Array.isArray(syndications) && syndications.length !== 0) {
                 let syndicationsTip = 'In addition to this, you can also try responding directly to the following <a href="https://indieweb.org/Category:syndication" rel="noopener external nofollow noreferrer" target="_blank">syndication(s)</a> and wait for the data to be pulled: ';
-                for (const syndicationHost in syndications) {
-                    if (syndications.hasOwnProperty(syndicationHost)) {
-                        const syndicationUrl = syndications[syndicationHost];
-                        syndicationsTip += `<a href="${syndicationUrl}" rel="noopener external nofollow noreferrer" target="_blank">${syndicationHost}</a>, `;
-                    }
+                const syndicationsLength = syndications.length;
+                for (let syndicationIndex = 0; syndicationIndex < syndicationsLength; syndicationIndex++) {
+                    const syndication = syndications[syndicationIndex];
+                    const syndicationHost = syndication.split('/')[2];
+                    syndicationsTip += `<a href="${syndication}" rel="noopener external nofollow noreferrer" target="_blank">${syndicationHost}</a>, `;
                 }
                 syndicationsTip = syndicationsTip.slice(0, -2) + '.';
                 mainTip += (' ' + syndicationsTip);
@@ -37,13 +37,13 @@ const smI18n = {
         }
         if (this.isZh()) {
             let mainTip = '<p>如果你给本文写了<a href="https://indieweb.org/responses" rel="noopener external nofollow noreferrer" target="_blank">回应</a>，可以在此提交文章 URL 以向我发送 <a href="https://indieweb.org/Webmention" rel="noopener external nofollow noreferrer" target="_blank">Webmention</a>。';
-            if (syndications) {
+            if (Array.isArray(syndications) && syndications.length !== 0) {
                 let syndicationsTip = '除此之外，你还可以尝试直接回应以下<a href="https://indieweb.org/Category:syndication" rel="noopener external nofollow noreferrer" target="_blank">副本</a>，并等待数据拉取：';
-                for (const syndicationHost in syndications) {
-                    if (syndications.hasOwnProperty(syndicationHost)) {
-                        const syndicationUrl = syndications[syndicationHost];
-                        syndicationsTip += `<a href="${syndicationUrl}" rel="noopener external nofollow noreferrer" target="_blank">${syndicationHost}</a>、`;
-                    }
+                const syndicationsLength = syndications.length;
+                for (let syndicationIndex = 0; syndicationIndex < syndicationsLength; syndicationIndex++) {
+                    const syndication = syndications[syndicationIndex];
+                    const syndicationHost = syndication.split('/')[2];
+                    syndicationsTip += `<a href="${syndication}" rel="noopener external nofollow noreferrer" target="_blank">${syndicationHost}</a>、`;
                 }
                 syndicationsTip = syndicationsTip.slice(0, -1) + '。';
                 mainTip += syndicationsTip;

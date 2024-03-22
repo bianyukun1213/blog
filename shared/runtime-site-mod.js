@@ -407,6 +407,12 @@ async function getPageMetaAsync(forced, pathnameIn) {
         return pageMeta; // 没找到的空值。
     }
 }
+async function getPageLangAsync(forced) {
+    const curMeta = await getPageMetaAsync(forced);
+    if ($.isEmptyObject(curMeta) || !curMeta.lang)
+        return {};
+    return curMeta.lang;
+}
 async function getPageAvailableLangsAsync(forced) {
     const curMeta = await getPageMetaAsync(forced);
     if ($.isEmptyObject(curMeta) || !curMeta.langs)
@@ -647,10 +653,11 @@ function afterUiReady() {
         $('#interaction-system-switch').click(() => {
             switchInteractionSystem();
         });
-        smUi.createWebmentionPostForm($('#webmentions'));
-        // 静态页面中是评论，Webmentions 是动态添加的。如果设置了默认互动系统为 Webmentions，就直接切换。
-        if (getSmSettings().defaultInteractionSystem === 'WEBMENTIONS')
-            switchInteractionSystem();
+        smUi.createWebmentionPostFormAsync($('#webmentions')).then(() => {
+            // 静态页面中是评论，Webmentions 是动态添加的。如果设置了默认互动系统为 Webmentions，就直接切换。
+            if (getSmSettings().defaultInteractionSystem === 'WEBMENTIONS')
+                switchInteractionSystem();
+        });
     }
     // 检查用户区域。
     checkPageRegionBlockAsync().then((res) => {
@@ -1045,29 +1052,29 @@ $(document).ready(() => {
                     },
                     success: async (layero, index, that) => {
                         // langsOrForced 是 object 并且不为空，就用；否则现场获取可用语言，是否 forced 取决于 langsOrForced 的值是否是布尔 true。
+                        const pageLang = await getPageLangAsync(); // 页面语言不等于站点语言，不等式秒了！
                         langsOrForced = $.isPlainObject(langsOrForced) && !$.isEmptyObject(langsOrForced) ? langsOrForced : await getPageAvailableLangsAsync(langsOrForced === true ? true : false);
                         const availableLangs = Object.getOwnPropertyNames(langsOrForced);
                         const langsLength = availableLangs.length;
                         for (let i = 0; i < langsLength; i++) {
                             const langKey = availableLangs[i];
-                            if (langKey === smI18n.getSiteLang())
+                            if (langKey === pageLang)
                                 $(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}" selected>${smI18n.langSwitchPopSelectOptionLang(langKey)} (${langKey})</option>`);
                             else
                                 $(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}">${smI18n.langSwitchPopSelectOptionLang(langKey)} (${langKey})</option>`);
                         }
-                        if (availableLangs.length === 0) { // 如果当前页面可用语言为空，则手动添加一个“当前语言”的项。
-                            $(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${smI18n.getSiteLang()}" selected>${smI18n.langSwitchPopSelectOptionLang(smI18n.getSiteLang())} (${smI18n.getSiteLang()})</option > `);
-                        }
+                        if (availableLangs.length === 0) // 如果当前页面可用语言为空，则手动添加一个“当前语言”的项。
+                            $(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${pageLang}" selected>${smI18n.langSwitchPopSelectOptionLang(pageLang)} (${pageLang})</option>`);
                         form.render();
                         $(layero).find('.smui-button-switch-language').click(() => {
                             form.submit('lang-switch', (data) => {
                                 const targetLangKey = data.field[nameBindings.targetLang];
                                 const targetPath = langsOrForced[targetLangKey];
-                                if (targetLangKey === smI18n.getSiteLang()) { // 语言不变切个屁。
+                                if (targetLangKey === pageLang) { // 语言不变切个屁。
                                     layer.close(index);
                                     return;
                                 }
-                                window.location.pathname = encodeURI(`/${targetLangKey}/${targetPath}`);
+                                window.location.pathname = encodeURI(targetPath);
                             });
                             return false; // 阻止默认动作。
                         });
@@ -1075,20 +1082,27 @@ $(document).ready(() => {
                 });
                 return li;
             },
-            createWebmentionPostForm: function (elementAfter) {
+            createWebmentionPostFormAsync: async function (elementAfter) {
                 if ($('#smui-form-webmention-post').length !== 0)
                     return;
                 const nameBindings = {
                     webmentionPostArticleUrl: 'webmention-post-article-url'
                 };
-                const syndicationMarkups = $('.u-syndication');
-                let syndications = {};
-                for (const syndicationMarkup of syndicationMarkups)
-                    syndications[$(syndicationMarkup).text()] = $(syndicationMarkup).attr('href');
+                const syndications = (await getPageMetaAsync()).syndications;
+                let validatedSyndications = [];
+                if (Array.isArray(syndications)) {
+                    const syndicationsLength = syndications.length;
+                    for (let syndicationIndex = 0; syndicationIndex < syndicationsLength; syndicationIndex++) {
+                        const syndication = syndications[syndicationIndex].trim();
+                        if (isTextUrl(syndication))
+                            validatedSyndications.push(syndication);
+                    }
+                }
                 $(elementAfter).before(
                     `
                     <div id="smui-form-webmention-post" class="layui-form" lay-filter="webmention-post">
-                        <div class="smui-content">${smI18n.webmentionPostFormTipHtml($.isEmptyObject(syndications) ? undefined : syndications)}</div>
+                        <!-- <div class="smui-content">${smI18n.webmentionPostFormTipHtml($.isEmptyObject(syndications) ? undefined : syndications)}</div> -->
+                        <div class="smui-content">${smI18n.webmentionPostFormTipHtml(validatedSyndications)}</div>
                         <div class="smui-wrapper-webmention-post">
                             <div class="smui-form-item-webmention-post layui-form-item">
                                 <input class="smui-input-${nameBindings.webmentionPostArticleUrl} layui-input" name="${nameBindings.webmentionPostArticleUrl}" autocomplete="off" placeholder="${smI18n.webmentionPostFormInputArticleUrlPlaceholder()}" lay-verify="required|article-url"  lay-reqtext="${smI18n.webmentionPostFormInputArticleUrlReqText()}">
