@@ -63,10 +63,10 @@ const smI18n = {
     },
     webmentionPostFormInputArticleUrlReqText: function () {
         if (this.isEn()) {
-            return 'Please fill in the article URL!';
+            return 'Please fill in the article URL correctly!';
         }
         if (this.isZh()) {
-            return '请填写文章 URL！';
+            return '请有效填写文章 URL！';
         }
         return this.notTranslated();
     },
@@ -474,6 +474,135 @@ const smI18n = {
         }
         if (this.isZh()) {
             return '切换';
+        }
+        return this.notTranslated();
+    },
+    pageContentIconTitleShareOnFediverse: function () {
+        if (this.isEn()) {
+            return 'Share on Fediverse';
+        }
+        if (this.isZh()) {
+            return '分享到 Fediverse';
+        }
+        return this.notTranslated();
+    },
+    fediverseSharingPopTitle: function () {
+        if (this.isEn()) {
+            return 'Share on Fediverse';
+        }
+        if (this.isZh()) {
+            return '分享到 Fediverse';
+        }
+        return this.notTranslated();
+    },
+    fediverseSharingPopLableInstance: function () {
+        if (this.isEn()) {
+            return 'Instance';
+        }
+        if (this.isZh()) {
+            return '实例';
+        }
+        return this.notTranslated();
+    },
+    fediverseSharingPopInputInstancePlaceholder: function () {
+        if (this.isEn()) {
+            return 'your-instance.domain';
+        }
+        if (this.isZh()) {
+            return 'your-instance.domain';
+        }
+        return this.notTranslated();
+    },
+    fediverseSharingPopInputInstanceReqText: function () {
+        if (this.isEn()) {
+            return 'Please fill in the instance correctly!';
+        }
+        if (this.isZh()) {
+            return '请有效填写实例！';
+        }
+        return this.notTranslated();
+    },
+    fediverseSharingPopLableSoftware: function () {
+        if (this.isEn()) {
+            return 'Software';
+        }
+        if (this.isZh()) {
+            return '平台';
+        }
+        return this.notTranslated();
+    },
+    fediverseSharingPopSelectOptionSoftware: function (key) {
+        switch (key) {
+            case 'calckey':
+                return 'Calckey';
+            case 'diaspora':
+                return 'Diaspora';
+            case 'fedibird':
+                return 'Fedibird';
+            case 'firefish':
+                return 'Firefish';
+            case 'foundkey':
+                return 'FoundKey';
+            case 'friendica':
+                return 'Friendica';
+            case 'hometown':
+                return 'Hometown';
+            case 'hubzilla':
+                return 'Hubzilla';
+            case 'kbin':
+                return 'kbin';
+            case 'mastodon':
+                return 'Mastodon';
+            case 'meisskey':
+                return 'Meisskey';
+            case 'microdotblog':
+                return 'micro.blog';
+            default:
+                return key;
+        }
+    },
+    fediverseSharingPopButtonShare: function () {
+        if (this.isEn()) {
+            return 'Share';
+        }
+        if (this.isZh()) {
+            return '分享';
+        }
+        return this.notTranslated();
+    },
+    fediverseSharingPopPostTitle: function () {
+        if (this.isEn()) {
+            return 'Title: ';
+        }
+        if (this.isZh()) {
+            return '标题：';
+        }
+        return this.notTranslated();
+    },
+    fediverseSharingPopPostExcerpt: function () {
+        if (this.isEn()) {
+            return 'Excerpt: ';
+        }
+        if (this.isZh()) {
+            return '摘要：';
+        }
+        return this.notTranslated();
+    },
+    fediverseSharingPopPostAigeneratedExcerpt: function () {
+        if (this.isEn()) {
+            return 'AI-generated excerpt: ';
+        }
+        if (this.isZh()) {
+            return 'AI 生成的摘要：';
+        }
+        return this.notTranslated();
+    },
+    fediverseSharingPopPostUrl: function () {
+        if (this.isEn()) {
+            return 'Link: ';
+        }
+        if (this.isZh()) {
+            return '链接：';
         }
         return this.notTranslated();
     }

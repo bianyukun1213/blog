@@ -284,7 +284,7 @@ function genRandomStr() {
     return Math.random().toString(36).slice(-8);
 }
 function isTextUrl(text) {
-    return /^(http|https):\/\/[^ "]+$/.test(text);
+    return /^https?:\/\/(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost)(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?$/i.test(text);
 }
 function isMobile() {
     return !!navigator.userAgent.match(
@@ -629,36 +629,42 @@ function afterUiReady() {
             $('#icon-switch-lang').click(() => smUi.openLangSwitchPopup(langs));
         }
     });
-    let commentTitle = $('.comment-area-title');
-    if (commentTitle.length !== 0) {
-        let commentTitleText = commentTitle.text();
-        const switchInteractionSystem = () => {
-            if (commentTitle.hasClass('on-webmentions')) {
-                commentTitle.contents()[0].nodeValue = commentTitleText;
-                $('#interaction-system-switch').text(smI18n.interactionSwitchWebmentions());
-                $('.twikoo-container').show();
-                $('#smui-form-webmention-post').hide();
-                $('#webmentions').hide();
-                commentTitle.removeClass('on-webmentions');
-            } else {
-                commentTitle.contents()[0].nodeValue = smI18n.interactionSwitchWebmentions();
-                $('#interaction-system-switch').text(commentTitleText);
-                $('.twikoo-container').hide();
-                $('#smui-form-webmention-post').show();
-                $('#webmentions').show();
-                commentTitle.addClass('on-webmentions');
-            }
-        };
-        commentTitle.append(`<a id="interaction-system-switch">${smI18n.interactionSwitchWebmentions()}</a>`);
-        $('#interaction-system-switch').click(() => {
-            switchInteractionSystem();
-        });
-        smUi.createWebmentionPostFormAsync($('#webmentions')).then(() => {
-            // 静态页面中是评论，Webmentions 是动态添加的。如果设置了默认互动系统为 Webmentions，就直接切换。
-            if (getSmSettings().defaultInteractionSystem === 'WEBMENTIONS')
+    getPageMetaAsync().then((meta) => {
+        if (meta.layout !== 'post')
+            return;
+        $('.article-content').append(`<div id="icon-share-on-fediverse" title="${escapeHtml(smI18n.pageContentIconTitleShareOnFediverse())}"><i class="layui-icon layui-icon-share"></i></div>`);
+        $('#icon-share-on-fediverse').click(() => smUi.openFediverseSharingPopup());
+        let commentTitle = $('.comment-area-title');
+        if (commentTitle.length !== 0) {
+            let commentTitleText = commentTitle.text();
+            const switchInteractionSystem = () => {
+                if (commentTitle.hasClass('on-webmentions')) {
+                    commentTitle.contents()[0].nodeValue = commentTitleText;
+                    $('#interaction-system-switch').text(smI18n.interactionSwitchWebmentions());
+                    $('.twikoo-container').show();
+                    $('#smui-form-webmention-post').hide();
+                    $('#webmentions').hide();
+                    commentTitle.removeClass('on-webmentions');
+                } else {
+                    commentTitle.contents()[0].nodeValue = smI18n.interactionSwitchWebmentions();
+                    $('#interaction-system-switch').text(commentTitleText);
+                    $('.twikoo-container').hide();
+                    $('#smui-form-webmention-post').show();
+                    $('#webmentions').show();
+                    commentTitle.addClass('on-webmentions');
+                }
+            };
+            commentTitle.append(`<a id="interaction-system-switch">${smI18n.interactionSwitchWebmentions()}</a>`);
+            $('#interaction-system-switch').click(() => {
                 switchInteractionSystem();
-        });
-    }
+            });
+            smUi.createWebmentionPostFormAsync($('#webmentions')).then(() => {
+                // 静态页面中是评论，Webmentions 是动态添加的。如果设置了默认互动系统为 Webmentions，就直接切换。
+                if (getSmSettings().defaultInteractionSystem === 'WEBMENTIONS')
+                    switchInteractionSystem();
+            });
+        }
+    });
     // 检查用户区域。
     checkPageRegionBlockAsync().then((res) => {
         if (res === 'BLOCKED')
@@ -850,7 +856,7 @@ $(document).ready(() => {
                     type: 1,
                     title: escapeHtml(smI18n.initPopTitle()),
                     content: `
-                    <div class="smui-container smui-container-init-popup ${smI18n.langStyleClass()}">
+                    <div class="${smI18n.langStyleClass()} smui-container smui-container-init-popup">
                         <div class="smui-content">
                           ${smI18n.initPopContentHtml(minimumSupportedBrowserVersions)}
                         </div>
@@ -898,6 +904,7 @@ $(document).ready(() => {
             },
             openSettingsPopup: () => {
                 const nameBindings = {
+                    layFilter: 'sm-settings',
                     dataAnalytics: 'sm-setting-data-analytics',
                     aiGeneratedExcerpt: 'sm-setting-ai-generated-excerpt',
                     defaultInteractionSystem: 'sm-setting-default-interaction-system'
@@ -906,8 +913,8 @@ $(document).ready(() => {
                     type: 1,
                     title: escapeHtml(smI18n.settPopTitle()),
                     content: `
-                    <div class="smui-container smui-container-settings ${smI18n.langStyleClass()}">
-                        <div class="layui-form" lay-filter="sm-settings">
+                    <div class="${smI18n.langStyleClass()} smui-container smui-container-settings">
+                        <div class="layui-form" lay-filter="${nameBindings.layFilter}">
                           <div class="layui-form-item">
                             <label class="smui-label-${nameBindings.dataAnalytics} layui-form-label">${escapeHtml(smI18n.settPopLableDataAnalytics())}
                               <i class="layui-icon layui-icon-question"></i>
@@ -928,8 +935,8 @@ $(document).ready(() => {
                             <label class="smui-label-${nameBindings.defaultInteractionSystem} layui-form-label">${escapeHtml(smI18n.settPopLableDefaultInteractionSystem())}</label>
                             <div class="smui-block-${nameBindings.defaultInteractionSystem} layui-input-block">
                                 <select name="${nameBindings.defaultInteractionSystem}">
-                                    <option value="COMMENTS">${smI18n.settPopSelectOptionDefaultInteractionSystem('COMMENTS')}</option>
-                                    <option value="WEBMENTIONS">${smI18n.settPopSelectOptionDefaultInteractionSystem('WEBMENTIONS')}</option>
+                                    <option value="COMMENTS">${escapeHtml(smI18n.settPopSelectOptionDefaultInteractionSystem('COMMENTS'))}</option>
+                                    <option value="WEBMENTIONS">${escapeHtml(smI18n.settPopSelectOptionDefaultInteractionSystem('WEBMENTIONS'))}</option>
                                 </select>
                             </div>
                           </div>
@@ -957,12 +964,11 @@ $(document).ready(() => {
                         const settingsRead = getSmSettings();
                         // doNotTrack 和“数据分析”是反的。
                         if (!settingsRead.doNotTrack)
-                            $(`input[name="${nameBindings.dataAnalytics}"]`).attr('checked', '');
+                            $(layero).find(`input[name="${nameBindings.dataAnalytics}"]`).attr('checked', '');
                         if (settingsRead.showAiGeneratedExcerpt)
-                            $(`input[name="${nameBindings.aiGeneratedExcerpt}"]`).attr('checked', '');
-                        $(`select[name="${nameBindings.defaultInteractionSystem}"] option[value="${settingsRead.defaultInteractionSystem}"]`).attr('selected', '');
+                            $(layero).find(`input[name="${nameBindings.aiGeneratedExcerpt}"]`).attr('checked', '');
+                        $(layero).find(`select[name="${nameBindings.defaultInteractionSystem}"] option[value="${settingsRead.defaultInteractionSystem}"]`).attr('selected', '');
                         // 动态生成的控件需要调用 render 渲染。它实际上是根据原生组件生成了一个美化的。设置好值后再渲染。
-                        form.render();
                         $(layero).find(`.smui-label-${nameBindings.dataAnalytics}`).click(function (e) {
                             layer.tips(
                                 smI18n.settPopTipDataAnalyticsHtml(isTrackingAvailable(true)), // 不应转义，这里写的本来就该是 html。
@@ -992,7 +998,7 @@ $(document).ready(() => {
                             return false; // 阻止默认动作。
                         });
                         $(layero).find('.smui-button-save-sm-settings').click(() => {
-                            form.submit('sm-settings', (data) => {
+                            form.submit(nameBindings.layFilter, (data) => {
                                 const userOptions = data.field;
                                 let settingsToWrite = getSmSettings(); // 获取实时的。
                                 // doNotTrack 和“数据分析”是反的。
@@ -1012,27 +1018,29 @@ $(document).ready(() => {
                             }
                             return false; // 阻止默认动作。
                         });
+                        form.render();
                     }
                 });
                 return li;
             },
             openLangSwitchPopup: (langsOrForced) => {
                 const nameBindings = {
+                    layFilter: 'lang-switch',
                     targetLang: 'lang-switch-target-lang'
                 };
                 const li = layer.open({
                     type: 1,
                     title: escapeHtml(smI18n.langSwitchPopTitle()),
                     content: `
-                    <div class="smui-container smui-container-lang-switch ${smI18n.langStyleClass()}">
-                        <div class="layui-form" lay-filter="lang-switch">
+                    <div class="${smI18n.langStyleClass()} smui-container smui-container-lang-switch">
+                        <div class="layui-form" lay-filter="${nameBindings.layFilter}">
                             <div class="layui-form-item">
                                 <label class="layui-form-label">${escapeHtml(smI18n.langSwitchPopLableAvailableLangs())}</label>
                                 <div class="smui-block-${nameBindings.targetLang} layui-input-block">
                                     <select name="${nameBindings.targetLang}">
                                     </select>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
                         <div class="smui-func smui-clearfix">
                           <hr>
@@ -1059,15 +1067,14 @@ $(document).ready(() => {
                         for (let i = 0; i < langsLength; i++) {
                             const langKey = availableLangs[i];
                             if (langKey === pageLang)
-                                $(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}" selected>${smI18n.langSwitchPopSelectOptionLang(langKey)} (${langKey})</option>`);
+                                $(layero).find(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}" selected>${escapeHtml(smI18n.langSwitchPopSelectOptionLang(langKey) + ' (' + langKey + ')')}</option>`);
                             else
-                                $(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}">${smI18n.langSwitchPopSelectOptionLang(langKey)} (${langKey})</option>`);
+                                $(layero).find(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}">${escapeHtml(smI18n.langSwitchPopSelectOptionLang(langKey) + ' (' + langKey + ')')}</option>`);
                         }
                         if (availableLangs.length === 0) // 如果当前页面可用语言为空，则手动添加一个“当前语言”的项。
-                            $(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${pageLang}" selected>${smI18n.langSwitchPopSelectOptionLang(pageLang)} (${pageLang})</option>`);
-                        form.render();
+                            $(layero).find(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${pageLang}" selected>${escapeHtml(smI18n.langSwitchPopSelectOptionLang(pageLang) + ' (' + pageLang + ')')}</option>`);
                         $(layero).find('.smui-button-switch-language').click(() => {
-                            form.submit('lang-switch', (data) => {
+                            form.submit(nameBindings.layFilter, (data) => {
                                 const targetLangKey = data.field[nameBindings.targetLang];
                                 const targetPath = langsOrForced[targetLangKey];
                                 if (targetLangKey === pageLang) { // 语言不变切个屁。
@@ -1078,14 +1085,165 @@ $(document).ready(() => {
                             });
                             return false; // 阻止默认动作。
                         });
+                        form.render();
                     }
                 });
                 return li;
             },
-            createWebmentionPostFormAsync: async function (elementAfter) {
+            openFediverseSharingPopup: () => {
+                const nameBindings = {
+                    layFilter: 'fediverse-sharing',
+                    software: 'fediverse-sharing-software',
+                    instance: 'fediverse-sharing-instance'
+                };
+                const li = layer.open({
+                    type: 1,
+                    title: escapeHtml(smI18n.fediverseSharingPopTitle()),
+                    content: `
+                    <div class="${smI18n.langStyleClass()} smui-container smui-container-fediverse-sharing">
+                        <div class="layui-form" lay-filter="${nameBindings.layFilter}">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">${escapeHtml(smI18n.fediverseSharingPopLableSoftware())}</label>
+                                <div class="smui-block-${nameBindings.software} layui-input-block">
+                                    <select name="${nameBindings.software}">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">${escapeHtml(smI18n.fediverseSharingPopLableInstance())}</label>
+                                <div class="smui-block-${nameBindings.instance} layui-input-block">
+                                    <input class="layui-input" type="text" name="${nameBindings.instance}" autocomplete="off" placeholder="${escapeHtml(smI18n.fediverseSharingPopInputInstancePlaceholder())}" lay-verify="required|instance-domain" lay-reqtext="${escapeHtml(smI18n.fediverseSharingPopInputInstanceReqText())}">
+                                 </div>
+                            </div>
+                        </div>
+                        <div class="smui-func smui-clearfix">
+                          <hr>
+                          <div class="smui-func-right">
+                            <button class="smui-button-share-on-fediverse layui-btn">${escapeHtml(smI18n.fediverseSharingPopButtonShare())}</button>
+                          </div>
+                        </div>
+                    </div>
+                    `,
+                    area: ['350px', 'auto'],
+                    closeBtn: 1,
+                    shadeClose: true,
+                    resize: false,
+                    scrollbar: false,
+                    success: async (layero, index, that) => {
+                        const pageMeta = await getPageMetaAsync();
+                        const postTitle = pageMeta.title;
+                        const postExcerpt = pageMeta.excerpt;
+                        const postAigeneratedExcerpt = pageMeta.aigeneratedExcerpt;
+                        const postUrl = pageMeta.permalink;
+                        let postContent = '';
+                        const eles = $('.article-content').children();
+                        let ps = []
+                        let moreFound = false;
+                        const elesLength = eles.length;
+                        for (let eleIndex = 0; eleIndex < elesLength; eleIndex++) {
+                            const ele = eles[eleIndex];
+                            if (ele.id === 'more') {
+                                moreFound = true;
+                                continue;
+                            }
+                            else if (ele.tagName === 'P' && moreFound) {
+                                ps.push(ele);
+                            }
+                        }
+                        ps.pop() // 弹出“完”或“The End”。
+                        for (const p of ps)
+                            postContent += ($(p).text().trim() + '\n');
+                        let sharingText = `${smI18n.fediverseSharingPopPostTitle()}${postTitle}\n\n${smI18n.fediverseSharingPopPostExcerpt()}${postExcerpt}\n\n`;
+                        if (postAigeneratedExcerpt)
+                            sharingText += `${smI18n.fediverseSharingPopPostAigeneratedExcerpt()}${postAigeneratedExcerpt}\n\n`;
+                        if (postContent.trim() !== '')
+                            sharingText += (postContent + '\n\n');
+                        if (sharingText.length > 90) // 字数多了的话，m.cmx.im 会 502。
+                            sharingText = sharingText.substring(0, 89).trim() + '…\n\n';
+                        sharingText += `${smI18n.fediverseSharingPopPostUrl()}${postUrl}`;
+                        const encodedPostTitle = encodeURIComponent(postTitle);
+                        const encodedPostExcerpt = encodeURIComponent(postExcerpt);
+                        const encodedPostUrl = encodeURIComponent(postUrl);
+                        const encodedSharingText = encodeURIComponent(sharingText);
+                        const softwares = [
+                            'calckey',
+                            'diaspora',
+                            'fedibird',
+                            'firefish',
+                            'foundkey',
+                            'friendica',
+                            'hometown',
+                            'hubzilla',
+                            'kbin',
+                            'mastodon',
+                            'meisskey',
+                            'microdotblog',
+                            'misskey'
+                        ];
+                        const endpoints = {
+                            calckey: `share?text=${encodedSharingText}`,
+                            diaspora: `bookmarklet?title=${encodedPostTitle}&notes=${encodedPostExcerpt}&url=${encodedPostUrl}`,
+                            fedibird: `share?text=${encodedSharingText}`,
+                            firefish: `share?text=${encodedSharingText}`,
+                            foundkey: `share?text=${encodedSharingText}`,
+                            friendica: `compose?title=${encodedPostTitle}&body=${encodedPostExcerpt}%0A${encodedPostUrl}`,
+                            hometown: `share?text=${encodedSharingText}`,
+                            hubzilla: `rpost?title=${encodedPostTitle}&body=${encodedPostExcerpt}%0A${encodedPostUrl}`,
+                            kbin: `new/link?url=${encodedPostUrl}`,
+                            mastodon: `share?text=${encodedSharingText}`,
+                            meisskey: `share?text=${encodedSharingText}`,
+                            microdotblog: `post?text=[${encodedPostTitle}](${encodedPostUrl})%0A%0A${encodedPostExcerpt}`,
+                            misskey: `share?text=${encodedSharingText}`
+                        };
+                        const softwaresLength = softwares.length;
+                        for (let i = 0; i < softwaresLength; i++) {
+                            let selected = softwares[i] === 'mastodon' ? ' selected' : '';
+                            $(layero).find(`select[name="${nameBindings.software}"]`).append(`<option value="${softwares[i]}"${selected}>${escapeHtml(smI18n.fediverseSharingPopSelectOptionSoftware(softwares[i]))}</option>`);
+                        }
+                        // 输入框响应 enter。
+                        $(layero).find(`input[name="${nameBindings.instance}"]`).on('keydown', (e) => {
+                            if (e.originalEvent.keyCode === 13)
+                                $(layero).find('.smui-button-share-on-fediverse').click();
+                        });
+                        $(layero).find('.smui-button-share-on-fediverse').click(() => {
+                            form.submit(nameBindings.layFilter, (data) => {
+                                if (form.validate(`input[name="${nameBindings.instance}"]`)) {
+                                    let instance = data.field[nameBindings.instance];
+                                    if (!instance.startsWith('https://') && !instance.startsWith('http://'))
+                                        instance = 'https://' + instance;
+                                    if (!instance.endsWith('/'))
+                                        instance += '/';
+                                    window.open(`${instance}${endpoints[data.field[nameBindings.software]]}`, '_blank');
+                                    // layer.close(index);
+                                }
+                            });
+                            return false; // 阻止默认动作。
+                        });
+                        form.verify({
+                            // Layui 有 URL 验证。创建这个完全是为了提示的 i18n。
+                            'instance-domain': (value, elem) => {
+                                let instance = value
+                                if (!instance.startsWith('https://') && !instance.startsWith('http://'))
+                                    instance = 'https://' + instance;
+                                if (!instance.endsWith('/'))
+                                    instance += '/';
+                                // 自定义规则和自定义提示方式。
+                                if (!isTextUrl(instance)) {
+                                    layer.msg(smI18n.fediverseSharingPopInputInstanceReqText(), { icon: 5, anim: 6 }); // 默认风格基本就是这个样式。
+                                    return true; // 返回 true 即可阻止 form 默认的提示风格。
+                                }
+                            }
+                        });
+                        form.render();
+                    }
+                });
+                return li;
+            },
+            createWebmentionPostFormAsync: async (elementAfter) => {
                 if ($('#smui-form-webmention-post').length !== 0)
                     return;
                 const nameBindings = {
+                    layFilter: 'webmention-post',
                     webmentionPostArticleUrl: 'webmention-post-article-url'
                 };
                 const syndications = (await getPageMetaAsync()).syndications;
@@ -1100,31 +1258,34 @@ $(document).ready(() => {
                 }
                 $(elementAfter).before(
                     `
-                    <div id="smui-form-webmention-post" class="layui-form" lay-filter="webmention-post">
-                        <!-- <div class="smui-content">${smI18n.webmentionPostFormTipHtml($.isEmptyObject(syndications) ? undefined : syndications)}</div> -->
+                    <div id="smui-form-webmention-post" class="${smI18n.langStyleClass()} layui-form" lay-filter="${nameBindings.layFilter}">
                         <div class="smui-content">${smI18n.webmentionPostFormTipHtml(validatedSyndications)}</div>
                         <div class="smui-wrapper-webmention-post">
                             <div class="smui-form-item-webmention-post layui-form-item">
-                                <input class="smui-input-${nameBindings.webmentionPostArticleUrl} layui-input" name="${nameBindings.webmentionPostArticleUrl}" autocomplete="off" placeholder="${smI18n.webmentionPostFormInputArticleUrlPlaceholder()}" lay-verify="required|article-url"  lay-reqtext="${smI18n.webmentionPostFormInputArticleUrlReqText()}">
+                                <input class="smui-input-${nameBindings.webmentionPostArticleUrl} layui-input" name="${nameBindings.webmentionPostArticleUrl}" autocomplete="off" placeholder="${escapeHtml(smI18n.webmentionPostFormInputArticleUrlPlaceholder())}" lay-verify="required|article-url" lay-reqtext="${escapeHtml(smI18n.webmentionPostFormInputArticleUrlReqText())}">
                             </div>
-                            <button type="button" class="smui-button-webmention-post-submit layui-btn" lay-filter="webmention-post" lay-submit>${smI18n.webmentionPostFormButtonSubmitHtml()}</button>
+                            <button type="button" class="smui-button-webmention-post-submit layui-btn" lay-filter="${nameBindings.layFilter}" lay-submit>${escapeHtml(smI18n.webmentionPostFormButtonSubmitHtml())}</button>
                         </div>
                     </div>
                     `
                 );
                 $('#smui-form-webmention-post').hide();
-                form.render();
+                // 输入框响应 enter。
+                $(`input[name="${nameBindings.webmentionPostArticleUrl}"]`).on('keydown', (e) => {
+                    if (e.originalEvent.keyCode === 13)
+                        $('.smui-button-webmention-post-submit').click();
+                });
                 form.verify({
                     // Layui 有 URL 验证。创建这个完全是为了提示的 i18n。
                     'article-url': (value, elem) => {
                         // 自定义规则和自定义提示方式。
-                        if (!isTextUrl(value.trim())) {
+                        if (!isTextUrl(value)) {
                             layer.msg(smI18n.webmentionPostFormInputArticleUrlReqText(), { icon: 5, anim: 6 }); // 默认风格基本就是这个样式。
                             return true; // 返回 true 即可阻止 form 默认的提示风格。
                         }
                     }
                 });
-                form.on('submit(webmention-post)', (data) => {
+                form.on(`submit(${nameBindings.layFilter})`, (data) => {
                     const field = data.field;
                     $(`.smui-input-${nameBindings.webmentionPostArticleUrl}`).attr('disabled', '');
                     $('.smui-button-webmention-post-submit').attr('disabled', '');
@@ -1151,6 +1312,7 @@ $(document).ready(() => {
                     });
                     return false;
                 });
+                form.render();
             }
         };
         afterUiReady();
