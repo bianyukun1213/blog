@@ -223,7 +223,7 @@ const smI18n = {
     },
     smSettingsMigratedAlert: function () {
         if (this.isEn()) {
-            return 'Data migration and validation result in changes to settings. You can open the Settings window to adjust the new settings.';
+            return 'Data migration and validation result in changes to settings. You can open the Settings pop-up to adjust the new settings.';
         }
         if (this.isZh()) {
             return '数据迁移与校验导致设置变更。您可在设置窗口调整新的设置。';
