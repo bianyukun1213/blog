@@ -284,7 +284,7 @@ function genRandomStr() {
     return Math.random().toString(36).slice(-8);
 }
 function isTextUrl(text) {
-    return /^https?:\/\/(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost)(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?$/i.test(text);
+    return /^https?:\/\/(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost)(\/[-a-z\d%_.~+@]*)*(\?[;&a-z\d%_.~+=-@]*)?(\#[-a-z\d_@]*)?$/i.test(text);
 }
 function isMobile() {
     return !!navigator.userAgent.match(
