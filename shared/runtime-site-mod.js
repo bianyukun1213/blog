@@ -626,14 +626,21 @@ function afterUiReady() {
         if (!$.isEmptyObject(langs)) {
             // 如果当前文章、页面另外语言可用，就添加切换图标。
             $('.article-content-container, .page-template-container').append(`<div id="icon-switch-lang" title="${escapeHtml(smI18n.pageContentIconTitleSwitchLang())}"><i class="layui-icon layui-icon-tips"></i></div>`);
-            $('#icon-switch-lang').click(() => smUi.openLangSwitchPopup(langs));
+            $('#icon-switch-lang').click(() => {
+                smUi.openLangSwitchPopup(langs);
+                return false; // 阻止默认动作。
+            });
         }
     });
     getPageMetaAsync().then((meta) => {
         if (meta.layout !== 'post')
             return;
-        $('.article-content').append(`<div id="icon-share-on-fediverse" title="${escapeHtml(smI18n.pageContentIconTitleShareOnFediverse())}"><i class="layui-icon layui-icon-share"></i></div>`);
-        $('#icon-share-on-fediverse').click(() => smUi.openFediverseSharingPopup());
+        $('.article-content').append('<div id="post-functions"></div>')
+        $('#post-functions').append(`<div id="icon-share-on-fediverse" class="post-function-item" title="${escapeHtml(smI18n.pageContentIconTitleShareOnFediverse())}"><i class="layui-icon layui-icon-share"></i></div>`);
+        $('#icon-share-on-fediverse').click(() => {
+            smUi.openFediverseSharingPopup();
+            return false; // 阻止默认动作。
+        });
         let commentTitle = $('.comment-area-title');
         if (commentTitle.length !== 0) {
             let commentTitleText = commentTitle.text();
@@ -657,6 +664,7 @@ function afterUiReady() {
             commentTitle.append(`<a id="interaction-system-switch">${smI18n.interactionSwitchWebmentions()}</a>`);
             $('#interaction-system-switch').click(() => {
                 switchInteractionSystem();
+                return false; // 阻止默认动作。
             });
             smUi.createWebmentionPostFormAsync($('#webmentions')).then(() => {
                 // 静态页面中是评论，Webmentions 是动态添加的。如果设置了默认互动系统为 Webmentions，就直接切换。
