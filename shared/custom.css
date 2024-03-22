@@ -627,60 +627,6 @@ div.main-content.region-block-hidden {
     float: right;
 }
 
-/* 此处也是对 Redefine 的修改，目的是方便绝对定位的语言切换图标定位。 */
-.article-content-container,
-.page-template-container {
-    position: relative;
-}
-
-#icon-switch-lang {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    text-align: center;
-    cursor: pointer;
-}
-
-#icon-switch-lang i {
-    font-size: 20px;
-}
-
-/* 语言切换图标设置 Redefine 主色。 */
-#icon-switch-lang:hover {
-    color: var(--primary-color);
-}
-
-#post-functions {
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
-    height: 36px;
-}
-
-#post-functions .post-function-item {
-    margin-left: 8px;
-    margin-bottom: 8px;
-}
-
-#post-functions #icon-share-on-fediverse {
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    text-align: center;
-    cursor: pointer;
-}
-
-#post-functions #icon-share-on-fediverse i {
-    font-size: 24px;
-}
-
-/* 分享图标设置 Redefine 主色。 */
-#post-functions #icon-share-on-fediverse:hover {
-    color: var(--primary-color);
-}
-
 #interaction-system-switch {
     margin-left: 4px;
     font-size: 16px;

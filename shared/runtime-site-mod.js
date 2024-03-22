@@ -624,9 +624,9 @@ function afterUiReady() {
     });
     getPageAvailableLangsAsync().then((langs) => {
         if (!$.isEmptyObject(langs)) {
-            // 如果当前文章、页面另外语言可用，就添加切换图标。
-            $('.article-content-container, .page-template-container').append(`<div id="icon-switch-lang" title="${escapeHtml(smI18n.pageContentIconTitleSwitchLang())}"><i class="layui-icon layui-icon-tips"></i></div>`);
-            $('#icon-switch-lang').click(() => {
+            // 如果当前文章、页面另外语言可用，就添加切换按钮。
+            $('.toggle-tools-list').after('<li id="button-switch-lang" class="right-bottom-tools tool-switch-lang flex justify-center items-center"><i class="fa-solid fa-language"></i></li>');
+            $('#button-switch-lang').click(() => {
                 smUi.openLangSwitchPopup(langs);
                 return false; // 阻止默认动作。
             });
@@ -635,9 +635,9 @@ function afterUiReady() {
     getPageMetaAsync().then((meta) => {
         if (meta.layout !== 'post')
             return;
-        $('.article-content').append('<div id="post-functions"></div>')
-        $('#post-functions').append(`<div id="icon-share-on-fediverse" class="post-function-item" title="${escapeHtml(smI18n.pageContentIconTitleShareOnFediverse())}"><i class="layui-icon layui-icon-share"></i></div>`);
-        $('#icon-share-on-fediverse').click(() => {
+        // 添加分享按钮。
+        $('.toggle-tools-list').after('<li id="button-share-on-fediverse" class="right-bottom-tools tool-share-on-fediverse flex justify-center items-center"><i class="fa-brands fa-mastodon"></i></li>');
+        $('#button-share-on-fediverse').click(() => {
             smUi.openFediverseSharingPopup();
             return false; // 阻止默认动作。
         });
