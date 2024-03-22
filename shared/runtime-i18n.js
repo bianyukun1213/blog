@@ -545,6 +545,10 @@ const smI18n = {
                 return 'FoundKey';
             case 'friendica':
                 return 'Friendica';
+            case 'glitchcafe':
+                return 'Glitchcafe';
+            case 'gnusocial':
+                return 'GNU Social';
             case 'hometown':
                 return 'Hometown';
             case 'hubzilla':
@@ -557,6 +561,8 @@ const smI18n = {
                 return 'Meisskey';
             case 'microdotblog':
                 return 'micro.blog';
+            case 'misskey':
+                return 'Misskey';
             default:
                 return key;
         }
