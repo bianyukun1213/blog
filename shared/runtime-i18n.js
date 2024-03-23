@@ -223,7 +223,7 @@ const smI18n = {
     },
     smSettingsMigratedAlert: function () {
         if (this.isEn()) {
-            return 'Data migration and validation result in changes to settings. You can open the Settings pop-up to adjust the new settings.';
+            return 'Data migration and validation result in changes to settings. You can open the settings pop-up to adjust the new settings.';
         }
         if (this.isZh()) {
             return '数据迁移与校验导致设置变更。您可在设置窗口调整新的设置。';
@@ -245,7 +245,7 @@ const smI18n = {
             <p>Hello!</p>
             <p>This may be your first visit to this site. Most of the resources on this site are hosted abroad and may not load properly under the network environment in mainland China. If you visit this site in mainland China, it is recommended to use a proxy. (International visitors, however, may experience slow image loading since images are stored in mainland China.)</p>
             <p>Some of the features used on this site require Chrome/Chromium ${minimumSupportedBrowserVersions.chrome}, Safari ${minimumSupportedBrowserVersions.safari}, Firefox ${minimumSupportedBrowserVersions.firefox} and above.</p>
-            <p>In addition, before completing the initialization, if you want to adjust the settings such as Data Analytics, please click the button at the bottom left corner, otherwise the site will work with the default settings. After the initialization is completed, you can also find the settings in the lower right corner of the page.</p>
+            <p>In addition, before completing the initialization, if you want to adjust the settings such as data analytics, please click the button at the bottom left corner, otherwise the site will work with the default settings. After the initialization is completed, you can also find the settings in the lower right corner of the page.</p>
             <p>Click “${this.initPopButtonOk()}” to complete the initialization and permanently close this pop-up.</p>
             `;
         }
@@ -298,7 +298,7 @@ const smI18n = {
     },
     settPopLableDataAnalytics: function () {
         if (this.isEn()) {
-            return 'Data Analytics';
+            return 'Data analytics';
         }
         if (this.isZh()) {
             return '数据分析';
@@ -307,8 +307,8 @@ const smI18n = {
     },
     settPopTipDataAnalyticsHtml: function (trackingDetails) {
         if (this.isEn()) {
-            const tip = 'The counting script used on this site may collect and analyze data such as region, User-Agent, refer(r)er, language, screen size, etc. In addition to the disablement here, “Do Not Track” requests or incomplete initialization of the site will also result in Data Analytics being disabled and visits not being logged. This setting does not affect the comment module, the few necessary region checks and potential third-party data analytics.<br>';
-            const trackingResTxtPart1 = `Data Analytics is currenly ${trackingDetails.available ? 'enabled. ' : 'disabled, because '}`;
+            const tip = 'The counting script used on this site may collect and analyze data such as region, User-Agent, refer(r)er, language, screen size, etc. In addition to the disablement here, “Do Not Track” requests or incomplete initialization of the site will also result in data analytics being disabled and visits not being logged. This setting does not affect the comment module, the few necessary region checks and potential third-party data analytics.<br>';
+            const trackingResTxtPart1 = `Data analytics is currenly ${trackingDetails.available ? 'enabled. ' : 'disabled, because '}`;
             let trackingResTxtPart2 = '';
             if (!trackingDetails.initializationPassed)
                 trackingResTxtPart2 += 'the site is not initialized, ';
@@ -347,7 +347,7 @@ const smI18n = {
     },
     settPopLableAiGeneratedExcerpt: function () {
         if (this.isEn()) {
-            return 'AI-generated Excerpt';
+            return 'AI-generated excerpt';
         }
         if (this.isZh()) {
             return 'AI 生成的摘要';
@@ -374,7 +374,7 @@ const smI18n = {
     },
     settPopLableDefaultInteractionSystem: function () {
         if (this.isEn()) {
-            return 'Default Interaction System';
+            return 'Default interaction system';
         }
         if (this.isZh()) {
             return '默认互动系统';
