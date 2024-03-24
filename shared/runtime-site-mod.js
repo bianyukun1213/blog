@@ -769,14 +769,14 @@ if (debugOn) {
             return this.checkVars(getSmData().debugVars);
         },
         loadVars: function () {
-            const vars = getSmData().debugVars;
-            if (this.checkVars(vars)) {
-                this._vars = vars;
-            }
-            else {
+            let vars = getSmData().debugVars;
+            if (!this.checkVars(vars)) {
                 smLogWarn('localStorage 中的 debugVars 无效，将重置：', vars);
                 this.resetDebugVars();
+                // vars = getSmData().debugVars; 不需要。
+                return;
             }
+            this._vars = vars;
         },
         setDebugVars: function (vars) {
             if (this.checkVars(vars)) {
