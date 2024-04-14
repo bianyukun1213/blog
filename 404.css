@@ -3,20 +3,12 @@ body {
     background-color: white;
 }
 
-a:link {
+a {
     color: #27b783;
-}
-
-a:visited {
-    color: #ff4263;
 }
 
 a:hover {
     font-weight: bold;
-}
-
-a:active {
-    color: #ff4263;
 }
 
 @media (prefers-color-scheme: dark) {
