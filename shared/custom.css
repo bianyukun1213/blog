@@ -554,6 +554,11 @@ noscript#javascript-alert p::after {
     color: yellow;
 }
 
+/* {% raw %} 里的内容有时用 .h2l-raw-wrapper 包装。 */
+.h2l-raw-wrapper>* {
+    margin: 0 auto 16px auto;
+}
+
 .ai-generated-excerpt {
     padding: 0;
     margin: 16px 0;
