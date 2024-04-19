@@ -554,8 +554,12 @@ noscript#javascript-alert p::after {
     color: yellow;
 }
 
-/* {% raw %} 里的内容有时用 .h2l-raw-wrapper 包装。 */
-.h2l-raw-wrapper>* {
+.h2l-invisible-content {
+    display: none;
+}
+
+/* {% raw %} 里的内容有时用 .h2l-center-wrapper 包装。 */
+.h2l-center-wrapper>* {
     margin: 0 auto 16px auto;
 }
 
