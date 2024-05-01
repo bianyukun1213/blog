@@ -1166,7 +1166,7 @@ $(document).ready(() => {
                             sharingText += `${smI18n.fediverseSharingPopPostAigeneratedExcerpt()}${postAigeneratedExcerpt}\n\n`;
                         if (postContent.trim() !== '')
                             sharingText += (postContent + '\n\n');
-                        if (sharingText.length > 90) // 字数多了的话，m.cmx.im 会 502。
+                        if (sharingText.length > 75) // 字数多了的话，m.cmx.im 会 502。
                             sharingText = sharingText.substring(0, 89).trim() + '…\n\n';
                         sharingText += `${smI18n.fediverseSharingPopPostUrl()}${postUrl}`;
                         const encodedPostTitle = encodeURIComponent(postTitle);
@@ -1190,22 +1190,41 @@ $(document).ready(() => {
                             'microdotblog',
                             'misskey'
                         ];
-                        const endpoints = {
-                            calckey: `share?text=${encodedSharingText}`,
-                            diaspora: `bookmarklet?title=${encodedPostTitle}&notes=${encodedPostExcerpt}&url=${encodedPostUrl}`,
-                            fedibird: `share?text=${encodedSharingText}`,
-                            firefish: `share?text=${encodedSharingText}`,
-                            foundkey: `share?text=${encodedSharingText}`,
-                            friendica: `compose?title=${encodedPostTitle}&body=${encodedPostExcerpt}%0A${encodedPostUrl}`,
-                            glitchcafe: `share?text=${encodedSharingText}`,
-                            gnusocial: `notice/new?status_textarea=${encodedSharingText}`,
-                            hometown: `share?text=${encodedSharingText}`,
-                            hubzilla: `rpost?title=${encodedPostTitle}&body=${encodedPostExcerpt}%0A${encodedPostUrl}`,
-                            kbin: `new/link?url=${encodedPostUrl}`,
-                            mastodon: `share?text=${encodedSharingText}`,
-                            meisskey: `share?text=${encodedSharingText}`,
-                            microdotblog: `post?text=[${encodedPostTitle}](${encodedPostUrl})%0A%0A${encodedPostExcerpt}`,
-                            misskey: `share?text=${encodedSharingText}`
+                        const getEndpoint = (software) => {
+                            switch (software) {
+                                case 'calckey':
+                                    return `share?text=${encodedSharingText}`;
+                                case 'diaspora':
+                                    return `bookmarklet?title=${encodedPostTitle}&notes=${encodedPostExcerpt}&url=${encodedPostUrl}`;
+                                case 'fedibird':
+                                    return `share?text=${encodedSharingText}`;
+                                case 'firefish':
+                                    return `share?text=${encodedSharingText}`;
+                                case 'foundkey':
+                                    return `share?text=${encodedSharingText}`;
+                                case 'friendica':
+                                    return `compose?title=${encodedPostTitle}&body=${encodedPostExcerpt}%0A${encodedPostUrl}`;
+                                case 'glitchcafe':
+                                    return `share?text=${encodedSharingText}`;
+                                case 'gnusocial':
+                                    return `notice/new?status_textarea=${encodedSharingText}`;
+                                case 'hometown':
+                                    return `share?text=${encodedSharingText}`;
+                                case 'hubzilla':
+                                    return `rpost?title=${encodedPostTitle}&body=${encodedPostExcerpt}%0A${encodedPostUrl}`;
+                                case 'kbin':
+                                    return `new/link?url=${encodedPostUrl}`;
+                                case 'mastodon':
+                                    return `share?text=${encodedSharingText}`;
+                                case 'meisskey':
+                                    return `share?text=${encodedSharingText}`;
+                                case 'microdotblog':
+                                    return `post?text=[${encodedPostTitle}](${encodedPostUrl})%0A%0A${encodedPostExcerpt}`;
+                                case 'misskey':
+                                    return `share?text=${encodedSharingText}`;
+                                default:
+                                    return '';
+                            }
                         };
                         const softwaresLength = softwares.length;
                         for (let i = 0; i < softwaresLength; i++) {
@@ -1225,7 +1244,7 @@ $(document).ready(() => {
                                         instance = 'https://' + instance;
                                     if (!instance.endsWith('/'))
                                         instance += '/';
-                                    window.open(`${instance}${endpoints[data.field[nameBindings.software]]}`, '_blank');
+                                    window.open(`${instance}${getEndpoint(data.field[nameBindings.software])}`, '_blank');
                                     // layer.close(index);
                                 }
                             });
