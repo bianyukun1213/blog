@@ -1166,8 +1166,9 @@ $(document).ready(() => {
                             sharingText += `${smI18n.fediverseSharingPopPostAigeneratedExcerpt()}${postAigeneratedExcerpt}\n\n`;
                         if (postContent.trim() !== '')
                             sharingText += (postContent + '\n\n');
-                        if (sharingText.length > 75) // 字数多了的话，m.cmx.im 会 502。
-                            sharingText = sharingText.substring(0, 89).trim() + '…\n\n';
+                        const limit = 75;
+                        if (sharingText.length > limit) // 字数多了的话，m.cmx.im 会 502。
+                            sharingText = sharingText.substring(0, limit - 1).trim() + '…\n\n';
                         sharingText += `${smI18n.fediverseSharingPopPostUrl()}${postUrl}`;
                         const encodedPostTitle = encodeURIComponent(postTitle);
                         const encodedPostExcerpt = encodeURIComponent(postExcerpt);
