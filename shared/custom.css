@@ -563,6 +563,18 @@ noscript#javascript-alert p::after {
     margin: 0 auto 16px auto;
 }
 
+/* 首行缩进，用 em 而不是 rem。作用于 Redefine 文章和页面区域。 */
+.article-content-container .h2l-text-indent,
+.page-template-container .h2l-text-indent {
+    text-indent: 2em;
+}
+
+/* 取消子元素的缩进。 */
+.article-content-container .h2l-text-indent>*,
+.page-template-container .h2l-text-indent>* {
+    text-indent: initial;
+}
+
 .ai-generated-excerpt {
     padding: 0;
     margin: 16px 0;
