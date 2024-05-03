@@ -703,28 +703,27 @@ function afterUiReady() {
     try {
         let url = new URL(window.location.href);
         let params = new URLSearchParams(url.search);
-        let referrer = document.referrer;
-        if (referrer !== '') {
-            const referrerUrl = new URL(referrer);
+        let documentReferrer = document.referrer;
+        let referrerUrl;
+        if (documentReferrer !== '') {
+            referrerUrl = new URL(documentReferrer);
             // 从首页跳转过来，获取首页传过来的 referrer。
             if ((referrerUrl.hostname === 'his2nd.life' || referrerUrl.hostname === '8000.cs.nas.yinhe.dev') && (referrerUrl.pathname === '/' || referrerUrl.pathname.startsWith('/index'))) {
-                referrer = params.get('referrer');
-                if (referrer !== null)
-                    referrer = decodeURIComponent(referrer);
-                else
-                    referrer = '';
+                const referrerParam = params.get('referrer');
+                if (referrerParam !== null)
+                    referrerUrl = new URL(decodeURIComponent(referrerParam));
             }
+            let referrerKey = '';
+            if (referrerUrl.hostname === 'xn--sr8hvo.ws')
+                referrerKey = 'ANINDIEWEBWEBRING';
+            else if (referrerUrl.hostname === 'travellings.cn')
+                referrerKey = 'TRAVELLINGS';
+            if (!getSmData().initialized)
+                smUi.openInitPopup(referrerKey);
+            else if (referrerKey !== '')
+                smUi.openReferrerPopup(referrerKey);
         }
-        let referrerKey = '';
-        if (referrer.includes('xn--sr8hvo.ws'))
-            referrerKey = 'ANINDIEWEBWEBRING';
-        else if (referrer.includes('travellings.cn'))
-            referrerKey = 'TRAVELLINGS';
-        if (!getSmData().initialized)
-            smUi.openInitPopup(referrerKey);
-        else if (referrerKey !== '')
-            smUi.openReferrerPopup(referrerKey);
-        params.set('referrer', '');
+        params.delete('referrer');
         url.search = params.toString();
         history.replaceState(null, '', url.href);
     } catch (error) {
@@ -973,7 +972,7 @@ $(document).ready(() => {
                 return layer.load(0, { shade: [1, '#202124'], scrollbar: false });
             },
             openReferrerPopup: (referrerKey) => {
-                layer.msg(smI18n.referrerPopContent(referrerKey), { icon: 1 });
+                layer.msg(smI18n.referrerPopContent(referrerKey), { icon: 6 });
             },
             openInitPopup: (referrerKey) => {
                 const li = layer.open({
