@@ -300,22 +300,24 @@ const smI18n = {
     },
     initPopContentHtml: function (minimumSupportedBrowserVersions, referrerKey) {
         if (this.isEn()) {
-            let greeting = '';
+            let greeting = 'Hello';
             if (typeof referrerKey !== 'undefined' && referrerKey !== '')
-                greeting = `, visitor from “${this.brands(referrerKey)}”`
+                greeting = `, visitor from “${this.brands(referrerKey)}”`;
+            greeting += '! ';
             return `
-            <p>Hello${greeting}! This may be your first visit to this site.</p>
+            <p>${greeting}This may be your first visit to this site.</p>
             <p>Some resources on this site are hosted abroad and may not load properly under the network environment in mainland China. If you visit this site in mainland China, it is recommended to use a proxy. Some of the features used on this site require Chrome/Chromium ${minimumSupportedBrowserVersions.chrome}, Safari ${minimumSupportedBrowserVersions.safari}, Firefox ${minimumSupportedBrowserVersions.firefox} and above.</p>
             <p>In addition, before completing the initialization, if you want to adjust the settings such as data analytics, please click the button at the bottom left corner, otherwise the site will work with the default settings. After the initialization is completed, you can also find the settings in the lower right corner of the page.</p>
             <p>Click “${this.initPopButtonOk()}” to complete the initialization and permanently close this pop-up.</p>
             `;
         }
         else if (this.isZh()) {
-            let greeting = '';
+            let greeting = '您好';
             if (typeof referrerKey !== 'undefined' && referrerKey !== '')
-                greeting = `，从“${this.brands(referrerKey)}”过来的访客`
+                greeting = `，从“${this.brands(referrerKey)}”过来的访客`;
+            greeting += '！';
             return `
-            <p>您好${greeting}！这可能是您初次访问本站。</p>
+            <p>${greeting}这可能是您初次访问本站。</p>
             <p>本站的部分资源托管在国外，在中国大陆的网络环境下可能无法正常加载。如果您在中国大陆访问本站，推荐使用代理。本站使用的部分特性需要 Chrome/Chromium ${minimumSupportedBrowserVersions.chrome}、Safari ${minimumSupportedBrowserVersions.safari}、Firefox ${minimumSupportedBrowserVersions.firefox} 及以上版本的支持。</p>
             <p>此外，在完成初始化前，如果您想要调整数据分析等设置，请点击左下角按钮，否则站点将以默认设置工作。初始化完成后，您也可以在页面右下角找到设置。</p>
             <p>点击“${this.initPopButtonOk()}”完成初始化并永久关闭本弹窗。</p>
