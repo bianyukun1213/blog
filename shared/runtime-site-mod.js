@@ -362,6 +362,59 @@ function fixPathname(pathnameIn) {
 function removeLangPrefix(str) {
     return str.replace(`/${smI18n.getSiteLang()}`, '');
 }
+function extractPostContent() {
+    // https://github.com/lukeaus/html-to-formatted-text/blob/master/src/index.js
+    const wantedTagNames = [
+        'P',
+        'DIV',
+        'BR',
+        'HR',
+        'TITLE',
+        'H1',
+        'H2',
+        'H3',
+        'H4',
+        'H5',
+        'H6',
+        'OL',
+        'UL',
+        'LI',
+        'PRE',
+        'TABLE',
+        'TH',
+        'TD',
+        'BLOCKQUOTE',
+        'HEADER',
+        'FOOTER',
+        'NAV',
+        'SECTION',
+        'SUMMARY',
+        'ASIDE',
+        'ARTICLE',
+        'ADDRESS'
+    ];
+    let postContent = '';
+    const eles = $('.article-content').children();
+    let ps = []
+    let moreFound = false;
+    const elesLength = eles.length;
+    for (let eleIndex = 0; eleIndex < elesLength; eleIndex++) {
+        const ele = eles[eleIndex];
+        if (ele.id === 'more') {
+            moreFound = true;
+            continue;
+        }
+        else if (wantedTagNames.includes(ele.tagName) && $(ele).is(':visible') && moreFound) {
+            ps.push(ele);
+        }
+    }
+    for (const p of ps)
+        postContent += (p.innerText.trim() + '\n'); // 用原生的 innerText 而不是 jQuery 的 text()，后者会去除中间的 \n。
+    postContent = postContent.replace(/\n{2,}/g, '\n'); // 移除多个 \n。
+    postContent = postContent.replace(/\n+$/, ''); // 移除首 \n。
+    postContent = postContent.replace(/^\n+/, ''); // 移除尾 \n。
+    return postContent;
+}
 // 获取站点元数据，如果在 sesstionStorage 下已有元数据，就不再获取。
 async function getSiteMetaAsync(forced) {
     if ($.isEmptyObject(siteMetaCache) || siteMetaCache.site.language !== smI18n.getSiteLang() || forced) {
@@ -1173,56 +1226,7 @@ $(document).ready(() => {
                         const postExcerpt = pageMeta.excerpt;
                         const postAigeneratedExcerpt = pageMeta.aigeneratedExcerpt;
                         const postUrl = pageMeta.permalink;
-                        // https://github.com/lukeaus/html-to-formatted-text/blob/master/src/index.js
-                        const wantedTagNames = [
-                            'P',
-                            'DIV',
-                            'BR',
-                            'HR',
-                            'TITLE',
-                            'H1',
-                            'H2',
-                            'H3',
-                            'H4',
-                            'H5',
-                            'H6',
-                            'OL',
-                            'UL',
-                            'LI',
-                            'PRE',
-                            'TABLE',
-                            'TH',
-                            'TD',
-                            'BLOCKQUOTE',
-                            'HEADER',
-                            'FOOTER',
-                            'NAV',
-                            'SECTION',
-                            'SUMMARY',
-                            'ASIDE',
-                            'ARTICLE',
-                            'ADDRESS'
-                        ];
-                        let postContent = '';
-                        const eles = $('.article-content').children();
-                        let ps = []
-                        let moreFound = false;
-                        const elesLength = eles.length;
-                        for (let eleIndex = 0; eleIndex < elesLength; eleIndex++) {
-                            const ele = eles[eleIndex];
-                            if (ele.id === 'more') {
-                                moreFound = true;
-                                continue;
-                            }
-                            else if (wantedTagNames.includes(ele.tagName) && moreFound) {
-                                ps.push(ele);
-                            }
-                        }
-                        for (const p of ps)
-                            postContent += (p.innerText.trim() + '\n'); // 用原生的 innerText 而不是 jQuery 的 text()，后者会去除中间的 \n。
-                        postContent = postContent.replace(/\n{2,}/g, '\n'); // 移除多个 \n。
-                        postContent = postContent.replace(/\n+$/, ''); // 移除首 \n。
-                        postContent = postContent.replace(/^\n+/, ''); // 移除尾 \n。
+                        const postContent = extractPostContent();
                         let sharingText = `${smI18n.fediverseSharingPopPostTitle()}${postTitle}\n\n${smI18n.fediverseSharingPopPostExcerpt()}${postExcerpt}\n\n`;
                         if (postAigeneratedExcerpt)
                             sharingText += `${smI18n.fediverseSharingPopPostAigeneratedExcerpt()}${postAigeneratedExcerpt}\n\n`;
