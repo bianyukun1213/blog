@@ -713,11 +713,13 @@ function afterUiReady() {
                 if (referrerParam !== null)
                     referrerUrl = new URL(decodeURIComponent(referrerParam));
             }
-            let referrerKey = '';
-            if (referrerUrl.hostname === 'xn--sr8hvo.ws')
+            let referrerKey = referrerUrl.hostname;
+            if (referrerUrl.hostname.includes('xn--sr8hvo.ws'))
                 referrerKey = 'ANINDIEWEBWEBRING';
-            else if (referrerUrl.hostname === 'travellings.cn')
+            else if (referrerUrl.hostname.includes('travellings.cn'))
                 referrerKey = 'TRAVELLINGS';
+            else if (referrerUrl.hostname.includes('github.com'))
+                referrerKey = 'GITHUB';
             if (!getSmData().initialized)
                 smUi.openInitPopup(referrerKey);
             else if (referrerKey !== '')

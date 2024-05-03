@@ -23,6 +23,8 @@ const smI18n = {
         switch (brandKey) {
             case 'ANINDIEWEBWEBRING':
                 return 'An IndieWeb Webring';
+            case 'GITHUB':
+                return 'GitHub';
             case 'CALCKEY':
                 return 'Calckey';
             case 'DIASPORA':
