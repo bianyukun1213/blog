@@ -713,7 +713,7 @@ function afterUiReady() {
                 if (referrerParam !== null)
                     referrerUrl = new URL(decodeURIComponent(referrerParam));
             }
-            let referrerKey = referrerUrl.hostname;
+            let referrerKey = '';
             if (referrerUrl.hostname.includes('xn--sr8hvo.ws'))
                 referrerKey = 'ANINDIEWEBWEBRING';
             else if (referrerUrl.hostname.includes('travellings.cn'))
