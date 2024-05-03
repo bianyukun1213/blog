@@ -699,8 +699,38 @@ function afterPageReady() {
     }
 }
 function afterUiReady() {
-    if (!getSmData().initialized)
-        smUi.openInitPopup();
+    // 旧浏览器不支持 URLSearchParams。
+    try {
+        let url = new URL(window.location.href);
+        let params = new URLSearchParams(url.search);
+        let referrer = document.referrer;
+        if (referrer !== '') {
+            const referrerUrl = new URL(referrer);
+            // 从首页跳转过来，获取首页传过来的 referrer。
+            if ((referrerUrl.hostname === 'his2nd.life' || referrerUrl.hostname === '8000.cs.nas.yinhe.dev') && (referrerUrl.pathname === '/' || referrerUrl.pathname.startsWith('/index'))) {
+                referrer = params.get('referrer');
+                if (referrer !== null)
+                    referrer = decodeURIComponent(referrer);
+                else
+                    referrer = '';
+            }
+        }
+        let referrerKey = '';
+        if (referrer.includes('xn--sr8hvo.ws'))
+            referrerKey = 'ANINDIEWEBWEBRING';
+        else if (referrer.includes('travellings.cn'))
+            referrerKey = 'TRAVELLINGS';
+        if (!getSmData().initialized)
+            smUi.openInitPopup(referrerKey);
+        else if (referrerKey !== '')
+            smUi.openReferrerPopup(referrerKey);
+        params.set('referrer', '');
+        url.search = params.toString();
+        history.replaceState(null, '', url.href);
+    } catch (error) {
+        if (!getSmData().initialized)
+            smUi.openInitPopup();
+    }
     // 给 Redefine 夹个私货，新增一个按钮用来打开设置页面。
     $('.hidden-tools-list').append('<li id="button-show-settings-popup" class="right-bottom-tools tool-sm-settings flex justify-center items-center"><i class="fa-solid fa-wrench"></i></li>');
     $('#button-show-settings-popup').click(() => {
@@ -942,14 +972,17 @@ $(document).ready(() => {
             showLoading: () => {
                 return layer.load(0, { shade: [1, '#202124'], scrollbar: false });
             },
-            openInitPopup: () => {
+            openReferrerPopup: (referrerKey) => {
+                layer.msg(smI18n.referrerPopContent(referrerKey), { icon: 1 });
+            },
+            openInitPopup: (referrerKey) => {
                 const li = layer.open({
                     type: 1,
                     title: escapeHtml(smI18n.initPopTitle()),
                     content: `
                     <div class="${smI18n.langStyleClass()} smui-container smui-container-init-popup">
                         <div class="smui-content">
-                          ${smI18n.initPopContentHtml(minimumSupportedBrowserVersions)}
+                          ${smI18n.initPopContentHtml(minimumSupportedBrowserVersions, referrerKey)}
                         </div>
                         <div class="smui-func smui-clearfix">
                           <hr>
@@ -1298,7 +1331,7 @@ $(document).ready(() => {
                         const softwaresLength = softwares.length;
                         for (let i = 0; i < softwaresLength; i++) {
                             let selected = softwares[i] === preferredSoftware ? ' selected' : '';
-                            $(layero).find(`select[name="${nameBindings.software}"]`).append(`<option value="${softwares[i]}"${selected}>${escapeHtml(smI18n.fediverseSharingPopSelectOptionSoftware(softwares[i]))}</option>`);
+                            $(layero).find(`select[name="${nameBindings.software}"]`).append(`<option value="${softwares[i]}"${selected}>${escapeHtml(smI18n.brands(softwares[i]))}</option>`);
                         }
                         $(layero).find(`input[name="${nameBindings.instance}"]`).val(fediverseSharingPreferences.instance);
                         // 输入框响应 enter。

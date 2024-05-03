@@ -7,6 +7,7 @@ function updatePageTitle() {
 }
 function updatePossibleLinkTip() {
     let excluded = [];
+    // 旧浏览器不支持 URLSearchParams。
     try {
         excluded = JSON.parse(decodeURIComponent(new URLSearchParams(window.location.search).get('excluded'))) || [];
     } catch (error) {

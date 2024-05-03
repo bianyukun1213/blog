@@ -20,11 +20,19 @@ else
     lang = 'en';
 document.getElementsByTagName('html')[0].lang = lang;
 updatePageTitle();
+if (document.referrer !== '') {
+    let hrefZhcn = document.getElementById('link-zhcn').getAttribute('href');
+    hrefZhcn += '?referrer=' + encodeURIComponent(document.referrer);
+    document.getElementById('link-zhcn').setAttribute('href', hrefZhcn);
+    let hrefEn = document.getElementById('link-en').getAttribute('href');
+    hrefEn += '?referrer=' + encodeURIComponent(document.referrer);
+    document.getElementById('link-en').setAttribute('href', hrefEn);
+}
 if (new URLSearchParams(window.location.search).get('noAutoJump') !== 'true') {
     let secondsRemain = 5;
     setInterval(() => {
         if (secondsRemain <= 0) {
-            window.location.pathname = `/${lang}`;
+            window.location.href = lang + (document.referrer !== '' ? '?referrer=' + encodeURIComponent(document.referrer) : '');
             return; // 距离跳转还有短暂的一点时间，不再更新秒数。
         }
         updateTip(secondsRemain--);
