@@ -1173,7 +1173,56 @@ $(document).ready(() => {
                         const postExcerpt = pageMeta.excerpt;
                         const postAigeneratedExcerpt = pageMeta.aigeneratedExcerpt;
                         const postUrl = pageMeta.permalink;
-                        let postContent = $('.article-content').text();
+                        // https://github.com/lukeaus/html-to-formatted-text/blob/master/src/index.js
+                        const wantedTagNames = [
+                            'P',
+                            'DIV',
+                            'BR',
+                            'HR',
+                            'TITLE',
+                            'H1',
+                            'H2',
+                            'H3',
+                            'H4',
+                            'H5',
+                            'H6',
+                            'OL',
+                            'UL',
+                            'LI',
+                            'PRE',
+                            'TABLE',
+                            'TH',
+                            'TD',
+                            'BLOCKQUOTE',
+                            'HEADER',
+                            'FOOTER',
+                            'NAV',
+                            'SECTION',
+                            'SUMMARY',
+                            'ASIDE',
+                            'ARTICLE',
+                            'ADDRESS'
+                        ];
+                        let postContent = '';
+                        const eles = $('.article-content').children();
+                        let ps = []
+                        let moreFound = false;
+                        const elesLength = eles.length;
+                        for (let eleIndex = 0; eleIndex < elesLength; eleIndex++) {
+                            const ele = eles[eleIndex];
+                            if (ele.id === 'more') {
+                                moreFound = true;
+                                continue;
+                            }
+                            else if (wantedTagNames.includes(ele.tagName) && moreFound) {
+                                ps.push(ele);
+                            }
+                        }
+                        for (const p of ps)
+                            postContent += (p.innerText.trim() + '\n'); // 用原生的 innerText 而不是 jQuery 的 text()，后者会去除中间的 \n。
+                        postContent = postContent.replace(/\n{2,}/g, '\n'); // 移除多个 \n。
+                        postContent = postContent.replace(/\n+$/, ''); // 移除首 \n。
+                        postContent = postContent.replace(/^\n+/, ''); // 移除尾 \n。
                         let sharingText = `${smI18n.fediverseSharingPopPostTitle()}${postTitle}\n\n${smI18n.fediverseSharingPopPostExcerpt()}${postExcerpt}\n\n`;
                         if (postAigeneratedExcerpt)
                             sharingText += `${smI18n.fediverseSharingPopPostAigeneratedExcerpt()}${postAigeneratedExcerpt}\n\n`;
