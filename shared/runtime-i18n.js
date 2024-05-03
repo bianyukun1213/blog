@@ -531,35 +531,35 @@ const smI18n = {
     },
     fediverseSharingPopSelectOptionSoftware: function (key) {
         switch (key) {
-            case 'calckey':
+            case 'CALCKEY':
                 return 'Calckey';
-            case 'diaspora':
+            case 'DIASPORA':
                 return 'Diaspora';
-            case 'fedibird':
+            case 'FEDIBIRD':
                 return 'Fedibird';
-            case 'firefish':
+            case 'FIREFISH':
                 return 'Firefish';
-            case 'foundkey':
+            case 'FOUNDKEY':
                 return 'FoundKey';
-            case 'friendica':
+            case 'FRIENDICA':
                 return 'Friendica';
-            case 'glitchcafe':
+            case 'GLITCHCAFE':
                 return 'Glitchcafe';
-            case 'gnusocial':
+            case 'GNUSOCIAL':
                 return 'GNU Social';
-            case 'hometown':
+            case 'HOMETOWN':
                 return 'Hometown';
-            case 'hubzilla':
+            case 'HUBZILLA':
                 return 'Hubzilla';
-            case 'kbin':
+            case 'KBIN':
                 return 'kbin';
-            case 'mastodon':
+            case 'MASTODON':
                 return 'Mastodon';
-            case 'meisskey':
+            case 'MEISSKEY':
                 return 'Meisskey';
-            case 'microdotblog':
+            case 'MICRODOTBLOG':
                 return 'micro.blog';
-            case 'misskey':
+            case 'MISSKEY':
                 return 'Misskey';
             default:
                 return key;

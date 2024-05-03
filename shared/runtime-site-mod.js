@@ -111,7 +111,7 @@ function smDelete(options) {
 }
 const smDataTemplates = {
     get latest() {
-        return this.v6;
+        return this.v7;
     },
     get v1() {
         return {
@@ -213,6 +213,33 @@ const smDataTemplates = {
         v6.settings.defaultInteractionSystem = 'COMMENTS';
         v6.templateVer = 6;
         return v6;
+    },
+    get v7() {
+        return {
+            templateVer: 7,
+            settings: {
+                doNotTrack: false,
+                showAiGeneratedExcerpt: true,
+                defaultInteractionSystem: 'COMMENTS'
+            },
+            initialized: false,
+            debug: false,
+            debugVars: {},
+            fediverseSharingPreferences: {
+                software: '',
+                instance: ''
+            }
+        };
+    },
+    migrateFromV6ToV7: function (v6) {
+        let v7 = v6;
+        // v7 新增 fediverseSharingPreferences
+        v7.fediverseSharingPreferences = {
+            software: '',
+            instance: ''
+        };
+        v7.templateVer = 7;
+        return v7;
     }
 };
 function makeSmData() {
@@ -241,6 +268,8 @@ function migrateSmData(oldSmData) {
         oldSmData = smDataTemplates.migrateFromV4ToV5(oldSmData);
     if (oldSmData.templateVer < 6)
         oldSmData = smDataTemplates.migrateFromV5ToV6(oldSmData);
+    if (oldSmData.templateVer < 7)
+        oldSmData = smDataTemplates.migrateFromV6ToV7(oldSmData);
     return oldSmData;
 }
 // 按最新的数据模板校验。
@@ -260,6 +289,9 @@ function validateSmData(invalidSmData) {
         validSmData.settings.defaultInteractionSystem = invalidSettings.defaultInteractionSystem;
     else
         validSmData.settings.defaultInteractionSystem = 'COMMENTS';
+    let invalidFediverseSharingPreferences = invalidSmData.fediverseSharingPreferences || {};
+    validSmData.fediverseSharingPreferences.software = typeof invalidFediverseSharingPreferences.software === 'string' ? invalidFediverseSharingPreferences.software : '';
+    validSmData.fediverseSharingPreferences.instance = typeof invalidFediverseSharingPreferences.instance === 'string' ? invalidFediverseSharingPreferences.instance : '';
     // ...
     return validSmData;
 }
@@ -696,25 +728,23 @@ let smLogInfo = (...params) => { console.info(new Date().toLocaleTimeString() + 
 let smLogWarn = (...params) => { console.warn(new Date().toLocaleTimeString() + ' |', ...params); };
 let smLogError = (...params) => { console.error(new Date().toLocaleTimeString() + ' |', ...params); };
 // 初始化 site-mod 数据，检测数据变更。
-(() => {
-    const smDataRawStr = localStorage.getItem('smData');
-    let smDataRawStrEmpty = true;
-    let smSettingsRaw = {};
-    if (smDataRawStr) {
-        smDataRawStrEmpty = false;
-        try {
-            smSettingsRaw = JSON.parse(smDataRawStr).settings || {};
-        } catch (error) {
-            smSettingsRaw = {};
-        }
+const smDataRawStr = localStorage.getItem('smData');
+let smDataRawStrEmpty = true;
+let smSettingsRaw = {};
+if (smDataRawStr) {
+    smDataRawStrEmpty = false;
+    try {
+        smSettingsRaw = JSON.parse(smDataRawStr).settings || {};
+    } catch (error) {
+        smSettingsRaw = {};
     }
-    setSmData(getSmData());
-    const smSettings = getSmSettings();
-    // 使用了 lodash 的 isEqual 。
-    if (!smDataRawStrEmpty && !_.isEqual(smSettings, smSettingsRaw))
-        // Layui 此时还未加载，弹窗不可用。等到 Layui 加载，执行 afterUiReady 时，页面可能已经历刷新，就检测不到变化了。
-        alert(smI18n.smSettingsMigratedAlert());
-})();
+}
+setSmData(getSmData());
+const smSettings = getSmSettings();
+// 使用了 lodash 的 isEqual 。
+if (!smDataRawStrEmpty && !_.isEqual(smSettings, smSettingsRaw))
+    // Layui 此时还未加载，弹窗不可用。等到 Layui 加载，执行 afterUiReady 时，页面可能已经历刷新，就检测不到变化了。
+    alert(smI18n.smSettingsMigratedAlert());
 let vConsole = {};
 let smDebug = {};
 if (debugOn) {
@@ -1175,63 +1205,66 @@ $(document).ready(() => {
                         const encodedPostUrl = encodeURIComponent(postUrl);
                         const encodedSharingText = encodeURIComponent(sharingText);
                         const softwares = [
-                            'calckey',
-                            'diaspora',
-                            'fedibird',
-                            'firefish',
-                            'foundkey',
-                            'friendica',
-                            'glitchcafe',
-                            'gnusocial',
-                            'hometown',
-                            'hubzilla',
-                            'kbin',
-                            'mastodon',
-                            'meisskey',
-                            'microdotblog',
-                            'misskey'
+                            'CALCKEY',
+                            'DIASPORA',
+                            'FEDIBIRD',
+                            'FIREFISH',
+                            'FOUNDKEY',
+                            'FRIENDICA',
+                            'GLITCHCAFE',
+                            'GNUSOCIAL',
+                            'HOMETOWN',
+                            'HUBZILLA',
+                            'KBIN',
+                            'MASTODON',
+                            'MEISSKEY',
+                            'MICRODOTBLOG',
+                            'MISSKEY'
                         ];
                         const getEndpoint = (software) => {
                             switch (software) {
-                                case 'calckey':
+                                case 'CALCKEY':
                                     return `share?text=${encodedSharingText}`;
-                                case 'diaspora':
+                                case 'DIASPORA':
                                     return `bookmarklet?title=${encodedPostTitle}&notes=${encodedPostExcerpt}&url=${encodedPostUrl}`;
-                                case 'fedibird':
+                                case 'FEDIBIRD':
                                     return `share?text=${encodedSharingText}`;
-                                case 'firefish':
+                                case 'FIREFISH':
                                     return `share?text=${encodedSharingText}`;
-                                case 'foundkey':
+                                case 'FOUNDKEY':
                                     return `share?text=${encodedSharingText}`;
-                                case 'friendica':
+                                case 'FRIENDICA':
                                     return `compose?title=${encodedPostTitle}&body=${encodedPostExcerpt}%0A${encodedPostUrl}`;
-                                case 'glitchcafe':
+                                case 'GLITCHCAFE':
                                     return `share?text=${encodedSharingText}`;
-                                case 'gnusocial':
+                                case 'GNUSOCIAL':
                                     return `notice/new?status_textarea=${encodedSharingText}`;
-                                case 'hometown':
+                                case 'HOMETOWN':
                                     return `share?text=${encodedSharingText}`;
-                                case 'hubzilla':
+                                case 'HUBZILLA':
                                     return `rpost?title=${encodedPostTitle}&body=${encodedPostExcerpt}%0A${encodedPostUrl}`;
-                                case 'kbin':
+                                case 'KBIN':
                                     return `new/link?url=${encodedPostUrl}`;
-                                case 'mastodon':
+                                case 'MASTODON':
                                     return `share?text=${encodedSharingText}`;
-                                case 'meisskey':
+                                case 'MEISSKEY':
                                     return `share?text=${encodedSharingText}`;
-                                case 'microdotblog':
+                                case 'MICRODOTBLOG':
                                     return `post?text=[${encodedPostTitle}](${encodedPostUrl})%0A%0A${encodedPostExcerpt}`;
-                                case 'misskey':
+                                case 'MISSKEY':
                                     return `share?text=${encodedSharingText}`;
                                 default:
                                     return '';
                             }
                         };
+                        let fediverseSharingPreferences = getSmData().fediverseSharingPreferences;
+                        let preferredSoftware = softwares.includes(fediverseSharingPreferences.software) ? fediverseSharingPreferences.software : 'MASTODON';
                         const softwaresLength = softwares.length;
                         for (let i = 0; i < softwaresLength; i++) {
-                            let selected = softwares[i] === 'mastodon' ? ' selected' : '';
+                            let selected = softwares[i] === preferredSoftware ? ' selected' : '';
                             $(layero).find(`select[name="${nameBindings.software}"]`).append(`<option value="${softwares[i]}"${selected}>${escapeHtml(smI18n.fediverseSharingPopSelectOptionSoftware(softwares[i]))}</option>`);
                         }
+                        $(layero).find(`input[name="${nameBindings.instance}"]`).val(fediverseSharingPreferences.instance);
                         // 输入框响应 enter。
                         $(layero).find(`input[name="${nameBindings.instance}"]`).on('keydown', (e) => {
                             if (e.originalEvent.keyCode === 13)
@@ -1240,12 +1273,18 @@ $(document).ready(() => {
                         $(layero).find('.smui-button-share-on-fediverse').click(() => {
                             form.submit(nameBindings.layFilter, (data) => {
                                 if (form.validate(`input[name="${nameBindings.instance}"]`)) {
+                                    const software = data.field[nameBindings.software];
                                     let instance = data.field[nameBindings.instance];
+                                    fediverseSharingPreferences.software = software;
+                                    fediverseSharingPreferences.instance = instance;
+                                    let smDataTmp = getSmData();
+                                    smDataTmp.fediverseSharingPreferences = fediverseSharingPreferences;
+                                    setSmData(smDataTmp);
                                     if (!instance.startsWith('https://') && !instance.startsWith('http://'))
                                         instance = 'https://' + instance;
                                     if (!instance.endsWith('/'))
                                         instance += '/';
-                                    window.open(`${instance}${getEndpoint(data.field[nameBindings.software])}`, '_blank');
+                                    window.open(`${instance}${getEndpoint(software)}`, '_blank');
                                     // layer.close(index);
                                 }
                             });
