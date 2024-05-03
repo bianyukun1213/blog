@@ -610,7 +610,7 @@ function afterPageReady() {
                 frm.src = frm.src.replace('music.163.com/', 'music.163.com/m/');
         }
     }
-    if (removeLangPrefix(pathname) === '/timeline/') {
+    if (removeLangPrefix(pathname) === '/fediverse/') {
         if (!mastodonTimeline) {
             const instanceUrl = 'https://m.cmx.im';
             let locale = smI18n.getSiteLang();
@@ -863,7 +863,7 @@ setInterval(() => {
         else
             $('#layui-theme-dark').removeAttr('href');
         // 切换 mastodonTimeline 主题。
-        if (removeLangPrefix(window.location.pathname) === '/timeline/')
+        if (removeLangPrefix(window.location.pathname) === '/fediverse/')
             mastodonTimeline.mtColorTheme(newThemeColorScheme);
         if (!$.isEmptyObject(vConsole))
             vConsole.setOption('theme', newThemeColorScheme);
