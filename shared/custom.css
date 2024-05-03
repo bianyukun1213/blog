@@ -564,14 +564,14 @@ noscript#javascript-alert p::after {
 }
 
 /* 首行缩进，用 em 而不是 rem。作用于 Redefine 文章和页面区域。 */
-.article-content-container .h2l-text-indent,
-.page-template-container .h2l-text-indent {
+.article-content .h2l-text-indent,
+.page-template-content .h2l-text-indent {
     text-indent: 2em;
 }
 
 /* 取消子元素的缩进。 */
-.article-content-container .h2l-text-indent>*,
-.page-template-container .h2l-text-indent>* {
+.article-content .h2l-text-indent>*,
+.page-template-content .h2l-text-indent>* {
     text-indent: initial;
 }
 

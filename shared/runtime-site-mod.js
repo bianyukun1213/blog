@@ -1173,24 +1173,7 @@ $(document).ready(() => {
                         const postExcerpt = pageMeta.excerpt;
                         const postAigeneratedExcerpt = pageMeta.aigeneratedExcerpt;
                         const postUrl = pageMeta.permalink;
-                        let postContent = '';
-                        const eles = $('.article-content').children();
-                        let ps = []
-                        let moreFound = false;
-                        const elesLength = eles.length;
-                        for (let eleIndex = 0; eleIndex < elesLength; eleIndex++) {
-                            const ele = eles[eleIndex];
-                            if (ele.id === 'more') {
-                                moreFound = true;
-                                continue;
-                            }
-                            else if (ele.tagName === 'P' && moreFound) {
-                                ps.push(ele);
-                            }
-                        }
-                        ps.pop() // 弹出“完”或“The End”。
-                        for (const p of ps)
-                            postContent += ($(p).text().trim() + '\n');
+                        let postContent = $('.article-content').text();
                         let sharingText = `${smI18n.fediverseSharingPopPostTitle()}${postTitle}\n\n${smI18n.fediverseSharingPopPostExcerpt()}${postExcerpt}\n\n`;
                         if (postAigeneratedExcerpt)
                             sharingText += `${smI18n.fediverseSharingPopPostAigeneratedExcerpt()}${postAigeneratedExcerpt}\n\n`;
