@@ -379,10 +379,11 @@ function fixReferrer() {
                     referrerUrl = new URL(decodeURIComponent(referrerParam));
             }
             fixedReferrer = referrerUrl.origin + referrerUrl.pathname;
+        } else {
+            params.delete('referrer');
+            url.search = params.toString();
+            history.replaceState(null, '', url.href);
         }
-        params.delete('referrer');
-        url.search = params.toString();
-        history.replaceState(null, '', url.href);
         return fixedReferrer;
     } catch (error) { }
 }
