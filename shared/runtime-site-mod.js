@@ -1494,14 +1494,14 @@ $(document).ready(() => {
 // 然后我又把此脚本及其依赖提前了，放在 body_begin。
 // 现在需要确保此脚本不会提前操作 body 里的元素。操作 body 里的元素的放在 afterPageReady 里。
 $(window).on('hexo-blog-decrypt', (e) => {
-    if (!window.location.hash.includes('#on-decryption-reload')) {
-        window.location.hash = '#on-decryption-reload';
+    if (!window.location.hash.includes('on-decryption-reload')) {
+        window.location.hash = 'on-decryption-reload';
         // 如果文章是新解密的，等待 hexo-blog-encrypt 插件写入 localStorage，这样下次再访问就能自动解密。
         setInterval(() => {
             if (localStorage.getItem(`hexo-blog-encrypt:#${window.location.pathname}`) !== null)
                 window.location.reload();
         }, 1000);
     } else {
-        window.location.hash = window.location.hash.replace('#on-decryption-reload', '');
+        window.location.hash = window.location.hash.replace('on-decryption-reload', '');
     }
 });
