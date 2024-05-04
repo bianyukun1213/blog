@@ -385,7 +385,9 @@ function fixReferrer() {
             history.replaceState(null, '', url.href);
         }
         return fixedReferrer;
-    } catch (error) { }
+    } catch (error) {
+        return document.referrer;
+    }
 }
 function fixPathname(pathnameIn) {
     let fixedPathname = pathnameIn;
