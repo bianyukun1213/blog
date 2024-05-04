@@ -624,13 +624,6 @@ function adjustVConsoleSwitchPosition(reset) {
 }
 // 页面加载后再执行的操作：
 function afterPageReady() {
-    // 修正 pathname，以解决不带 .html 不显示评论，并且已保存了密码的文章也不能自动解密的问题。
-    const pathname = window.location.pathname;
-    const fixedPathname = fixPathname(pathname);
-    if (pathname !== fixedPathname) {
-        window.location.replace(window.location.origin + fixedPathname); // 跳转。
-        return; // 从 replace 到实际跳转有一段时间，没必要让代码继续执行，因此 return。
-    }
     // 监听搜索框输入事件，根据条件开启调试。需要在页面加载后监听，因为 site-mod.js 在头部注入，执行时还没有搜索框。
     $('.search-input').on('input', function () {
         if ($(this).val() === 'debugon' && !debugOn) {
@@ -708,7 +701,7 @@ function afterPageReady() {
                 frm.src = frm.src.replace('music.163.com/', 'music.163.com/m/');
         }
     }
-    if (removeLangPrefix(pathname) === '/fediverse/') {
+    if (removeLangPrefix(window.location.pathname) === '/fediverse/') {
         if (!mastodonTimeline) {
             const instanceUrl = 'https://m.cmx.im';
             let locale = smI18n.getSiteLang();
@@ -834,7 +827,11 @@ function afterUiReady() {
 // 脚本开始。
 
 
-
+// 修正 pathname，以解决不带 .html 不显示评论，并且已保存了密码的文章也不能自动解密的问题。
+const pathname = window.location.pathname;
+const fixedPathname = fixPathname(pathname);
+if (pathname !== fixedPathname)
+    window.location.replace(window.location.origin + fixedPathname); // 跳转。
 let smLogDebug = () => { };
 const debugOn = getSmData().debug;
 smLogDebug = (...params) => { if (debugOn) console.debug(new Date().toLocaleTimeString() + ' |', ...params); };
@@ -1493,6 +1490,9 @@ $(document).ready(() => {
     });
 });
 // 监听 hexo-blog-encrypt 插件的解密事件，自动刷新页面以使部分内容正确显示。
+// 某次调整脚本加载顺序（此脚本放在 body_end）后，监听不再时刻有效。手动解密的可以监听，自动解密的无法监听，因为此时此脚本还未加载。
+// 然后我又把此脚本及其依赖提前了，放在 body_begin。
+// 现在需要确保此脚本不会提前操作 body 里的元素。操作 body 里的元素的放在 afterPageReady 里。
 $(window).on('hexo-blog-decrypt', (e) => {
     if (!window.location.hash.includes('#on-decryption-reload')) {
         window.location.hash = '#on-decryption-reload';

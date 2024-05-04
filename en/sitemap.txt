@@ -7,9 +7,9 @@ https://his2nd.life/en/about/index.html
 https://his2nd.life/en/categories/index.html
 https://his2nd.life/en/tags/index.html
 https://his2nd.life/en/
-https://his2nd.life/en/tags/network/
 https://his2nd.life/en/tags/front-end/
 https://his2nd.life/en/tags/javascript/
+https://his2nd.life/en/tags/network/
 https://his2nd.life/en/tags/html/
 https://his2nd.life/en/tags/css/
 https://his2nd.life/en/categories/technologies-and-techniques/
