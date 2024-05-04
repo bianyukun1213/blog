@@ -21,16 +21,14 @@ const minimumSupportedBrowserVersions = {
     firefox: '121'
 };
 
-function escapeHtml(str) {
-    let s = '';
-    if (str.length == 0) return '';
-    s = str.replace(/&/g, '&amp;');
-    s = s.replace(/</g, '&lt;');
-    s = s.replace(/>/g, '&gt;');
-    s = s.replace(/\'/g, '&apos;');
-    s = s.replace(/\"/g, '&quot;');
-    return s;
-}
+const knownReferrerHostnames = {
+    'xn--sr8hvo.ws': 'ANINDIEWEBWEBRING',
+    'travellings.cn': 'TRAVELLINGS',
+    'github.com': 'GITHUB',
+    'postcrossing.com': 'POSTCROSSING',
+    'steamcommunity.com': 'STEAMCOMMUNITY'
+};
+
 // jQuery Ajax 包装：
 // 把以前做 daddys-here 的代码改吧改吧，见 https://github.com/bianyukun1213/daddys-here/blob/main/src/index.html#L739。
 function smRequest(options, async) {
@@ -315,6 +313,16 @@ function setSmData(smData) {
 function genRandomStr() {
     return Math.random().toString(36).slice(-8);
 }
+function escapeHtml(str) {
+    let s = '';
+    if (str.length == 0) return '';
+    s = str.replace(/&/g, '&amp;');
+    s = s.replace(/</g, '&lt;');
+    s = s.replace(/>/g, '&gt;');
+    s = s.replace(/\'/g, '&apos;');
+    s = s.replace(/\"/g, '&quot;');
+    return s;
+}
 function isTextUrl(text) {
     return /^https?:\/\/(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost)(\/[-a-z\d%_.~+@]*)*(\?[;&a-z\d%_.~+=-@]*)?(\#[-a-z\d_@]*)?$/i.test(text);
 }
@@ -346,6 +354,32 @@ function isTrackingAvailable(detailed) {
         return details;
     else
         return details.available;
+}
+function fixReferrer() {
+    if (removeLangPrefix(fixPathname(window.location.pathname)) !== '/')
+        return document.referrer;
+    // 旧浏览器不支持 URLSearchParams。
+    try {
+        let url = new URL(window.location.href);
+        let params = new URLSearchParams(url.search);
+        let documentReferrer = document.referrer;
+        let fixedReferrer = documentReferrer;
+        let referrerUrl;
+        if (documentReferrer !== '') {
+            referrerUrl = new URL(documentReferrer);
+            // 从首页跳转过来，获取首页传过来的 referrer。
+            if ((referrerUrl.hostname === 'his2nd.life' || referrerUrl.hostname === 'cs.nas.yinhe.dev' || referrerUrl.hostname === '8000.cs.nas.yinhe.dev') && fixPathname(referrerUrl.pathname) === '/' /* 不用 removeLangPrefix，因为首页本来就没有它。 */) {
+                const referrerParam = params.get('referrer');
+                if (referrerParam !== null)
+                    referrerUrl = new URL(decodeURIComponent(referrerParam));
+            }
+            fixedReferrer = referrerUrl.origin + referrerUrl.pathname;
+        }
+        params.delete('referrer');
+        url.search = params.toString();
+        history.replaceState(null, '', url.href);
+        return fixedReferrer;
+    } catch (error) { }
 }
 function fixPathname(pathnameIn) {
     let fixedPathname = pathnameIn;
@@ -699,39 +733,25 @@ function afterPageReady() {
     }
 }
 function afterUiReady() {
-    // 旧浏览器不支持 URLSearchParams。
-    try {
-        let url = new URL(window.location.href);
-        let params = new URLSearchParams(url.search);
-        let documentReferrer = document.referrer;
-        let referrerUrl;
-        if (documentReferrer !== '') {
-            referrerUrl = new URL(documentReferrer);
-            // 从首页跳转过来，获取首页传过来的 referrer。
-            if ((referrerUrl.hostname === 'his2nd.life' || referrerUrl.hostname === '8000.cs.nas.yinhe.dev') && (referrerUrl.pathname === '/' || referrerUrl.pathname.startsWith('/index'))) {
-                const referrerParam = params.get('referrer');
-                if (referrerParam !== null)
-                    referrerUrl = new URL(decodeURIComponent(referrerParam));
+    let referrerKey = '';
+    if (fixedReferrer !== '') {
+        const referrerUrl = new URL(fixedReferrer);
+        if (!referrerUrl.hostname.includes('his2nd.life') && !referrerUrl.hostname.includes('cs.nas.yinhe.dev'))
+            referrerKey = referrerUrl.hostname;
+        const hostnames = Object.keys(knownReferrerHostnames);
+        const hostnamesLength = hostnames.length;
+        for (let i = 0; i < hostnamesLength; i++) {
+            const referrerHostname = hostnames[i];
+            if (referrerUrl.hostname.includes(referrerHostname)) {
+                referrerKey = knownReferrerHostnames[referrerHostname];
+                break;
             }
-            let referrerKey = '';
-            if (referrerUrl.hostname.includes('xn--sr8hvo.ws'))
-                referrerKey = 'ANINDIEWEBWEBRING';
-            else if (referrerUrl.hostname.includes('travellings.cn'))
-                referrerKey = 'TRAVELLINGS';
-            else if (referrerUrl.hostname.includes('github.com'))
-                referrerKey = 'GITHUB';
-            if (!getSmData().initialized)
-                smUi.openInitPopup(referrerKey);
-            else if (referrerKey !== '')
-                smUi.openReferrerPopup(referrerKey);
         }
-        params.delete('referrer');
-        url.search = params.toString();
-        history.replaceState(null, '', url.href);
-    } catch (error) {
-        if (!getSmData().initialized)
-            smUi.openInitPopup();
     }
+    if (!getSmData().initialized)
+        smUi.openInitPopup(referrerKey);
+    else if (referrerKey !== '')
+        smUi.openReferrerPopup(referrerKey);
     // 给 Redefine 夹个私货，新增一个按钮用来打开设置页面。
     $('.hidden-tools-list').append('<li id="button-show-settings-popup" class="right-bottom-tools tool-sm-settings flex justify-center items-center"><i class="fa-solid fa-wrench"></i></li>');
     $('#button-show-settings-popup').click(() => {
@@ -807,10 +827,11 @@ function afterUiReady() {
 let smLogDebug = () => { };
 const debugOn = getSmData().debug;
 smLogDebug = (...params) => { if (debugOn) console.debug(new Date().toLocaleTimeString() + ' |', ...params); };
-let smLog = (...params) => { console.log(new Date().toLocaleTimeString() + ' |', ...params); };
-let smLogInfo = (...params) => { console.info(new Date().toLocaleTimeString() + ' |', ...params); };
-let smLogWarn = (...params) => { console.warn(new Date().toLocaleTimeString() + ' |', ...params); };
-let smLogError = (...params) => { console.error(new Date().toLocaleTimeString() + ' |', ...params); };
+const smLog = (...params) => { console.log(new Date().toLocaleTimeString() + ' |', ...params); };
+const smLogInfo = (...params) => { console.info(new Date().toLocaleTimeString() + ' |', ...params); };
+const smLogWarn = (...params) => { console.warn(new Date().toLocaleTimeString() + ' |', ...params); };
+const smLogError = (...params) => { console.error(new Date().toLocaleTimeString() + ' |', ...params); };
+const fixedReferrer = fixReferrer();
 // 初始化 site-mod 数据，检测数据变更。
 const smDataRawStr = localStorage.getItem('smData');
 let smDataRawStrEmpty = true;
@@ -917,7 +938,8 @@ if (debugOn) {
     smDebug.loadVars();
 }
 window.goatcounter = {
-    no_onload: !isTrackingAvailable()
+    no_onload: !isTrackingAvailable(),
+    referrer: fixedReferrer
 };
 // 初始化站点元数据。
 let siteMetaCache = {};
@@ -1012,7 +1034,7 @@ $(document).ready(() => {
                             setSmData(smData);
                             // 标记初始化完成后，如果跟踪可用，立即计数一次。
                             if (isTrackingAvailable())
-                                goatcounter.count();
+                                window.goatcounter.count();
                             layer.close(index);
                             return false; // 阻止默认动作。
                         });
@@ -1187,7 +1209,7 @@ $(document).ready(() => {
                         // langsOrForced 是 object 并且不为空，就用；否则现场获取可用语言，是否 forced 取决于 langsOrForced 的值是否是布尔 true。
                         const pageLang = await getPageLangAsync(); // 页面语言不等于站点语言，不等式秒了！
                         langsOrForced = $.isPlainObject(langsOrForced) && !$.isEmptyObject(langsOrForced) ? langsOrForced : await getPageAvailableLangsAsync(langsOrForced === true ? true : false);
-                        const availableLangs = Object.getOwnPropertyNames(langsOrForced);
+                        const availableLangs = Object.keys(langsOrForced);
                         const langsLength = availableLangs.length;
                         for (let i = 0; i < langsLength; i++) {
                             const langKey = availableLangs[i];

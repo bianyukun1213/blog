@@ -25,6 +25,8 @@ const smI18n = {
                 return 'An IndieWeb Webring';
             case 'GITHUB':
                 return 'GitHub';
+            case 'POSTCROSSING':
+                return 'Postcrossing';
             case 'CALCKEY':
                 return 'Calckey';
             case 'DIASPORA':
@@ -60,12 +62,16 @@ const smI18n = {
             switch (brandKey) {
                 case 'TRAVELLINGS':
                     return 'Travellings';
+                case 'STEAMCOMMUNITY':
+                    return 'Steam Community';
             }
         }
         else if (this.isZh()) {
             switch (brandKey) {
                 case 'TRAVELLINGS':
                     return '开往';
+                case 'STEAMCOMMUNITY':
+                    return 'Steam 社区';
             }
         }
         return brandKey;
@@ -302,7 +308,7 @@ const smI18n = {
         if (this.isEn()) {
             let greeting = 'Hello';
             if (typeof referrerKey !== 'undefined' && referrerKey !== '')
-                greeting = `, visitor from “${this.brands(referrerKey)}”`;
+                greeting += `, visitor from “${this.brands(referrerKey)}”`;
             greeting += '! ';
             return `
             <p>${greeting}This may be your first visit to this site.</p>
@@ -314,7 +320,7 @@ const smI18n = {
         else if (this.isZh()) {
             let greeting = '您好';
             if (typeof referrerKey !== 'undefined' && referrerKey !== '')
-                greeting = `，从“${this.brands(referrerKey)}”过来的访客`;
+                greeting += `，从“${this.brands(referrerKey)}”过来的访客`;
             greeting += '！';
             return `
             <p>${greeting}这可能是您初次访问本站。</p>

@@ -32,7 +32,10 @@ if (new URLSearchParams(window.location.search).get('noAutoJump') !== 'true') {
     let secondsRemain = 5;
     setInterval(() => {
         if (secondsRemain <= 0) {
-            window.location.href = lang + (document.referrer !== '' ? '?referrer=' + encodeURIComponent(document.referrer) : '');
+            if (lang === 'zh-CN')
+                document.getElementById('link-zhcn').click();
+            else
+                document.getElementById('link-en').click();
             return; // 距离跳转还有短暂的一点时间，不再更新秒数。
         }
         updateTip(secondsRemain--);
