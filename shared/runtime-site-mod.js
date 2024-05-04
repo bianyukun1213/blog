@@ -376,10 +376,10 @@ function fixReferrer() {
             if ((referrerUrl.hostname === 'his2nd.life' || referrerUrl.hostname === 'cs.nas.yinhe.dev' || referrerUrl.hostname === '8000.cs.nas.yinhe.dev') && fixPathname(referrerUrl.pathname) === '/' /* 不用 removeLangPrefix，因为首页本来就没有它。 */) {
                 const referrerParam = params.get('referrer');
                 if (referrerParam !== null)
-                    referrerUrl = new URL(decodeURIComponent(referrerParam));
+                    referrerUrl = new URL(referrerParam);
             }
             fixedReferrer = referrerUrl.href;
-            params.set('referrer', encodeURIComponent(fixedReferrer));
+            params.set('referrer', fixedReferrer);
             url.search = params.toString();
             history.replaceState(null, '', url.href);
         } else {
