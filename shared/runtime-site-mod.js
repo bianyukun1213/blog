@@ -655,7 +655,7 @@ function afterPageReady() {
     $('.article-content-container').on('transitionend webkitTransitionEnd oTransitionEnd', function () {
         $('.image-masonry-script').each(function () {
             const masonryId = this.id.replace('image-masonry-script-', '');
-            window[`macyAt${masonryId}`].recalculate(true);
+            window[`macy${masonryId}`].recalculate(true);
         });
     });
     // 自己加载 twikoo，传入语言信息。
