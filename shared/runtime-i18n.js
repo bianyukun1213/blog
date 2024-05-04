@@ -21,6 +21,8 @@ const smI18n = {
     },
     brands: function (brandKey) {
         switch (brandKey) {
+            case 'GOOGLE':
+                return 'Google';
             case 'ANINDIEWEBWEBRING':
                 return 'An IndieWeb Webring';
             case 'GITHUB':
@@ -62,6 +64,10 @@ const smI18n = {
         }
         if (this.isEn()) {
             switch (brandKey) {
+                case 'BING':
+                    return 'Bing';
+                case 'BAIDU':
+                    return 'Baidu';
                 case 'TRAVELLINGS':
                     return 'Travellings';
                 case 'STEAMCOMMUNITY':
@@ -70,6 +76,10 @@ const smI18n = {
         }
         else if (this.isZh()) {
             switch (brandKey) {
+                case 'BING':
+                    return '必应';
+                case 'BAIDU':
+                    return '百度';
                 case 'TRAVELLINGS':
                     return '开往';
                 case 'STEAMCOMMUNITY':

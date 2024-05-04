@@ -21,7 +21,11 @@ const minimumSupportedBrowserVersions = {
     firefox: '121'
 };
 
+// 这里仅以 hostname 判断。实际上，referrer 包含端口号，而 hostname 不含端口号，host 才有。
 const knownReferrerHostnames = {
+    'google.com': 'GOOGLE',
+    'bing.com': 'BING',
+    'baidu.com': 'BAIDU',
     'xn--sr8hvo.ws': 'ANINDIEWEBWEBRING',
     'travellings.cn': 'TRAVELLINGS',
     'github.com': 'GITHUB',
