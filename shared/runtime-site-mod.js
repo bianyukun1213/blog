@@ -378,7 +378,10 @@ function fixReferrer() {
                 if (referrerParam !== null)
                     referrerUrl = new URL(decodeURIComponent(referrerParam));
             }
-            fixedReferrer = referrerUrl.origin + referrerUrl.pathname;
+            fixedReferrer = referrerUrl.href;
+            params.set('referrer', encodeURIComponent(fixedReferrer));
+            url.search = params.toString();
+            history.replaceState(null, '', url.href);
         } else {
             params.delete('referrer');
             url.search = params.toString();
