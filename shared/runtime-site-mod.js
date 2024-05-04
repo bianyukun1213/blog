@@ -378,10 +378,12 @@ function fixReferrer() {
                 if (referrerParam !== null)
                     referrerUrl = new URL(referrerParam);
             }
-            fixedReferrer = referrerUrl.href;
-            params.set('referrer', fixedReferrer);
-            url.search = params.toString();
-            history.replaceState(null, '', url.href);
+            if (params.get('referrer') !== null) {
+                fixedReferrer = referrerUrl.href;
+                params.set('referrer', fixedReferrer);
+                url.search = params.toString();
+                history.replaceState(null, '', url.href);
+            }
         } else {
             params.delete('referrer');
             url.search = params.toString();
