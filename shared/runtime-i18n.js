@@ -27,6 +27,8 @@ const smI18n = {
                 return 'GitHub';
             case 'POSTCROSSING':
                 return 'Postcrossing';
+            case 'THEMEREDEFINE':
+                return 'Theme Redefine';
             case 'CALCKEY':
                 return 'Calckey';
             case 'DIASPORA':

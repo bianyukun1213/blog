@@ -26,7 +26,8 @@ const knownReferrerHostnames = {
     'travellings.cn': 'TRAVELLINGS',
     'github.com': 'GITHUB',
     'postcrossing.com': 'POSTCROSSING',
-    'steamcommunity.com': 'STEAMCOMMUNITY'
+    'steamcommunity.com': 'STEAMCOMMUNITY',
+    'redefine.ohevan.com': 'THEMEREDEFINE'
 };
 
 // jQuery Ajax 包装：
