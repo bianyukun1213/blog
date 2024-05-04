@@ -372,13 +372,11 @@ function fixReferrer() {
         let referrerUrl;
         if (documentReferrer !== '') {
             referrerUrl = new URL(documentReferrer);
-            // 从首页跳转过来，获取首页传过来的 referrer。
-            if ((referrerUrl.hostname === 'his2nd.life' || referrerUrl.hostname === 'cs.nas.yinhe.dev' || referrerUrl.hostname === '8000.cs.nas.yinhe.dev') && fixPathname(referrerUrl.pathname) === '/' /* 不用 removeLangPrefix，因为首页本来就没有它。 */) {
-                const referrerParam = params.get('referrer');
-                if (referrerParam !== null)
+            const referrerParam = params.get('referrer');
+            if (referrerParam !== null) {
+                // 从首页跳转过来，获取首页传过来的 referrer。
+                if ((referrerUrl.hostname === 'his2nd.life' || referrerUrl.hostname === 'cs.nas.yinhe.dev' || referrerUrl.hostname === '8000.cs.nas.yinhe.dev') && fixPathname(referrerUrl.pathname) === '/' /* 不用 removeLangPrefix，因为首页本来就没有它。 */)
                     referrerUrl = new URL(referrerParam);
-            }
-            if (params.get('referrer') !== null) {
                 fixedReferrer = referrerUrl.href;
                 params.set('referrer', fixedReferrer);
                 url.search = params.toString();
