@@ -518,7 +518,7 @@ async function getPageMetaAsync(forced, pathnameIn) {
         const allMetaLength = pagesMeta.length;
         for (let i = 0; i < allMetaLength; i++) {
             let item = pagesMeta[i];
-            // 举例：比较 links/index.html 与 /links/，应该能够对应上。
+            // 举例：比较 neighbors/index.html 与 /neighbors/，应该能够对应上。
             // 此时 targetPathname 要么以 / 结尾，要么以 .html 结尾。
             // 如果数据是加密的。
             if (typeof item.encryptedData !== 'undefined' && item.encryptedData !== null)
