@@ -565,7 +565,7 @@ const smI18n = {
             return 'Share on Fediverse';
         }
         else if (this.isZh()) {
-            return '分享到 Fediverse';
+            return '分享到联邦宇宙';
         }
         return this.notTranslated();
     },
@@ -574,7 +574,7 @@ const smI18n = {
             return 'Share on Fediverse';
         }
         else if (this.isZh()) {
-            return '分享到 Fediverse';
+            return '分享到联邦宇宙';
         }
         return this.notTranslated();
     },
