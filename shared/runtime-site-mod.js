@@ -776,7 +776,7 @@ function afterUiReady() {
         if (meta.layout !== 'post')
             return;
         // 添加分享按钮。
-        $('.toggle-tools-list').after('<li id="button-share-on-fediverse" class="right-bottom-tools tool-share-on-fediverse flex justify-center items-center"><i class="fa-brands fa-mastodon"></i></li>');
+        $('.toggle-tools-list').after('<li id="button-share-on-fediverse" class="right-bottom-tools tool-share-on-fediverse flex justify-center items-center"><i class="fa-solid fa-share-nodes"></i></li>');
         $('#button-share-on-fediverse').click(() => {
             smUi.openFediverseSharingPopup();
             return false; // 阻止默认动作。
