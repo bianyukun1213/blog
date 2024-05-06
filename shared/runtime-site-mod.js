@@ -708,7 +708,7 @@ function afterPageReady() {
             if (locale === 'en')
                 locale = 'en-US';
             mastodonTimeline = new MastodonTimeline.Init({
-                tContainerId: 'mt-container',
+                mtContainerId: 'mt-container',
                 instanceUrl: instanceUrl,
                 timelineType: 'profile',
                 userId: '107989258291762102',
@@ -716,20 +716,38 @@ function afterPageReady() {
                 hashtagName: '',
                 spinnerClass: 'mt-loading-spinner',
                 defaultTheme: getThemeColorScheme(),
+                maxNbPostFetch: '20',
+                maxNbPostShow: '20',
                 dateLocale: locale,
                 dateOptions: {
                     day: '2-digit',
                     month: '2-digit',
                     year: 'numeric',
                 },
+                hideUnlisted: false,
+                hideReblog: false,
+                hideReplies: false,
+                hidePinnedPosts: false,
+                hideUserAccount: false,
+                txtMaxLines: '',
+                btnShowMore: escapeHtml(smI18n.timelineButtonShowMore()),
+                btnShowLess: escapeHtml(smI18n.timelineButtonShowLess()),
+                markdownBlockquote: false,
+                hideEmojos: false,
+                btnShowContent: escapeHtml(smI18n.timelineButtonShowContent()),
+                hideVideoPreview: false,
+                btnPlayVideoTxt: escapeHtml(smI18n.timelineButtonPlayVideo()),
+                hidePreviewLink: false,
+                previewMaxLines: '',
+                hideCounterBar: false,
+                disableCarousel: false,
                 carouselCloseTxt: escapeHtml(smI18n.timelineButtonCloseCarousel()),
                 carouselPrevTxt: escapeHtml(smI18n.timelineButtonCarouselPrevItem()),
                 carouselNextTxt: escapeHtml(smI18n.timelineButtonCarouselNextItem()),
-                btnShowMore: escapeHtml(smI18n.timelineButtonShowMore()),
-                btnShowLess: escapeHtml(smI18n.timelineButtonShowLess()),
-                btnShowContent: escapeHtml(smI18n.timelineButtonShowContent()),
                 btnSeeMore: escapeHtml(smI18n.timelineLinkSeeMore(instanceUrl.split('/')[2])),
-                btnReload: escapeHtml(smI18n.timelineButtonRefresh())
+                btnReload: escapeHtml(smI18n.timelineButtonRefresh()),
+                insistSearchContainer: false,
+                insistSearchContainerTime: '3000'
             });
         } else {
             mastodonTimeline.mtUpdate();

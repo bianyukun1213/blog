@@ -272,6 +272,15 @@ const smI18n = {
         }
         return this.notTranslated();
     },
+    timelineButtonPlayVideo: function () {
+        if (this.isEn()) {
+            return 'PLAY VIDEO';
+        }
+        else if (this.isZh()) {
+            return '播放视频';
+        }
+        return this.notTranslated();
+    },
     timelineLinkSeeMore: function (instanceHost) {
         if (this.isEn()) {
             return `See more twoots at ${instanceHost}`;
