@@ -1,3 +1,10 @@
+function updateHead() {
+    const lang = document.getElementsByTagName('html')[0].lang;
+    if (lang === 'zh-CN')
+        document.querySelector('meta[name="description"]').setAttribute('content', '他的第二人生的 404 页面。你看到此页面是因为你请求的页面不存在。');
+    else
+        document.querySelector('meta[name="description"]').setAttribute('content', 'This is the 404 page of His 2nd Life. You are seeing this because the page you requested cannot be found.');
+}
 function updatePageTitle() {
     const lang = document.getElementsByTagName('html')[0].lang;
     if (lang === 'zh-CN')
@@ -69,4 +76,5 @@ else
     lang = 'en';
 document.getElementsByTagName('html')[0].lang = lang;
 updatePageTitle();
+updateHead();
 updatePossibleLinkTip();
