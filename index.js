@@ -3,7 +3,7 @@ function updatePageTitle() {
     if (lang === 'zh-CN')
         document.getElementById("site-title").innerText = document.title = '选择站点 - 他的第二人生';
     else
-        document.getElementById("site-title").innerText = document.title = 'Select site - His 2nd Life';
+        document.getElementById("site-title").innerText = document.title = 'Select a site to continue - His 2nd Life';
 }
 function updateTip(seconds) {
     const lang = document.getElementsByTagName('html')[0].lang;
