@@ -1,19 +1,19 @@
-name: search-engines-urls-push
+name: search-engines-urls-push-h2lzh
 
 on: deployment
 
 jobs:
-  search-engines-urls-push:
+  search-engines-urls-push-h2lzh:
     runs-on: ubuntu-latest
-    name: search-engines-urls-push
+    name: search-engines-urls-push-h2lzh
     steps:
-      - name: search-engines-urls-push
-        id: search-engines-urls-push
+      - name: search-engines-urls-push-h2lzh
+        id: search-engines-urls-push-h2lzh
         # 使用最新的版本
         uses: 3Alan/search-engines-urls-push@v0.2.2
         with:
           site: ${{ secrets.SITE }}
-          sitemap: ${{ secrets.SITEMAP }}
+          sitemap: ${{ secrets.SITEMAP_H2LZH }}
           count: ${{ secrets.COUNT }}
           bing-token: ${{ secrets.BING_TOKEN }}
           baidu-token: ${{ secrets.BAIDU_TOKEN }}
