@@ -26,11 +26,11 @@ const knownReferrerHostnames = {
     'google.com': 'GOOGLE',
     'bing.com': 'BING',
     'baidu.com': 'BAIDU',
-    'xn--sr8hvo.ws': 'ANINDIEWEBWEBRING',
+    'xn--sr8hvo.ws': 'AN_INDIEWEB_WEBRING',
     'travellings.cn': 'TRAVELLINGS',
     'github.com': 'GITHUB',
     'postcrossing.com': 'POSTCROSSING',
-    'steamcommunity.com': 'STEAMCOMMUNITY',
+    'steamcommunity.com': 'STEAM_COMMUNITY',
     'redefine.ohevan.com': 'THEMEREDEFINE'
 };
 
@@ -1330,13 +1330,13 @@ $(document).ready(() => {
                             'FOUNDKEY',
                             'FRIENDICA',
                             'GLITCHCAFE',
-                            'GNUSOCIAL',
+                            'GNU_SOCIAL',
                             'HOMETOWN',
                             'HUBZILLA',
                             'KBIN',
                             'MASTODON',
                             'MEISSKEY',
-                            'MICRODOTBLOG',
+                            'MICRO_DOT_BLOG',
                             'MISSKEY'
                         ];
                         const getEndpoint = (software) => {
@@ -1355,7 +1355,7 @@ $(document).ready(() => {
                                     return `compose?title=${encodedPostTitle}&body=${encodedPostExcerpt}%0A${encodedPostUrl}`;
                                 case 'GLITCHCAFE':
                                     return `share?text=${encodedSharingText}`;
-                                case 'GNUSOCIAL':
+                                case 'GNU_SOCIAL':
                                     return `notice/new?status_textarea=${encodedSharingText}`;
                                 case 'HOMETOWN':
                                     return `share?text=${encodedSharingText}`;
@@ -1367,7 +1367,7 @@ $(document).ready(() => {
                                     return `share?text=${encodedSharingText}`;
                                 case 'MEISSKEY':
                                     return `share?text=${encodedSharingText}`;
-                                case 'MICRODOTBLOG':
+                                case 'MICRO_DOT_BLOG':
                                     return `post?text=[${encodedPostTitle}](${encodedPostUrl})%0A%0A${encodedPostExcerpt}`;
                                 case 'MISSKEY':
                                     return `share?text=${encodedSharingText}`;

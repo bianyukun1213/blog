@@ -23,13 +23,13 @@ const smI18n = {
         switch (brandKey) {
             case 'GOOGLE':
                 return 'Google';
-            case 'ANINDIEWEBWEBRING':
+            case 'AN_INDIEWEB_WEBRING':
                 return 'An IndieWeb Webring';
             case 'GITHUB':
                 return 'GitHub';
             case 'POSTCROSSING':
                 return 'Postcrossing';
-            case 'THEMEREDEFINE':
+            case 'THEME_REDEFINE':
                 return 'Theme Redefine';
             case 'CALCKEY':
                 return 'Calckey';
@@ -45,7 +45,7 @@ const smI18n = {
                 return 'Friendica';
             case 'GLITCHCAFE':
                 return 'Glitchcafe';
-            case 'GNUSOCIAL':
+            case 'GNU_SOCIAL':
                 return 'GNU Social';
             case 'HOMETOWN':
                 return 'Hometown';
@@ -57,7 +57,7 @@ const smI18n = {
                 return 'Mastodon';
             case 'MEISSKEY':
                 return 'Meisskey';
-            case 'MICRODOTBLOG':
+            case 'MICRO_DOT_BLOG':
                 return 'micro.blog';
             case 'MISSKEY':
                 return 'Misskey';
@@ -70,7 +70,7 @@ const smI18n = {
                     return 'Baidu';
                 case 'TRAVELLINGS':
                     return 'Travellings';
-                case 'STEAMCOMMUNITY':
+                case 'STEAM_COMMUNITY':
                     return 'Steam Community';
             }
         }
