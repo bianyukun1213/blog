@@ -118,6 +118,16 @@ const smI18n = {
         }
         return this._applyModifier(brandKey, modifier, context);
     },
+    searchInputReverseConversionPlaceholder: function (modifier) {
+        const context = {
+            callerName: this.searchInputReverseConversionPlaceholder.name,
+            args: []
+        };
+        if (this.isZh()) {
+            return this._applyModifier('//用此格式转换为简体//', modifier, context);
+        }
+        return this._applyModifier(this._notTranslated(), false);
+    },
     webmentionPostFormTipHtml: function (syndications, modifier) {
         const context = {
             callerName: this.webmentionPostFormTipHtml.name,

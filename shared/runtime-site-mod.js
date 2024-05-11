@@ -667,19 +667,25 @@ function afterPageReady() {
         const HTMLConvertHandler = OpenCC.HTMLConverter(converter, document.documentElement, 'zh-CN', `zh-${getSmSettings().chineseConversion}`);
         HTMLConvertHandler.convert();
     }
+    // 为繁体中文下输入框添加转换提示。
+    if (typeof converter !== 'undefined')
+        $('.search-input').attr('placeholder', smI18n.searchInputReverseConversionPlaceholder());
     // 监听搜索框输入事件，根据条件开启调试。需要在页面加载后监听，因为 site-mod.js 在头部注入，执行时还没有搜索框。
     $('.search-input').on('input', function () {
-        if ($(this).val() === 'debugon' && !debugOn) {
+        const val = $(this).val();
+        if (val === 'debugon' && !debugOn) {
             let smData = getSmData();
             smData.debug = true;
             setSmData(smData);
             window.location.reload();
         }
-        else if ($(this).val() === 'debugoff' && debugOn) {
+        else if (val === 'debugoff' && debugOn) {
             let smData = getSmData();
             smData.debug = false;
             setSmData(smData);
             window.location.reload();
+        } else if (typeof reverseConverter !== 'undefined' && /^\/{2}.+\/{2}$/.test(val)) {
+            $(this).val(reverseConverter(val.slice(2, -2)));
         }
     });
     /* PC 端 vConsole 默认在右下角，挡元素。 */
@@ -920,6 +926,7 @@ const fixedReferrer = fixReferrer();
 //     setSmSettings(smSettings);
 // }
 let converter;
+let reverseConverter;
 if (siteLang === 'zh-CN') {
     let to = '';
     const chineseConversion = getSmSettings().chineseConversion;
@@ -927,8 +934,28 @@ if (siteLang === 'zh-CN') {
         to = 'hk'
     else if (chineseConversion === 'TW')
         to = 'twp';
-    if (to !== '')
-        converter = OpenCC.Converter({ from: 'cn', to: to });
+    if (to !== '') {
+        const customDict = [
+            ['“', '「'],
+            ['”', '」'],
+            ['‘', '『'],
+            ['’', '』'],
+        ];
+        converter = OpenCC.ConverterFactory(
+            OpenCC.Locale.from.cn,
+            OpenCC.Locale.to[to].concat([customDict])
+        );
+        const reverseCustomDict = [
+            ['「', '“'],
+            ['」', '”'],
+            ['『', '‘'],
+            ['』', '’'],
+        ];
+        reverseConverter = OpenCC.ConverterFactory(
+            OpenCC.Locale.from[to],
+            OpenCC.Locale.to.cn.concat([reverseCustomDict])
+        );
+    }
 }
 smI18n.bindLang(siteLang);
 smI18n.bindGlobalModifier((string, i18nLang, context) => {
