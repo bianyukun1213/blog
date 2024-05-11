@@ -2,8 +2,11 @@
 
 // 这里做一些对站点的整体修改。
 
+const siteLang = window.location.pathname.split('/')[1];
+const pageLang = $('html').attr('lang');
+
 // const siteUrl = 'https://his2nd.life';
-const siteUrl = `${window.location.origin}/${smI18n.getSiteLang()}`;
+const siteUrl = `${window.location.origin}/${siteLang}`;
 
 const counterUrl = 'https://gc.his2nd.life/counter';
 
@@ -114,7 +117,7 @@ function smDelete(options) {
 }
 const smDataTemplates = {
     get latest() {
-        return this.v7;
+        return this.v8;
     },
     get v1() {
         return {
@@ -243,6 +246,31 @@ const smDataTemplates = {
         };
         v7.templateVer = 7;
         return v7;
+    },
+    get v8() {
+        return {
+            templateVer: 8,
+            settings: {
+                doNotTrack: false,
+                showAiGeneratedExcerpt: true,
+                chineseConversion: 'DISABLED',
+                defaultInteractionSystem: 'COMMENTS'
+            },
+            initialized: false,
+            debug: false,
+            debugVars: {},
+            fediverseSharingPreferences: {
+                software: '',
+                instance: ''
+            }
+        };
+    },
+    migrateFromV7ToV8: function (v7) {
+        let v8 = v7;
+        // v8 新增 settings 的 chineseConversion。
+        v8.settings.chineseConversion = 'DISABLED';
+        v8.templateVer = 8;
+        return v8;
     }
 };
 function makeSmData() {
@@ -273,6 +301,8 @@ function migrateSmData(oldSmData) {
         oldSmData = smDataTemplates.migrateFromV5ToV6(oldSmData);
     if (oldSmData.templateVer < 7)
         oldSmData = smDataTemplates.migrateFromV6ToV7(oldSmData);
+    if (oldSmData.templateVer < 8)
+        oldSmData = smDataTemplates.migrateFromV7ToV8(oldSmData);
     return oldSmData;
 }
 // 按最新的数据模板校验。
@@ -288,6 +318,10 @@ function validateSmData(invalidSmData) {
     let invalidSettings = invalidSmData.settings || {};
     validSmData.settings.doNotTrack = invalidSettings.doNotTrack === true || invalidSettings.doNotTrack === 'true' ? true : false;
     validSmData.settings.showAiGeneratedExcerpt = invalidSettings.showAiGeneratedExcerpt === false || invalidSettings.showAiGeneratedExcerpt === 'false' ? false : true;
+    if (invalidSettings.chineseConversion === 'HK' || invalidSettings.chineseConversion === 'TW')
+        validSmData.settings.chineseConversion = invalidSettings.chineseConversion;
+    else
+        validSmData.settings.chineseConversion = 'DISABLED';
     if (invalidSettings.defaultInteractionSystem === 'COMMENTS' || invalidSettings.defaultInteractionSystem === 'WEBMENTIONS')
         validSmData.settings.defaultInteractionSystem = invalidSettings.defaultInteractionSystem;
     else
@@ -405,7 +439,20 @@ function fixPathname(pathnameIn) {
 //     return window.location.pathname.split('/')[1];
 // }
 function removeLangPrefix(str) {
-    return str.replace(`/${smI18n.getSiteLang()}`, '');
+    return str.replace(`/${siteLang}`, '');
+}
+// function getPageLang(forced) {
+//     // const curMeta = await getPageMetaAsync(forced);
+//     // if ($.isEmptyObject(curMeta) || !curMeta.lang)
+//     //     return {};
+//     // return curMeta.lang;
+//     return $('html').attr('lang');
+// }
+async function getPageAvailableLangsAsync(forced) {
+    const curMeta = await getPageMetaAsync(forced);
+    if ($.isEmptyObject(curMeta) || !curMeta.langs)
+        return {};
+    return curMeta.langs;
 }
 function extractPostContent() {
     // https://github.com/lukeaus/html-to-formatted-text/blob/master/src/index.js
@@ -462,7 +509,7 @@ function extractPostContent() {
 }
 // 获取站点元数据，如果在 sesstionStorage 下已有元数据，就不再获取。
 async function getSiteMetaAsync(forced) {
-    if ($.isEmptyObject(siteMetaCache) || siteMetaCache.site.language !== smI18n.getSiteLang() || forced) {
+    if ($.isEmptyObject(siteMetaCache) || siteMetaCache.site.language !== siteLang || forced) {
         const loadingIndex = smUi.showLoading();
         const getPromise = smGetAsync({
             entry: '/site-meta.json',
@@ -536,18 +583,6 @@ async function getPageMetaAsync(forced, pathnameIn) {
         smLogWarn('未找到页面元数据。');
         return pageMeta; // 没找到的空值。
     }
-}
-async function getPageLangAsync(forced) {
-    const curMeta = await getPageMetaAsync(forced);
-    if ($.isEmptyObject(curMeta) || !curMeta.lang)
-        return {};
-    return curMeta.lang;
-}
-async function getPageAvailableLangsAsync(forced) {
-    const curMeta = await getPageMetaAsync(forced);
-    if ($.isEmptyObject(curMeta) || !curMeta.langs)
-        return {};
-    return curMeta.langs;
 }
 async function checkPageRegionBlockAsync(forced) {
     // 调试模式下可以跳过区域检查。其实可以不检查 debugOn，因为 smDebug 不为空就已经代表 debugOn 了。
@@ -624,6 +659,14 @@ function adjustVConsoleSwitchPosition(reset) {
 }
 // 页面加载后再执行的操作：
 function afterPageReady() {
+    // logo-title
+    if (window.location.hostname !== 'his2nd.life')
+        $('.logo-title').text('她的备胎') // 非线上版本标识。
+    if (typeof converter !== 'undefined') {
+        // 将所有 zh-CN 标签转为 zh-HK/TW 标签。
+        const HTMLConvertHandler = OpenCC.HTMLConverter(converter, document.documentElement, 'zh-CN', `zh-${getSmSettings().chineseConversion}`);
+        HTMLConvertHandler.convert();
+    }
     // 监听搜索框输入事件，根据条件开启调试。需要在页面加载后监听，因为 site-mod.js 在头部注入，执行时还没有搜索框。
     $('.search-input').on('input', function () {
         if ($(this).val() === 'debugon' && !debugOn) {
@@ -653,12 +696,20 @@ function afterPageReady() {
     });
     // 自己加载 twikoo，传入语言信息。
     if ($('.twikoo-container').length > 0) {
+        let lang = siteLang;
+        if (lang === 'zh-CN') {
+            const chineseConversion = getSmSettings().chineseConversion;
+            if (chineseConversion === 'HK')
+                lang = 'zh-HK';
+            else if (chineseConversion == 'TW')
+                lang = 'zh-TW';
+        }
         twikoo.init({
             envId: 'https://twikoo.his2nd.life', // 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
             el: '#twikoo-comment', // 容器元素
             // region: 'ap-guangzhou', // 环境地域，默认为 ap-shanghai，腾讯云环境填 ap-shanghai 或 ap-guangzhou；Vercel 环境不填
             // path: location.pathname, // 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
-            lang: smI18n.getSiteLang(), // 用于手动设定评论区语言，支持的语言列表 https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js
+            lang: lang // 用于手动设定评论区语言，支持的语言列表 https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js
         });
     }
     // 读取设置，决定是否隐藏 AI 生成的摘要。
@@ -702,9 +753,9 @@ function afterPageReady() {
         }
     }
     if (removeLangPrefix(window.location.pathname) === '/fediverse/') {
-        if (!mastodonTimeline) {
+        if (typeof mastodonTimeline === 'undefined') {
             const instanceUrl = 'https://m.cmx.im';
-            let locale = smI18n.getSiteLang();
+            let locale = siteLang;
             if (locale === 'en')
                 locale = 'en-US';
             mastodonTimeline = new MastodonTimeline.Init({
@@ -834,7 +885,7 @@ function afterUiReady() {
     // 检查用户区域。
     checkPageRegionBlockAsync().then((res) => {
         if (res === 'BLOCKED')
-            window.location.replace(`/${smI18n.getSiteLang()}/go-back-home/`);
+            window.location.replace(`/${siteLang}/go-back-home/`);
         else if (res === 'NOT_BLOCKED')
             $('.main-content').show();
     });
@@ -858,6 +909,33 @@ const smLogInfo = (...params) => { console.info(new Date().toLocaleTimeString() 
 const smLogWarn = (...params) => { console.warn(new Date().toLocaleTimeString() + ' |', ...params); };
 const smLogError = (...params) => { console.error(new Date().toLocaleTimeString() + ' |', ...params); };
 const fixedReferrer = fixReferrer();
+// 未初始化时保存无效……
+// const navigatorLang = navigator.language;
+// if (!getSmData().initialized) {
+//     let smSettings = getSmSettings();
+//     if (navigatorLang === 'zh-HK' || navigatorLang === 'zh-TW')
+//         smSettings.chineseConversion = navigatorLang.replace('zh-', '');
+//     else
+//         smSettings.chineseConversion = 'DISABLED';
+//     setSmSettings(smSettings);
+// }
+let converter;
+if (siteLang === 'zh-CN') {
+    let to = '';
+    const chineseConversion = getSmSettings().chineseConversion;
+    if (chineseConversion === 'HK')
+        to = 'hk'
+    else if (chineseConversion === 'TW')
+        to = 'twp';
+    if (to !== '')
+        converter = OpenCC.Converter({ from: 'cn', to: to });
+}
+smI18n.bindLang(siteLang);
+smI18n.bindGlobalModifier((string, i18nLang, context) => {
+    if (typeof converter !== 'undefined')
+        string = converter(string);
+    return string;
+});
 // 初始化 site-mod 数据，检测数据变更。
 const smDataRawStr = localStorage.getItem('smData');
 let smDataRawStrEmpty = true;
@@ -871,11 +949,12 @@ if (smDataRawStr) {
     }
 }
 setSmData(getSmData());
-const smSettings = getSmSettings();
+let smSettingsTmp = getSmSettings();
 // 使用了 lodash 的 isEqual 。
-if (!smDataRawStrEmpty && !_.isEqual(smSettings, smSettingsRaw))
+if (!smDataRawStrEmpty && !_.isEqual(smSettingsTmp, smSettingsRaw))
     // Layui 此时还未加载，弹窗不可用。等到 Layui 加载，执行 afterUiReady 时，页面可能已经历刷新，就检测不到变化了。
     alert(smI18n.smSettingsMigratedAlert());
+smSettingsTmp = null; // 回收。
 let vConsole = {};
 let smDebug = {};
 if (debugOn) {
@@ -889,7 +968,9 @@ if (debugOn) {
         get vars() {
             return this._vars;
         },
-        _vars: Symbol('vars'),
+        _vars: {
+            skipRegionCheck: false
+        },
         decryptSiteMetaAsync: async function (forced) {
             let decryptedSiteMeta = await getSiteMetaAsync(forced);
             if ($.isEmptyObject(decryptedSiteMeta)) {
@@ -995,7 +1076,7 @@ setInterval(() => {
         else
             $('#layui-theme-dark').removeAttr('href');
         // 切换 mastodonTimeline 主题。
-        if (removeLangPrefix(window.location.pathname) === '/fediverse/')
+        if (removeLangPrefix(window.location.pathname) === '/fediverse/' && typeof mastodonTimeline !== 'undefined')
             mastodonTimeline.mtColorTheme(newThemeColorScheme);
         if (!$.isEmptyObject(vConsole))
             vConsole.setOption('theme', newThemeColorScheme);
@@ -1080,6 +1161,7 @@ $(document).ready(() => {
                     layFilter: 'sm-settings',
                     dataAnalytics: 'sm-setting-data-analytics',
                     aiGeneratedExcerpt: 'sm-setting-ai-generated-excerpt',
+                    chineseConversion: 'sm-setting-chinese-conversion',
                     defaultInteractionSystem: 'sm-setting-default-interaction-system'
                 };
                 const li = layer.open({
@@ -1089,24 +1171,36 @@ $(document).ready(() => {
                     <div class="${smI18n.langStyleClass()} smui-container smui-container-settings">
                         <div class="layui-form" lay-filter="${nameBindings.layFilter}">
                           <div class="layui-form-item">
-                            <label class="smui-label-${nameBindings.dataAnalytics} layui-form-label">${escapeHtml(smI18n.settPopLableDataAnalytics())}
+                            <label class="smui-form-label-${nameBindings.dataAnalytics} layui-form-label">${escapeHtml(smI18n.settPopLableDataAnalytics())}
                               <i class="layui-icon layui-icon-question"></i>
                             </label>
-                            <div class="smui-block-${nameBindings.dataAnalytics} layui-input-block">
+                            <div class="smui-input-block-${nameBindings.dataAnalytics} layui-input-block">
                               <input type="checkbox" name="${nameBindings.dataAnalytics}" lay-skin="switch" title="${escapeHtml(smI18n.settPopSwitchDataAnalytics())}">
                             </div>
                           </div>
                           <div class="layui-form-item">
-                            <label class="smui-label-${nameBindings.aiGeneratedExcerpt} layui-form-label">${escapeHtml(smI18n.settPopLableAiGeneratedExcerpt())}
+                            <label class="smui-form-label-${nameBindings.aiGeneratedExcerpt} layui-form-label">${escapeHtml(smI18n.settPopLableAiGeneratedExcerpt())}
                               <i class="layui-icon layui-icon-question"></i>
                             </label>
-                            <div class="smui-block-${nameBindings.aiGeneratedExcerpt} layui-input-block">
+                            <div class="smui-input-block-${nameBindings.aiGeneratedExcerpt} layui-input-block">
                               <input type="checkbox" name="${nameBindings.aiGeneratedExcerpt}" lay-skin="switch" title="${escapeHtml(smI18n.settPopSwitchAiGeneratedExcerpt())}">
                             </div>
                           </div>
+                          <div class="layui-form-item smui-form-item-${nameBindings.chineseConversion}">
+                            <label class="smui-form-label-${nameBindings.chineseConversion} layui-form-label">${escapeHtml(smI18n.settPopLableChineseConversion())}
+                              <i class="layui-icon layui-icon-question"></i>
+                            </label>
+                            <div class="smui-input-block-${nameBindings.chineseConversion} layui-input-block">
+                                <select name="${nameBindings.chineseConversion}">
+                                    <option value="DISABLED">${escapeHtml(smI18n.settPopSelectOptionChineseConversion('DISABLED'))}</option>
+                                    <option value="HK">${escapeHtml(smI18n.settPopSelectOptionChineseConversion('HK'))}</option>
+                                    <option value="TW">${escapeHtml(smI18n.settPopSelectOptionChineseConversion('TW'))}</option>
+                                </select>
+                            </div>
+                          </div>
                           <div class="layui-form-item">
-                            <label class="smui-label-${nameBindings.defaultInteractionSystem} layui-form-label">${escapeHtml(smI18n.settPopLableDefaultInteractionSystem())}</label>
-                            <div class="smui-block-${nameBindings.defaultInteractionSystem} layui-input-block">
+                            <label class="smui-form-label-${nameBindings.defaultInteractionSystem} layui-form-label">${escapeHtml(smI18n.settPopLableDefaultInteractionSystem())}</label>
+                            <div class="smui-input-block-${nameBindings.defaultInteractionSystem} layui-input-block">
                                 <select name="${nameBindings.defaultInteractionSystem}">
                                     <option value="COMMENTS">${escapeHtml(smI18n.settPopSelectOptionDefaultInteractionSystem('COMMENTS'))}</option>
                                     <option value="WEBMENTIONS">${escapeHtml(smI18n.settPopSelectOptionDefaultInteractionSystem('WEBMENTIONS'))}</option>
@@ -1140,9 +1234,10 @@ $(document).ready(() => {
                             $(layero).find(`input[name="${nameBindings.dataAnalytics}"]`).attr('checked', '');
                         if (settingsRead.showAiGeneratedExcerpt)
                             $(layero).find(`input[name="${nameBindings.aiGeneratedExcerpt}"]`).attr('checked', '');
+                        $(layero).find(`select[name="${nameBindings.chineseConversion}"] option[value="${settingsRead.chineseConversion}"]`).attr('selected', '');
                         $(layero).find(`select[name="${nameBindings.defaultInteractionSystem}"] option[value="${settingsRead.defaultInteractionSystem}"]`).attr('selected', '');
                         // 动态生成的控件需要调用 render 渲染。它实际上是根据原生组件生成了一个美化的。设置好值后再渲染。
-                        $(layero).find(`.smui-label-${nameBindings.dataAnalytics}`).click(function (e) {
+                        $(layero).find(`.smui-form-label-${nameBindings.dataAnalytics}`).click(function (e) {
                             layer.tips(
                                 smI18n.settPopTipDataAnalyticsHtml(isTrackingAvailable(true)), // 不应转义，这里写的本来就该是 html。
                                 // e.target,
@@ -1156,9 +1251,23 @@ $(document).ready(() => {
                             );
                             return false; // 阻止默认动作。
                         });
-                        $(layero).find(`.smui-label-${nameBindings.aiGeneratedExcerpt}`).click(function (e) {
+                        $(layero).find(`.smui-form-label-${nameBindings.aiGeneratedExcerpt}`).click(function (e) {
                             layer.tips(
                                 smI18n.settPopTipAiGeneratedExcerptHtml(), // 不应转义，这里写的本来就该是 html。
+                                // e.target,
+                                this,
+                                {
+                                    tips: 1, // 向上弹。
+                                    time: 0, // 文字很长，取消计时关闭。
+                                    shade: 0.3, // 必须大于 0 才能点击遮罩关闭。
+                                    shadeClose: true
+                                }
+                            );
+                            return false; // 阻止默认动作。
+                        });
+                        $(layero).find(`.smui-form-label-${nameBindings.chineseConversion}`).click(function (e) {
+                            layer.tips(
+                                smI18n.settPopTipChineseConversionHtml(), // 不应转义，这里写的本来就该是 html。
                                 // e.target,
                                 this,
                                 {
@@ -1177,6 +1286,7 @@ $(document).ready(() => {
                                 // doNotTrack 和“数据分析”是反的。
                                 settingsToWrite.doNotTrack = userOptions[nameBindings.dataAnalytics] === 'on' ? false : true;
                                 settingsToWrite.showAiGeneratedExcerpt = userOptions[nameBindings.aiGeneratedExcerpt] === 'on' ? true : false;
+                                settingsToWrite.chineseConversion = userOptions[nameBindings.chineseConversion];
                                 settingsToWrite.defaultInteractionSystem = userOptions[nameBindings.defaultInteractionSystem];
                                 setSmSettings(settingsToWrite);
                                 layer.close(index);
@@ -1209,7 +1319,7 @@ $(document).ready(() => {
                         <div class="layui-form" lay-filter="${nameBindings.layFilter}">
                             <div class="layui-form-item">
                                 <label class="layui-form-label">${escapeHtml(smI18n.langSwitchPopLableAvailableLangs())}</label>
-                                <div class="smui-block-${nameBindings.targetLang} layui-input-block">
+                                <div class="smui-input-block-${nameBindings.targetLang} layui-input-block">
                                     <select name="${nameBindings.targetLang}">
                                     </select>
                                 </div>
@@ -1217,6 +1327,9 @@ $(document).ready(() => {
                         </div>
                         <div class="smui-func smui-clearfix">
                           <hr>
+                          <div class="smui-func-left">
+                            <button class="smui-button-set-chinese-conversion layui-btn layui-btn-primary layui-border-blue">${escapeHtml(smI18n.langSwitchPopButtonSetChineseConversion())}</button>
+                          </div>
                           <div class="smui-func-right">
                             <button class="smui-button-switch-language layui-btn">${escapeHtml(smI18n.langSwitchPopButtonSwitch())}</button>
                           </div>
@@ -1233,7 +1346,6 @@ $(document).ready(() => {
                     },
                     success: async (layero, index, that) => {
                         // langsOrForced 是 object 并且不为空，就用；否则现场获取可用语言，是否 forced 取决于 langsOrForced 的值是否是布尔 true。
-                        const pageLang = await getPageLangAsync(); // 页面语言不等于站点语言，不等式秒了！
                         langsOrForced = $.isPlainObject(langsOrForced) && !$.isEmptyObject(langsOrForced) ? langsOrForced : await getPageAvailableLangsAsync(langsOrForced === true ? true : false);
                         const availableLangs = Object.keys(langsOrForced);
                         const langsLength = availableLangs.length;
@@ -1258,6 +1370,10 @@ $(document).ready(() => {
                             });
                             return false; // 阻止默认动作。
                         });
+                        $(layero).find('.smui-button-set-chinese-conversion').click(() => {
+                            smUi.openSettingsPopup();
+                            return false; // 阻止默认动作。
+                        });
                         form.render();
                     }
                 });
@@ -1277,14 +1393,14 @@ $(document).ready(() => {
                         <div class="layui-form" lay-filter="${nameBindings.layFilter}">
                             <div class="layui-form-item">
                                 <label class="layui-form-label">${escapeHtml(smI18n.fediverseSharingPopLableSoftware())}</label>
-                                <div class="smui-block-${nameBindings.software} layui-input-block">
+                                <div class="smui-input-block-${nameBindings.software} layui-input-block">
                                     <select name="${nameBindings.software}">
                                     </select>
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">${escapeHtml(smI18n.fediverseSharingPopLableInstance())}</label>
-                                <div class="smui-block-${nameBindings.instance} layui-input-block">
+                                <div class="smui-input-block-${nameBindings.instance} layui-input-block">
                                     <input class="layui-input" type="text" name="${nameBindings.instance}" autocomplete="off" placeholder="${escapeHtml(smI18n.fediverseSharingPopInputInstancePlaceholder())}" lay-verify="required|instance-domain" lay-reqtext="${escapeHtml(smI18n.fediverseSharingPopInputInstanceReqText())}">
                                  </div>
                             </div>
