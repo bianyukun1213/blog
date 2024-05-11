@@ -327,6 +327,7 @@ function validateSmData(invalidSmData) {
     else
         validSmData.settings.defaultInteractionSystem = 'COMMENTS';
     let invalidFediverseSharingPreferences = invalidSmData.fediverseSharingPreferences || {};
+    // 不校验 software 了，太多了。默认值都是空字符串。
     validSmData.fediverseSharingPreferences.software = typeof invalidFediverseSharingPreferences.software === 'string' ? invalidFediverseSharingPreferences.software : '';
     validSmData.fediverseSharingPreferences.instance = typeof invalidFediverseSharingPreferences.instance === 'string' ? invalidFediverseSharingPreferences.instance : '';
     // ...
