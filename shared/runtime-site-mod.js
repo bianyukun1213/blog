@@ -37,6 +37,24 @@ const knownReferrerHostnames = {
     'redefine.ohevan.com': 'THEMEREDEFINE'
 };
 
+const fediverseSoftwares = [
+    'CALCKEY',
+    'DIASPORA',
+    'FEDIBIRD',
+    'FIREFISH',
+    'FOUNDKEY',
+    'FRIENDICA',
+    'GLITCHCAFE',
+    'GNU_SOCIAL',
+    'HOMETOWN',
+    'HUBZILLA',
+    'KBIN',
+    'MASTODON',
+    'MEISSKEY',
+    'MICRO_DOT_BLOG',
+    'MISSKEY'
+];
+
 // jQuery Ajax 包装：
 // 把以前做 daddys-here 的代码改吧改吧，见 https://github.com/bianyukun1213/daddys-here/blob/main/src/index.html#L739。
 function smRequest(options, async) {
@@ -232,7 +250,7 @@ const smDataTemplates = {
             debug: false,
             debugVars: {},
             fediverseSharingPreferences: {
-                software: '',
+                software: 'MASTODON',
                 instance: ''
             }
         };
@@ -241,7 +259,7 @@ const smDataTemplates = {
         let v7 = v6;
         // v7 新增 fediverseSharingPreferences
         v7.fediverseSharingPreferences = {
-            software: '',
+            software: 'MASTODON',
             instance: ''
         };
         v7.templateVer = 7;
@@ -318,17 +336,13 @@ function validateSmData(invalidSmData) {
     let invalidSettings = invalidSmData.settings || {};
     validSmData.settings.doNotTrack = invalidSettings.doNotTrack === true || invalidSettings.doNotTrack === 'true' ? true : false;
     validSmData.settings.showAiGeneratedExcerpt = invalidSettings.showAiGeneratedExcerpt === false || invalidSettings.showAiGeneratedExcerpt === 'false' ? false : true;
-    if (invalidSettings.chineseConversion === 'HK' || invalidSettings.chineseConversion === 'TW')
+    if (invalidSettings.chineseConversion === 'DISABLED' || invalidSettings.chineseConversion === 'HK' || invalidSettings.chineseConversion === 'TW')
         validSmData.settings.chineseConversion = invalidSettings.chineseConversion;
-    else
-        validSmData.settings.chineseConversion = 'DISABLED';
     if (invalidSettings.defaultInteractionSystem === 'COMMENTS' || invalidSettings.defaultInteractionSystem === 'WEBMENTIONS')
         validSmData.settings.defaultInteractionSystem = invalidSettings.defaultInteractionSystem;
-    else
-        validSmData.settings.defaultInteractionSystem = 'COMMENTS';
     let invalidFediverseSharingPreferences = invalidSmData.fediverseSharingPreferences || {};
-    // 不校验 software 了，太多了。默认值都是空字符串。
-    validSmData.fediverseSharingPreferences.software = typeof invalidFediverseSharingPreferences.software === 'string' ? invalidFediverseSharingPreferences.software : '';
+    if (fediverseSoftwares.includes(invalidFediverseSharingPreferences.software))
+        validSmData.fediverseSharingPreferences.software = invalidFediverseSharingPreferences.software;
     validSmData.fediverseSharingPreferences.instance = typeof invalidFediverseSharingPreferences.instance === 'string' ? invalidFediverseSharingPreferences.instance : '';
     // ...
     return validSmData;
@@ -687,6 +701,8 @@ function afterPageReady() {
             window.location.reload();
         } else if (typeof reverseConverter !== 'undefined' && /^\/{2}.+\/{2}$/.test(val)) {
             $(this).val(reverseConverter(val.slice(2, -2)));
+            const event = new Event('input');
+            this.dispatchEvent(event);
         }
     });
     /* PC 端 vConsole 默认在右下角，挡元素。 */
@@ -1466,23 +1482,6 @@ $(document).ready(() => {
                         const encodedPostExcerpt = encodeURIComponent(postExcerpt);
                         const encodedPostUrl = encodeURIComponent(postUrl);
                         const encodedSharingText = encodeURIComponent(sharingText);
-                        const softwares = [
-                            'CALCKEY',
-                            'DIASPORA',
-                            'FEDIBIRD',
-                            'FIREFISH',
-                            'FOUNDKEY',
-                            'FRIENDICA',
-                            'GLITCHCAFE',
-                            'GNU_SOCIAL',
-                            'HOMETOWN',
-                            'HUBZILLA',
-                            'KBIN',
-                            'MASTODON',
-                            'MEISSKEY',
-                            'MICRO_DOT_BLOG',
-                            'MISSKEY'
-                        ];
                         const getEndpoint = (software) => {
                             switch (software) {
                                 case 'CALCKEY':
@@ -1520,11 +1519,11 @@ $(document).ready(() => {
                             }
                         };
                         let fediverseSharingPreferences = getSmData().fediverseSharingPreferences;
-                        let preferredSoftware = softwares.includes(fediverseSharingPreferences.software) ? fediverseSharingPreferences.software : 'MASTODON';
-                        const softwaresLength = softwares.length;
+                        let preferredSoftware = fediverseSoftwares.includes(fediverseSharingPreferences.software) ? fediverseSharingPreferences.software : 'MASTODON';
+                        const softwaresLength = fediverseSoftwares.length;
                         for (let i = 0; i < softwaresLength; i++) {
-                            let selected = softwares[i] === preferredSoftware ? ' selected' : '';
-                            $(layero).find(`select[name="${nameBindings.software}"]`).append(`<option value="${softwares[i]}"${selected}>${escapeHtml(smI18n.brands(softwares[i]))}</option>`);
+                            let selected = fediverseSoftwares[i] === preferredSoftware ? ' selected' : '';
+                            $(layero).find(`select[name="${nameBindings.software}"]`).append(`<option value="${fediverseSoftwares[i]}"${selected}>${escapeHtml(smI18n.brands(fediverseSoftwares[i]))}</option>`);
                         }
                         $(layero).find(`input[name="${nameBindings.instance}"]`).val(fediverseSharingPreferences.instance);
                         // 输入框响应 enter。
