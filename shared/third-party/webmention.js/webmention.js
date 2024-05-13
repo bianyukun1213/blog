@@ -105,7 +105,7 @@ A more detailed example:
   //   t: function t(/** @type {string} */key) { return key; }
   // }
   // const t = window.i18next.t.bind(window.i18next);
-  const t = smI18n.webmentionjsStrings.bind(smI18n); // 替换为我自己的简易 i18n 方案。
+  const t = globalSmI18n.webmentionjsStrings.bind(globalSmI18n); // 替换为我自己的简易 i18n 方案。
 
   /**
    * Read the configuration value.
