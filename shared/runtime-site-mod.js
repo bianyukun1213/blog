@@ -637,7 +637,7 @@ async function checkPageRegionBlockAsync(forced) {
         const curMetaRegionBlacklistLength = curMeta.regionBlacklist.length;
         for (let i = 0; i < curMetaRegionBlacklistLength; i++) {
             const region = curMeta.regionBlacklist[i];
-            if (userRegionTextCache.includes(region))
+            if (userRegionTextCache.toLowerCase().includes(region.toLowerCase()))
                 return 'BLOCKED';
         }
         return 'NOT_BLOCKED';
