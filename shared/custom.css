@@ -525,7 +525,22 @@
 .mt-container a.mt-btn-violet:hover,
 .mt-container a.mt-btn-violet:active {
     text-decoration: none !important;
-    color: var(--mt-color-btn-txt)
+    color: var(--mt-color-btn-txt);
+}
+
+/* !important 我加的，防止 Redefine 覆盖。 */
+.mt-post-media,
+.mt-post-media-spoiler>audio,
+.mt-post-media-spoiler>img,
+.mt-post-media>img,
+.mt-post-media>video {
+    border-radius: 0.5rem !important;
+}
+
+/* 我加的。 */
+.mt-container .mt-post-media-spoiler>img,
+.mt-container .mt-post-media>img {
+    margin: 0;
 }
 
 /* 上面的样式用来根据实际需求修复/覆盖 mastodon 时间线样式。 */

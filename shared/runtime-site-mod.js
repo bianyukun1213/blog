@@ -14,8 +14,6 @@ const layuiThemeDarkCdn = 'https://npm.onmicrosoft.cn/layui-theme-dark/dist/layu
 
 // 明晃晃写，毕竟这些措施都只能稍稍保护一下。
 
-const geoApiToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBY2NvdW50SWQiOiJkMDA2OGM4ZDFiNTM2ZmMzMjc2NmRiNWIzOTQ4NjFkYiJ9.ahNbkKBX2KIaalcvL6eRUBJVWA9NEfIesXNIhliN5Kc';
-
 const aesKey = 'Uznb#gi;ZezgSV0EcaER(uwf@NV+bh+3';
 
 const minimumSupportedBrowserVersions = {
@@ -610,23 +608,20 @@ async function checkPageRegionBlockAsync(forced) {
         return 'UNKNOWN';
     // 检查用户地区是否在黑名单内。
     if ($.isArray(curMeta.regionBlacklist) && curMeta.regionBlacklist.length > 0) {
-        if (userRegionTextCache === '' || forced) {
+        // API 更换为 Cloudflare Workers 实现。有时可能无法拿到 city。
+        // 没有“ip”的话是 worker 挂了。
+        if (userRegionTextCache === '' || !userRegionTextCache.toLowerCase().includes('"ip"') || forced) {
             const loadingIndex = smUi.showLoading();
             const getPromise = smGetAsync({
-                baseUrl: 'https://www.douyacun.com',
-                entry: '/api/openapi/geo/location',
+                baseUrl: 'https://ip.yinhe.dev',
+                entry: '/',
                 cache: false, // 不要从缓存读取。
-                data: {
-                    token: geoApiToken
-                },
                 timeout: 5000
             });
             getPromise.finally(() => {
                 smUi.closeLayer(loadingIndex);
             });
             const res = await getPromise;
-            // TODO: 在这里判断返回数据的有效性。目前 douyacun api 已经失效，返回 {"code":401,"message":"Unauthorized"}。
-            // 按目前的逻辑，进入下面的 NOT_BLOCKED，实际应为 UNKNOWN。
             if (typeof res === 'undefined' || res === null) {
                 smLogError('区域为空：', res);
                 return 'UNKNOWN';
@@ -634,6 +629,8 @@ async function checkPageRegionBlockAsync(forced) {
             userRegionTextCache = JSON.stringify(res);
             sessionStorage.setItem('userRegionTextCache', userRegionTextCache);
         }
+        if (!userRegionTextCache.toLowerCase().includes('"ip"'))
+            return 'UNKNOWN';
         const curMetaRegionBlacklistLength = curMeta.regionBlacklist.length;
         for (let i = 0; i < curMetaRegionBlacklistLength; i++) {
             const region = curMeta.regionBlacklist[i];
