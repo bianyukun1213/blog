@@ -12,9 +12,9 @@ class SmI18n {
     };
     bindLang(langStr) {
         if (langStr === 'en')
-            this._lang = 'en';
+            this.#lang = 'en';
         else
-            this._lang = 'zh-CN';
+            this.#lang = 'zh-CN';
     };
     bindGlobalPostProcessor(globalPostProcessor) {
         this.#globalPostProcessor = globalPostProcessor;
