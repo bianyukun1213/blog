@@ -98,7 +98,7 @@ async function smRequestAsync(options) {
         smRequest(options, true);
     }).catch((error) => {
         smLogError('异步请求出错：', error);
-        return Promise.reject(error);
+        // return Promise.reject(error);
     });
 }
 function smGet(options) {
@@ -609,8 +609,9 @@ async function checkPageRegionBlockAsync(forced) {
     // 检查用户地区是否在黑名单内。
     if ($.isArray(curMeta.regionBlacklist) && curMeta.regionBlacklist.length > 0) {
         // API 更换为 Cloudflare Workers 实现。有时可能无法拿到 city。
-        // 没有“ip”的话是 worker 挂了。
-        if (userRegionTextCache === '' || !userRegionTextCache.toLowerCase().includes('"ip"') || forced) {
+        if ($.isEmptyObject(userRegionCache) ||
+            (typeof userRegionCache.country === 'undefined' && typeof userRegionCache.city === 'undefined' && typeof userRegionCache.region === 'undefined') ||
+            forced) {
             const loadingIndex = smUi.showLoading();
             const getPromise = smGetAsync({
                 baseUrl: 'https://ip.yinhe.dev',
@@ -622,21 +623,22 @@ async function checkPageRegionBlockAsync(forced) {
                 smUi.closeLayer(loadingIndex);
             });
             const res = await getPromise;
-            if (typeof res === 'undefined' || res === null) {
+            if (typeof res === 'undefined' ||
+                res === null ||
+                (typeof res.country === 'undefined' && typeof res.city === 'undefined' && typeof res.region === 'undefined')) {
                 smLogError('区域为空：', res);
                 return 'UNKNOWN';
             }
-            userRegionTextCache = JSON.stringify(res);
-            sessionStorage.setItem('userRegionTextCache', userRegionTextCache);
+            userRegionCache = res;
+            sessionStorage.setItem('userRegionCache', JSON.stringify(userRegionCache));
         }
-        if (!userRegionTextCache.toLowerCase().includes('"ip"'))
-            return 'UNKNOWN';
-        const curMetaRegionBlacklistLength = curMeta.regionBlacklist.length;
-        for (let i = 0; i < curMetaRegionBlacklistLength; i++) {
-            const region = curMeta.regionBlacklist[i];
-            if (userRegionTextCache.toLowerCase().includes(region.toLowerCase()))
-                return 'BLOCKED';
-        }
+        let region = [];
+        if (userRegionCache.country) region.push(userRegionCache.country);
+        if (userRegionCache.city) region.push(userRegionCache.city);
+        if (userRegionCache.region) region.push(userRegionCache.region);
+        // lodash 交集，两个数组都转小写。
+        if (_.intersectionBy(region, curMeta.regionBlacklist, item => item.toLowerCase()).length > 0)
+            return 'BLOCKED';
         return 'NOT_BLOCKED';
     }
     else {
@@ -906,10 +908,14 @@ function afterUiReady() {
     });
     // 检查用户区域。
     checkPageRegionBlockAsync().then((res) => {
-        if (res === 'BLOCKED')
-            window.location.replace(`/${siteLang}/go-back-home/`);
-        else if (res === 'NOT_BLOCKED')
+        // if (res === 'BLOCKED')
+        //     window.location.replace(`/${siteLang}/go-back-home/`);
+        // else if (res === 'NOT_BLOCKED')
+        //     $('.main-content').show();
+        if (res === 'NOT_BLOCKED')
             $('.main-content').show();
+        else
+            window.location.replace(`/${siteLang}/go-back-home/`);
     });
 }
 
@@ -1016,9 +1022,9 @@ if (debugOn) {
                 skipRegionCheck: false
             };
         }
-        static _vars = this.varsTemplate;
+        static #vars = this.varsTemplate;
         static get vars() {
-            return this._vars;
+            return this.#vars;
         }
         static async decryptSiteMetaAsync(forced) {
             let decryptedSiteMeta = await getSiteMetaAsync(forced);
@@ -1067,11 +1073,11 @@ if (debugOn) {
                 // vars = getSmData().debugVars; 不需要。
                 return;
             }
-            this._vars = vars;
+            this.#vars = vars;
         }
         static setDebugVars(vars) {
             if (this.checkVars(vars)) {
-                this._vars = vars;
+                this.#vars = vars;
                 const smData = getSmData();
                 smData.debugVars = vars;
                 setSmData(smData);
@@ -1105,7 +1111,13 @@ try {
 } catch (error) {
     siteMetaCache = {};
 }
-let userRegionTextCache = sessionStorage.getItem('userRegionTextCache') || '';
+// TODO: 解析 region。
+let userRegionCache = {};
+try {
+    userRegionCache = JSON.parse(sessionStorage.getItem('userRegionCache')) || {};
+} catch (error) {
+    userRegionCache = {};
+}
 // let themeColorScheme = getThemeColorScheme();
 let themeColorScheme = ''; // 初值设为空，这样首次即能触发 newThemeColorScheme !== themeColorScheme。
 let mastodonTimeline;
