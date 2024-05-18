@@ -32,7 +32,7 @@ const knownReferrerHostnames = {
     'github.com': 'GITHUB',
     'postcrossing.com': 'POSTCROSSING',
     'steamcommunity.com': 'STEAM_COMMUNITY',
-    'redefine.ohevan.com': 'THEMEREDEFINE'
+    'redefine.ohevan.com': 'THEME_REDEFINE'
 };
 
 const fediverseSoftwares = [

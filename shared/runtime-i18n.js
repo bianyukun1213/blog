@@ -110,7 +110,7 @@ class SmI18n {
                     return this.#applyPostProcessor('百度', postProcessor, context);
                 case 'TRAVELLINGS':
                     return this.#applyPostProcessor('开往', postProcessor, context);
-                case 'STEAMCOMMUNITY':
+                case 'STEAM_COMMUNITY':
                     return this.#applyPostProcessor('Steam 社区', postProcessor, context);
             }
         }
