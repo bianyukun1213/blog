@@ -290,6 +290,10 @@
 
 /* Twikoo 主配色统一为 Redefine 配色。即使不统一，部分样式也会被 Redefine 覆盖，还不如直接统一。 */
 
+.el-loading-spinner .path {
+    stroke: var(--primary-color) !important;
+}
+
 /* 主按钮配色。 */
 .el-button--primary {
     background-color: var(--primary-color) !important;
