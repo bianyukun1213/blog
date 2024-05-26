@@ -133,7 +133,7 @@ function smDelete(options) {
 }
 class smDataTemplates {
     static get latest() {
-        return this.v8;
+        return this.v9;
     }
     static get v1() {
         return {
@@ -288,6 +288,31 @@ class smDataTemplates {
         v8.templateVer = 8;
         return v8;
     }
+    static get v9() {
+        return {
+            templateVer: 9,
+            settings: {
+                doNotTrack: false,
+                showAiGeneratedSummary: true,
+                chineseConversion: 'DISABLED',
+                defaultInteractionSystem: 'COMMENTS'
+            },
+            initialized: false,
+            debug: false,
+            debugVars: {},
+            fediverseSharingPreferences: {
+                software: '',
+                instance: ''
+            }
+        };
+    }
+    static migrateFromV8ToV9(v8) {
+        let v9 = v8;
+        // v9 将 showAiGeneratedExcerpt 改为 showAiGeneratedSummary。
+        v9.settings.showAiGeneratedSummary = v8.settings.showAiGeneratedExcerpt;
+        v9.templateVer = 9;
+        return v9;
+    }
 };
 function makeSmData() {
     return smDataTemplates.latest;
@@ -333,7 +358,7 @@ function validateSmData(invalidSmData) {
     validSmData.debugVars = invalidSmData.debugVars || {}; // 不检查 debugVars，让 smDebug 自己检查。debugVars 的内容与 templateVer 无关。
     let invalidSettings = invalidSmData.settings || {};
     validSmData.settings.doNotTrack = invalidSettings.doNotTrack === true || invalidSettings.doNotTrack === 'true' ? true : false;
-    validSmData.settings.showAiGeneratedExcerpt = invalidSettings.showAiGeneratedExcerpt === false || invalidSettings.showAiGeneratedExcerpt === 'false' ? false : true;
+    validSmData.settings.showAiGeneratedSummary = invalidSettings.showAiGeneratedSummary === false || invalidSettings.showAiGeneratedSummary === 'false' ? false : true;
     if (invalidSettings.chineseConversion === 'DISABLED' || invalidSettings.chineseConversion === 'HK' || invalidSettings.chineseConversion === 'TW')
         validSmData.settings.chineseConversion = invalidSettings.chineseConversion;
     if (invalidSettings.defaultInteractionSystem === 'COMMENTS' || invalidSettings.defaultInteractionSystem === 'WEBMENTIONS')
@@ -737,8 +762,8 @@ function afterPageReady() {
         });
     }
     // 读取设置，决定是否隐藏 AI 生成的摘要。
-    if (!getSmSettings().showAiGeneratedExcerpt)
-        $('.ai-generated-excerpt').hide();
+    if (!getSmSettings().showAiGeneratedSummary)
+        $('.ai-generated-summary').hide();
     // 获取全站访问计数。
     smGetAsync({
         baseUrl: counterUrl,
@@ -1222,7 +1247,7 @@ $(document).ready(() => {
                 const nameBindings = {
                     layFilter: 'sm-settings',
                     dataAnalytics: 'sm-setting-data-analytics',
-                    aiGeneratedExcerpt: 'sm-setting-ai-generated-excerpt',
+                    aiGeneratedSummary: 'sm-setting-ai-generated-summary',
                     chineseConversion: 'sm-setting-chinese-conversion',
                     defaultInteractionSystem: 'sm-setting-default-interaction-system'
                 };
@@ -1241,11 +1266,11 @@ $(document).ready(() => {
                             </div>
                           </div>
                           <div class="layui-form-item">
-                            <label class="smui-form-label-${nameBindings.aiGeneratedExcerpt} layui-form-label">${escapeHtml(globalSmI18n.settPopLableAiGeneratedExcerpt())}
+                            <label class="smui-form-label-${nameBindings.aiGeneratedSummary} layui-form-label">${escapeHtml(globalSmI18n.settPopLableAiGeneratedSummary())}
                               <i class="layui-icon layui-icon-question"></i>
                             </label>
-                            <div class="smui-input-block-${nameBindings.aiGeneratedExcerpt} layui-input-block">
-                              <input type="checkbox" name="${nameBindings.aiGeneratedExcerpt}" lay-skin="switch" title="${escapeHtml(globalSmI18n.settPopSwitchAiGeneratedExcerpt())}">
+                            <div class="smui-input-block-${nameBindings.aiGeneratedSummary} layui-input-block">
+                              <input type="checkbox" name="${nameBindings.aiGeneratedSummary}" lay-skin="switch" title="${escapeHtml(globalSmI18n.settPopSwitchAiGeneratedSummary())}">
                             </div>
                           </div>
                           <div class="layui-form-item smui-form-item-${nameBindings.chineseConversion}">
@@ -1294,8 +1319,8 @@ $(document).ready(() => {
                         // doNotTrack 和“数据分析”是反的。
                         if (!settingsRead.doNotTrack)
                             $(layero).find(`input[name="${nameBindings.dataAnalytics}"]`).attr('checked', '');
-                        if (settingsRead.showAiGeneratedExcerpt)
-                            $(layero).find(`input[name="${nameBindings.aiGeneratedExcerpt}"]`).attr('checked', '');
+                        if (settingsRead.showAiGeneratedSummary)
+                            $(layero).find(`input[name="${nameBindings.aiGeneratedSummary}"]`).attr('checked', '');
                         $(layero).find(`select[name="${nameBindings.chineseConversion}"] option[value="${settingsRead.chineseConversion}"]`).attr('selected', '');
                         $(layero).find(`select[name="${nameBindings.defaultInteractionSystem}"] option[value="${settingsRead.defaultInteractionSystem}"]`).attr('selected', '');
                         // 动态生成的控件需要调用 render 渲染。它实际上是根据原生组件生成了一个美化的。设置好值后再渲染。
@@ -1313,9 +1338,9 @@ $(document).ready(() => {
                             );
                             return false; // 阻止默认动作。
                         });
-                        $(layero).find(`.smui-form-label-${nameBindings.aiGeneratedExcerpt}`).click(function (e) {
+                        $(layero).find(`.smui-form-label-${nameBindings.aiGeneratedSummary}`).click(function (e) {
                             layer.tips(
-                                globalSmI18n.settPopTipAiGeneratedExcerptHtml(), // 不应转义，这里写的本来就该是 html。
+                                globalSmI18n.settPopTipAiGeneratedSummaryHtml(), // 不应转义，这里写的本来就该是 html。
                                 // e.target,
                                 this,
                                 {
@@ -1347,7 +1372,7 @@ $(document).ready(() => {
                                 let settingsToWrite = getSmSettings(); // 获取实时的。
                                 // doNotTrack 和“数据分析”是反的。
                                 settingsToWrite.doNotTrack = userOptions[nameBindings.dataAnalytics] === 'on' ? false : true;
-                                settingsToWrite.showAiGeneratedExcerpt = userOptions[nameBindings.aiGeneratedExcerpt] === 'on' ? true : false;
+                                settingsToWrite.showAiGeneratedSummary = userOptions[nameBindings.aiGeneratedSummary] === 'on' ? true : false;
                                 settingsToWrite.chineseConversion = userOptions[nameBindings.chineseConversion];
                                 settingsToWrite.defaultInteractionSystem = userOptions[nameBindings.defaultInteractionSystem];
                                 setSmSettings(settingsToWrite);
@@ -1484,12 +1509,12 @@ $(document).ready(() => {
                         const pageMeta = await getPageMetaAsync();
                         const postTitle = pageMeta.title;
                         const postExcerpt = pageMeta.excerpt;
-                        const postAigeneratedExcerpt = pageMeta.aigeneratedExcerpt;
+                        const postAiGeneratedSummary = pageMeta.aiGeneratedSummary;
                         const postUrl = pageMeta.permalink;
                         const postContent = extractPostContent();
                         let sharingText = `${globalSmI18n.fediverseSharingPopPostTitle()}${postTitle}\n\n${globalSmI18n.fediverseSharingPopPostExcerpt()}${postExcerpt}\n\n`;
-                        if (postAigeneratedExcerpt)
-                            sharingText += `${globalSmI18n.fediverseSharingPopPostAigeneratedExcerpt()}${postAigeneratedExcerpt}\n\n`;
+                        if (postAiGeneratedSummary)
+                            sharingText += `${globalSmI18n.fediverseSharingPopPostAiGeneratedSummary()}${postAiGeneratedSummary}\n\n`;
                         if (postContent.trim() !== '')
                             sharingText += (postContent + '\n\n');
                         const limit = 75;

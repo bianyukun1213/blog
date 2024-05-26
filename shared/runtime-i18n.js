@@ -589,35 +589,35 @@ class SmI18n {
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
     };
-    settPopLableAiGeneratedExcerpt(postProcessor) {
+    settPopLableAiGeneratedSummary(postProcessor) {
         const context = {
-            callerName: this.settPopLableAiGeneratedExcerpt.name,
+            callerName: this.settPopLableAiGeneratedSummary.name,
             args: []
         };
         if (this.isEn()) {
-            return this.#applyPostProcessor('AI-generated excerpt', postProcessor, context);
+            return this.#applyPostProcessor('AI-generated summary', postProcessor, context);
         }
         else if (this.isZh()) {
-            return this.#applyPostProcessor('AI 生成的摘要', postProcessor, context);
+            return this.#applyPostProcessor('AI 生成的总结', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
     };
-    settPopTipAiGeneratedExcerptHtml(postProcessor) {
+    settPopTipAiGeneratedSummaryHtml(postProcessor) {
         const context = {
-            callerName: this.settPopTipAiGeneratedExcerptHtml.name,
+            callerName: this.settPopTipAiGeneratedSummaryHtml.name,
             args: []
         };
         if (this.isEn()) {
-            return this.#applyPostProcessor('This setting does not work for posts that do not contain an AI-generated excerpt at all.', postProcessor, context);
+            return this.#applyPostProcessor('This setting does not work for posts that do not contain an AI-generated summary at all.', postProcessor, context);
         }
         else if (this.isZh()) {
-            return this.#applyPostProcessor('有些文章本来就不包含 AI 生成的摘要，此项设置对其无效。', postProcessor, context);
+            return this.#applyPostProcessor('有些文章本来就不包含 AI 生成的总结，此项设置对其无效。', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
     };
-    settPopSwitchAiGeneratedExcerpt(postProcessor) {
+    settPopSwitchAiGeneratedSummary(postProcessor) {
         const context = {
-            callerName: this.settPopSwitchAiGeneratedExcerpt.name,
+            callerName: this.settPopSwitchAiGeneratedSummary.name,
             args: []
         };
         if (this.isEn()) {
@@ -647,10 +647,6 @@ class SmI18n {
             callerName: this.settPopTipChineseConversionHtml.name,
             args: []
         };
-        // if (this.isEn()) {
-        //     return this._applyModifier('This setting does not work for posts that do not contain an AI-generated excerpt at all.', postProcessor, context);
-        // }
-        // else 
         if (this.isZh()) {
             return this.#applyPostProcessor('试验性，对动态加载的内容可能无效。', postProcessor, context);
         }
@@ -962,16 +958,16 @@ class SmI18n {
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
     };
-    fediverseSharingPopPostAigeneratedExcerpt(postProcessor) {
+    fediverseSharingPopPostAiGeneratedSummary(postProcessor) {
         const context = {
-            callerName: this.fediverseSharingPopPostAigeneratedExcerpt.name,
+            callerName: this.fediverseSharingPopPostAiGeneratedSummary.name,
             args: []
         };
         if (this.isEn()) {
-            return this.#applyPostProcessor('AI-generated excerpt: ', postProcessor, context);
+            return this.#applyPostProcessor('AI-generated summary: ', postProcessor, context);
         }
         else if (this.isZh()) {
-            return this.#applyPostProcessor('AI 生成的摘要：', postProcessor)
+            return this.#applyPostProcessor('AI 生成的总结：', postProcessor)
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
     };

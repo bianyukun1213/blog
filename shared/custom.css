@@ -388,12 +388,12 @@
 
 /* 此处有点击事件。 */
 .smui-container.smui-container-settings .layui-form-label.smui-form-label-sm-setting-data-analytics,
-.smui-container.smui-container-settings .layui-form-label.smui-form-label-sm-setting-ai-generated-excerpt,
+.smui-container.smui-container-settings .layui-form-label.smui-form-label-sm-setting-ai-generated-summary,
 .smui-container.smui-container-settings .layui-form-label.smui-form-label-sm-setting-chinese-conversion {
     cursor: pointer;
 }
 
-/* 英文下“Data Analytics”需 110px 才不折叠。 */
+/* 英文下“Data analytics”需 110px 才不折叠。 */
 .smui-container.smui-container-settings.smui-lang-en .layui-form-label.smui-form-label-sm-setting-data-analytics {
     width: 110px;
 }
@@ -404,22 +404,22 @@
 }
 
 /* 中文下“AI 生成的摘要”需 110px 才不折叠。 */
-.smui-container.smui-container-settings.smui-lang-zh .layui-form-label.smui-form-label-sm-setting-ai-generated-excerpt {
+.smui-container.smui-container-settings.smui-lang-zh .layui-form-label.smui-form-label-sm-setting-ai-generated-summary {
     width: 110px;
 }
 
 /* 140px 左边距对应上面 110px 宽度。 */
-.smui-container.smui-container-settings.smui-lang-zh .layui-input-block.smui-input-block-sm-setting-ai-generated-excerpt {
+.smui-container.smui-container-settings.smui-lang-zh .layui-input-block.smui-input-block-sm-setting-ai-generated-summary {
     margin-left: 140px;
 }
 
-/* 英文下“AI-generated Excerpt”需 160px 才不折叠。 */
-.smui-container.smui-container-settings.smui-lang-en .layui-form-label.smui-form-label-sm-setting-ai-generated-excerpt {
+/* 英文下“AI-generated summary”需 160px 才不折叠。 */
+.smui-container.smui-container-settings.smui-lang-en .layui-form-label.smui-form-label-sm-setting-ai-generated-summary {
     width: 160px;
 }
 
 /* 190px 左边距对应上面 160px 宽度。 */
-.smui-container.smui-container-settings.smui-lang-en .layui-input-block.smui-input-block-sm-setting-ai-generated-excerpt {
+.smui-container.smui-container-settings.smui-lang-en .layui-input-block.smui-input-block-sm-setting-ai-generated-summary {
     margin-left: 190px;
 }
 
@@ -439,7 +439,7 @@
     margin-left: 120px;
 }
 
-/* 英文下“Default Interaction System”需 160px 才不折叠。 */
+/* 英文下“Default interaction system”需 160px 才不折叠。 */
 .smui-container.smui-container-settings.smui-lang-en .layui-form-label.smui-form-label-sm-setting-default-interaction-system {
     width: 160px;
 }
@@ -602,14 +602,14 @@ noscript#javascript-alert p::after {
     text-indent: initial;
 }
 
-.ai-generated-excerpt {
+.ai-generated-summary {
     padding: 0;
     margin: 16px 0;
     border: 2px solid #0088e0;
     border-radius: 10px;
 }
 
-.ai-generated-excerpt .title {
+.ai-generated-summary .title {
     padding: 16px;
     margin: 0;
     border-top-left-radius: 10px;
@@ -617,7 +617,7 @@ noscript#javascript-alert p::after {
     background-color: rgba(0, 136, 224, 0.2);
 }
 
-.ai-generated-excerpt .title p {
+.ai-generated-summary .title p {
     padding: 0;
     margin: 0;
     font-size: 16px;
@@ -625,12 +625,12 @@ noscript#javascript-alert p::after {
     line-height: 24px;
 }
 
-.ai-generated-excerpt .content {
+.ai-generated-summary .content {
     padding: 0;
     margin: 16px;
 }
 
-.ai-generated-excerpt .content p {
+.ai-generated-summary .content p {
     padding: 0;
     margin: 0;
     font-size: 16px;
