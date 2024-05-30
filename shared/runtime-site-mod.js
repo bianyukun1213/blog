@@ -1005,16 +1005,12 @@ if (siteLang === 'zh-CN') {
     }
 }
 const globalSmI18n = new SmI18n(siteLang, (string, i18nLang, context) => {
+    if(!context.isHtml)
+        string = escapeHtml(string);
     if (typeof converter !== 'undefined')
         string = converter(string);
     return string;
 });
-// globalSmI18n.bindLang(siteLang);
-// globalSmI18n.bindGlobalModifier((string, i18nLang, context) => {
-//     if (typeof converter !== 'undefined')
-//         string = converter(string);
-//     return string;
-// });
 // 初始化 site-mod 数据，检测数据变更。
 let smDataRawStr = localStorage.getItem('smData');
 let smDataRawStrEmpty = true;

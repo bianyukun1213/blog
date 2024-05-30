@@ -1,12 +1,15 @@
 'use strict';
 
 class SmI18n {
-    constructor(lang, globalPostProcessor) {
+    constructor(lang, defaultPostProcessor) {
         this.bindLang(lang);
-        this.bindGlobalPostProcessor(globalPostProcessor);
+        this.bindDefaultPostProcessor(defaultPostProcessor);
     }
     #lang;
-    #globalPostProcessor;
+    #globalPostProcessor(text, lang, context) {
+        return text;
+    };
+    #defaultPostProcessor;
     get lang() {
         return this.#lang;
     };
@@ -16,16 +19,17 @@ class SmI18n {
         else
             this.#lang = 'zh-CN';
     };
-    bindGlobalPostProcessor(globalPostProcessor) {
-        this.#globalPostProcessor = globalPostProcessor;
+    bindDefaultPostProcessor(defaultPostProcessor) {
+        this.#defaultPostProcessor = defaultPostProcessor;
     };
     #applyPostProcessor(string, postProcessor, context) {
         if (postProcessor === false)
             return string;
+        string = this.#globalPostProcessor(string, this.#lang, context);
         if (typeof postProcessor === 'function')
-            return postProcessor(string, this.#lang, context);
-        if (typeof this.#globalPostProcessor === 'function')
-            return this.#globalPostProcessor(string, this.#lang, context);
+            string = postProcessor(string, this.#lang, context);
+        else if (typeof this.#defaultPostProcessor === 'function')
+            string = this.#defaultPostProcessor(string, this.#lang, context);
         return string;
     };
     #notTranslated() {
@@ -46,80 +50,99 @@ class SmI18n {
     brands(brandKey, postProcessor) {
         const context = {
             callerName: this.brands.name,
-            args: [brandKey]
+            args: [brandKey],
+            isHtml: false
         };
-        switch (brandKey) {
-            case 'GOOGLE':
-                return this.#applyPostProcessor('Google', postProcessor, context);
-            case 'AN_INDIEWEB_WEBRING':
-                return this.#applyPostProcessor('An IndieWeb Webring', postProcessor, context);
-            case 'GITHUB':
-                return this.#applyPostProcessor('GitHub', postProcessor, context);
-            case 'POSTCROSSING':
-                return this.#applyPostProcessor('Postcrossing', postProcessor, context);
-            case 'THEME_REDEFINE':
-                return this.#applyPostProcessor('Theme Redefine', postProcessor, context);
-            case 'CALCKEY':
-                return this.#applyPostProcessor('Calckey', postProcessor, context);
-            case 'DIASPORA':
-                return this.#applyPostProcessor('Diaspora', postProcessor, context);
-            case 'FEDIBIRD':
-                return this.#applyPostProcessor('Fedibird', postProcessor, context);
-            case 'FIREFISH':
-                return this.#applyPostProcessor('Firefish', postProcessor, context);
-            case 'FOUNDKEY':
-                return this.#applyPostProcessor('FoundKey', postProcessor, context);
-            case 'FRIENDICA':
-                return this.#applyPostProcessor('Friendica', postProcessor, context);
-            case 'GLITCHCAFE':
-                return this.#applyPostProcessor('Glitchcafe', postProcessor, context);
-            case 'GNU_SOCIAL':
-                return this.#applyPostProcessor('GNU Social', postProcessor, context);
-            case 'HOMETOWN':
-                return this.#applyPostProcessor('Hometown', postProcessor, context);
-            case 'HUBZILLA':
-                return this.#applyPostProcessor('Hubzilla', postProcessor, context);
-            case 'KBIN':
-                return this.#applyPostProcessor('kbin', postProcessor, context);
-            case 'MASTODON':
-                return this.#applyPostProcessor('Mastodon', postProcessor, context);
-            case 'MEISSKEY':
-                return this.#applyPostProcessor('Meisskey', postProcessor, context);
-            case 'MICRO_DOT_BLOG':
-                return this.#applyPostProcessor('micro.blog', postProcessor, context);
-            case 'MISSKEY':
-                return this.#applyPostProcessor('Misskey', postProcessor, context);
-        }
-        if (this.isEn()) {
-            switch (brandKey) {
-                case 'BING':
-                    return this.#applyPostProcessor('Bing', postProcessor, context);
-                case 'BAIDU':
-                    return this.#applyPostProcessor('Baidu', postProcessor, context);
-                case 'TRAVELLINGS':
-                    return this.#applyPostProcessor('Travellings', postProcessor, context);
-                case 'STEAM_COMMUNITY':
-                    return this.#applyPostProcessor('Steam Community', postProcessor, context);
+        let v;
+        const brands = {
+            GOOGLE: {
+                default: 'Google'
+            },
+            AN_INDIEWEB_WEBRING: {
+                default: 'An IndieWeb Webring'
+            },
+            GITHUB: {
+                default: 'GitHub'
+            },
+            POSTCROSSING: {
+                default: 'Postcrossing'
+            },
+            THEME_REDEFINE: {
+                default: 'Theme Redefine'
+            },
+            CALCKEY: {
+                default: 'Calckey'
+            },
+            DIASPORA: {
+                default: 'Diaspora'
+            },
+            FEDIBIRD: {
+                default: 'Fedibird'
+            },
+            FIREFISH: {
+                default: 'Firefish'
+            },
+            FOUNDKEY: {
+                default: 'FoundKey'
+            },
+            FRIENDICA: {
+                default: 'Friendica'
+            },
+            GLITCHCAFE: {
+                default: 'Glitchcafe'
+            },
+            GNU_SOCIAL: {
+                default: 'GNU Social'
+            },
+            HOMETOWN: {
+                default: 'Hometown'
+            },
+            HUBZILLA: {
+                default: 'Hubzilla'
+            },
+            KBIN: {
+                default: 'kbin'
+            },
+            MASTODON: {
+                default: 'Mastodon'
+            },
+            MEISSKEY: {
+                default: 'Meisskey'
+            },
+            MICRO_DOT_BLOG: {
+                default: 'micro.blog'
+            },
+            MISSKEY: {
+                default: 'Misskey'
+            },
+            BING: {
+                zh: '',
+                en: 'Bing'
+            },
+            BAIDU: {
+                zh: '百度',
+                en: 'Baidu'
+            },
+            TRAVELLINGS: {
+                zh: '开往',
+                en: 'Travellings'
+            },
+            STEAM_COMMUNITY: {
+                zh: 'Steam 社区',
+                en: 'Steam Community'
             }
-        }
-        else if (this.isZh()) {
-            switch (brandKey) {
-                case 'BING':
-                    return this.#applyPostProcessor('必应', postProcessor, context);
-                case 'BAIDU':
-                    return this.#applyPostProcessor('百度', postProcessor, context);
-                case 'TRAVELLINGS':
-                    return this.#applyPostProcessor('开往', postProcessor, context);
-                case 'STEAM_COMMUNITY':
-                    return this.#applyPostProcessor('Steam 社区', postProcessor, context);
-            }
-        }
-        return this.#applyPostProcessor(brandKey, postProcessor, context);
+        };
+        if (this.isEn())
+            v = brands[brandKey]?.en || brands[brandKey]?.default || brandKey;
+        else if (this.isZh())
+            v = brands[brandKey]?.zh || brands[brandKey]?.default || brandKey;
+        return this.#applyPostProcessor(v, postProcessor, context);
     };
     searchInputReverseConversionPlaceholder(postProcessor) {
         const context = {
             callerName: this.searchInputReverseConversionPlaceholder.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isZh()) {
             return this.#applyPostProcessor('//用此格式转换为简体//', postProcessor, context);
@@ -129,7 +152,8 @@ class SmI18n {
     webmentionPostFormTipHtml(syndications, postProcessor) {
         const context = {
             callerName: this.webmentionPostFormTipHtml.name,
-            args: [syndications]
+            args: [syndications],
+            isHtml: true
         };
         if (this.isEn()) {
             let mainTip = '<p>If you have written a <a href="https://indieweb.org/responses" rel="noopener external nofollow noreferrer" target="_blank">response</a> to this article, you can submit your article URL here to send me a <a href="https://indieweb.org/Webmention" rel="noopener external nofollow noreferrer" target="_blank">Webmention</a>.';
@@ -166,7 +190,8 @@ class SmI18n {
     webmentionPostFormInputArticleUrlPlaceholder(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormInputArticleUrlPlaceholder.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('https://your-website.com/some-post.html', postProcessor, context);
@@ -179,7 +204,8 @@ class SmI18n {
     webmentionPostFormInputArticleUrlReqText(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormInputArticleUrlReqText.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Please fill in the article URL correctly!', postProcessor, context);
@@ -192,7 +218,8 @@ class SmI18n {
     webmentionPostFormButtonSubmitHtml(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormButtonSubmitHtml.name,
-            args: []
+            args: [],
+            isHtml: true
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Submit', postProcessor, context);
@@ -205,7 +232,8 @@ class SmI18n {
     webmentionPostFormButtonSubmittingHtml(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormButtonSubmittingHtml.name,
-            args: []
+            args: [],
+            isHtml: true
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Submitting <i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>', postProcessor, context);
@@ -218,7 +246,8 @@ class SmI18n {
     webmentionPostFormTipSubmissionSucceeded(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormTipSubmissionSucceeded.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Done!', postProcessor, context);
@@ -231,7 +260,8 @@ class SmI18n {
     webmentionPostFormTipSubmissionFailed(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormTipSubmissionFailed.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Failed!', postProcessor, context);
@@ -244,7 +274,8 @@ class SmI18n {
     webmentionjsStrings(key, postProcessor) {
         const context = {
             callerName: this.webmentionjsStrings.name,
-            args: [key]
+            args: [key],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor(key, postProcessor, context);
@@ -280,7 +311,8 @@ class SmI18n {
     interactionSwitchWebmentions(postProcessor) {
         const context = {
             callerName: this.interactionSwitchWebmentions.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Webmentions', postProcessor, context);
@@ -293,7 +325,8 @@ class SmI18n {
     timelineButtonCloseCarousel(postProcessor) {
         const context = {
             callerName: this.timelineButtonCloseCarousel.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Close carousel', postProcessor, context);
@@ -306,7 +339,8 @@ class SmI18n {
     timelineButtonCarouselPrevItem(postProcessor) {
         const context = {
             callerName: this.timelineButtonCarouselPrevItem.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Previous media item', postProcessor, context);
@@ -319,7 +353,8 @@ class SmI18n {
     timelineButtonCarouselNextItem(postProcessor) {
         const context = {
             callerName: this.timelineButtonCarouselNextItem.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Next media item', postProcessor, context);
@@ -332,7 +367,8 @@ class SmI18n {
     timelineButtonShowMore(postProcessor) {
         const context = {
             callerName: this.timelineButtonShowMore.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('SHOW MORE', postProcessor, context);
@@ -345,7 +381,8 @@ class SmI18n {
     timelineButtonShowLess(postProcessor) {
         const context = {
             callerName: this.timelineButtonShowLess.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('SHOW LESS', postProcessor, context);
@@ -358,7 +395,8 @@ class SmI18n {
     timelineButtonShowContent(postProcessor) {
         const context = {
             callerName: this.timelineButtonShowContent.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('SHOW CONTENT', postProcessor, context);
@@ -371,7 +409,8 @@ class SmI18n {
     timelineButtonPlayVideo(postProcessor) {
         const context = {
             callerName: this.timelineButtonPlayVideo.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('PLAY VIDEO', postProcessor, context);
@@ -384,7 +423,8 @@ class SmI18n {
     timelineLinkSeeMore(instanceHost, postProcessor) {
         const context = {
             callerName: this.timelineLinkSeeMore.name,
-            args: [instanceHost]
+            args: [instanceHost],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor(`See more twoots at ${instanceHost}`, postProcessor, context);
@@ -397,7 +437,8 @@ class SmI18n {
     timelineButtonRefresh(postProcessor) {
         const context = {
             callerName: this.timelineButtonRefresh.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Refresh', postProcessor, context);
@@ -410,7 +451,8 @@ class SmI18n {
     smSettingsMigratedAlert(postProcessor) {
         const context = {
             callerName: this.smSettingsMigratedAlert.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Data migration and validation result in changes to settings. You can open the settings pop-up to adjust the new settings.', postProcessor, context);
@@ -423,7 +465,8 @@ class SmI18n {
     referrerPopContent(referrerKey, postProcessor) {
         const context = {
             callerName: this.referrerPopContent.name,
-            args: [referrerKey]
+            args: [referrerKey],
+            isHtml: false
         };
         const referrerStr = this.brands(referrerKey);
         if (this.isEn())
@@ -435,7 +478,8 @@ class SmI18n {
     initPopTitle(postProcessor) {
         const context = {
             callerName: this.initPopTitle.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Notice to visitors', postProcessor, context);
@@ -448,7 +492,8 @@ class SmI18n {
     initPopContentHtml(minimumSupportedBrowserVersions, referrerKey, postProcessor) {
         const context = {
             callerName: this.initPopContentHtml.name,
-            args: [minimumSupportedBrowserVersions, referrerKey]
+            args: [minimumSupportedBrowserVersions, referrerKey],
+            isHtml: true
         };
         if (this.isEn()) {
             let greeting = 'Hello';
@@ -479,7 +524,8 @@ class SmI18n {
     initPopButtonEnterSettings(postProcessor) {
         const context = {
             callerName: this.initPopButtonEnterSettings.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Settings', postProcessor, context);
@@ -492,7 +538,8 @@ class SmI18n {
     initPopButtonOk(postProcessor) {
         const context = {
             callerName: this.initPopButtonOk.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('OK', postProcessor, context);
@@ -505,7 +552,8 @@ class SmI18n {
     initPopConfirmTurnOffAntiadExtension(postProcessor) {
         const context = {
             callerName: this.initPopConfirmTurnOffAntiadExtension.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Hello!\nThe initialization pop-up is detected as not being displayed. Are you using an ad-blocking plugin? This site is ad-free, but the Layui component used may be blocked by some imperfect ad-blocking rules. Please add a whitelist for this site, otherwise you may not be able to browse normally.\nAfter the pop-up loads and completes initialization, you will be informed by default and no longer be detected for ad-blocking.\n\nClick “OK” to refresh the page.', postProcessor, context);
@@ -518,7 +566,8 @@ class SmI18n {
     settPopTitle(postProcessor) {
         const context = {
             callerName: this.settPopTitle.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Settings', postProcessor, context);
@@ -531,7 +580,8 @@ class SmI18n {
     settPopLableDataAnalytics(postProcessor) {
         const context = {
             callerName: this.settPopLableDataAnalytics.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Data analytics', postProcessor, context);
@@ -544,7 +594,8 @@ class SmI18n {
     settPopTipDataAnalyticsHtml(trackingDetails, postProcessor) {
         const context = {
             callerName: this.settPopTipDataAnalyticsHtml.name,
-            args: [trackingDetails]
+            args: [trackingDetails],
+            isHtml: true
         };
         if (this.isEn()) {
             const tip = 'The counting script used on this site may collect and analyze data such as region, User-Agent, refer(r)er, language, screen size, etc. In addition to the disablement here, “Do Not Track” requests or incomplete initialization of the site will also result in data analytics being disabled and visits not being logged. This setting does not affect the comment module, the few necessary region checks and potential third-party data analytics.<br>';
@@ -579,7 +630,8 @@ class SmI18n {
     settPopSwitchDataAnalytics(postProcessor) {
         const context = {
             callerName: this.settPopSwitchDataAnalytics.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Allowed|Prohibited', postProcessor, context);
@@ -592,7 +644,8 @@ class SmI18n {
     settPopLableAiGeneratedSummary(postProcessor) {
         const context = {
             callerName: this.settPopLableAiGeneratedSummary.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('AI-generated summary', postProcessor, context);
@@ -605,7 +658,8 @@ class SmI18n {
     settPopTipAiGeneratedSummaryHtml(postProcessor) {
         const context = {
             callerName: this.settPopTipAiGeneratedSummaryHtml.name,
-            args: []
+            args: [],
+            isHtml: true
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('This setting does not work for posts that do not contain an AI-generated summary at all.', postProcessor, context);
@@ -618,7 +672,8 @@ class SmI18n {
     settPopSwitchAiGeneratedSummary(postProcessor) {
         const context = {
             callerName: this.settPopSwitchAiGeneratedSummary.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Shown|Hidden', postProcessor, context);
@@ -631,12 +686,9 @@ class SmI18n {
     settPopLableChineseConversion(postProcessor) {
         const context = {
             callerName: this.settPopLableChineseConversion.name,
-            args: []
+            args: [],
+            isHtml: false
         };
-        // if (this.isEn()) {
-        //     return this._applyModifier('Default interaction system', postProcessor, context);
-        // }
-        // else 
         if (this.isZh()) {
             return this.#applyPostProcessor('简繁转换', postProcessor, context);
         }
@@ -645,7 +697,8 @@ class SmI18n {
     settPopTipChineseConversionHtml(postProcessor) {
         const context = {
             callerName: this.settPopTipChineseConversionHtml.name,
-            args: []
+            args: [],
+            isHtml: true
         };
         if (this.isZh()) {
             return this.#applyPostProcessor('试验性，对动态加载的内容可能无效。', postProcessor, context);
@@ -655,19 +708,9 @@ class SmI18n {
     settPopSelectOptionChineseConversion(key, postProcessor) {
         const context = {
             callerName: this.settPopSelectOptionChineseConversion.name,
-            args: [key]
+            args: [key],
+            isHtml: false
         };
-        // if (this.isEn()) {
-        //     switch (key) {
-        //         case 'COMMENTS':
-        //             return this._applyModifier('Comments', postProcessor, context);
-        //         case 'WEBMENTIONS':
-        //             return this._applyModifier('Webmentions', postProcessor, context);
-        //         default:
-        //             return this._applyModifier(this._notTranslated(), false);
-        //     }
-        // }
-        // else 
         if (this.isZh()) {
             switch (key) {
                 case 'DISABLED':
@@ -685,7 +728,8 @@ class SmI18n {
     settPopLableDefaultInteractionSystem(postProcessor) {
         const context = {
             callerName: this.settPopLableDefaultInteractionSystem.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Default interaction system', postProcessor, context);
@@ -698,7 +742,8 @@ class SmI18n {
     settPopSelectOptionDefaultInteractionSystem(key, postProcessor) {
         const context = {
             callerName: this.settPopSelectOptionDefaultInteractionSystem.name,
-            args: [key]
+            args: [key],
+            isHtml: false
         };
         if (this.isEn()) {
             switch (key) {
@@ -725,7 +770,8 @@ class SmI18n {
     settPopButtonClearLocalStorage(postProcessor) {
         const context = {
             callerName: this.settPopButtonClearLocalStorage.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Clear local storage', postProcessor, context);
@@ -738,7 +784,8 @@ class SmI18n {
     settPopConfirmStorageClear(postProcessor) {
         const context = {
             callerName: this.settPopConfirmStorageClear.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('All settings will be lost and the site will reinitialize, do you want to continue?', postProcessor, context);
@@ -751,7 +798,8 @@ class SmI18n {
     settPopButtonSave(postProcessor) {
         const context = {
             callerName: this.settPopButtonSave.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Save & refresh', postProcessor, context);
@@ -764,7 +812,8 @@ class SmI18n {
     pageContentIconTitleSwitchLang(postProcessor) {
         const context = {
             callerName: this.pageContentIconTitleSwitchLang.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Switch language', postProcessor, context);
@@ -777,7 +826,8 @@ class SmI18n {
     langSwitchPopTitle(postProcessor) {
         const context = {
             callerName: this.langSwitchPopTitle.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Switch language', postProcessor, context);
@@ -790,7 +840,8 @@ class SmI18n {
     langSwitchPopLableAvailableLangs(postProcessor) {
         const context = {
             callerName: this.langSwitchPopLableAvailableLangs.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Available in', postProcessor, context);
@@ -803,7 +854,8 @@ class SmI18n {
     langSwitchPopSelectOptionLang(langKey, postProcessor) {
         const context = {
             callerName: this.langSwitchPopSelectOptionLang.name,
-            args: [langKey]
+            args: [langKey],
+            isHtml: false
         };
         switch (langKey) {
             case 'en':
@@ -817,12 +869,9 @@ class SmI18n {
     langSwitchPopButtonSetChineseConversion(postProcessor) {
         const context = {
             callerName: this.langSwitchPopButtonSetChineseConversion.name,
-            args: []
+            args: [],
+            isHtml: false
         };
-        // if (this.isEn()) {
-        //     return this._applyModifier('Settings', postProcessor, context);
-        // }
-        // else 
         if (this.isZh()) {
             return this.#applyPostProcessor('设置简繁转换', postProcessor, context);
         }
@@ -831,7 +880,8 @@ class SmI18n {
     langSwitchPopButtonSwitch(postProcessor) {
         const context = {
             callerName: this.langSwitchPopButtonSwitch.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Switch', postProcessor, context);
@@ -844,7 +894,8 @@ class SmI18n {
     pageContentIconTitleShareOnFediverse(postProcessor) {
         const context = {
             callerName: this.pageContentIconTitleShareOnFediverse.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Share on Fediverse', postProcessor, context);
@@ -857,7 +908,8 @@ class SmI18n {
     fediverseSharingPopTitle(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopTitle.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Share on Fediverse', postProcessor, context);
@@ -870,7 +922,8 @@ class SmI18n {
     fediverseSharingPopLableInstance(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopLableInstance.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Instance', postProcessor, context);
@@ -883,7 +936,8 @@ class SmI18n {
     fediverseSharingPopInputInstancePlaceholder(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopInputInstancePlaceholder.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('your-instance.domain', postProcessor, context);
@@ -896,7 +950,8 @@ class SmI18n {
     fediverseSharingPopInputInstanceReqText(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopInputInstanceReqText.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Please fill in the instance correctly!', postProcessor, context);
@@ -909,7 +964,8 @@ class SmI18n {
     fediverseSharingPopLableSoftware(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopLableSoftware.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Software', postProcessor, context);
@@ -922,7 +978,8 @@ class SmI18n {
     fediverseSharingPopButtonShare(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopButtonShare.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Share', postProcessor, context);
@@ -935,7 +992,8 @@ class SmI18n {
     fediverseSharingPopPostTitle(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopPostTitle.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Title: ', postProcessor, context);
@@ -948,7 +1006,8 @@ class SmI18n {
     fediverseSharingPopPostExcerpt(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopPostExcerpt.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Excerpt: ', postProcessor, context);
@@ -961,20 +1020,22 @@ class SmI18n {
     fediverseSharingPopPostAiGeneratedSummary(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopPostAiGeneratedSummary.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('AI-generated summary: ', postProcessor, context);
         }
         else if (this.isZh()) {
-            return this.#applyPostProcessor('AI 生成的总结：', postProcessor)
+            return this.#applyPostProcessor('AI 生成的总结：', postProcessor, context)
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
     };
     fediverseSharingPopPostUrl(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopPostUrl.name,
-            args: []
+            args: [],
+            isHtml: false
         };
         if (this.isEn()) {
             return this.#applyPostProcessor('Link: ', postProcessor, context);
