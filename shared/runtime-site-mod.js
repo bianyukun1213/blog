@@ -830,22 +830,22 @@ function afterPageReady() {
                 hidePinnedPosts: false,
                 hideUserAccount: false,
                 txtMaxLines: '',
-                btnShowMore: escapeHtml(globalSmI18n.timelineButtonShowMore()),
-                btnShowLess: escapeHtml(globalSmI18n.timelineButtonShowLess()),
+                btnShowMore: globalSmI18n.timelineButtonShowMore(),
+                btnShowLess: globalSmI18n.timelineButtonShowLess(),
                 markdownBlockquote: false,
                 hideEmojos: false,
-                btnShowContent: escapeHtml(globalSmI18n.timelineButtonShowContent()),
+                btnShowContent: globalSmI18n.timelineButtonShowContent(),
                 hideVideoPreview: false,
-                btnPlayVideoTxt: escapeHtml(globalSmI18n.timelineButtonPlayVideo()),
+                btnPlayVideoTxt: globalSmI18n.timelineButtonPlayVideo(),
                 hidePreviewLink: false,
                 previewMaxLines: '',
                 hideCounterBar: false,
                 disableCarousel: false,
-                carouselCloseTxt: escapeHtml(globalSmI18n.timelineButtonCloseCarousel()),
-                carouselPrevTxt: escapeHtml(globalSmI18n.timelineButtonCarouselPrevItem()),
-                carouselNextTxt: escapeHtml(globalSmI18n.timelineButtonCarouselNextItem()),
-                btnSeeMore: escapeHtml(globalSmI18n.timelineLinkSeeMore(instanceUrl.split('/')[2])),
-                btnReload: escapeHtml(globalSmI18n.timelineButtonRefresh()),
+                carouselCloseTxt: globalSmI18n.timelineButtonCloseCarousel(),
+                carouselPrevTxt: globalSmI18n.timelineButtonCarouselPrevItem(),
+                carouselNextTxt: globalSmI18n.timelineButtonCarouselNextItem(),
+                btnSeeMore: globalSmI18n.timelineLinkSeeMore(instanceUrl.split('/')[2]),
+                btnReload: globalSmI18n.timelineButtonRefresh(),
                 insistSearchContainer: false,
                 insistSearchContainerTime: '3000'
             });
@@ -1005,7 +1005,7 @@ if (siteLang === 'zh-CN') {
     }
 }
 const globalSmI18n = new SmI18n(siteLang, (string, i18nLang, context) => {
-    if(!context.isHtml)
+    if (!context.isHtml)
         string = escapeHtml(string);
     if (typeof converter !== 'undefined')
         string = converter(string);
@@ -1191,7 +1191,7 @@ $(document).ready(() => {
             openInitPopup: (referrerKey) => {
                 const li = layer.open({
                     type: 1,
-                    title: escapeHtml(globalSmI18n.initPopTitle()),
+                    title: globalSmI18n.initPopTitle(),
                     content: `
                     <div class="${globalSmI18n.langStyleClass()} smui-container smui-container-init-popup">
                         <div class="smui-content">
@@ -1200,10 +1200,10 @@ $(document).ready(() => {
                         <div class="smui-func smui-clearfix">
                           <hr>
                           <div class="smui-func-left">
-                            <button class="smui-button-enter-settings layui-btn layui-btn-primary layui-border-blue">${escapeHtml(globalSmI18n.initPopButtonEnterSettings())}</button>
+                            <button class="smui-button-enter-settings layui-btn layui-btn-primary layui-border-blue">${globalSmI18n.initPopButtonEnterSettings()}</button>
                           </div>
                           <div class="smui-func-right">
-                            <button class="smui-button-complete-initialization layui-btn">${escapeHtml(globalSmI18n.initPopButtonOk())}</button>
+                            <button class="smui-button-complete-initialization layui-btn">${globalSmI18n.initPopButtonOk()}</button>
                           </div>
                         </div>
                     </div>
@@ -1249,44 +1249,44 @@ $(document).ready(() => {
                 };
                 const li = layer.open({
                     type: 1,
-                    title: escapeHtml(globalSmI18n.settPopTitle()),
+                    title: globalSmI18n.settPopTitle(),
                     content: `
                     <div class="${globalSmI18n.langStyleClass()} smui-container smui-container-settings">
                         <div class="layui-form" lay-filter="${nameBindings.layFilter}">
                           <div class="layui-form-item">
-                            <label class="smui-form-label-${nameBindings.dataAnalytics} layui-form-label">${escapeHtml(globalSmI18n.settPopLableDataAnalytics())}
+                            <label class="smui-form-label-${nameBindings.dataAnalytics} layui-form-label">${globalSmI18n.settPopLableDataAnalytics()}
                               <i class="layui-icon layui-icon-question"></i>
                             </label>
                             <div class="smui-input-block-${nameBindings.dataAnalytics} layui-input-block">
-                              <input type="checkbox" name="${nameBindings.dataAnalytics}" lay-skin="switch" title="${escapeHtml(globalSmI18n.settPopSwitchDataAnalytics())}">
+                              <input type="checkbox" name="${nameBindings.dataAnalytics}" lay-skin="switch" title="${globalSmI18n.settPopSwitchDataAnalytics()}">
                             </div>
                           </div>
                           <div class="layui-form-item">
-                            <label class="smui-form-label-${nameBindings.aiGeneratedSummary} layui-form-label">${escapeHtml(globalSmI18n.settPopLableAiGeneratedSummary())}
+                            <label class="smui-form-label-${nameBindings.aiGeneratedSummary} layui-form-label">${globalSmI18n.settPopLableAiGeneratedSummary()}
                               <i class="layui-icon layui-icon-question"></i>
                             </label>
                             <div class="smui-input-block-${nameBindings.aiGeneratedSummary} layui-input-block">
-                              <input type="checkbox" name="${nameBindings.aiGeneratedSummary}" lay-skin="switch" title="${escapeHtml(globalSmI18n.settPopSwitchAiGeneratedSummary())}">
+                              <input type="checkbox" name="${nameBindings.aiGeneratedSummary}" lay-skin="switch" title="${globalSmI18n.settPopSwitchAiGeneratedSummary()}">
                             </div>
                           </div>
                           <div class="layui-form-item smui-form-item-${nameBindings.chineseConversion}">
-                            <label class="smui-form-label-${nameBindings.chineseConversion} layui-form-label">${escapeHtml(globalSmI18n.settPopLableChineseConversion())}
+                            <label class="smui-form-label-${nameBindings.chineseConversion} layui-form-label">${globalSmI18n.settPopLableChineseConversion()}
                               <i class="layui-icon layui-icon-question"></i>
                             </label>
                             <div class="smui-input-block-${nameBindings.chineseConversion} layui-input-block">
                                 <select name="${nameBindings.chineseConversion}">
-                                    <option value="DISABLED">${escapeHtml(globalSmI18n.settPopSelectOptionChineseConversion('DISABLED'))}</option>
-                                    <option value="HK">${escapeHtml(globalSmI18n.settPopSelectOptionChineseConversion('HK'))}</option>
-                                    <option value="TW">${escapeHtml(globalSmI18n.settPopSelectOptionChineseConversion('TW'))}</option>
+                                    <option value="DISABLED">${globalSmI18n.settPopSelectOptionChineseConversion('DISABLED')}</option>
+                                    <option value="HK">${globalSmI18n.settPopSelectOptionChineseConversion('HK')}</option>
+                                    <option value="TW">${globalSmI18n.settPopSelectOptionChineseConversion('TW')}</option>
                                 </select>
                             </div>
                           </div>
                           <div class="layui-form-item">
-                            <label class="smui-form-label-${nameBindings.defaultInteractionSystem} layui-form-label">${escapeHtml(globalSmI18n.settPopLableDefaultInteractionSystem())}</label>
+                            <label class="smui-form-label-${nameBindings.defaultInteractionSystem} layui-form-label">${globalSmI18n.settPopLableDefaultInteractionSystem()}</label>
                             <div class="smui-input-block-${nameBindings.defaultInteractionSystem} layui-input-block">
                                 <select name="${nameBindings.defaultInteractionSystem}">
-                                    <option value="COMMENTS">${escapeHtml(globalSmI18n.settPopSelectOptionDefaultInteractionSystem('COMMENTS'))}</option>
-                                    <option value="WEBMENTIONS">${escapeHtml(globalSmI18n.settPopSelectOptionDefaultInteractionSystem('WEBMENTIONS'))}</option>
+                                    <option value="COMMENTS">${globalSmI18n.settPopSelectOptionDefaultInteractionSystem('COMMENTS')}</option>
+                                    <option value="WEBMENTIONS">${globalSmI18n.settPopSelectOptionDefaultInteractionSystem('WEBMENTIONS')}</option>
                                 </select>
                             </div>
                           </div>
@@ -1294,10 +1294,10 @@ $(document).ready(() => {
                         <div class="smui-func smui-clearfix">
                           <hr>
                           <div class="smui-func-left">
-                            <button class="smui-button-clear-local-storage layui-btn layui-btn-primary layui-border-red">${escapeHtml(globalSmI18n.settPopButtonClearLocalStorage())}</button>
+                            <button class="smui-button-clear-local-storage layui-btn layui-btn-primary layui-border-red">${globalSmI18n.settPopButtonClearLocalStorage()}</button>
                           </div>
                           <div class="smui-func-right">
-                            <button class="smui-button-save-sm-settings layui-btn">${escapeHtml(globalSmI18n.settPopButtonSave())}</button>
+                            <button class="smui-button-save-sm-settings layui-btn">${globalSmI18n.settPopButtonSave()}</button>
                           </div>
                         </div>
                     </div>
@@ -1396,12 +1396,12 @@ $(document).ready(() => {
                 };
                 const li = layer.open({
                     type: 1,
-                    title: escapeHtml(globalSmI18n.langSwitchPopTitle()),
+                    title: globalSmI18n.langSwitchPopTitle(),
                     content: `
                     <div class="${globalSmI18n.langStyleClass()} smui-container smui-container-lang-switch">
                         <div class="layui-form" lay-filter="${nameBindings.layFilter}">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">${escapeHtml(globalSmI18n.langSwitchPopLableAvailableLangs())}</label>
+                                <label class="layui-form-label">${globalSmI18n.langSwitchPopLableAvailableLangs()}</label>
                                 <div class="smui-input-block-${nameBindings.targetLang} layui-input-block">
                                     <select name="${nameBindings.targetLang}">
                                     </select>
@@ -1411,10 +1411,10 @@ $(document).ready(() => {
                         <div class="smui-func smui-clearfix">
                           <hr>
                           <div class="smui-func-left">
-                            <button class="smui-button-set-chinese-conversion layui-btn layui-btn-primary layui-border-blue">${escapeHtml(globalSmI18n.langSwitchPopButtonSetChineseConversion())}</button>
+                            <button class="smui-button-set-chinese-conversion layui-btn layui-btn-primary layui-border-blue">${globalSmI18n.langSwitchPopButtonSetChineseConversion()}</button>
                           </div>
                           <div class="smui-func-right">
-                            <button class="smui-button-switch-language layui-btn">${escapeHtml(globalSmI18n.langSwitchPopButtonSwitch())}</button>
+                            <button class="smui-button-switch-language layui-btn">${globalSmI18n.langSwitchPopButtonSwitch()}</button>
                           </div>
                         </div>
                     </div>
@@ -1435,12 +1435,12 @@ $(document).ready(() => {
                         for (let i = 0; i < langsLength; i++) {
                             const langKey = availableLangs[i];
                             if (langKey === pageLang)
-                                $(layero).find(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}" selected>${escapeHtml(globalSmI18n.langSwitchPopSelectOptionLang(langKey) + ' (' + langKey + ')')}</option>`);
+                                $(layero).find(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}" selected>${globalSmI18n.langSwitchPopSelectOptionLang(langKey) + ' (' + langKey + ')'}</option>`);
                             else
-                                $(layero).find(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}">${escapeHtml(globalSmI18n.langSwitchPopSelectOptionLang(langKey) + ' (' + langKey + ')')}</option>`);
+                                $(layero).find(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${langKey}">${globalSmI18n.langSwitchPopSelectOptionLang(langKey) + ' (' + langKey + ')'}</option>`);
                         }
                         if (availableLangs.length === 0) // 如果当前页面可用语言为空，则手动添加一个“当前语言”的项。
-                            $(layero).find(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${pageLang}" selected>${escapeHtml(globalSmI18n.langSwitchPopSelectOptionLang(pageLang) + ' (' + pageLang + ')')}</option>`);
+                            $(layero).find(`select[name="${nameBindings.targetLang}"]`).append(`<option value="${pageLang}" selected>${globalSmI18n.langSwitchPopSelectOptionLang(pageLang) + ' (' + pageLang + ')'}</option>`);
                         $(layero).find('.smui-button-switch-language').click(() => {
                             form.submit(nameBindings.layFilter, (data) => {
                                 const targetLangKey = data.field[nameBindings.targetLang];
@@ -1470,28 +1470,28 @@ $(document).ready(() => {
                 };
                 const li = layer.open({
                     type: 1,
-                    title: escapeHtml(globalSmI18n.fediverseSharingPopTitle()),
+                    title: globalSmI18n.fediverseSharingPopTitle(),
                     content: `
                     <div class="${globalSmI18n.langStyleClass()} smui-container smui-container-fediverse-sharing">
                         <div class="layui-form" lay-filter="${nameBindings.layFilter}">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">${escapeHtml(globalSmI18n.fediverseSharingPopLableSoftware())}</label>
+                                <label class="layui-form-label">${globalSmI18n.fediverseSharingPopLableSoftware()}</label>
                                 <div class="smui-input-block-${nameBindings.software} layui-input-block">
                                     <select name="${nameBindings.software}">
                                     </select>
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">${escapeHtml(globalSmI18n.fediverseSharingPopLableInstance())}</label>
+                                <label class="layui-form-label">${globalSmI18n.fediverseSharingPopLableInstance()}</label>
                                 <div class="smui-input-block-${nameBindings.instance} layui-input-block">
-                                    <input class="layui-input" type="text" name="${nameBindings.instance}" autocomplete="off" placeholder="${escapeHtml(globalSmI18n.fediverseSharingPopInputInstancePlaceholder())}" lay-verify="required|instance-domain" lay-reqtext="${escapeHtml(globalSmI18n.fediverseSharingPopInputInstanceReqText())}">
+                                    <input class="layui-input" type="text" name="${nameBindings.instance}" autocomplete="off" placeholder="${globalSmI18n.fediverseSharingPopInputInstancePlaceholder()}" lay-verify="required|instance-domain" lay-reqtext="${globalSmI18n.fediverseSharingPopInputInstanceReqText()}">
                                  </div>
                             </div>
                         </div>
                         <div class="smui-func smui-clearfix">
                           <hr>
                           <div class="smui-func-right">
-                            <button class="smui-button-share-on-fediverse layui-btn">${escapeHtml(globalSmI18n.fediverseSharingPopButtonShare())}</button>
+                            <button class="smui-button-share-on-fediverse layui-btn">${globalSmI18n.fediverseSharingPopButtonShare()}</button>
                           </div>
                         </div>
                     </div>
@@ -1562,7 +1562,7 @@ $(document).ready(() => {
                         const softwaresLength = fediverseSoftwares.length;
                         for (let i = 0; i < softwaresLength; i++) {
                             let selected = fediverseSoftwares[i] === preferredSoftware ? ' selected' : '';
-                            $(layero).find(`select[name="${nameBindings.software}"]`).append(`<option value="${fediverseSoftwares[i]}"${selected}>${escapeHtml(globalSmI18n.brands(fediverseSoftwares[i]))}</option>`);
+                            $(layero).find(`select[name="${nameBindings.software}"]`).append(`<option value="${fediverseSoftwares[i]}"${selected}>${globalSmI18n.brands(fediverseSoftwares[i])}</option>`);
                         }
                         $(layero).find(`input[name="${nameBindings.instance}"]`).val(fediverseSharingPreferences.instance);
                         // 输入框响应 enter。
@@ -1633,9 +1633,9 @@ $(document).ready(() => {
                         <div class="smui-content">${globalSmI18n.webmentionPostFormTipHtml(validatedSyndications)}</div>
                         <div class="smui-wrapper-webmention-post">
                             <div class="smui-form-item-webmention-post layui-form-item">
-                                <input class="smui-input-${nameBindings.webmentionPostArticleUrl} layui-input" name="${nameBindings.webmentionPostArticleUrl}" autocomplete="off" placeholder="${escapeHtml(globalSmI18n.webmentionPostFormInputArticleUrlPlaceholder())}" lay-verify="required|article-url" lay-reqtext="${escapeHtml(globalSmI18n.webmentionPostFormInputArticleUrlReqText())}">
+                                <input class="smui-input-${nameBindings.webmentionPostArticleUrl} layui-input" name="${nameBindings.webmentionPostArticleUrl}" autocomplete="off" placeholder="${globalSmI18n.webmentionPostFormInputArticleUrlPlaceholder()}" lay-verify="required|article-url" lay-reqtext="${globalSmI18n.webmentionPostFormInputArticleUrlReqText()}">
                             </div>
-                            <button type="button" class="smui-button-webmention-post-submit layui-btn" lay-filter="${nameBindings.layFilter}" lay-submit>${escapeHtml(globalSmI18n.webmentionPostFormButtonSubmitHtml())}</button>
+                            <button type="button" class="smui-button-webmention-post-submit layui-btn" lay-filter="${nameBindings.layFilter}" lay-submit>${globalSmI18n.webmentionPostFormButtonSubmitHtml()}</button>
                         </div>
                     </div>
                     `
