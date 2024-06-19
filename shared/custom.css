@@ -113,9 +113,7 @@
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-    /* font-family: Satoshi-Variable, sans-serif, 'Noto Sans SC', sans-serif, sans-serif; */
-    font-family: Satoshi-Variable, Noto Sans SC, -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial;
-    /* font-family: unset; */
+    font-family: Geist Variable, Noto Sans SC, -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial;
 }
 
 /* layui-theme-dark 会给 hr 加一条底边，这里取消掉。 */

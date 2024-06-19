@@ -8,20 +8,20 @@ class SmI18n {
     #lang;
     #globalPostProcessor(text, lang, context) {
         return text;
-    };
+    }
     #defaultPostProcessor;
     get lang() {
         return this.#lang;
-    };
+    }
     bindLang(langStr) {
         if (langStr === 'en')
             this.#lang = 'en';
         else
             this.#lang = 'zh-CN';
-    };
+    }
     bindDefaultPostProcessor(defaultPostProcessor) {
         this.#defaultPostProcessor = defaultPostProcessor;
-    };
+    }
     #applyPostProcessor(string, postProcessor, context) {
         if (postProcessor === false)
             return string;
@@ -31,22 +31,22 @@ class SmI18n {
         else if (typeof this.#defaultPostProcessor === 'function')
             string = this.#defaultPostProcessor(string, this.#lang, context);
         return string;
-    };
+    }
     #notTranslated() {
         return 'NOT_TRANSLATED';
-    };
+    }
     isEn() {
         return this.#lang === 'en' ? true : false;
-    };
+    }
     isZh() {
         return this.#lang === 'zh-CN' ? true : false;
-    };
+    }
     langStyleClass() {
         if (this.isEn())
             return 'smui-lang-en';
         else if (this.isZh())
             return 'smui-lang-zh';
-    };
+    }
     brands(brandKey, postProcessor) {
         const context = {
             callerName: this.brands.name,
@@ -137,7 +137,7 @@ class SmI18n {
         else if (this.isZh())
             v = brands[brandKey]?.zh || brands[brandKey]?.default || brandKey;
         return this.#applyPostProcessor(v, postProcessor, context);
-    };
+    }
     searchInputReverseConversionPlaceholder(postProcessor) {
         const context = {
             callerName: this.searchInputReverseConversionPlaceholder.name,
@@ -148,7 +148,7 @@ class SmI18n {
             return this.#applyPostProcessor('//用此格式转换为简体//', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     webmentionPostFormTipHtml(syndications, postProcessor) {
         const context = {
             callerName: this.webmentionPostFormTipHtml.name,
@@ -186,7 +186,7 @@ class SmI18n {
             return this.#applyPostProcessor(mainTip + '</p>', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     webmentionPostFormInputArticleUrlPlaceholder(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormInputArticleUrlPlaceholder.name,
@@ -200,7 +200,7 @@ class SmI18n {
             return this.#applyPostProcessor('https://your-website.com/some-post.html', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     webmentionPostFormInputArticleUrlReqText(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormInputArticleUrlReqText.name,
@@ -214,7 +214,7 @@ class SmI18n {
             return this.#applyPostProcessor('请有效填写文章 URL！', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     webmentionPostFormButtonSubmitHtml(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormButtonSubmitHtml.name,
@@ -228,7 +228,7 @@ class SmI18n {
             return this.#applyPostProcessor('提交', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     webmentionPostFormButtonSubmittingHtml(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormButtonSubmittingHtml.name,
@@ -242,7 +242,7 @@ class SmI18n {
             return this.#applyPostProcessor('提交中 <i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     webmentionPostFormTipSubmissionSucceeded(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormTipSubmissionSucceeded.name,
@@ -256,7 +256,7 @@ class SmI18n {
             return this.#applyPostProcessor('完成！', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     webmentionPostFormTipSubmissionFailed(postProcessor) {
         const context = {
             callerName: this.webmentionPostFormTipSubmissionFailed.name,
@@ -270,7 +270,7 @@ class SmI18n {
             return this.#applyPostProcessor('失败！', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     webmentionjsStrings(key, postProcessor) {
         const context = {
             callerName: this.webmentionjsStrings.name,
@@ -307,7 +307,7 @@ class SmI18n {
             }
         }
         return this.#applyPostProcessor(key, postProcessor, context);
-    };
+    }
     interactionSwitchWebmentions(postProcessor) {
         const context = {
             callerName: this.interactionSwitchWebmentions.name,
@@ -321,7 +321,7 @@ class SmI18n {
             return this.#applyPostProcessor('Webmentions', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     timelineButtonCloseCarousel(postProcessor) {
         const context = {
             callerName: this.timelineButtonCloseCarousel.name,
@@ -335,7 +335,7 @@ class SmI18n {
             return this.#applyPostProcessor('关闭大图', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     timelineButtonCarouselPrevItem(postProcessor) {
         const context = {
             callerName: this.timelineButtonCarouselPrevItem.name,
@@ -349,7 +349,7 @@ class SmI18n {
             return this.#applyPostProcessor('前一项', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     timelineButtonCarouselNextItem(postProcessor) {
         const context = {
             callerName: this.timelineButtonCarouselNextItem.name,
@@ -363,7 +363,7 @@ class SmI18n {
             return this.#applyPostProcessor('后一项', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     timelineButtonShowMore(postProcessor) {
         const context = {
             callerName: this.timelineButtonShowMore.name,
@@ -377,7 +377,7 @@ class SmI18n {
             return this.#applyPostProcessor('展开', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     timelineButtonShowLess(postProcessor) {
         const context = {
             callerName: this.timelineButtonShowLess.name,
@@ -391,7 +391,7 @@ class SmI18n {
             return this.#applyPostProcessor('折叠', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     timelineButtonShowContent(postProcessor) {
         const context = {
             callerName: this.timelineButtonShowContent.name,
@@ -405,7 +405,7 @@ class SmI18n {
             return this.#applyPostProcessor('显示内容', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     timelineButtonPlayVideo(postProcessor) {
         const context = {
             callerName: this.timelineButtonPlayVideo.name,
@@ -419,7 +419,7 @@ class SmI18n {
             return this.#applyPostProcessor('播放视频', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     timelineLinkSeeMore(instanceHost, postProcessor) {
         const context = {
             callerName: this.timelineLinkSeeMore.name,
@@ -433,7 +433,7 @@ class SmI18n {
             return this.#applyPostProcessor(`在 ${instanceHost} 查看更多嘟文`, postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     timelineButtonRefresh(postProcessor) {
         const context = {
             callerName: this.timelineButtonRefresh.name,
@@ -447,7 +447,7 @@ class SmI18n {
             return this.#applyPostProcessor('刷新', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     smSettingsMigratedAlert(postProcessor) {
         const context = {
             callerName: this.smSettingsMigratedAlert.name,
@@ -461,7 +461,7 @@ class SmI18n {
             return this.#applyPostProcessor('数据迁移与校验导致设置变更。您可在设置窗口调整新的设置。', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     referrerPopContent(referrerKey, postProcessor) {
         const context = {
             callerName: this.referrerPopContent.name,
@@ -474,7 +474,7 @@ class SmI18n {
         else if (this.isZh())
             return this.#applyPostProcessor(`欢迎，从“${referrerStr}”过来的访客！`, postProcessor, context);
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     initPopTitle(postProcessor) {
         const context = {
             callerName: this.initPopTitle.name,
@@ -488,7 +488,7 @@ class SmI18n {
             return this.#applyPostProcessor('访客须知', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     initPopContentHtml(minimumSupportedBrowserVersions, referrerKey, postProcessor) {
         const context = {
             callerName: this.initPopContentHtml.name,
@@ -520,7 +520,7 @@ class SmI18n {
             `, postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     initPopButtonEnterSettings(postProcessor) {
         const context = {
             callerName: this.initPopButtonEnterSettings.name,
@@ -534,7 +534,7 @@ class SmI18n {
             return this.#applyPostProcessor('设置', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     initPopButtonOk(postProcessor) {
         const context = {
             callerName: this.initPopButtonOk.name,
@@ -548,7 +548,7 @@ class SmI18n {
             return this.#applyPostProcessor('了解', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     initPopConfirmTurnOffAntiadExtension(postProcessor) {
         const context = {
             callerName: this.initPopConfirmTurnOffAntiadExtension.name,
@@ -562,7 +562,7 @@ class SmI18n {
             return this.#applyPostProcessor('您好！\n检测到初始化弹窗未显示。您是否使用了广告拦截插件？本站不含广告，但使用的 Layui 组件可能被某些不完善的广告拦截规则拦截。请您为本站添加白名单，否则可能无法正常浏览。\n待弹窗加载，完成初始化后，将默认您已知晓相关信息，不再检测广告拦截。\n\n点击“确定”刷新页面。', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopTitle(postProcessor) {
         const context = {
             callerName: this.settPopTitle.name,
@@ -576,7 +576,7 @@ class SmI18n {
             return this.#applyPostProcessor('设置', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopLableDataAnalytics(postProcessor) {
         const context = {
             callerName: this.settPopLableDataAnalytics.name,
@@ -590,7 +590,7 @@ class SmI18n {
             return this.#applyPostProcessor('数据分析', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopTipDataAnalyticsHtml(trackingDetails, postProcessor) {
         const context = {
             callerName: this.settPopTipDataAnalyticsHtml.name,
@@ -626,7 +626,7 @@ class SmI18n {
             return this.#applyPostProcessor(tip + trackingResTxt, postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopSwitchDataAnalytics(postProcessor) {
         const context = {
             callerName: this.settPopSwitchDataAnalytics.name,
@@ -640,7 +640,7 @@ class SmI18n {
             return this.#applyPostProcessor('已允许|已禁止', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopLableAiGeneratedSummary(postProcessor) {
         const context = {
             callerName: this.settPopLableAiGeneratedSummary.name,
@@ -654,7 +654,7 @@ class SmI18n {
             return this.#applyPostProcessor('AI 生成的总结', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopTipAiGeneratedSummaryHtml(postProcessor) {
         const context = {
             callerName: this.settPopTipAiGeneratedSummaryHtml.name,
@@ -668,7 +668,7 @@ class SmI18n {
             return this.#applyPostProcessor('有些文章本来就不包含 AI 生成的总结，此项设置对其无效。', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopSwitchAiGeneratedSummary(postProcessor) {
         const context = {
             callerName: this.settPopSwitchAiGeneratedSummary.name,
@@ -682,7 +682,7 @@ class SmI18n {
             return this.#applyPostProcessor('已显示|已隐藏', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopLableChineseConversion(postProcessor) {
         const context = {
             callerName: this.settPopLableChineseConversion.name,
@@ -693,7 +693,7 @@ class SmI18n {
             return this.#applyPostProcessor('简繁转换', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopTipChineseConversionHtml(postProcessor) {
         const context = {
             callerName: this.settPopTipChineseConversionHtml.name,
@@ -704,7 +704,7 @@ class SmI18n {
             return this.#applyPostProcessor('试验性，对动态加载的内容可能无效。', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopSelectOptionChineseConversion(key, postProcessor) {
         const context = {
             callerName: this.settPopSelectOptionChineseConversion.name,
@@ -724,7 +724,7 @@ class SmI18n {
             }
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopLableDefaultInteractionSystem(postProcessor) {
         const context = {
             callerName: this.settPopLableDefaultInteractionSystem.name,
@@ -738,7 +738,7 @@ class SmI18n {
             return this.#applyPostProcessor('默认互动系统', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopSelectOptionDefaultInteractionSystem(key, postProcessor) {
         const context = {
             callerName: this.settPopSelectOptionDefaultInteractionSystem.name,
@@ -766,7 +766,7 @@ class SmI18n {
             }
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopButtonClearLocalStorage(postProcessor) {
         const context = {
             callerName: this.settPopButtonClearLocalStorage.name,
@@ -780,7 +780,7 @@ class SmI18n {
             return this.#applyPostProcessor('清除本地存储', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopConfirmStorageClear(postProcessor) {
         const context = {
             callerName: this.settPopConfirmStorageClear.name,
@@ -794,7 +794,7 @@ class SmI18n {
             return this.#applyPostProcessor('所有设置都将丢失，站点将重新初始化，是否继续？', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     settPopButtonSave(postProcessor) {
         const context = {
             callerName: this.settPopButtonSave.name,
@@ -808,7 +808,7 @@ class SmI18n {
             return this.#applyPostProcessor('保存并刷新', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     pageContentIconTitleSwitchLang(postProcessor) {
         const context = {
             callerName: this.pageContentIconTitleSwitchLang.name,
@@ -822,7 +822,7 @@ class SmI18n {
             return this.#applyPostProcessor('切换语言', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     langSwitchPopTitle(postProcessor) {
         const context = {
             callerName: this.langSwitchPopTitle.name,
@@ -836,7 +836,7 @@ class SmI18n {
             return this.#applyPostProcessor('切换语言', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     langSwitchPopLableAvailableLangs(postProcessor) {
         const context = {
             callerName: this.langSwitchPopLableAvailableLangs.name,
@@ -850,7 +850,7 @@ class SmI18n {
             return this.#applyPostProcessor('可用语言', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     langSwitchPopSelectOptionLang(langKey, postProcessor) {
         const context = {
             callerName: this.langSwitchPopSelectOptionLang.name,
@@ -865,7 +865,7 @@ class SmI18n {
             default:
                 return this.#applyPostProcessor(langKey, false);
         }
-    };
+    }
     langSwitchPopButtonSetChineseConversion(postProcessor) {
         const context = {
             callerName: this.langSwitchPopButtonSetChineseConversion.name,
@@ -876,7 +876,7 @@ class SmI18n {
             return this.#applyPostProcessor('设置简繁转换', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     langSwitchPopButtonSwitch(postProcessor) {
         const context = {
             callerName: this.langSwitchPopButtonSwitch.name,
@@ -890,7 +890,7 @@ class SmI18n {
             return this.#applyPostProcessor('切换', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     pageContentIconTitleShareOnFediverse(postProcessor) {
         const context = {
             callerName: this.pageContentIconTitleShareOnFediverse.name,
@@ -904,7 +904,7 @@ class SmI18n {
             return this.#applyPostProcessor('分享到联邦宇宙', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(postProcessor), false);
-    };
+    }
     fediverseSharingPopTitle(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopTitle.name,
@@ -918,7 +918,7 @@ class SmI18n {
             return this.#applyPostProcessor('分享到联邦宇宙', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     fediverseSharingPopLableInstance(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopLableInstance.name,
@@ -932,7 +932,7 @@ class SmI18n {
             return this.#applyPostProcessor('实例', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     fediverseSharingPopInputInstancePlaceholder(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopInputInstancePlaceholder.name,
@@ -946,7 +946,7 @@ class SmI18n {
             return this.#applyPostProcessor('your-instance.domain', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     fediverseSharingPopInputInstanceReqText(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopInputInstanceReqText.name,
@@ -960,7 +960,7 @@ class SmI18n {
             return this.#applyPostProcessor('请有效填写实例！', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     fediverseSharingPopLableSoftware(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopLableSoftware.name,
@@ -974,7 +974,7 @@ class SmI18n {
             return this.#applyPostProcessor('平台', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     fediverseSharingPopButtonShare(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopButtonShare.name,
@@ -988,7 +988,7 @@ class SmI18n {
             return this.#applyPostProcessor('分享', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     fediverseSharingPopPostTitle(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopPostTitle.name,
@@ -1002,7 +1002,7 @@ class SmI18n {
             return this.#applyPostProcessor('标题：', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     fediverseSharingPopPostExcerpt(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopPostExcerpt.name,
@@ -1016,7 +1016,7 @@ class SmI18n {
             return this.#applyPostProcessor('摘要：', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     fediverseSharingPopPostAiGeneratedSummary(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopPostAiGeneratedSummary.name,
@@ -1030,7 +1030,7 @@ class SmI18n {
             return this.#applyPostProcessor('AI 生成的总结：', postProcessor, context)
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
-    };
+    }
     fediverseSharingPopPostUrl(postProcessor) {
         const context = {
             callerName: this.fediverseSharingPopPostUrl.name,
@@ -1045,4 +1045,4 @@ class SmI18n {
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
     }
-};
+}

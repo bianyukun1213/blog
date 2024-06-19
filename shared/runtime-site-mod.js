@@ -1,5 +1,8 @@
 'use strict';
 
+const webcrypto = window.crypto;
+const { subtle } = webcrypto;
+
 // 这里做一些对站点的整体修改。
 
 const siteLang = window.location.pathname.split('/')[1];
@@ -14,7 +17,8 @@ const layuiThemeDarkCdn = 'https://npm.onmicrosoft.cn/layui-theme-dark/dist/layu
 
 // 明晃晃写，毕竟这些措施都只能稍稍保护一下。
 
-const aesKey = 'Uznb#gi;ZezgSV0EcaER(uwf@NV+bh+3';
+const aesKeyValue = '8DmqOcxy34az9e8qz0/qTueEUiPXh0VfFaaTj65sC3w=';
+let aesKey;
 
 const minimumSupportedBrowserVersions = {
     chrome: '105',
@@ -130,6 +134,63 @@ function smDelete(options) {
     options = options || {};
     options.method = 'DELETE';
     smRequest(options);
+}
+async function importAesKeyAsync(pem) {
+    const keyData = base64ToUint8Array(pem);
+    const key = await subtle.importKey(
+        'raw',
+        keyData,
+        {
+            name: 'AES-CBC',
+            length: 256
+        },
+        false,
+        ['encrypt', 'decrypt']
+    );
+    return key;
+}
+function generateIv() {
+    return crypto.getRandomValues(new Uint8Array(16));
+}
+async function aesEncryptAsync(plainText, key, iv) {
+    const encryptedBuffer = await subtle.encrypt(
+        {
+            name: 'AES-CBC',
+            iv
+        },
+        key,
+        new TextEncoder().encode(plainText)
+    );
+    const encrypted = arrayBufferToBase64(encryptedBuffer);
+    return encrypted;
+}
+async function aesDecryptAsync(cipherText, key, iv) {
+    const decryptedBuffer = await subtle.decrypt(
+        {
+            name: 'AES-CBC',
+            iv
+        },
+        key,
+        base64ToUint8Array(cipherText)
+    );
+    const decrypted = new TextDecoder().decode(decryptedBuffer);
+    return decrypted;
+}
+function base64ToUint8Array(base64) {
+    const byteString = atob(base64);
+    const bytes = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) {
+        bytes[i] = byteString.charCodeAt(i);
+    }
+    return bytes;
+}
+function arrayBufferToBase64(buffer) {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    for (let i = 0; i < bytes.byteLength; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    return btoa(binary);
 }
 class smDataTemplates {
     static get latest() {
@@ -313,7 +374,7 @@ class smDataTemplates {
         v9.templateVer = 9;
         return v9;
     }
-};
+}
 function makeSmData() {
     return smDataTemplates.latest;
 }
@@ -568,9 +629,15 @@ async function getSiteMetaAsync(forced) {
     }
     return siteMetaCache;
 }
-function decryptPageMeta(pageMeta) {
+async function decryptPageMetaAsync(pageMeta) {
     try {
-        return JSON.parse(CryptoJS.AES.decrypt(pageMeta.encryptedData, CryptoJS.enc.Utf8.parse(aesKey), { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 }).toString(CryptoJS.enc.Utf8));
+        if (!aesKey)
+            aesKey = await importAesKeyAsync(aesKeyValue);
+        const encrypted = pageMeta.encryptedData;
+        const iv = base64ToUint8Array(encrypted.split('.')[0]);
+        const cipher = encrypted.split('.')[1];
+        const dataStr = await aesDecryptAsync(cipher, aesKey, iv);
+        return JSON.parse(dataStr);
     } catch (error) {
         return {};
     }
@@ -585,7 +652,7 @@ async function getPageMetaAsync(forced, pathnameIn) {
             const metaContent = $('meta[name=h2l-embedded-meta]')?.attr('content');
             pageMeta = JSON.parse(decodeURIComponent(metaContent));
             if (typeof pageMeta.encryptedData !== 'undefined' && pageMeta.encryptedData !== null)
-                pageMeta = decryptPageMeta(pageMeta);
+                pageMeta = await decryptPageMetaAsync(pageMeta);
             pageMetaFound = true;
             smLogDebug('在 head 中获取到嵌入的页面元数据：', pageMeta);
             return pageMeta;
@@ -607,7 +674,7 @@ async function getPageMetaAsync(forced, pathnameIn) {
             // 此时 targetPathname 要么以 / 结尾，要么以 .html 结尾。
             // 如果数据是加密的。
             if (typeof item.encryptedData !== 'undefined' && item.encryptedData !== null)
-                item = decryptPageMeta(item);
+                item = await decryptPageMetaAsync(item);
             const decodedPathname = decodeURI(targetPathname);
             if (item.path === removeLangPrefix(decodedPathname).slice(1) || item.path === removeLangPrefix(decodedPathname).slice(1) + 'index.html') {
                 pageMeta = item;
@@ -1053,11 +1120,12 @@ if (debugOn) {
                 smLogWarn('站点元数据空白，无法解密：', decryptedSiteMeta);
                 return decryptedSiteMeta;
             }
-            decryptedSiteMeta.pages = decryptedSiteMeta.pages.map((page) => {
+            decryptedSiteMeta.pages = decryptedSiteMeta.pages.map(async (page) => {
                 if (typeof page.encryptedData !== 'undefined' && page.encryptedData !== null)
-                    page = decryptPageMeta(page);
+                    page = await decryptPageMetaAsync(page);
                 return page;
             });
+            decryptedSiteMeta.pages = await Promise.all(decryptedSiteMeta.pages);
             return decryptedSiteMeta;
         }
         static async getHiddenPagesAsync(forced) {
