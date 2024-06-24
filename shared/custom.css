@@ -391,14 +391,14 @@
     cursor: pointer;
 }
 
-/* 英文下“Data analytics”需 110px 才不折叠。 */
+/* 英文下“Data analytics”需 120px 才不折叠。 */
 .smui-container.smui-container-settings.smui-lang-en .layui-form-label.smui-form-label-sm-setting-data-analytics {
-    width: 110px;
+    width: 120px;
 }
 
-/* 140px 左边距对应上面 110px 宽度。 */
+/* 140px 左边距对应上面 120px 宽度。 */
 .smui-container.smui-container-settings.smui-lang-en .layui-input-block.smui-input-block-sm-setting-data-analytics {
-    margin-left: 140px;
+    margin-left: 150px;
 }
 
 /* 中文下“AI 生成的摘要”需 110px 才不折叠。 */
@@ -437,14 +437,14 @@
     margin-left: 120px;
 }
 
-/* 英文下“Default interaction system”需 160px 才不折叠。 */
+/* 英文下“Default interaction system”需 180px 才不折叠。 */
 .smui-container.smui-container-settings.smui-lang-en .layui-form-label.smui-form-label-sm-setting-default-interaction-system {
-    width: 160px;
+    width: 180px;
 }
 
-/* 190px 左边距对应上面 160px 宽度。 */
+/* 190px 左边距对应上面 180px 宽度。 */
 .smui-container.smui-container-settings.smui-lang-en .layui-input-block.smui-input-block-sm-setting-default-interaction-system {
-    margin-left: 190px;
+    margin-left: 210px;
 }
 
 /* 上面的样式用来根据实际需求覆盖 Layui 样式。 */

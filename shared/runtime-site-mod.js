@@ -1276,7 +1276,7 @@ $(document).ready(() => {
                         </div>
                     </div>
                     `,
-                    area: ['350px', 'auto'],
+                    area: ['360px', 'auto'],
                     closeBtn: 0,
                     shadeClose: false,
                     resize: false,
@@ -1370,7 +1370,7 @@ $(document).ready(() => {
                         </div>
                     </div>
                     `,
-                    area: ['350px', 'auto'],
+                    area: ['360px', 'auto'],
                     closeBtn: 1,
                     shadeClose: true,
                     resize: false,
@@ -1487,7 +1487,7 @@ $(document).ready(() => {
                         </div>
                     </div>
                     `,
-                    area: ['350px', 'auto'],
+                    area: ['360px', 'auto'],
                     closeBtn: 1,
                     shadeClose: true,
                     resize: false,
@@ -1564,7 +1564,7 @@ $(document).ready(() => {
                         </div>
                     </div>
                     `,
-                    area: ['350px', 'auto'],
+                    area: ['360px', 'auto'],
                     closeBtn: 1,
                     shadeClose: true,
                     resize: false,
