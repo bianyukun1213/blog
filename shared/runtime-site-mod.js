@@ -135,28 +135,26 @@ function smDelete(options) {
     options.method = 'DELETE';
     smRequest(options);
 }
-async function importAesKeyAsync(pem) {
-    const keyData = base64ToUint8Array(pem);
+async function importAesKeyAsync(k) {
+    const keyData = base64ToUint8Array(k);
     const key = await subtle.importKey(
         'raw',
         keyData,
-        {
-            name: 'AES-CBC',
-            length: 256
-        },
+        'AES-CTR',
         false,
         ['encrypt', 'decrypt']
     );
     return key;
 }
-function generateIv() {
+function generateCounter() {
     return crypto.getRandomValues(new Uint8Array(16));
 }
-async function aesEncryptAsync(plainText, key, iv) {
+async function aesEncryptAsync(plainText, key, counter) {
     const encryptedBuffer = await subtle.encrypt(
         {
-            name: 'AES-CBC',
-            iv
+            name: 'AES-CTR',
+            counter,
+            length: 64
         },
         key,
         new TextEncoder().encode(plainText)
@@ -164,11 +162,12 @@ async function aesEncryptAsync(plainText, key, iv) {
     const encrypted = arrayBufferToBase64(encryptedBuffer);
     return encrypted;
 }
-async function aesDecryptAsync(cipherText, key, iv) {
+async function aesDecryptAsync(cipherText, key, counter) {
     const decryptedBuffer = await subtle.decrypt(
         {
-            name: 'AES-CBC',
-            iv
+            name: 'AES-CTR',
+            counter,
+            length: 64
         },
         key,
         base64ToUint8Array(cipherText)
@@ -634,9 +633,9 @@ async function decryptPageMetaAsync(pageMeta) {
         if (!aesKey)
             aesKey = await importAesKeyAsync(aesKeyValue);
         const encrypted = pageMeta.encryptedData;
-        const iv = base64ToUint8Array(encrypted.split('.')[0]);
+        const counter = base64ToUint8Array(encrypted.split('.')[0]);
         const cipher = encrypted.split('.')[1];
-        const dataStr = await aesDecryptAsync(cipher, aesKey, iv);
+        const dataStr = await aesDecryptAsync(cipher, aesKey, counter);
         return JSON.parse(dataStr);
     } catch (error) {
         return {};
