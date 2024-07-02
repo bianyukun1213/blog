@@ -421,6 +421,16 @@
     margin-left: 200px;
 }
 
+/* 英文下“Color scheme”需 90px 才不折叠。 */
+.smui-container.smui-container-settings.smui-lang-en .layui-form-label.smui-form-label-sm-setting-color-scheme {
+    width: 90px;
+}
+
+/* 120px 左边距对应上面 90px 宽度。 */
+.smui-container.smui-container-settings.smui-lang-en .layui-input-block.smui-input-block-sm-setting-color-scheme {
+    margin-left: 120px;
+}
+
 /* 英语下隐藏简繁转换设置。 */
 .smui-container.smui-container-settings.smui-lang-en .layui-form-item.smui-form-item-sm-setting-chinese-conversion,
 .smui-container.smui-container-lang-switch.smui-lang-en .smui-button-set-chinese-conversion {
