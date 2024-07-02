@@ -1386,7 +1386,7 @@ $(document).ready(() => {
                         <div class="layui-form" lay-filter="${nameBindings.layFilter}">
                           <div class="layui-form-item">
                             <label class="smui-form-label-${nameBindings.dataAnalytics} layui-form-label">${globalSmI18n.settPopLableDataAnalytics()}
-                              <i class="layui-icon layui-icon-question"></i>
+                              <i class="layui-icon layui-icon-tips"></i>
                             </label>
                             <div class="smui-input-block-${nameBindings.dataAnalytics} layui-input-block">
                               <input type="checkbox" name="${nameBindings.dataAnalytics}" lay-skin="switch" title="${globalSmI18n.settPopSwitchDataAnalytics()}">
@@ -1394,7 +1394,7 @@ $(document).ready(() => {
                           </div>
                           <div class="layui-form-item">
                             <label class="smui-form-label-${nameBindings.aiGeneratedSummary} layui-form-label">${globalSmI18n.settPopLableAiGeneratedSummary()}
-                              <i class="layui-icon layui-icon-question"></i>
+                              <i class="layui-icon layui-icon-tips"></i>
                             </label>
                             <div class="smui-input-block-${nameBindings.aiGeneratedSummary} layui-input-block">
                               <input type="checkbox" name="${nameBindings.aiGeneratedSummary}" lay-skin="switch" title="${globalSmI18n.settPopSwitchAiGeneratedSummary()}">
@@ -1413,7 +1413,7 @@ $(document).ready(() => {
                           <!-- 英文站点下隐藏。 -->
                           <div class="layui-form-item smui-form-item-${nameBindings.chineseConversion}">
                             <label class="smui-form-label-${nameBindings.chineseConversion} layui-form-label">${globalSmI18n.settPopLableChineseConversion()}
-                              <i class="layui-icon layui-icon-question"></i>
+                              <i class="layui-icon layui-icon-tips"></i>
                             </label>
                             <div class="smui-input-block-${nameBindings.chineseConversion} layui-input-block">
                                 <select name="${nameBindings.chineseConversion}">
