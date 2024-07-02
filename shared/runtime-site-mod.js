@@ -783,6 +783,8 @@ function adjustVConsoleSwitchPosition(reset) {
 }
 // 页面加载后再执行的操作：
 function afterPageReady() {
+    // 明暗切换按钮隐藏，不能删掉，用我自己的逻辑。
+    $('.tool-dark-light-toggle').hide();
     // 这种情况是 runtime-light-dark-switch-helper.js 先于 afterPageReady 执行。
     if (typeof h2lLightDarkSwitchModeToggle !== 'undefined')
         switchThemeColorScheme();
