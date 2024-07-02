@@ -496,7 +496,7 @@ class SmI18n {
             isHtml: true
         };
         if (this.isEn()) {
-            let greeting = 'Hello';
+            let greeting = 'Greetings';
             if (typeof referrerKey !== 'undefined' && referrerKey !== '')
                 greeting += `, visitor from “${this.brands(referrerKey)}”`;
             greeting += '! ';
