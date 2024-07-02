@@ -683,6 +683,52 @@ class SmI18n {
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
     }
+    settPopLableColorScheme(postProcessor) {
+        const context = {
+            callerName: this.settPopLableColorScheme.name,
+            args: [],
+            isHtml: false
+        };
+        if (this.isEn()) {
+            return this.#applyPostProcessor('Color scheme', postProcessor, context);
+        }
+        else if (this.isZh()) {
+            return this.#applyPostProcessor('颜色方案', postProcessor, context);
+        }
+        return this.#applyPostProcessor(this.#notTranslated(), false);
+    }
+    settPopSelectOptionColorScheme(key, postProcessor) {
+        const context = {
+            callerName: this.settPopSelectOptionColorScheme.name,
+            args: [key],
+            isHtml: false
+        };
+        if (this.isEn()) {
+            switch (key) {
+                case 'SYSTEM':
+                    return this.#applyPostProcessor('System', postProcessor, context);
+                case 'LIGHT':
+                    return this.#applyPostProcessor('Light', postProcessor, context);
+                case 'DARK':
+                    return this.#applyPostProcessor('Dark', postProcessor, context);
+                default:
+                    return this.#applyPostProcessor(this.#notTranslated(), false);
+            }
+        }
+        else if (this.isZh()) {
+            switch (key) {
+                case 'SYSTEM':
+                    return this.#applyPostProcessor('系统', postProcessor, context);
+                case 'LIGHT':
+                    return this.#applyPostProcessor('亮色', postProcessor, context);
+                case 'DARK':
+                    return this.#applyPostProcessor('暗色', postProcessor, context);
+                default:
+                    return this.#applyPostProcessor(this.#notTranslated(), false);
+            }
+        }
+        return this.#applyPostProcessor(this.#notTranslated(), false);
+    }
     settPopLableChineseConversion(postProcessor) {
         const context = {
             callerName: this.settPopLableChineseConversion.name,

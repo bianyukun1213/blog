@@ -193,7 +193,7 @@ function arrayBufferToBase64(buffer) {
 }
 class smDataTemplates {
     static get latest() {
-        return this.v9;
+        return this.v10;
     }
     static get v1() {
         return {
@@ -373,6 +373,32 @@ class smDataTemplates {
         v9.templateVer = 9;
         return v9;
     }
+    static get v10() {
+        return {
+            templateVer: 10,
+            settings: {
+                doNotTrack: false,
+                showAiGeneratedSummary: true,
+                colorScheme: 'SYSTEM',
+                chineseConversion: 'DISABLED',
+                defaultInteractionSystem: 'COMMENTS'
+            },
+            initialized: false,
+            debug: false,
+            debugVars: {},
+            fediverseSharingPreferences: {
+                software: '',
+                instance: ''
+            }
+        };
+    }
+    static migrateFromV9ToV10(v9) {
+        let v10 = v9;
+        // v10 新增 colorScheme。
+        v10.settings.colorScheme = 'SYSTEM';
+        v10.templateVer = 10;
+        return v10;
+    }
 }
 function makeSmData() {
     return smDataTemplates.latest;
@@ -404,6 +430,10 @@ function migrateSmData(oldSmData) {
         oldSmData = smDataTemplates.migrateFromV6ToV7(oldSmData);
     if (oldSmData.templateVer < 8)
         oldSmData = smDataTemplates.migrateFromV7ToV8(oldSmData);
+    if (oldSmData.templateVer < 9)
+        oldSmData = smDataTemplates.migrateFromV8ToV9(oldSmData);
+    if (oldSmData.templateVer < 10)
+        oldSmData = smDataTemplates.migrateFromV9ToV10(oldSmData);
     return oldSmData;
 }
 // 按最新的数据模板校验。
@@ -419,6 +449,8 @@ function validateSmData(invalidSmData) {
     let invalidSettings = invalidSmData.settings || {};
     validSmData.settings.doNotTrack = invalidSettings.doNotTrack === true || invalidSettings.doNotTrack === 'true' ? true : false;
     validSmData.settings.showAiGeneratedSummary = invalidSettings.showAiGeneratedSummary === false || invalidSettings.showAiGeneratedSummary === 'false' ? false : true;
+    if (invalidSettings.colorScheme === 'SYSTEM' || invalidSettings.colorScheme === 'LIGHT' || invalidSettings.colorScheme === 'DARK')
+        validSmData.settings.colorScheme = invalidSettings.colorScheme;
     if (invalidSettings.chineseConversion === 'DISABLED' || invalidSettings.chineseConversion === 'HK' || invalidSettings.chineseConversion === 'TW')
         validSmData.settings.chineseConversion = invalidSettings.chineseConversion;
     if (invalidSettings.defaultInteractionSystem === 'COMMENTS' || invalidSettings.defaultInteractionSystem === 'WEBMENTIONS')
@@ -736,21 +768,6 @@ async function checkPageRegionBlockAsync(forced) {
         return 'NOT_BLOCKED';
     }
 }
-function getThemeColorScheme() {
-    const redefineStorage = localStorage.getItem('REDEFINE-THEME-STATUS');
-    if (redefineStorage !== null) {
-        if (JSON.parse(redefineStorage).isDark === true)
-            return 'dark';
-        else
-            return 'light';
-    }
-    else {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
-            return 'dark';
-        else
-            return 'light';
-    }
-}
 function adjustVConsoleSwitchPosition(reset) {
     if ($.isEmptyObject(vConsole))
         return;
@@ -766,7 +783,9 @@ function adjustVConsoleSwitchPosition(reset) {
 }
 // 页面加载后再执行的操作：
 function afterPageReady() {
-    // logo-title
+    // 这种情况是 runtime-light-dark-switch-helper.js 先于 afterPageReady 执行。
+    if (typeof h2lLightDarkSwitchModeToggle !== 'undefined')
+        switchThemeColorScheme();
     if (window.location.hostname !== 'his2nd.life')
         $('.logo-title').text('她的备胎') // 非线上版本标识。
     if (typeof converter !== 'undefined') {
@@ -1020,6 +1039,7 @@ const pathname = window.location.pathname;
 const fixedPathname = fixPathname(pathname);
 if (pathname !== fixedPathname)
     window.location.replace(window.location.origin + fixedPathname); // 跳转。
+let isPageReady = false;
 let smLogDebug = () => { };
 const debugOn = getSmData().debug;
 smLogDebug = (...params) => { if (debugOn) console.debug(new Date().toLocaleTimeString() + ' |', ...params); };
@@ -1199,26 +1219,43 @@ try {
 } catch (error) {
     siteMetaCache = {};
 }
-// TODO: 解析 region。
 let userRegionCache = {};
 try {
     userRegionCache = JSON.parse(sessionStorage.getItem('userRegionCache')) || {};
 } catch (error) {
     userRegionCache = {};
 }
-// let themeColorScheme = getThemeColorScheme();
+function getThemeColorScheme() {
+
+    const redefineStorage = localStorage.getItem('REDEFINE-THEME-STATUS');
+    if (redefineStorage !== null) {
+        if (JSON.parse(redefineStorage).isDark === true)
+            return 'dark';
+        else
+            return 'light';
+    }
+    else {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+            return 'dark';
+        else
+            return 'light';
+    }
+}
+function switchThemeColorScheme() {
+    // 实际上 Redefine 的明暗切换机制会修改 body，而此脚本在 body_begin，所以得等页面加载完成再切换。
+    // 问题是 runtime-light-dark-switch-helper 可能后于 afterPageReady 执行，所以得在两个地方：h2lLightDarkSwitchInitialize 和 afterPageReady 分条件执行本函数。
+    let wantedColorScheme = getSmSettings().colorScheme.toLowerCase();
+    // const currentColorScheme = getThemeColorScheme();
+    const systemColorScheme = (!!h2lLightDarkSwitchModeToggle.isDarkPrefersColorScheme().matches) ? 'dark' : 'light';
+    if (wantedColorScheme === 'system')
+        wantedColorScheme = systemColorScheme;
+    // if (currentColorScheme !== wantedColorScheme) // 也需要更新各种第三方组件的明暗，所以这里不能加判断。
+    wantedColorScheme === 'dark' ? h2lLightDarkSwitchModeToggle.enableDarkMode() : h2lLightDarkSwitchModeToggle.enableLightMode();
+    // }
+}
 let themeColorScheme = ''; // 初值设为空，这样首次即能触发 newThemeColorScheme !== themeColorScheme。
 let mastodonTimeline;
-// 轮询检测 local storage 变化，实现 Layui 跟随 Redefine 明暗。
-// 原来用的是监听，实际上比较麻烦，见：
-// https://stackoverflow.com/questions/26974084/listen-for-changes-with-localstorage-on-the-same-window
-// 这种监听对 Mozilla Firefox 无效：Firefox 把 setItem 完全当作键名处理，会在 local storage 中存入名为 setItem 的数据，并且不会触发事件。
-// 可以修改 Storage 的原型解决这个问题：
-// https://stackoverflow.com/questions/49367897/how-to-edit-function-setitem-in-firefox
-// https://stackoverflow.com/questions/13612643/is-it-possible-to-override-local-storage-and-session-storage-separately-in-html5
-// 但仍有缺点：这种方式不会响应 localStorage.xxx = yyy 或 localStorage['xxx'] = yyy 的存储，需要另外的办法，我没整明白。
-// https://stackoverflow.com/questions/33888685/override-dot-notation-for-localstorage
-setInterval(() => {
+function applyComponentColorScheme() {
     let newThemeColorScheme = getThemeColorScheme();
     if (newThemeColorScheme !== themeColorScheme) {
         if (newThemeColorScheme === 'dark')
@@ -1232,9 +1269,33 @@ setInterval(() => {
             vConsole.setOption('theme', newThemeColorScheme);
     }
     themeColorScheme = newThemeColorScheme;
-}, 1000);
+}
+let h2lLightDarkSwitchModeToggle;
+window.h2lLightDarkSwitchInitialize = (ModeToggle) => {
+    const originalEnableDarkMode = ModeToggle.enableDarkMode;
+    ModeToggle.enableDarkMode = new Proxy(originalEnableDarkMode, {
+        apply(target, ctx, args) {
+            Reflect.apply(...arguments);
+            applyComponentColorScheme();
+        }
+    });
+    const originalEnableLightMode = ModeToggle.enableLightMode;
+    ModeToggle.enableLightMode = new Proxy(originalEnableLightMode, {
+        apply(target, ctx, args) {
+            Reflect.apply(...arguments);
+            applyComponentColorScheme();
+        }
+    });
+    if (getSmSettings().colorScheme.toLowerCase() !== 'system')
+        ModeToggle.initModeAutoTrigger = () => { }; // 取消初始化自动切换。
+    h2lLightDarkSwitchModeToggle = ModeToggle;
+    // 如果页面已经加载完成，把 switchThemeColorScheme 补上。
+    if (isPageReady)
+        switchThemeColorScheme();
+};
 // 监听页面加载完成事件。
 $(document).ready(() => {
+    isPageReady = true;
     afterPageReady();
     layui.use(() => {
         const layer = layui.layer;
@@ -1311,6 +1372,7 @@ $(document).ready(() => {
                     layFilter: 'sm-settings',
                     dataAnalytics: 'sm-setting-data-analytics',
                     aiGeneratedSummary: 'sm-setting-ai-generated-summary',
+                    colorScheme: 'sm-setting-color-scheme',
                     chineseConversion: 'sm-setting-chinese-conversion',
                     defaultInteractionSystem: 'sm-setting-default-interaction-system'
                 };
@@ -1336,6 +1398,17 @@ $(document).ready(() => {
                               <input type="checkbox" name="${nameBindings.aiGeneratedSummary}" lay-skin="switch" title="${globalSmI18n.settPopSwitchAiGeneratedSummary()}">
                             </div>
                           </div>
+                          <div class="layui-form-item">
+                            <label class="smui-form-label-${nameBindings.colorScheme} layui-form-label">${globalSmI18n.settPopLableColorScheme()}</label>
+                            <div class="smui-input-block-${nameBindings.colorScheme} layui-input-block">
+                                <select name="${nameBindings.colorScheme}">
+                                    <option value="SYSTEM">${globalSmI18n.settPopSelectOptionColorScheme('SYSTEM')}</option>
+                                    <option value="LIGHT">${globalSmI18n.settPopSelectOptionColorScheme('LIGHT')}</option>
+                                    <option value="DARK">${globalSmI18n.settPopSelectOptionColorScheme('DARK')}</option>
+                                </select>
+                            </div>
+                          </div>
+                          <!-- 英文站点下隐藏。 -->
                           <div class="layui-form-item smui-form-item-${nameBindings.chineseConversion}">
                             <label class="smui-form-label-${nameBindings.chineseConversion} layui-form-label">${globalSmI18n.settPopLableChineseConversion()}
                               <i class="layui-icon layui-icon-question"></i>
@@ -1348,6 +1421,7 @@ $(document).ready(() => {
                                 </select>
                             </div>
                           </div>
+                          <!-- 英文站点下隐藏。 -->
                           <div class="layui-form-item">
                             <label class="smui-form-label-${nameBindings.defaultInteractionSystem} layui-form-label">${globalSmI18n.settPopLableDefaultInteractionSystem()}</label>
                             <div class="smui-input-block-${nameBindings.defaultInteractionSystem} layui-input-block">
@@ -1384,6 +1458,7 @@ $(document).ready(() => {
                             $(layero).find(`input[name="${nameBindings.dataAnalytics}"]`).attr('checked', '');
                         if (settingsRead.showAiGeneratedSummary)
                             $(layero).find(`input[name="${nameBindings.aiGeneratedSummary}"]`).attr('checked', '');
+                        $(layero).find(`select[name="${nameBindings.colorScheme}"] option[value="${settingsRead.colorScheme}"]`).attr('selected', '');
                         $(layero).find(`select[name="${nameBindings.chineseConversion}"] option[value="${settingsRead.chineseConversion}"]`).attr('selected', '');
                         $(layero).find(`select[name="${nameBindings.defaultInteractionSystem}"] option[value="${settingsRead.defaultInteractionSystem}"]`).attr('selected', '');
                         // 动态生成的控件需要调用 render 渲染。它实际上是根据原生组件生成了一个美化的。设置好值后再渲染。
@@ -1436,6 +1511,7 @@ $(document).ready(() => {
                                 // doNotTrack 和“数据分析”是反的。
                                 settingsToWrite.doNotTrack = userOptions[nameBindings.dataAnalytics] === 'on' ? false : true;
                                 settingsToWrite.showAiGeneratedSummary = userOptions[nameBindings.aiGeneratedSummary] === 'on' ? true : false;
+                                settingsToWrite.colorScheme = userOptions[nameBindings.colorScheme];
                                 settingsToWrite.chineseConversion = userOptions[nameBindings.chineseConversion];
                                 settingsToWrite.defaultInteractionSystem = userOptions[nameBindings.defaultInteractionSystem];
                                 setSmSettings(settingsToWrite);
