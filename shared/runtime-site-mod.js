@@ -1247,7 +1247,7 @@ function switchThemeColorScheme() {
     // 实际上 Redefine 的明暗切换机制会修改 body，而此脚本在 body_begin，所以得等页面加载完成再切换。
     // 问题是 runtime-light-dark-switch-helper 可能后于 afterPageReady 执行，所以得在两个地方：h2lLightDarkSwitchInitialize 和 afterPageReady 分条件执行本函数。
     let wantedColorScheme = getSmSettings().colorScheme.toLowerCase();
-    // const currentColorScheme = getThemeColorScheme();
+    const currentColorScheme = getThemeColorScheme();
     const systemColorScheme = (!!h2lLightDarkSwitchModeToggle.isDarkPrefersColorScheme().matches) ? 'dark' : 'light';
     if (wantedColorScheme === 'system')
         wantedColorScheme = systemColorScheme;
