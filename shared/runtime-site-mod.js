@@ -1251,9 +1251,10 @@ function switchThemeColorScheme() {
     const systemColorScheme = (!!h2lLightDarkSwitchModeToggle.isDarkPrefersColorScheme().matches) ? 'dark' : 'light';
     if (wantedColorScheme === 'system')
         wantedColorScheme = systemColorScheme;
-    // if (currentColorScheme !== wantedColorScheme) // 也需要更新各种第三方组件的明暗，所以这里不能加判断。
-    wantedColorScheme === 'dark' ? h2lLightDarkSwitchModeToggle.enableDarkMode() : h2lLightDarkSwitchModeToggle.enableLightMode();
-    // }
+    if (currentColorScheme !== wantedColorScheme)
+        wantedColorScheme === 'dark' ? h2lLightDarkSwitchModeToggle.enableDarkMode() : h2lLightDarkSwitchModeToggle.enableLightMode();
+    else
+        applyComponentColorScheme();
 }
 let themeColorScheme = ''; // 初值设为空，这样首次即能触发 newThemeColorScheme !== themeColorScheme。
 let mastodonTimeline;
