@@ -156,7 +156,7 @@ class SmI18n {
             isHtml: true
         };
         if (this.isEn()) {
-            let mainTip = '<p>If you have written a <a href="https://indieweb.org/responses" rel="noopener external nofollow noreferrer" target="_blank">response</a> to this article, you can submit your article URL here to send me a <a href="https://indieweb.org/Webmention" rel="noopener external nofollow noreferrer" target="_blank">Webmention</a>.';
+            let mainTip = '<p>If you have written a <a href="https://indieweb.org/responses" rel="noopener external nofollow noreferrer" target="_blank">response</a> to this post, you can submit your response URL here to send me a <a href="https://indieweb.org/Webmention" rel="noopener external nofollow noreferrer" target="_blank">Webmention</a>.';
             if (Array.isArray(syndications) && syndications.length !== 0) {
                 let syndicationsTip = 'In addition to this, you can also try responding directly to the following <a href="https://indieweb.org/Category:syndication" rel="noopener external nofollow noreferrer" target="_blank">syndication(s)</a> and wait for the data to be pulled: ';
                 const syndicationsLength = syndications.length;
@@ -194,10 +194,10 @@ class SmI18n {
             isHtml: false
         };
         if (this.isEn()) {
-            return this.#applyPostProcessor('https://your-website.com/some-post.html', postProcessor, context);
+            return this.#applyPostProcessor('https://your-website.com/some-response.html', postProcessor, context);
         }
         else if (this.isZh()) {
-            return this.#applyPostProcessor('https://your-website.com/some-post.html', postProcessor, context);
+            return this.#applyPostProcessor('https://your-website.com/some-response.html', postProcessor, context);
         }
         return this.#applyPostProcessor(this.#notTranslated(), false);
     }
