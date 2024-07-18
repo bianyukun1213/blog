@@ -135,6 +135,30 @@ function smDelete(options) {
     options.method = 'DELETE';
     smRequest(options);
 }
+// https://moyuscript.github.io/MoyuScript/2024/04/17/handle-unicode-in-js/
+class UnicodeUtils {
+    // 按 Unicode 码位分割
+    static split(str) {
+        const arr = [];
+        let index = 0;
+        while (index < str.length) {
+            const codePoint = str.codePointAt(index);
+            let char = str[index];
+            // 如果 codePoint >= 0x10000，说明是两个码元的字符
+            if (codePoint >= 0x10000)
+                char += str[index + 1];
+            index += char.length;
+            arr.push(char);
+        }
+        return arr;
+    }
+    static count(str) {
+        return this.split(str).length;
+    }
+    static slice(str, start, end) {
+        return this.split(str).slice(start, end).join('');
+    }
+}
 async function importAesKeyAsync(k) {
     const keyData = base64ToUint8Array(k);
     const key = await subtle.importKey(
@@ -1661,7 +1685,7 @@ $(document).ready(() => {
                             sharingText += (postContent + '\n\n');
                         const limit = 75;
                         if (sharingText.length > limit) // 字数多了的话，m.cmx.im 会 502。
-                            sharingText = sharingText.substring(0, limit - 1).trim() + '…\n\n';
+                            sharingText = UnicodeUtils.slice(sharingText, 0, limit).trim() + '…\n\n';
                         sharingText += `${globalSmI18n.fediverseSharingPopPostUrl()}${postUrl}`;
                         const encodedPostTitle = encodeURIComponent(postTitle);
                         const encodedPostExcerpt = encodeURIComponent(postExcerpt);
