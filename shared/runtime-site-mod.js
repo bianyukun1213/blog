@@ -1363,7 +1363,8 @@ $(document).ready(() => {
                         </div>
                     </div>
                     `,
-                    area: ['360px', 'auto'],
+                    area: '360px',
+                    maxHeight: 600,
                     closeBtn: 0,
                     shadeClose: false,
                     resize: false,
@@ -1470,7 +1471,8 @@ $(document).ready(() => {
                         </div>
                     </div>
                     `,
-                    area: ['360px', 'auto'],
+                    area: '360px',
+                    maxHeight: 600,
                     closeBtn: 1,
                     shadeClose: true,
                     resize: false,
@@ -1589,7 +1591,8 @@ $(document).ready(() => {
                         </div>
                     </div>
                     `,
-                    area: ['360px', 'auto'],
+                    area: '360px',
+                    maxHeight: 600,
                     closeBtn: 1,
                     shadeClose: true,
                     resize: false,
@@ -1666,7 +1669,8 @@ $(document).ready(() => {
                         </div>
                     </div>
                     `,
-                    area: ['360px', 'auto'],
+                    area: '360px',
+                    maxHeight: 600,
                     closeBtn: 1,
                     shadeClose: true,
                     resize: false,

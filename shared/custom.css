@@ -379,9 +379,10 @@
     color: var(--lay-color-text-1, var(--selection-color)) !important;
 }
 
-/* 由右对齐改为左对齐。 */
+/* 由右对齐改为左对齐，取消左侧外边距以对齐标题。 */
 .smui-container .layui-form-label {
     text-align: left;
+    padding-left: 0;
 }
 
 /* 此处有点击事件。 */
@@ -658,16 +659,30 @@ div.main-content.region-block-hidden {
 
 .smui-container {
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 32px);
 }
 
 .smui-content {
-    margin: 0;
-    margin-bottom: 16px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: auto;
 }
 
 .smui-content p {
     margin: 0;
     margin-bottom: 16px;
+}
+
+.smui-content a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.smui-func {
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .smui-func hr {
