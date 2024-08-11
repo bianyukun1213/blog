@@ -116,7 +116,7 @@ class SmI18n {
                 default: 'Misskey'
             },
             BING: {
-                zh: '',
+                zh: '必应',
                 en: 'Bing'
             },
             BAIDU: {
