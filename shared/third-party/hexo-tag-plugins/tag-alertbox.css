@@ -1,26 +1,23 @@
 .alertbox {
-  padding: 16px;
-  margin: 16px 0;
-  /* font-size: 16px;
-  line-height: 24px; */
+  padding: 1rem;
+  margin: 1rem 0;
   background-color: gray;
 }
 
-/* 增加权重，覆盖主题样式。 */
 .alertbox p:first-of-type {
   padding: 0;
   margin: 0;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .alertbox p:first-of-type::before {
-  margin-right: 16px;
+  margin-inline-end: 1rem;
   font-weight: bold;
 }
 
 .alertbox.alertbox-danger {
-  border-left: 4px #e22500 solid;
+  border-inline-start: 4px #e22500 solid;
   background-color: rgba(226, 37, 0, 0.2);
 }
 
@@ -30,7 +27,7 @@
 }
 
 .alertbox.alertbox-warning {
-  border-left: 4px #fc0 solid;
+  border-inline-start: 4px #fc0 solid;
   background-color: rgba(255,204,0,0.2);
 }
 
@@ -40,7 +37,7 @@
 }
 
 .alertbox.alertbox-info {
-  border-left: 4px #0088e0 solid;
+  border-inline-start: 4px #0088e0 solid;
   background-color: rgba(0,136,224,0.2);
 }
 

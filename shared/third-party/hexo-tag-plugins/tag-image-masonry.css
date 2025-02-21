@@ -1,4 +1,5 @@
-/* 增加权重，覆盖主题样式。 */
-.image-masonry .image-masonry-img-wrapper .image-masonry-img {
+/* 覆盖主题样式。 */
+.image-masonry figure {
     margin: 0;
+    max-width: 100%;
 }
