@@ -74,3 +74,14 @@ noscript#javascript-alert p::after {
 #tide-main-content.region-block-hidden {
     display: none;
 }
+
+#travelling-link {
+    display: inline-block;
+    width: 8rem;
+    max-width: 100%;
+    margin-top: 1rem;
+}
+
+#travelling-logo {
+    vertical-align: bottom;
+}
