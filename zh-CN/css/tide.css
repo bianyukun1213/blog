@@ -151,6 +151,7 @@ html[data-tide-color-scheme="dark"] {
 html {
     /* 要与 unocss（tailwind 4.0？）主题配置同步。 */
     --tide-unocss-spacing: 0.25rem;
+    --tide-item-description-marker: "：";
     --tide-font-global: 'Noto Sans', 'Noto Sans SC', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, sans-serif;
     --tide-font-site-title: 'Noto Sans', 'Noto Sans SC', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, sans-serif;
     --tide-font-site-subtitle: 'Ma Shan Zheng', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
@@ -179,18 +180,22 @@ button {
 
 body {
     font-family: var(--tide-font-global);
+    /* @apply un-font-(family-name:--tide-font-global); */
 }
 
 #tide-site-title {
     font-family: var(--tide-font-site-title);
+    /* @apply un-font-(family-name:--tide-font-site-title); */
 }
 
 #tide-site-subtitle {
     font-family: var(--tide-font-site-subtitle);
+    /* @apply un-font-(family-name:--tide-font-site-subtitle); */
 }
 
 .un-prose {
     font-family: var(--tide-font-prose) !important;
+    /* @apply un-font-(family-name:--tide-font-prose)!; */
 }
 
 /* [un-prose] code:not(.not-prose) {
@@ -211,10 +216,6 @@ input:focus,
 select:focus:focus,
 textarea:focus {outline-width:2px;outline-color:var(--tide-color-focused-outline);outline-offset:2px;outline-style:solid;
 }
-
-/* .tide-paginator {
-    @apply un-text-lg;
-} */
 
 .tide-paginator span {display:inline-block;margin-left:0.5rem;margin-right:0.5rem;color:var(--tide-color-text-secondary);
 }
@@ -248,8 +249,7 @@ textarea:focus {outline-width:2px;outline-color:var(--tide-color-focused-outline
 .tide-toc-link:hover {font-weight:700;
 }
 
-#tide-search-box::-webkit-search-cancel-button {
-    display: none;
+#tide-search-box::-webkit-search-cancel-button {display:none;
 }
 
 #tide-search-result-list {margin:0;padding:0;
@@ -291,7 +291,7 @@ textarea:focus {outline-width:2px;outline-color:var(--tide-color-focused-outline
 .tide-category-link:hover,.tide-tag-link:hover{-webkit-text-decoration-color:currentColor;text-decoration-color:currentColor;}
 
 .tide-category-count::before,
-.tide-tag-count::before {content:'·';
+.tide-tag-count::before {content:var(--tide-item-description-marker);
 }
 
 /* 插件样式修复 */
@@ -496,7 +496,7 @@ textarea:focus {outline-width:2px;outline-color:var(--tide-color-focused-outline
 
 .un-bottom-1\/5{bottom:20%;}
 
-.un-bottom-4{bottom:1rem;}
+.un-bottom-16{bottom:4rem;}
 
 .un-left-1\/2{left:50%;}
 
@@ -840,8 +840,7 @@ textarea:focus {outline-width:2px;outline-color:var(--tide-color-focused-outline
 }
 
 @starting-style {
-    .tide-dialog[open] {
-        opacity: 0;
+    .tide-dialog[open] {opacity:0;
     }
 
     [dir="ltr"] .tide-dialog[open] .tide-side-panel {
