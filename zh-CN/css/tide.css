@@ -151,7 +151,7 @@ html[data-tide-color-scheme="dark"] {
 html {
     /* 要与 unocss（tailwind 4.0？）主题配置同步。 */
     --tide-unocss-spacing: 0.25rem;
-    --tide-item-description-marker: "：";
+    --tide-description-marker: "：";
     --tide-font-global: 'Noto Sans', 'Noto Sans SC', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, sans-serif;
     --tide-font-site-title: 'Noto Sans', 'Noto Sans SC', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, sans-serif;
     --tide-font-site-subtitle: 'Ma Shan Zheng', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
@@ -291,7 +291,7 @@ textarea:focus {outline-width:2px;outline-color:var(--tide-color-focused-outline
 .tide-category-link:hover,.tide-tag-link:hover{-webkit-text-decoration-color:currentColor;text-decoration-color:currentColor;}
 
 .tide-category-count::before,
-.tide-tag-count::before {content:var(--tide-item-description-marker);
+.tide-tag-count::before {content:var(--tide-description-marker);
 }
 
 /* 插件样式修复 */
