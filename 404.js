@@ -55,7 +55,7 @@ function updatePossibleLinkTip() {
             document.getElementById('possible-links').appendChild(li);
         }
         const li = document.createElement('li');
-        li.innerHTML = `<a href="/">${lang === 'zh-CN' ? '返回首页' : 'Return to the index page'}</a>`;
+        li.innerHTML = `<a id="go-home" href="/">${lang === 'zh-CN' ? '返回首页' : 'Return to the index page'}</a>`;
         document.getElementById('possible-links').appendChild(li);
     }
     else {

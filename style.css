@@ -1,0 +1,189 @@
+@media (prefers-color-scheme: no-preference) or (prefers-color-scheme: light) {
+    html {
+        color-scheme: light;
+        --tide-background-size-side-bar: cover;
+        --tide-background-position-side-bar: bottom;
+        --tide-background-repeat-side-bar: no-repeat;
+        --tide-background-attachment-side-bar: local;
+        --tide-color-primary: #1F5297;
+        --tide-color-secondary: #0A97B0;
+        --tide-color-background-primary: #FFFFFF;
+        --tide-color-background-secondary: #F1F1F1;
+        --tide-color-background-side-bar: #1F5297;
+        --tide-color-text-primary: #323739;
+        --tide-color-text-secondary: #5C6669;
+        --tide-color-text-diminished: #EAECED;
+        --tide-color-text-side-bar: #FFFFFF;
+        --tide-color-focused-outline: #E36209;
+        --tide-color-link: #1F5297;
+        --tide-color-link-hover: #1F5297;
+        --tide-color-link-visited: #0A97B0;
+        --tide-color-code-inline: #1F5297;
+        --tide-color-table-border: #E5E7EB;
+        --tide-color-table-background-head: #F1F1F1;
+        --tide-color-table-background-even: #F5F5F5;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html {
+        color-scheme: dark;
+        --tide-background-size-side-bar: cover;
+        --tide-background-position-side-bar: bottom;
+        --tide-background-repeat-side-bar: no-repeat;
+        --tide-background-attachment-side-bar: local;
+        --tide-color-primary: #CCCCCC;
+        --tide-color-secondary: #00ADB5;
+        --tide-color-background-primary: #151515;
+        --tide-color-background-secondary: #262626;
+        --tide-color-background-side-bar: #151515;
+        --tide-color-text-primary: #CCCCCC;
+        --tide-color-text-secondary: #8C8C8C;
+        --tide-color-text-diminished: #262626;
+        --tide-color-text-side-bar: #CCCCCC;
+        --tide-color-focused-outline: #E36209;
+        --tide-color-link: #F26B6B;
+        --tide-color-link-hover: #F26B6B;
+        --tide-color-link-visited: #A0153E;
+        --tide-color-code-inline: #CCCCCC;
+        --tide-color-table-border: #262626;
+        --tide-color-table-background-head: #202020;
+        --tide-color-table-background-even: #191919;
+    }
+}
+
+html[data-color-scheme="light"] {
+    color-scheme: light;
+    --tide-background-size-side-bar: cover;
+    --tide-background-position-side-bar: bottom;
+    --tide-background-repeat-side-bar: no-repeat;
+    --tide-background-attachment-side-bar: local;
+    --tide-color-primary: #1F5297;
+    --tide-color-secondary: #0A97B0;
+    --tide-color-background-primary: #FFFFFF;
+    --tide-color-background-secondary: #F1F1F1;
+    --tide-color-background-side-bar: #1F5297;
+    --tide-color-text-primary: #323739;
+    --tide-color-text-secondary: #5C6669;
+    --tide-color-text-diminished: #EAECED;
+    --tide-color-text-side-bar: #FFFFFF;
+    --tide-color-focused-outline: #E36209;
+    --tide-color-link: #1F5297;
+    --tide-color-link-hover: #1F5297;
+    --tide-color-link-visited: #0A97B0;
+    --tide-color-code-inline: #1F5297;
+    --tide-color-table-border: #E5E7EB;
+    --tide-color-table-background-head: #F1F1F1;
+    --tide-color-table-background-even: #F5F5F5;
+}
+
+html[data-color-scheme="dark"] {
+    color-scheme: dark;
+    --tide-background-size-side-bar: cover;
+    --tide-background-position-side-bar: bottom;
+    --tide-background-repeat-side-bar: no-repeat;
+    --tide-background-attachment-side-bar: local;
+    --tide-color-primary: #CCCCCC;
+    --tide-color-secondary: #00ADB5;
+    --tide-color-background-primary: #151515;
+    --tide-color-background-secondary: #262626;
+    --tide-color-background-side-bar: #151515;
+    --tide-color-text-primary: #CCCCCC;
+    --tide-color-text-secondary: #8C8C8C;
+    --tide-color-text-diminished: #262626;
+    --tide-color-text-side-bar: #CCCCCC;
+    --tide-color-focused-outline: #E36209;
+    --tide-color-link: #F26B6B;
+    --tide-color-link-hover: #F26B6B;
+    --tide-color-link-visited: #A0153E;
+    --tide-color-code-inline: #CCCCCC;
+    --tide-color-table-border: #262626;
+    --tide-color-table-background-head: #202020;
+    --tide-color-table-background-even: #191919;
+}
+
+body {
+    color: var(--tide-color-text-primary);
+    background-color: var(--tide-color-background-primary);
+}
+
+a {
+    color: var(--tide-color-link);
+    text-decoration-line: underline;
+}
+
+a:hover {
+    text-underline-offset: 4px;
+}
+
+.indieweb-webring,
+#go-home {
+    color: var(--tide-color-text-secondary);
+    text-decoration: none;
+}
+
+#go-home {
+    font-size: initial;
+}
+
+.indieweb-webring:hover,
+#go-home:hover {
+    text-decoration-line: underline;
+}
+
+#content-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    text-align: center;
+}
+
+#site-title,
+#not-found-title {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    text-align: center;
+}
+
+.h-card {
+    display: none;
+}
+
+#jump-tip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    text-align: center;
+}
+
+#site-list,
+#possible-links {
+    padding: 0;
+    list-style: none;
+    font-size: 1.25rem;
+}
+
+#site-list li,
+#possible-links li {
+    margin-bottom: 1rem;
+}
+
+#footer {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    text-align: center;
+}
+
+#travelling-logo {
+    vertical-align: bottom;
+}
