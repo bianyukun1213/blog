@@ -1,16 +1,13 @@
+document.documentElement.lang = currentLang;
+document.documentElement.dir = content[currentLang]['404'].dir;
+updatePageTitle();
+updateHead();
+updatePossibleLinkTip();
 function updateHead() {
-    const lang = document.getElementsByTagName('html')[0].lang;
-    if (lang === 'zh-CN')
-        document.querySelector('meta[name="description"]').setAttribute('content', '他的第二人生的 404 页面。你看到此页面是因为你请求的页面不存在。');
-    else
-        document.querySelector('meta[name="description"]').setAttribute('content', 'This is the 404 page of His 2nd Life. You are seeing this because the page you requested cannot be found.');
+    document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang]['404'].description);
 }
 function updatePageTitle() {
-    const lang = document.getElementsByTagName('html')[0].lang;
-    if (lang === 'zh-CN')
-        document.getElementById('not-found-title').innerText = document.title = '页面不存在 :(';
-    else
-        document.getElementById('not-found-title').innerText = document.title = 'Page Not Found :(';
+    document.getElementById('not-found-title').innerText = document.title = content[currentLang]['404'].title;
 }
 function updatePossibleLinkTip() {
     let excluded = [];
@@ -45,36 +42,20 @@ function updatePossibleLinkTip() {
             possibleLinks.push(possibleLinkEn);
     }
     if (possibleLinks.length > 0) {
-        if (lang === 'zh-CN')
-            document.getElementById('possible-link-tip').innerText = '您还可以尝试访问以下可能的链接，或返回首页：';
-        else
-            document.getElementById('possible-link-tip').innerText = 'You can also try visiting the following possible link(s), or return to the index page:';
+        document.getElementById('possible-link-tip').innerText = content[currentLang]['404'].possibleLinkTip;
         for (const possibleLink of possibleLinks) {
             const li = document.createElement('li');
             li.innerHTML = `<a href="${possibleLink}?excluded=${encodeURIComponent(JSON.stringify(excluded))}">${possibleLink}</a>`;
             document.getElementById('possible-links').appendChild(li);
         }
         const li = document.createElement('li');
-        li.innerHTML = `<a id="go-home" href="/">${lang === 'zh-CN' ? '返回首页' : 'Return to the index page'}</a>`;
+        li.innerHTML = `<a id="go-home" href="/">${content[currentLang]['404'].goHome}</a>`;
         document.getElementById('possible-links').appendChild(li);
     }
     else {
-        if (lang === 'zh-CN')
-            document.getElementById('possible-link-tip').innerText = '回去选择站点：';
-        else
-            document.getElementById('possible-link-tip').innerText = 'Go back and select a site:';
+        document.getElementById('possible-link-tip').innerText = content[currentLang]['404'].possibleLinkTipNoLinkAvailable;
         const li = document.createElement('li');
-        li.innerHTML = `<a href="/">${lang === 'zh-CN' ? '咱们走！' : 'Let’s go!'}</a>`;
+        li.innerHTML = `<a id="go-home" href="/">${content[currentLang]['404'].goHomeNoLinkAvailable}</a>`;
         document.getElementById('possible-links').appendChild(li);
     }
 }
-let lang = '';
-if (navigator.language.startsWith('zh'))
-    // if (true)
-    lang = 'zh-CN';
-else
-    lang = 'en';
-document.getElementsByTagName('html')[0].lang = lang;
-updatePageTitle();
-updateHead();
-updatePossibleLinkTip();
