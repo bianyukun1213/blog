@@ -1,9 +1,9 @@
 document.documentElement.lang = currentLang;
 document.documentElement.dir = content[currentLang].dir;
+setColorScheme();
 updatePageTitle();
 updateHead();
 updatePossibleLinkTip();
-setColorScheme();
 function updateHead() {
     document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang]['404'].description);
 }

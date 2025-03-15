@@ -1,8 +1,8 @@
 document.documentElement.lang = currentLang;
 document.documentElement.dir = content[currentLang].dir;
+setColorScheme();
 updatePageTitle();
 updateHead();
-setColorScheme();
 if (document.referrer !== '') {
     let hrefZhCn = document.getElementById('link-zh-cn').getAttribute('href');
     hrefZhCn += '?referrer=' + encodeURIComponent(document.referrer);
