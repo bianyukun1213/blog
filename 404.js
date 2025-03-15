@@ -1,5 +1,5 @@
 document.documentElement.lang = currentLang;
-document.documentElement.dir = content[currentLang]['404'].dir;
+document.documentElement.dir = content[currentLang].dir;
 updatePageTitle();
 updateHead();
 updatePossibleLinkTip();

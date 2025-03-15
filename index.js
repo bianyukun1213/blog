@@ -1,5 +1,5 @@
 document.documentElement.lang = currentLang;
-document.documentElement.dir = content[currentLang].index.dir;
+document.documentElement.dir = content[currentLang].dir;
 updatePageTitle();
 updateHead();
 setColorScheme();
