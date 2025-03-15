@@ -52,7 +52,7 @@
     }
 }
 
-html[data-color-scheme="light"] {
+html[data-tide-color-scheme="light"] {
     color-scheme: light;
     --tide-background-size-side-bar: cover;
     --tide-background-position-side-bar: bottom;
@@ -77,7 +77,7 @@ html[data-color-scheme="light"] {
     --tide-color-table-background-even: #F5F5F5;
 }
 
-html[data-color-scheme="dark"] {
+html[data-tide-color-scheme="dark"] {
     color-scheme: dark;
     --tide-background-size-side-bar: cover;
     --tide-background-position-side-bar: bottom;

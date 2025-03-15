@@ -2,6 +2,7 @@ document.documentElement.lang = currentLang;
 document.documentElement.dir = content[currentLang].index.dir;
 updatePageTitle();
 updateHead();
+setColorScheme();
 if (document.referrer !== '') {
     let hrefZhCn = document.getElementById('link-zh-cn').getAttribute('href');
     hrefZhCn += '?referrer=' + encodeURIComponent(document.referrer);
@@ -22,6 +23,18 @@ if (new URLSearchParams(window.location.search).get('noAutoJump') !== 'true') {
         }
         updateTip(secondsRemain--);
     }, 1000);
+}
+function setColorScheme() {
+    let tideSettings = localStorage.getItem('tide_settings') || '{}';
+    try {
+        tideSettings = JSON.parse(tideSettings);
+    } catch (error) {
+        tideSettings = {};
+    }
+    if (tideSettings.colorScheme === 'LIGHT')
+        document.documentElement.setAttribute('data-tide-color-scheme', 'light');
+    else if (tideSettings.colorScheme === 'DARK')
+        document.documentElement.setAttribute('data-tide-color-scheme', 'dark');
 }
 function updateHead() {
     document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang].index.description);

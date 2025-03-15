@@ -3,6 +3,7 @@ document.documentElement.dir = content[currentLang]['404'].dir;
 updatePageTitle();
 updateHead();
 updatePossibleLinkTip();
+setColorScheme();
 function updateHead() {
     document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang]['404'].description);
 }
@@ -58,4 +59,16 @@ function updatePossibleLinkTip() {
         li.innerHTML = `<a id="go-home" href="/">${content[currentLang]['404'].goHomeNoLinkAvailable}</a>`;
         document.getElementById('possible-links').appendChild(li);
     }
+}
+function setColorScheme() {
+    let tideSettings = localStorage.getItem('tide_settings') || '{}';
+    try {
+        tideSettings = JSON.parse(tideSettings);
+    } catch (error) {
+        tideSettings = {};
+    }
+    if (tideSettings.colorScheme === 'LIGHT')
+        document.documentElement.setAttribute('data-tide-color-scheme', 'light');
+    else if (tideSettings.colorScheme === 'DARK')
+        document.documentElement.setAttribute('data-tide-color-scheme', 'dark');
 }
