@@ -153,7 +153,7 @@ html {
     --tide-unocss-spacing: 0.25rem;
     --tide-description-marker: ": ";
     --tide-font-global: 'Noto Sans', 'Noto Sans SC', 'Noto Sans CJK SC', system-ui, sans-serif;
-    --tide-font-site-title: 'Noto Sans', 'Noto Sans SC', 'Noto Sans CJK SC', system-ui, sans-serif;
+    --tide-font-site-title: 'Noto Serif', Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif, 'Noto Sans SC';
     --tide-font-site-subtitle: Caveat, 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive, 'Noto Sans SC';
     --tide-font-prose: 'Noto Serif', Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif, 'Noto Sans SC';
     /* --tide-font-code: <TIDE_FONT_CODE>; */
