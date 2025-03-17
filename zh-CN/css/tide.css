@@ -152,10 +152,10 @@ html {
     /* 要与 unocss（tailwind 4.0？）主题配置同步。 */
     --tide-unocss-spacing: 0.25rem;
     --tide-description-marker: "：";
-    --tide-font-global: 'Noto Sans', 'Noto Sans SC', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, sans-serif;
-    --tide-font-site-title: 'Noto Sans', 'Noto Sans SC', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, sans-serif;
+    --tide-font-global: 'Noto Sans', 'Noto Sans SC', 'Noto Sans CJK SC', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, sans-serif;
+    --tide-font-site-title: 'Noto Sans', 'Noto Sans SC', 'Noto Sans CJK SC', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, sans-serif;
     --tide-font-site-subtitle: 'Ma Shan Zheng', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
-    --tide-font-prose: 'Noto Serif', 'Noto Serif SC', Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+    --tide-font-prose: 'Noto Serif', 'Noto Serif SC', 'Noto Serif CJK SC', Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
     /* --tide-font-code: <TIDE_FONT_CODE>; */
     /* --tide-font-global: 'Noto Serif SC', serif; */
 }

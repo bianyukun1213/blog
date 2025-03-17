@@ -105,6 +105,7 @@ html[data-tide-color-scheme="dark"] {
 body {
     color: var(--tide-color-text-primary);
     background-color: var(--tide-color-background-primary);
+    font-family: 'Noto Sans', 'Noto Sans SC', 'Noto Sans CJK SC', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, sans-serif;
 }
 
 a {
@@ -148,6 +149,9 @@ a:hover {
     transform: translate(-50%, -50%);
     width: 100vw;
     text-align: center;
+    font-family: 'Noto Serif', 'Noto Serif SC', 'Noto Serif CJK SC', Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+    font-weight: 700;
+    color: var(--tide-color-primary);
 }
 
 .h-card {
