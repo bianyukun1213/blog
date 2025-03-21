@@ -108,6 +108,20 @@ body {
     font-family: 'Noto Sans', 'Noto Sans SC', 'Noto Sans CJK SC', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, sans-serif;
 }
 
+[tabindex]:not([tabindex="-1"]):focus,
+a:focus,
+.icon-wrapper:has(a:focus),
+button:focus,
+input:focus,
+select:focus:focus,
+textarea:focus,
+summary:focus {
+    outline-width: 2px;
+    outline-color: var(--tide-color-focused-outline) !important;
+    outline-offset: 2px;
+    outline-style: solid;
+}
+
 a {
     color: var(--tide-color-link);
     text-decoration-line: underline;
