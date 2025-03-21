@@ -1,5 +1,5 @@
 @media (prefers-color-scheme: no-preference) or (prefers-color-scheme: light) {
-    html {
+    :root {
         color-scheme: light;
         --tide-background-size-side-bar: cover;
         --tide-background-position-side-bar: bottom;
@@ -26,7 +26,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    html {
+    :root {
         color-scheme: dark;
         --tide-background-size-side-bar: cover;
         --tide-background-position-side-bar: bottom;
@@ -52,7 +52,7 @@
     }
 }
 
-html[data-tide-color-scheme="light"] {
+:root[data-tide-color-scheme="light"] {
     color-scheme: light;
     --tide-background-size-side-bar: cover;
     --tide-background-position-side-bar: bottom;
@@ -77,7 +77,7 @@ html[data-tide-color-scheme="light"] {
     --tide-color-table-background-even: #F5F5F5;
 }
 
-html[data-tide-color-scheme="dark"] {
+:root[data-tide-color-scheme="dark"] {
     color-scheme: dark;
     --tide-background-size-side-bar: cover;
     --tide-background-position-side-bar: bottom;
