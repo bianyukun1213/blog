@@ -535,7 +535,7 @@ pre:has(code),
 
 .un-prose :where(ol > li):not(:where(.not-un-prose,.not-un-prose *))::marker,.un-prose :where(ul > li):not(:where(.not-un-prose,.not-un-prose *))::marker,.un-prose :where(summary):not(:where(.not-un-prose,.not-un-prose *))::marker{color:var(--un-prose-lists);}
 
-.un-prose :where(hr):not(:where(.not-un-prose,.not-un-prose *)){margin:2em 0;border:1px var(--tide-color-text-diminished) solid;}
+.un-prose :where(hr):not(:where(.not-un-prose,.not-un-prose *)){margin:1em 0;border:1px var(--tide-color-text-diminished) solid;}
 
 .un-prose :where(table):not(:where(.not-un-prose,.not-un-prose *)){display:table;margin:0;border-collapse:separate;overflow-x:auto;min-width:100%;table-layout:auto;white-space:nowrap;border-spacing:0;border:1px var(--tide-color-table-border) solid;}
 
