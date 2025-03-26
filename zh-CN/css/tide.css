@@ -617,7 +617,8 @@ pre:has(code),
 
 .un-sc-select-plain:disabled{cursor:not-allowed;opacity:0.5;}
 
-.un-sc-input-plain,
+.un-sc-input-plain{border-width:2px;border-color:var(--tide-color-text-primary);border-style:solid;background-color:var(--tide-color-background-primary);padding-left:1rem;padding-right:1rem;color:var(--tide-color-text-primary);}
+
 .un-sc-select-plain{border-width:2px;border-color:var(--tide-color-text-primary);border-style:solid;background-color:var(--tide-color-background-primary);color:var(--tide-color-text-primary);}
 
 .un-sc-link-plain{color:var(--tide-color-text-primary);-webkit-text-decoration-color:transparent;text-decoration-color:transparent;}

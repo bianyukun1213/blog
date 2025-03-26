@@ -8,9 +8,9 @@ https://his2nd.life/en/about/
 https://his2nd.life/en/categories/
 https://his2nd.life/en/tags/
 https://his2nd.life/en/
-https://his2nd.life/en/tags/network/
 https://his2nd.life/en/tags/front-end/
 https://his2nd.life/en/tags/javascript/
+https://his2nd.life/en/tags/network/
 https://his2nd.life/en/tags/html/
 https://his2nd.life/en/tags/css/
 https://his2nd.life/en/tags/travel-note/
