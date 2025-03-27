@@ -651,7 +651,7 @@ pre:has(code),
 
 .un-end-0{inset-inline-end:0;}
 
-.un-end-16{inset-inline-end:4rem;}
+.un-end-14{inset-inline-end:3.5rem;}
 
 .un-end-4{inset-inline-end:1rem;}
 
@@ -739,9 +739,9 @@ pre:has(code),
 
 .un-max-w-none{max-width:none;}
 
-.un-min-w-20{min-width:5rem;}
+.un-min-w-18{min-width:4.5rem;}
 
-.un-min-w-32{min-width:8rem;}
+.un-min-w-30{min-width:7.5rem;}
 
 .un-w-0{width:0;}
 
@@ -840,10 +840,6 @@ pre:has(code),
 .un-p-4{padding:1rem;}
 
 .un-p-8{padding:2rem;}
-
-.un-px-4{padding-left:1rem;padding-right:1rem;}
-
-.un-py-2{padding-top:0.5rem;padding-bottom:0.5rem;}
 
 .un-text-center{text-align:center;}
 
