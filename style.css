@@ -177,11 +177,13 @@ a:hover {
 }
 
 #jump-tip {
+    box-sizing: border-box;
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+    padding: 0 1rem;
     text-align: center;
 }
 
