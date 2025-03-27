@@ -147,21 +147,25 @@ a:hover {
 }
 
 #content-container {
+    box-sizing: border-box;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100vw;
+    width: 100%;
+    padding: 0 1rem;
     text-align: center;
 }
 
 #site-title,
 #not-found-title {
+    box-sizing: border-box;
     position: absolute;
     top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100vw;
+    width: 100%;
+    padding: 0 1rem;
     text-align: center;
     font-family: 'Noto Serif', 'Noto Serif SC', 'Noto Serif CJK SC', Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
     font-weight: 700;
@@ -177,7 +181,7 @@ a:hover {
     top: 100%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100vw;
+    width: 100%;
     text-align: center;
 }
 
@@ -194,11 +198,13 @@ a:hover {
 }
 
 #footer {
+    box-sizing: border-box;
     position: absolute;
     top: 75%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100vw;
+    width: 100%;
+    padding: 0 1rem;
     text-align: center;
 }
 
