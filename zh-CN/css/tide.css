@@ -278,6 +278,9 @@ summary:focus {outline-width:2px;outline-color:var(--tide-color-focused-outline)
 
 #tide-search-results .search-result-title:hover{-webkit-text-decoration-color:currentColor;text-decoration-color:currentColor;}
 
+#tide-search-results .search-result-title:only-child {margin-bottom:1rem;
+}
+
 #tide-search-results .search-result-title .search-keyword {color:var(--tide-color-text-primary);
 }
 
