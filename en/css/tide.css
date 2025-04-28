@@ -706,9 +706,13 @@ pre:has(code),
 
 .un-me-8{margin-inline-end:2rem;}
 
+.un-me-auto{margin-inline-end:auto;}
+
 .un-ms-1{margin-inline-start:0.25rem;}
 
 .un-ms-4{margin-inline-start:1rem;}
+
+.un-ms-auto{margin-inline-start:auto;}
 
 .un-mt-4{margin-top:1rem;}
 
