@@ -646,8 +646,6 @@ pre:has(code),
 
 /* layer: default */
 
-.un-pointer-events-none{pointer-events:none;}
-
 .un-absolute{position:absolute;}
 
 .un-fixed{position:fixed;}
