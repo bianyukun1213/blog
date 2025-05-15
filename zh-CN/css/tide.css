@@ -523,22 +523,22 @@ summary:focus {syntax:"<percentage>";inherits:false;initial-value:100%;outline-s
 
 /* 侧栏默认整体滚动。 */
 #tide-sidebar {
-    width: min(var(--tide-unocss-spacing) * 120, 75vw);overflow:auto;
+    width: min(var(--tide-unocss-spacing) * 120, 80vw);overflow:auto;
 }
 
 #tide-sidebar {
-    inset-inline-start: max(var(--tide-unocss-spacing) * -120, -75vw);
+    inset-inline-start: max(var(--tide-unocss-spacing) * -120, -80vw);
 }
 
 /* 使用 [dir="ltr"] 而非 @apply un-ltr:…… ，因为后者在转换后会有空的样式，显示警告。 */
 [dir="ltr"] [data-tide-sidebar-expanded="true"] #tide-sidebar,
 [dir="ltr"] [data-tide-sidebar-expanded="true"] #tide-content {
-    transform: translateX(min(var(--tide-unocss-spacing) * 120, 75vw));
+    transform: translateX(min(var(--tide-unocss-spacing) * 120, 80vw));
 }
 
 [dir="rtl"] [data-tide-sidebar-expanded="true"] #tide-sidebar,
 [dir="rtl"] [data-tide-sidebar-expanded="true"] #tide-content {
-    transform: translateX(max(var(--tide-unocss-spacing) * -120, -75vw));
+    transform: translateX(max(var(--tide-unocss-spacing) * -120, -80vw));
 }
 
 #tide-site-title {font-size:var(--text-3xl-fontSize);line-height:var(--un-leading, var(--text-3xl-lineHeight));
@@ -586,16 +586,16 @@ summary:focus {syntax:"<percentage>";inherits:false;initial-value:100%;outline-s
 
         [dir="ltr"] :not([tide-is-post]) #tide-sidebar,
         [dir="ltr"] :not([tide-is-post]) #tide-content {
-            transform: translateX(min(var(--tide-unocss-spacing) * 120, 75vw));
+            transform: translateX(min(var(--tide-unocss-spacing) * 120, 80vw));
         }
 
         [dir="rtl"] :not([tide-is-post]) #tide-sidebar,
         [dir="rtl"] :not([tide-is-post]) #tide-content {
-            transform: translateX(max(var(--tide-unocss-spacing) * -120, -75vw));
+            transform: translateX(max(var(--tide-unocss-spacing) * -120, -80vw));
         }
 
         :not([tide-is-post]) #tide-content {
-            width: calc(100% - min(var(--tide-unocss-spacing) * 120, 75vw));
+            width: calc(100% - min(var(--tide-unocss-spacing) * 120, 80vw));
         }
 
         :not([tide-is-post]) #tide-btn-nav {display:none;
