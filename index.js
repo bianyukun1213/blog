@@ -11,7 +11,8 @@ if (document.referrer !== '') {
     hrefEn += '?referrer=' + encodeURIComponent(document.referrer);
     document.getElementById('link-en').setAttribute('href', hrefEn);
 }
-if (new URLSearchParams(window.location.search).get('noAutoJump') !== 'true') {
+const naj = new URLSearchParams(window.location.search).get('naj');
+if (naj !== 'true' && naj !== '') {
     let secondsRemain = 5;
     setInterval(() => {
         if (secondsRemain <= 0) {
