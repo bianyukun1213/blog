@@ -583,6 +583,10 @@ summary:focus {syntax:"<percentage>";inherits:false;initial-value:100%;outline-s
 .tide-image-inline-figure {display:inline-block;position:relative;max-width:80%;margin-inline:auto;
 }
 
+.tide-image-mask {
+    font-family: var(--tide-font-global);
+}
+
 .tide-image-mask:has(+img:not([data-mask])),
 .tide-image-mask:has(+img[data-unmasked]),
 .tide-image-mask:has(+.pinch-zoom-container img:not([data-mask])),
