@@ -32,9 +32,9 @@ function setColorScheme() {
         tideSettings = {};
     }
     if (tideSettings.colorScheme === 'LIGHT')
-        document.documentElement.setAttribute('data-tide-color-scheme', 'light');
+        document.documentElement.dataset.colorScheme = 'light';
     else if (tideSettings.colorScheme === 'DARK')
-        document.documentElement.setAttribute('data-tide-color-scheme', 'dark');
+        document.documentElement.dataset.colorScheme = 'dark';
 }
 function updateHead() {
     document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang].index.description);
