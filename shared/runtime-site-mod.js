@@ -19,7 +19,7 @@ function fixNetEaseMusic() {
 }
 
 function addAriaRoleToCollapseControlTag() {
-    const collapseControls = [...document.querySelectorAll('a.collapse-ctrl')];
+    const collapseControls = [...document.querySelectorAll('div.collapse-ctrl, a.collapse-ctrl')];
     for (const control of collapseControls) {
         control.role = 'button';
         control.addEventListener('keydown', function (e) {
