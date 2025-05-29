@@ -18,8 +18,22 @@ function fixNetEaseMusic() {
     }
 }
 
+function addAriaRoleToCollapseControlTag() {
+    const collapseControls = [...document.querySelectorAll('a.collapse-ctrl')];
+    for (const control of collapseControls) {
+        control.role = 'button';
+        control.addEventListener('keydown', function (e) {
+            if (e.code === 'Space') {
+                e.preventDefault;
+                collapseToggle(this);
+            }
+        });
+    }
+}
+
 function domContentLoadedHandler(eDomContentLoaded) {
     fixNetEaseMusic();
+    addAriaRoleToCollapseControlTag();
 }
 
 const pathname = window.location.pathname;
