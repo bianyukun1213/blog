@@ -24,16 +24,59 @@ function addAriaRoleToCollapseControlTag() {
         control.role = 'button';
         control.addEventListener('keydown', function (e) {
             if (e.code === 'Space') {
-                e.preventDefault;
+                e.preventDefault();
                 collapseToggle(this);
             }
         });
     }
 }
 
+// 参考 https://github.com/YunYouJun/hexo-tag-common/blob/main/js/index.js
+// 额外添加 tabindex、role 与按键监听。
+function registerTabsTag() {
+    // Binding `nav-tabs` & `tab-content` by real time permalink changing.
+    document.querySelectorAll(".tabs ul.nav-tabs .tab").forEach((element) => {
+        const tabClick = () => {
+            // Prevent selected tab to select again.
+            if (element.classList.contains("active")) return;
+            // Add & Remove active class on `nav-tabs` & `tab-content`.
+            [...element.parentNode.children].forEach((target) => {
+                target.classList.toggle("active", target === element);
+            });
+            // https://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers
+            const tActive = document.getElementById(
+                element.querySelector("a").dataset.target
+            );
+            [...tActive.parentNode.children].forEach((target) => {
+                target.classList.toggle("active", target === tActive);
+            });
+            // Trigger event
+            tActive.dispatchEvent(
+                new Event("tabs:click", {
+                    bubbles: true,
+                })
+            );
+        };
+        element.role = 'button';
+        element.setAttribute('tabindex', '0');
+        element.addEventListener("click", function (e) {
+            e.preventDefault();
+            tabClick(e);
+        });
+        element.addEventListener("keydown", function (e) {
+            if (e.code === "Enter" || e.code === "Space") {
+                e.preventDefault();
+                tabClick(e);
+            }
+        });
+    });
+    window.dispatchEvent(new Event("tabs:register"));
+}
+
 function domContentLoadedHandler(eDomContentLoaded) {
     fixNetEaseMusic();
     addAriaRoleToCollapseControlTag();
+    registerTabsTag();
 }
 
 const pathname = window.location.pathname;
