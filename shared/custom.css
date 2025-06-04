@@ -145,7 +145,7 @@ noscript#javascript-alert p::after {
     /* border-top: 4px var(--tide-color-table-border) solid; */
     background-color: var(--tide-color-table-background-head);
     /* border-bottom: none; */
-    /* cursor: default; */
+    cursor: default;
 }
 
 .tag-common.tabs ul.nav-tabs li.tab.active a,
