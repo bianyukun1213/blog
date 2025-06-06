@@ -3,7 +3,7 @@ document.documentElement.dir = content[currentLang].dir;
 setColorScheme();
 updatePageTitle();
 updateHead();
-if (document.referrer !== '') {
+if (document.referrer !== '' && !document.referrer.startsWith('https://his2nd.life')) {
     let hrefZhCn = document.getElementById('link-zh-cn').getAttribute('href');
     hrefZhCn += '?referrer=' + encodeURIComponent(document.referrer);
     document.getElementById('link-zh-cn').setAttribute('href', hrefZhCn);
