@@ -92,7 +92,7 @@ noscript#javascript-alert p::after {
 .collapse-ctrl:not(a),
 .tag-common.tabs ul.nav-tabs li.tab,
 .tabs-comment ul.nav-tabs li.tab {
-    font-family: var(--tide-font-global);
+    font-family: var(--tide-font-global) !important;
 }
 
 /* 参考：https://github.com/YunYouJun/hexo-tag-common/blob/main/css/index.css */
