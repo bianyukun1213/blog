@@ -69,8 +69,69 @@ function addAriaRoleToCollapseControlTag() {
                 collapseToggle(this);
             }
         });
+        if (control.tagName === 'DIV') {
+            control.setAttribute('tabindex', '0');
+            control.addEventListener('keydown', function (e) {
+                if (e.code === 'Enter') {
+                    e.preventDefault();
+                    collapseToggle(this);
+                }
+            });
+        }
     }
 }
+
+// https://github.com/unnamed42/hexo-spoiler
+// bug 无法变回模糊状态。模糊状态点击链接仍然有效。
+// function addAriaRoleToSpoilerTag() {
+//     const collapseControls = [...document.querySelectorAll('p.spoiler, span.spoiler')];
+//     for (const control of collapseControls) {
+//         const setup = function (element, toggle = false) {
+//             if (toggle)
+//                 element.classList.toggle('spoiler');
+//             if (element.classList.contains('spoiler')) {
+//                 element.firstElementChild.setAttribute('aria-hidden', 'true');
+//                 element.firstElementChild.childNodes.forEach((e) => {
+//                     if (e.tagName === 'A')
+//                         e.setAttribute('tabindex', '-1');
+//                 });
+//                 element.style.userSelect = 'none';
+//                 element.setAttribute('tabindex', '0');
+//                 element.removeAttribute('onclick');
+//             } else {
+//                 element.firstElementChild.removeAttribute('aria-hidden');
+//                 element.firstElementChild.childNodes.forEach((e) => {
+//                     if (e.tagName === 'A')
+//                         e.removeAttribute('tabindex');
+//                 });
+//                 element.style.userSelect = 'auto';
+//                 // element.removeAttribute('tabindex');
+//             }
+//         }
+//         control.addEventListener('click', function (e) {
+//             if (e.target !== this) {
+//                 e.stopPropagation();
+//                 return;
+//             }
+//             e.preventDefault();
+//             setup(this, true);
+//         });
+//         control.addEventListener('keydown', function (e) {
+//             console.log(111, e.target)
+//             console.log(222, e.target)
+//             console.log(333, this)
+//             if (e.code === 'Enter' || e.code === 'Space') {
+//                 if (e.target !== this) {
+//                     e.stopPropagation();
+//                     return;
+//                 }
+//                 e.preventDefault();
+//                 setup(this, true);
+//             }
+//         });
+//         setup(control);
+//     }
+// }
 
 // 修复移动端网易云音乐外链。
 function fixNetEaseMusic() {
