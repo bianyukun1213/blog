@@ -109,6 +109,7 @@ noscript#javascript-alert p::after {
 .tag-common.tabs ul.nav-tabs li.tab,
 .tabs-comment ul.nav-tabs li.tab {
     background-color: var(--tide-color-table-background-head);
+    color: var(--tide-color-text-primary);
     border: 1px var(--tide-color-table-border) solid;
     border-bottom: none;
     border-top-left-radius: 4px;
@@ -121,7 +122,8 @@ noscript#javascript-alert p::after {
 .tag-common.tabs ul.nav-tabs li.tab a,
 .tabs-comment ul.nav-tabs li.tab a {
     display: block;
-    color: var(--tide-color-text-secondary);
+    /* color: var(--tide-color-text-secondary); */
+    color: var(--tide-color-text-primary);
     padding: 0.5em 1em;
     text-align: center;
     text-decoration: none;
