@@ -1,0 +1,4 @@
+# https://developers.cloudflare.com/workers/static-assets/redirects/
+# https://serverfault.com/questions/1184774/cloudflare-accept-html-at-end-of-urls
+
+/*.html /:splat 301
