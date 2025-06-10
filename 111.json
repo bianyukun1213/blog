@@ -1,8 +1,0 @@
-{
-    "name": "his-2nd-life",
-    "compatibility_date": "2025-06-10",
-    "assets": {
-        "directory": "./",
-        "not_found_handling": "404-page"
-    }
-}
