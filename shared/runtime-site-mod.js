@@ -149,6 +149,7 @@ function domContentLoadedHandler(eDomContentLoaded) {
     fixNetEaseMusic();
 }
 
+// 弃用，由 Cloudflare Workers 脚本重写 Url。
 // const pathname = window.location.pathname;
 // const fixedPathname = fixPathname(pathname);
 // if (pathname !== fixedPathname)
