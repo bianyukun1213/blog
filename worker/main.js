@@ -15,6 +15,8 @@ export default class extends WorkerEntrypoint {
             if (lastSegment && !lastSegment.includes('.')) {
                 parsed.pathname = segments.join('/') + '/' + lastSegment + '.html';
                 return Response.redirect(parsed.toString(), 301);
+            } else {
+                return await this.env.ASSETS.fetch(parsed.toString());
             }
         }
     }
