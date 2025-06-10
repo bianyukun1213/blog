@@ -149,10 +149,10 @@ function domContentLoadedHandler(eDomContentLoaded) {
     fixNetEaseMusic();
 }
 
-const pathname = window.location.pathname;
-const fixedPathname = fixPathname(pathname);
-if (pathname !== fixedPathname)
-    window.location.replace(window.location.origin + fixedPathname); // 跳转。
+// const pathname = window.location.pathname;
+// const fixedPathname = fixPathname(pathname);
+// if (pathname !== fixedPathname)
+//     window.location.replace(window.location.origin + fixedPathname); // 跳转。
 
 if (document.readyState !== 'loading')
     domContentLoadedHandler();
