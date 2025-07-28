@@ -590,8 +590,8 @@ summary:focus,
 }
 
 #tide-floating-widgets[data-extra-widgets] #tide-btn-toc,
-#tide-floating-widgets[data-extra-widgets] #tide-btn-langs,
-#tide-floating-widgets[data-extra-widgets] #tide-btn-interactions {display:block;
+#tide-floating-widgets[data-extra-widgets] #tide-btn-interactions
+#tide-floating-widgets[data-extra-widgets] #tide-btn-langs {display:block;
 }
 
 #tide-floating-widgets[data-extra-widgets] #tide-btn-extra-widgets-icon-plus {display:none;

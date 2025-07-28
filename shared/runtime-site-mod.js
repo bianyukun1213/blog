@@ -43,7 +43,9 @@ function registerTabsTag() {
                 })
             );
         };
+        const tabTargetId = element.querySelector('a').dataset.target;
         element.role = 'button';
+        element.setAttribute('aria-controls', tabTargetId);
         if (element.classList.contains('active'))
             element.removeAttribute('tabindex');
         else
@@ -55,17 +57,41 @@ function registerTabsTag() {
             if (e.code === 'Enter' || e.code === 'Space')
                 tabClick(e);
         });
+        [...document.getElementsByClassName('tab-pane')].forEach(e => e.role = 'tabpanel');
     });
     window.dispatchEvent(new Event('tabs:register'));
 }
 
 function addAriaRoleToCollapseControlTag() {
+    let count = 0;
     const collapseControls = [...document.querySelectorAll('div.collapse-ctrl, a.collapse-ctrl')];
     for (const control of collapseControls) {
+        const collapseEle = control.nextElementSibling;
+        const collapseEleId = `collapse-content-${count++}`;
+        collapseEle.id = collapseEleId;
         control.role = 'button';
+        control.setAttribute('aria-controls', collapseEleId);
+        control.setAttribute('aria-expanded', 'false');
+        control.removeAttribute('onclick');
+        control.addEventListener('click', function (e) {
+            e.preventDefault();
+            const controlled = document.getElementById(this.getAttribute('aria-controls'));
+            if (controlled.classList.contains('expanded')) {
+                this.setAttribute('aria-expanded', 'false');
+            } else {
+                this.setAttribute('aria-expanded', 'true');
+            }
+            collapseToggle(this);
+        });
         control.addEventListener('keydown', function (e) {
             if (e.code === 'Space') {
                 e.preventDefault();
+                const controlled = document.getElementById(this.getAttribute('aria-controls'));
+                if (controlled.classList.contains('expanded')) {
+                    this.setAttribute('aria-expanded', 'false');
+                } else {
+                    this.setAttribute('aria-expanded', 'true');
+                }
                 collapseToggle(this);
             }
         });
@@ -74,6 +100,12 @@ function addAriaRoleToCollapseControlTag() {
             control.addEventListener('keydown', function (e) {
                 if (e.code === 'Enter') {
                     e.preventDefault();
+                    const controlled = document.getElementById(this.getAttribute('aria-controls'));
+                    if (controlled.classList.contains('expanded')) {
+                        this.setAttribute('aria-expanded', 'false');
+                    } else {
+                        this.setAttribute('aria-expanded', 'true');
+                    }
                     collapseToggle(this);
                 }
             });
