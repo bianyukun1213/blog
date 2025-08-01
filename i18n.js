@@ -25,7 +25,7 @@ const content = {
             description: 'This is the site-selection page of His 2nd Life. You can continue browsing by selecting either the Chinese site or the English site.',
             title: 'His 2nd Life',
             funcJumpTip: function (seconds) {
-                return `Automatically jump to the English site after ${seconds}(s)…`;
+                return `Automatically jump to the English site after ${seconds}s…`;
             }
         },
         '404': {
