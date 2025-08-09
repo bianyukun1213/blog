@@ -176,10 +176,14 @@ noscript#javascript-alert p::after {
 }
 
 @media (forced-colors: active) {
+    .alertbox {
+        outline: 1px CanvasText solid;
+    }
 
     .tag-common.tabs ul.nav-tabs li.tab.active,
     .tabs-comment ul.nav-tabs li.tab.active {
         outline: var(--tide-focus-outline);
+        outline-color: CanvasText;
         outline-offset: var(--tide-focus-outline-offset);
     }
 }

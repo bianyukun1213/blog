@@ -783,6 +783,7 @@ img[data-mask]:not([data-unmasked]) {visibility:hidden;
 
 #tide-sidebar,
 .tide-dialog-container,
+.tide-side-panel,
 iframe,
 pre:has(code),
 .gist {syntax:"*";inherits:false;initial-value:solid;outline-style:var(--un-outline-style);outline-width:2px;outline-color:transparent;--un-outline-style:solid;outline-style:solid;
