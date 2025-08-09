@@ -174,3 +174,12 @@ noscript#javascript-alert p::after {
 .tabs-comment .tab-content .tab-pane:not(.active) {
     display: none;
 }
+
+@media (forced-colors: active) {
+
+    .tag-common.tabs ul.nav-tabs li.tab.active,
+    .tabs-comment ul.nav-tabs li.tab.active {
+        outline: var(--tide-focus-outline);
+        outline-offset: var(--tide-focus-outline-offset);
+    }
+}
