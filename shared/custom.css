@@ -96,7 +96,7 @@ noscript#javascript-alert p::after {
 }
 
 .hbe-input-field {
-    outline: 1px transparent solid;
+    outline: 2px transparent solid !important;
 }
 
 /* 参考：https://github.com/YunYouJun/hexo-tag-common/blob/main/css/index.css */
