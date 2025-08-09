@@ -2,6 +2,7 @@
   padding: 0.5rem 1rem;
   margin: 1rem 0;
   background-color: gray;
+  outline: 1px transparent solid;
 }
 
 .alertbox p:first-of-type {
