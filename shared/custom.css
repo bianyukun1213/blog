@@ -95,6 +95,10 @@ noscript#javascript-alert p::after {
     font-family: var(--tide-font-global) !important;
 }
 
+.hbe-input-field {
+    outline: 1px transparent solid;
+}
+
 /* 参考：https://github.com/YunYouJun/hexo-tag-common/blob/main/css/index.css */
 
 .tag-common.tabs ul.nav-tabs,
