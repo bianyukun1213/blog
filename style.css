@@ -20,7 +20,7 @@
         --tide-color-link-hover: #1F5297;
         --tide-color-link-visited: #028090;
         --tide-color-code-inline: #323739;
-        --tide-color-table-border: #E5E7EB;
+        --tide-color-table-border: #E3E3E3;
         --tide-color-table-background-head: #EAEAEA;
         --tide-color-table-background-even: #F1F1F1;
     }
@@ -75,7 +75,7 @@
     --tide-color-link-hover: #1F5297;
     --tide-color-link-visited: #028090;
     --tide-color-code-inline: #323739;
-    --tide-color-table-border: #E5E7EB;
+    --tide-color-table-border: #E3E3E3;
     --tide-color-table-background-head: #EAEAEA;
     --tide-color-table-background-even: #F1F1F1;
 }
