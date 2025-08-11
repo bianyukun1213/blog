@@ -120,10 +120,8 @@ input:focus,
 select:focus:focus,
 textarea:focus,
 summary:focus {
-    outline-width: 2px;
-    outline-color: var(--tide-color-focused-outline) !important;
-    outline-offset: 2px;
-    outline-style: solid;
+    outline: var(--tide-focus-outline);
+    outline-offset: var(--tide-focus-outline-offset);
 }
 
 a {
