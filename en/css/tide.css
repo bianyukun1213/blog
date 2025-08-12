@@ -216,7 +216,7 @@
 
     :root {
         color-scheme: light;
-        --tide-focus-outline: 2px #E36209 solid;
+        --tide-focus-outline: 2px #E36209 dashed;
         --tide-focus-outline-offset: 4px;
         --tide-background-size-sidebar: cover;
         --tide-background-position-sidebar: bottom;
@@ -255,7 +255,7 @@
 
     :root {
         color-scheme: dark;
-        --tide-focus-outline: 2px #E36209 solid;
+        --tide-focus-outline: 2px #E36209 dashed;
         --tide-focus-outline-offset: 4px;
         --tide-background-size-sidebar: cover;
         --tide-background-position-sidebar: bottom;
@@ -293,7 +293,7 @@
 
 :root[data-color-scheme="light"] {
     color-scheme: light;
-    --tide-focus-outline: 2px #E36209 solid;
+    --tide-focus-outline: 2px #E36209 dashed;
     --tide-focus-outline-offset: 4px;
     --tide-background-size-sidebar: cover;
     --tide-background-position-sidebar: bottom;
@@ -330,7 +330,7 @@
 
 :root[data-color-scheme="dark"] {
     color-scheme: dark;
-    --tide-focus-outline: 2px #E36209 solid;
+    --tide-focus-outline: 2px #E36209 dashed;
     --tide-focus-outline-offset: 4px;
     --tide-background-size-sidebar: cover;
     --tide-background-position-sidebar: bottom;
