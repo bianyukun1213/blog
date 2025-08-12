@@ -9,7 +9,7 @@ function fixPathname(pathnameIn) {
 }
 
 // 参考 https://github.com/YunYouJun/hexo-tag-common/blob/main/js/index.js
-// 额外添加 tabindex、role 与按键监听。
+// 额外添加 tabindex 与按键监听。
 function registerTabsTag() {
     // Binding `nav-tabs` & `tab-content` by real time permalink changing.
     document.querySelectorAll('.tabs ul.nav-tabs .tab').forEach((element) => {
@@ -44,7 +44,7 @@ function registerTabsTag() {
             );
         };
         const tabTargetId = element.querySelector('a').dataset.target;
-        element.role = 'button';
+        // element.role = 'tab';
         element.setAttribute('aria-controls', tabTargetId);
         if (element.classList.contains('active'))
             element.removeAttribute('tabindex');
@@ -57,8 +57,11 @@ function registerTabsTag() {
             if (e.code === 'Enter' || e.code === 'Space')
                 tabClick(e);
         });
-        [...document.getElementsByClassName('tab-pane')].forEach(e => e.role = 'tabpanel');
     });
+    // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/tab_role#example
+    // 结构不兼容。
+    // [...document.getElementsByClassName('tabs')].forEach(e => e.role = 'tablist');
+    // [...document.getElementsByClassName('tab-pane')].forEach(e => e.role = 'tabpanel');
     window.dispatchEvent(new Event('tabs:register'));
 }
 

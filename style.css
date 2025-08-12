@@ -14,7 +14,7 @@
         --tide-color-background-sidebar: #1F5297;
         --tide-color-text-primary: #323739;
         --tide-color-text-secondary: #5C6669;
-        --tide-color-text-diminished: #EAECED;
+        --tide-color-text-diminished: #EAEAEA;
         --tide-color-text-sidebar: #FFFFFF;
         --tide-color-link: #1F5297;
         --tide-color-link-hover: #1F5297;
@@ -22,7 +22,7 @@
         --tide-color-code-inline: #323739;
         --tide-color-table-border: #E3E3E3;
         --tide-color-table-background-head: #EAEAEA;
-        --tide-color-table-background-even: #F1F1F1;
+        --tide-color-table-background-even: #F9F9F9;
     }
 }
 
@@ -38,19 +38,19 @@
         --tide-color-primary: #CCCCCC;
         --tide-color-secondary: #00ADB5;
         --tide-color-background-primary: #151515;
-        --tide-color-background-secondary: #262626;
-        --tide-color-background-sidebar: #262626;
+        --tide-color-background-secondary: #2C2C2C;
+        --tide-color-background-sidebar: #2C2C2C;
         --tide-color-text-primary: #CCCCCC;
         --tide-color-text-secondary: #8C8C8C;
-        --tide-color-text-diminished: #262626;
+        --tide-color-text-diminished: #2C2C2C;
         --tide-color-text-sidebar: #CCCCCC;
         --tide-color-link: #70B1FF;
         --tide-color-link-hover: #70B1FF;
         --tide-color-link-visited: #81C3D7;
-        --tide-color-code-inline: #CCCCCC;
-        --tide-color-table-border: #262626;
-        --tide-color-table-background-head: #202020;
-        --tide-color-table-background-even: #191919;
+        --tide-color-code: #CCCCCC;
+        --tide-color-table-border: #333333;
+        --tide-color-table-background-head: #2C2C2C;
+        --tide-color-table-background-even: #1F1F1F;
     }
 }
 
@@ -69,7 +69,7 @@
     --tide-color-background-sidebar: #1F5297;
     --tide-color-text-primary: #323739;
     --tide-color-text-secondary: #5C6669;
-    --tide-color-text-diminished: #EAECED;
+    --tide-color-text-diminished: #EAEAEA;
     --tide-color-text-sidebar: #FFFFFF;
     --tide-color-link: #1F5297;
     --tide-color-link-hover: #1F5297;
@@ -77,7 +77,7 @@
     --tide-color-code-inline: #323739;
     --tide-color-table-border: #E3E3E3;
     --tide-color-table-background-head: #EAEAEA;
-    --tide-color-table-background-even: #F1F1F1;
+    --tide-color-table-background-even: #F9F9F9;
 }
 
 :root[data-color-scheme="dark"] {
@@ -91,19 +91,19 @@
     --tide-color-primary: #CCCCCC;
     --tide-color-secondary: #00ADB5;
     --tide-color-background-primary: #151515;
-    --tide-color-background-secondary: #262626;
-    --tide-color-background-sidebar: #262626;
+    --tide-color-background-secondary: #2C2C2C;
+    --tide-color-background-sidebar: #2C2C2C;
     --tide-color-text-primary: #CCCCCC;
     --tide-color-text-secondary: #8C8C8C;
-    --tide-color-text-diminished: #262626;
+    --tide-color-text-diminished: #2C2C2C;
     --tide-color-text-sidebar: #CCCCCC;
     --tide-color-link: #70B1FF;
     --tide-color-link-hover: #70B1FF;
     --tide-color-link-visited: #81C3D7;
-    --tide-color-code-inline: #CCCCCC;
-    --tide-color-table-border: #262626;
-    --tide-color-table-background-head: #202020;
-    --tide-color-table-background-even: #191919;
+    --tide-color-code: #CCCCCC;
+    --tide-color-table-border: #333333;
+    --tide-color-table-background-head: #2C2C2C;
+    --tide-color-table-background-even: #1F1F1F;
 }
 
 body {
