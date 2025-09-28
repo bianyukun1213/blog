@@ -20,7 +20,7 @@ noscript#javascript-alert p::after {
     font-family: initial;
     font-size: initial;
     font-weight: initial;
-    color: var(--tide-color-text-secondary);
+    /* color: var(--tide-color-text-secondary); */
 }
 
 .h2l-invisible-content {
