@@ -5,6 +5,7 @@ const content = {
         'index': {
             description: '他的第二人生的站点选择页面。可选择中文站或英文站继续浏览。',
             title: '他的第二人生',
+            mirrorTag: '[镜像站]',
             funcJumpTip: function (seconds) {
                 return `${seconds} 秒后自动跳转到中文站……`;
             }
@@ -24,6 +25,7 @@ const content = {
         'index': {
             description: 'This is the site-selection page of His 2nd Life. You can continue browsing by selecting either the Chinese site or the English site.',
             title: 'His 2nd Life',
+            mirrorTag: '[Mirror]',
             funcJumpTip: function (seconds) {
                 return `Automatically jump to the English site after ${seconds}s…`;
             }

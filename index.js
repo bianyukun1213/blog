@@ -3,6 +3,7 @@ document.documentElement.dir = content[currentLang].dir;
 setColorScheme();
 updatePageTitle();
 updateHead();
+updateBucket();
 if (document.referrer !== '' && !document.referrer.startsWith('https://his2nd.life')) {
     let hrefZhCn = document.getElementById('link-zh-cn').getAttribute('href');
     hrefZhCn += '?referrer=' + encodeURIComponent(document.referrer);
@@ -25,6 +26,27 @@ if (naj !== 'true' && naj !== '') {
         updateTip(secondsRemain--);
     }, 1000);
 }
+function updateHead() {
+    document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang].index.description);
+}
+function updatePageTitle() {
+    document.getElementById('site-title').innerText = document.title = content[currentLang].index.title;
+    if (window.location.hostname === 'blog.hollisdevhub.com')
+        document.getElementById('mirror-tag').innerText = content[currentLang].index.mirrorTag;
+}
+function updateTip(seconds) {
+    document.getElementById('jump-tip').innerText = content[currentLang].index.funcJumpTip(seconds);
+}
+function updateBucket() {
+    const favIcon = document.querySelector('meta[rel="icon"]');
+    let favIconHref = favIcon.href;
+    favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
+    favIcon.href = favIconHref;
+    const profileImg = document.querySelector('img.u-photo');
+    let profileImgSrc = profileImg.src;
+    profileImgSrc = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
+    profileImg.src = profileImgSrc;
+}
 function setColorScheme() {
     let tideSettings = localStorage.getItem('tide_settings') || '{}';
     try {
@@ -36,13 +58,4 @@ function setColorScheme() {
         document.documentElement.dataset.colorScheme = 'light';
     else if (tideSettings.colorScheme === 'DARK')
         document.documentElement.dataset.colorScheme = 'dark';
-}
-function updateHead() {
-    document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang].index.description);
-}
-function updatePageTitle() {
-    document.getElementById('site-title').innerText = document.title = content[currentLang].index.title;
-}
-function updateTip(seconds) {
-    document.getElementById('jump-tip').innerText = content[currentLang].index.funcJumpTip(seconds);
 }

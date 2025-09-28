@@ -24,7 +24,7 @@ noscript#javascript-alert p::after {
     position: absolute;
     top: 0;
     inset-inline-end: 0;
-    transform: translateX(0) translateY(-100%);
+    transform: translateX(0) translateY(-80%);
     font-size: initial;
     white-space: nowrap;
 }
