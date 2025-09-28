@@ -31,7 +31,7 @@ function updateHead() {
 }
 function updatePageTitle() {
     if (window.location.hostname === 'blog.hollisdevhub.com') {
-        document.title = content[currentLang].index.title;
+        document.title = content[currentLang].index.title + ' ' + content[currentLang].index.mirrorTag;
         document.getElementById('site-title').innerHTML = `${content[currentLang].index.title}<span id="mirror-tag">${content[currentLang].index.mirrorTag}<span>`;
     } else {
         document.getElementById('site-title').innerHTML = document.title = content[currentLang].index.title;
