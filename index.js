@@ -30,9 +30,12 @@ function updateHead() {
     document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang].index.description);
 }
 function updatePageTitle() {
-    document.getElementById('site-title').innerText = document.title = content[currentLang].index.title;
-    if (window.location.hostname === 'blog.hollisdevhub.com')
-        document.getElementById('mirror-tag').innerText = content[currentLang].index.mirrorTag;
+    if (window.location.hostname === 'blog.hollisdevhub.com') {
+        document.title = content[currentLang].index.title;
+        document.getElementById('site-title').innerHTML = `${content[currentLang].index.title}<span id="mirror-tag">${content[currentLang].index.mirrorTag}<span>`;
+    } else {
+        document.getElementById('site-title').innerHTML = document.title = content[currentLang].index.title;
+    }
 }
 function updateTip(seconds) {
     document.getElementById('jump-tip').innerText = content[currentLang].index.funcJumpTip(seconds);
