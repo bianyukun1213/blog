@@ -32,7 +32,7 @@ function updateMirror() {
     mirrorLink.innerText = content[currentLang].index.mirror;
     if (window.location.hostname === 'blog.hollisdevhub.com') {
         mirrorLink.parentElement.style.display = 'none';
-        const favIcon = document.querySelector('meta[rel="icon"]');
+        const favIcon = document.querySelector('link[rel="icon"]');
         let favIconHref = favIcon.href;
         favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
         favIcon.href = favIconHref;

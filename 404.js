@@ -7,7 +7,7 @@ updatePageTitle();
 updatePossibleLinkTip();
 function updateMirror() {
     if (window.location.hostname === 'blog.hollisdevhub.com') {
-        const favIcon = document.querySelector('meta[rel="icon"]');
+        const favIcon = document.querySelector('link[rel="icon"]');
         let favIconHref = favIcon.href;
         favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
         favIcon.href = favIconHref;
