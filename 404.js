@@ -1,8 +1,8 @@
 document.documentElement.lang = currentLang;
 document.documentElement.dir = content[currentLang].dir;
 setColorScheme();
-updatePageTitle();
 updateHead();
+updatePageTitle();
 updatePossibleLinkTip();
 updateBucket();
 function updateHead() {

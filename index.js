@@ -1,8 +1,9 @@
 document.documentElement.lang = currentLang;
 document.documentElement.dir = content[currentLang].dir;
 setColorScheme();
-updatePageTitle();
 updateHead();
+updatePageTitle();
+updateMirror();
 updateBucket();
 if (document.referrer !== '' && !document.referrer.startsWith('https://his2nd.life')) {
     let hrefZhCn = document.getElementById('link-zh-cn').getAttribute('href');
@@ -36,6 +37,9 @@ function updatePageTitle() {
     } else {
         document.getElementById('site-title').innerHTML = document.title = content[currentLang].index.title;
     }
+}
+function updateMirror() {
+    document.getElementById('link-mirror').innerText = content[currentLang].index.mirror;
 }
 function updateTip(seconds) {
     document.getElementById('jump-tip').innerText = content[currentLang].index.funcJumpTip(seconds);
