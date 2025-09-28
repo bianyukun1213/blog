@@ -8,6 +8,21 @@ function fixPathname(pathnameIn) {
     return fixedPathname;
 }
 
+function performMirrorMod() {
+    if (!window.location.hostname.startsWith('blog.hollisdevhub.com')) return;
+    const pageLang = getPageLang();
+    switch (pageLang) {
+        case 'zh-CN':
+            document.getElementById('tide-site-title').innerHTML += '<span id="mirror-tag">[镜像站]</span>';
+            // document.querySelector('#tide-navigation>ul>li:nth-child(7)>a').href = 'https://blog.hollisdevhub.com/?naj';
+            break;
+        case 'en':
+            document.getElementById('tide-site-title').innerHTML += '<span id="mirror-tag">[Mirror]</span>';
+            // document.querySelector('#tide-navigation>ul>li:nth-child(7)>a').href = 'https://blog.hollisdevhub.com/?naj';
+            break;
+    }
+}
+
 // 参考 https://github.com/YunYouJun/hexo-tag-common/blob/main/js/index.js
 // 额外添加 tabindex 与按键监听。
 function registerTabsTag() {
