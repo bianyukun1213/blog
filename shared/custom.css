@@ -23,8 +23,9 @@ noscript#javascript-alert p::after {
 #mirror-tag {
     position: absolute;
     top: 0;
-    inset-inline-start: 0;
+    inset-inline-end: 0;
     transform: translateX(0) translateY(-100%);
+    font-size: initial;
     white-space: nowrap;
 }
 
