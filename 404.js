@@ -1,10 +1,22 @@
 document.documentElement.lang = currentLang;
 document.documentElement.dir = content[currentLang].dir;
 setColorScheme();
+updateMirror();
 updateHead();
 updatePageTitle();
 updatePossibleLinkTip();
-updateBucket();
+function updateMirror() {
+    if (window.location.hostname === 'blog.hollisdevhub.com') {
+        const favIcon = document.querySelector('meta[rel="icon"]');
+        let favIconHref = favIcon.href;
+        favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
+        favIcon.href = favIconHref;
+        const profileImg = document.querySelector('img.u-photo');
+        let profileImgSrc = profileImg.src;
+        profileImgSrc = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
+        profileImg.src = profileImgSrc;
+    }
+}
 function updateHead() {
     document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang]['404'].description);
 }
@@ -60,16 +72,6 @@ function updatePossibleLinkTip() {
         li.innerHTML = `<a id="go-home" href="/">${content[currentLang]['404'].goHomeNoLinkAvailable}</a>`;
         document.getElementById('possible-links').appendChild(li);
     }
-}
-function updateBucket() {
-    const favIcon = document.querySelector('meta[rel="icon"]');
-    let favIconHref = favIcon.href;
-    favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
-    favIcon.href = favIconHref;
-    const profileImg = document.querySelector('img.u-photo');
-    let profileImgSrc = profileImg.src;
-    profileImgSrc = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
-    profileImg.src = profileImgSrc;
 }
 function setColorScheme() {
     let tideSettings = localStorage.getItem('tide_settings') || '{}';

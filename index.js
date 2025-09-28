@@ -1,10 +1,10 @@
 document.documentElement.lang = currentLang;
 document.documentElement.dir = content[currentLang].dir;
 setColorScheme();
+updateMirror();
 updateHead();
 updatePageTitle();
 updateMirror();
-updateBucket();
 if (document.referrer !== '' && !document.referrer.startsWith('https://his2nd.life')) {
     let hrefZhCn = document.getElementById('link-zh-cn').getAttribute('href');
     hrefZhCn += '?referrer=' + encodeURIComponent(document.referrer);
@@ -27,6 +27,21 @@ if (naj !== 'true' && naj !== '') {
         updateTip(secondsRemain--);
     }, 1000);
 }
+function updateMirror() {
+    const mirrorLink = document.getElementById('link-mirror');
+    mirrorLink.innerText = content[currentLang].index.mirror;
+    if (window.location.hostname === 'blog.hollisdevhub.com') {
+        mirrorLink.parentElement.style.display = 'none';
+        const favIcon = document.querySelector('meta[rel="icon"]');
+        let favIconHref = favIcon.href;
+        favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
+        favIcon.href = favIconHref;
+        const profileImg = document.querySelector('img.u-photo');
+        let profileImgSrc = profileImg.src;
+        profileImgSrc = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
+        profileImg.src = profileImgSrc;
+    }
+}
 function updateHead() {
     document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang].index.description);
 }
@@ -38,26 +53,8 @@ function updatePageTitle() {
         document.getElementById('site-title').innerHTML = document.title = content[currentLang].index.title;
     }
 }
-function updateMirror() {
-    const mirrorLink = document.getElementById('link-mirror');
-    mirrorLink.innerText = content[currentLang].index.mirror;
-    if (window.location.hostname === 'blog.hollisdevhub.com')
-        mirrorLink.parentElement.style.display = 'none';
-}
 function updateTip(seconds) {
     document.getElementById('jump-tip').innerText = content[currentLang].index.funcJumpTip(seconds);
-}
-function updateBucket() {
-    if (window.location.hostname === 'blog.hollisdevhub.com') {
-        const favIcon = document.querySelector('meta[rel="icon"]');
-        let favIconHref = favIcon.href;
-        favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
-        favIcon.href = favIconHref;
-        const profileImg = document.querySelector('img.u-photo');
-        let profileImgSrc = profileImg.src;
-        profileImgSrc = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
-        profileImg.src = profileImgSrc;
-    }
 }
 function setColorScheme() {
     let tideSettings = localStorage.getItem('tide_settings') || '{}';
