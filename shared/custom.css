@@ -17,9 +17,9 @@ noscript#javascript-alert p::after {
 
 #mirror-tag {
     margin-inline-start: 0.5rem;
-    font-family: initial;
+    /* font-family: initial; */
     font-size: initial;
-    font-weight: initial;
+    /* font-weight: initial; */
     /* color: var(--tide-color-text-secondary); */
 }
 
