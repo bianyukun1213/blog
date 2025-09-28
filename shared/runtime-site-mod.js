@@ -194,6 +194,7 @@ function fixNetEaseMusic() {
 }
 
 function domContentLoadedHandler(eDomContentLoaded) {
+    performMirrorMod();
     registerTabsTag();
     addAriaRoleToCollapseControlTag();
     fixNetEaseMusic();
