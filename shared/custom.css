@@ -15,12 +15,17 @@ noscript#javascript-alert p::after {
     color: yellow;
 }
 
+#tide-site-title:has(#mirror-tag) {
+    position: relative;
+    display: inline-block;
+}
+
 #mirror-tag {
-    margin-inline-start: 0.5rem;
-    /* font-family: initial; */
-    font-size: initial;
-    /* font-weight: initial; */
-    /* color: var(--tide-color-text-secondary); */
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0;
+    transform: translateX(0) translateY(-100%);
+    white-space: nowrap;
 }
 
 .h2l-invisible-content {
