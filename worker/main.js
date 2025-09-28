@@ -22,7 +22,7 @@ export default class extends WorkerEntrypoint {
         }
         if (redirect) {
             return Response.redirect(parsed.toString(), 301);
-        } else if (request.method === "GET" && (request.headers.get("CF-IPCountry") === "RU" || request.headers.get("CF-IPCountry") === "CN")) {
+        } else if (request.method === "GET" && (request.headers.get("CF-IPCountry") === "RU" || request.headers.get("CF-IPCountry") === "CN") && request.headers.get("x-proxy-via") !== "h2l-on-eo-pages") {
             const base = "https://blog.hollisdevhub.com";
             const statusCode = 302;
             const url = new URL(request.url);
