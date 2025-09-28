@@ -13,11 +13,11 @@ function performMirrorMod() {
     const pageLang = getPageLang();
     switch (pageLang) {
         case 'zh-CN':
-            document.getElementById('tide-site-title').innerHTML += '<span id="mirror-tag">[镜像站]</span>';
+            // document.getElementById('tide-site-title').innerHTML += '<span id="mirror-tag">[镜像站]</span>';
             // document.querySelector('#tide-navigation>ul>li:nth-child(7)>a').href = 'https://blog.hollisdevhub.com/?naj';
             break;
         case 'en':
-            document.getElementById('tide-site-title').innerHTML += '<span id="mirror-tag">[Mirror]</span>';
+            // document.getElementById('tide-site-title').innerHTML += '<span id="mirror-tag">[Mirror]</span>';
             // document.querySelector('#tide-navigation>ul>li:nth-child(7)>a').href = 'https://blog.hollisdevhub.com/?naj';
             break;
     }
