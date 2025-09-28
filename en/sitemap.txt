@@ -1,11 +1,3 @@
-https://his2nd.life/en/res/third-party/font-awesome/metadata/sponsors.json
-https://his2nd.life/en/res/third-party/font-awesome/metadata/shims.json
-https://his2nd.life/en/res/third-party/font-awesome/metadata/shims.json
-https://his2nd.life/en/res/third-party/font-awesome/metadata/icons.json
-https://his2nd.life/en/res/third-party/font-awesome/metadata/icons.json
-https://his2nd.life/en/res/third-party/font-awesome/metadata/icon-families.json
-https://his2nd.life/en/res/third-party/font-awesome/metadata/icon-families.json
-https://his2nd.life/en/res/third-party/font-awesome/metadata/categories.json
 https://his2nd.life/en/posts/6fca3b45.html
 https://his2nd.life/en/posts/a14d0940.html
 https://his2nd.life/en/posts/dfeb1577.html
@@ -19,12 +11,12 @@ https://his2nd.life/en/tags/
 https://his2nd.life/en/
 https://his2nd.life/en/tags/cuz-im-a-wanderer/
 https://his2nd.life/en/tags/blah-blah-blah/
-https://his2nd.life/en/tags/travel-note/
+https://his2nd.life/en/tags/network/
 https://his2nd.life/en/tags/front-end/
 https://his2nd.life/en/tags/javascript/
-https://his2nd.life/en/tags/network/
 https://his2nd.life/en/tags/html/
 https://his2nd.life/en/tags/css/
+https://his2nd.life/en/tags/travel-note/
 https://his2nd.life/en/categories/life/
 https://his2nd.life/en/categories/technologies-and-studies/
 https://his2nd.life/en/categories/photography/
