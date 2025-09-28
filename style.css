@@ -175,8 +175,10 @@ a:hover {
 }
 
 #site-title:has(#mirror-tag) {
-    position: relative;
+    width: unset;
+    padding: 0;
     display: inline-block;
+    white-space: nowrap;
 }
 
 #mirror-tag {
