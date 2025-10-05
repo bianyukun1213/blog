@@ -5,7 +5,7 @@ updateMirror();
 updateHead();
 updatePageTitle();
 updateMirror();
-if (document.referrer !== '' && !document.referrer.startsWith('https://his2nd.life')) {
+if (document.referrer !== '' && !document.referrer.startsWith('https://his2nd.life') && !document.referrer.startsWith('https://blog.hollisdevhub.com')) {
     let hrefZhCn = document.getElementById('link-zh-cn').getAttribute('href');
     hrefZhCn += '?referrer=' + encodeURIComponent(document.referrer);
     document.getElementById('link-zh-cn').setAttribute('href', hrefZhCn);
