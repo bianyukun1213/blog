@@ -36,10 +36,10 @@ function updateMirror() {
         let favIconHref = favIcon.href;
         favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
         favIcon.href = favIconHref;
-        const profileImg = document.querySelector('img.u-photo');
-        let profileImgSrc = profileImg.src;
-        profileImgSrc = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
-        profileImg.src = profileImgSrc;
+        // const profileImg = document.querySelector('img.u-photo');
+        // let profileImgSrc = profileImg.src;
+        // profileImgSrc = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
+        // profileImg.src = profileImgSrc;
     }
 }
 function updateHead() {
