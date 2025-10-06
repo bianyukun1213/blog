@@ -536,14 +536,14 @@ summary:focus,
 .tide-toc-link:hover {--un-font-weight:var(--fontWeight-bold);font-weight:var(--fontWeight-bold);
 }
 
-.tide-toc-item-active .tide-toc-link {--un-font-weight:var(--fontWeight-bold);font-weight:var(--fontWeight-bold);
+.tide-toc-item-active>.tide-toc-link {--un-font-weight:var(--fontWeight-bold);font-weight:var(--fontWeight-bold);
 }
 
-.tide-toc-item-active .tide-toc-link::before {
+.tide-toc-item-active>.tide-toc-link::before {
     content: var(--tide-active-item-marker-begin);
 }
 
-.tide-toc-item-active .tide-toc-link::after {
+.tide-toc-item-active>.tide-toc-link::after {
     content: var(--tide-active-item-marker-end);
 }
 
