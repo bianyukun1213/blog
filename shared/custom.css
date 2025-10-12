@@ -39,7 +39,7 @@ noscript#javascript-alert p::after {
     margin: 0 auto 16px auto;
 }
 
-/* 首行缩进，用 em 而不是 rem。作用于 Redefine 文章和页面区域。 */
+/* 首行缩进，用 em 而不是 rem。作用于 hexo-theme-tide 文章和页面区域。 */
 #tide-post .h2l-text-indent,
 #tide-page .h2l-text-indent {
     text-indent: 2em;
