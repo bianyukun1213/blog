@@ -28,7 +28,7 @@ export default {
             const destinationURL = `${base}${pathname}${search}`;
             return Response.redirect(destinationURL, statusCode);
         } else {
-            return await this.env.ASSETS.fetch(parsed.toString());
+            return await env.ASSETS.fetch(parsed.toString());
         }
     }
 }
