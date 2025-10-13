@@ -1,7 +1,7 @@
 {
     "name": "his-2nd-life",
     "main": "./worker/main.js",
-    "compatibility_date": "2025-06-10",
+    "compatibility_date": "2025-10-13",
     "assets": {
         "directory": "./",
         "binding": "ASSETS",

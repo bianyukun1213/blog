@@ -1,7 +1,7 @@
 // https://developers.cloudflare.com/workers/static-assets/routing/worker-script/
 
 export default {
-    async fetch(request) {
+    async fetch(request, env, ctx) {
         let redirect = false;
         const parsed = new URL(request.url);
         const { pathname, search, hash } = parsed;
