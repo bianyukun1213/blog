@@ -1,8 +1,6 @@
 // https://developers.cloudflare.com/workers/static-assets/routing/worker-script/
 
-import { WorkerEntrypoint } from "cloudflare:workers";
-
-export default class extends WorkerEntrypoint {
+export default {
     async fetch(request) {
         let redirect = false;
         const parsed = new URL(request.url);
