@@ -1,3 +1,54 @@
+async function generateBase64AesKeyAsync(input) {
+    const enc = new TextEncoder();
+    const data = enc.encode(input);
+    const hash = await crypto.subtle.digest('SHA-256', data); // ArrayBuffer (32 bytes)
+    const keyBytes = new Uint8Array(hash);
+    return uint8ArrayToBase64(keyBytes);
+}
+
+async function importAesKeyAsync(base64Key) {
+    const keyData = base64ToUint8Array(base64Key);
+    const key = await crypto.subtle.importKey(
+        'raw',
+        keyData,
+        'AES-CTR',
+        false,
+        ['encrypt', 'decrypt']
+    );
+    return key;
+}
+
+async function aesDecryptAsync(cipherText, key, counter = new Uint8Array(16)) {
+    const decryptedBuffer = await subtle.decrypt(
+        {
+            name: 'AES-CTR',
+            counter,
+            length: 64
+        },
+        key,
+        base64ToUint8Array(cipherText)
+    );
+    const decrypted = new TextDecoder().decode(decryptedBuffer);
+    return decrypted;
+}
+
+function base64ToUint8Array(base64) {
+    const byteString = atob(base64);
+    const bytes = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) {
+        bytes[i] = byteString.charCodeAt(i);
+    }
+    return bytes;
+}
+
+function uint8ArrayToBase64(bytes) {
+    let binary = '';
+    for (let i = 0; i < bytes.byteLength; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    return btoa(binary);
+}
+
 function fixPathname(pathnameIn) {
     let fixedPathname = pathnameIn;
     if (!fixedPathname.endsWith('/') && !fixedPathname.endsWith('.html'))
