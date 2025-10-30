@@ -305,6 +305,9 @@ if (getSmSettings().debug) {
                     case 'decrypt-blocks':
                         this.decryptBlocks(cmdArgs, successFunc, failFunc);
                         break;
+                    default:
+                        failFunc('unknown command');
+                        break;
                 }
             } else {
                 failFunc('no command provided');
