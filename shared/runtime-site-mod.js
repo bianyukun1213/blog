@@ -303,14 +303,14 @@ if (getSmSettings().debug) {
                 const cmdArgs = args.slice(1);
                 switch (cmd.toLowerCase()) {
                     case 'decrypt-blocks':
-                        this.decryptBlock(cmdArgs, successFunc, failFunc);
+                        this.decryptBlocks(cmdArgs, successFunc, failFunc);
                         break;
                 }
             } else {
                 failFunc('no command provided');
             }
         },
-        decryptBlock: async function (cmdArgs, success, fail) {
+        decryptBlocks: async function (cmdArgs, success, fail) {
             if (cmdArgs.length !== 2) {
                 fail('insufficient args provided to decrypt');
                 return;
