@@ -312,7 +312,7 @@ if (getSmSettings().debug) {
         },
         decryptBlocks: async function (cmdArgs, success, fail) {
             if (cmdArgs.length !== 2) {
-                fail('insufficient args provided to decrypt');
+                fail('insufficient args provided to decrypt blocks');
                 return;
             }
             const targetElementStr = cmdArgs[0];
@@ -341,7 +341,7 @@ if (getSmSettings().debug) {
                 }
                 success('succeeded');
             } catch (error) {
-                fail('failed to decrypt', error);
+                fail('failed to decrypt blocks', error);
             }
         }
     };
