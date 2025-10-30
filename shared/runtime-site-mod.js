@@ -1,3 +1,22 @@
+'use strict';
+
+function getSmSettings() {
+    let smSettings = {
+        debug: false
+    };
+    const smSettingsStr = window.localStorage.getItem('sm_settings');
+    if (smSettingsStr) {
+        try {
+            smSettings = JSON.parse(smSettingsStr);
+        } catch (error) { }
+    }
+    return smSettings;
+}
+
+function setSmSettings(smSettings) {
+    window.localStorage.setItem('sm_settings', JSON.stringify(smSettings));
+}
+
 async function generateBase64AesKeyAsync(input) {
     const enc = new TextEncoder();
     const data = enc.encode(input);
@@ -19,7 +38,7 @@ async function importAesKeyAsync(base64Key) {
 }
 
 async function aesDecryptAsync(cipherText, key, counter = new Uint8Array(16)) {
-    const decryptedBuffer = await subtle.decrypt(
+    const decryptedBuffer = await crypto.subtle.decrypt(
         {
             name: 'AES-CTR',
             counter,
@@ -49,6 +68,33 @@ function uint8ArrayToBase64(bytes) {
     return btoa(binary);
 }
 
+// https://stackoverflow.com/a/20584396
+function nodeScriptReplace(node) {
+    if (nodeScriptIs(node) === true) {
+        node.parentNode.replaceChild(nodeScriptClone(node), node);
+    }
+    else {
+        let i = -1, children = node.childNodes;
+        while (++i < children.length) {
+            nodeScriptReplace(children[i]);
+        }
+    }
+    return node;
+}
+function nodeScriptClone(node) {
+    const script = document.createElement('script');
+    script.text = node.innerHTML;
+    let i = -1, attrs = node.attributes, attr;
+    while (++i < attrs.length) {
+        script.setAttribute((attr = attrs[i]).name, attr.value);
+    }
+    return script;
+}
+
+function nodeScriptIs(node) {
+    return node.tagName === 'SCRIPT';
+}
+
 function fixPathname(pathnameIn) {
     let fixedPathname = pathnameIn;
     if (!fixedPathname.endsWith('/') && !fixedPathname.endsWith('.html'))
@@ -57,6 +103,30 @@ function fixPathname(pathnameIn) {
         // 页面总是写在 .html 文件中，但在浏览器中访问时以 / 结尾。
         fixedPathname = fixedPathname.replace('index.html', '');
     return fixedPathname;
+}
+
+function toggleDebugMode(val) {
+    let smSettings = getSmSettings();
+    smSettings.debug = val;
+    setSmSettings(smSettings);
+}
+
+function setDebugModeBySearchBoxInput() {
+    const searchBox = document.getElementById('tide-search-box');
+    searchBox.addEventListener('input', clientUtils.debounce(function () {
+        if (searchBox.value.trim().toLowerCase() === 'debugon') {
+            toggleDebugMode(true);
+            window.location.reload();
+        } else if (searchBox.value.trim().toLowerCase() === 'debugoff') {
+            toggleDebugMode(false);
+            window.location.reload();
+        } else {
+            const match = searchBox.value.match(/^\s*debugrun\s+([\s\S]*)\s+eof\s*$/i);
+            if (match && typeof debugTools.runCommand === 'function') {
+                debugTools.runCommand(match[1].trim(), (msg) => { searchBox.value = msg }, (msg) => { searchBox.value = msg });
+            }
+        }
+    }));
 }
 
 function performMirrorMod() {
@@ -182,58 +252,6 @@ function addAriaRoleToCollapseControlTag() {
     }
 }
 
-// https://github.com/unnamed42/hexo-spoiler
-// bug 无法变回模糊状态。模糊状态点击链接仍然有效。
-// function addAriaRoleToSpoilerTag() {
-//     const collapseControls = [...document.querySelectorAll('p.spoiler, span.spoiler')];
-//     for (const control of collapseControls) {
-//         const setup = function (element, toggle = false) {
-//             if (toggle)
-//                 element.classList.toggle('spoiler');
-//             if (element.classList.contains('spoiler')) {
-//                 element.firstElementChild.setAttribute('aria-hidden', 'true');
-//                 element.firstElementChild.childNodes.forEach((e) => {
-//                     if (e.tagName === 'A')
-//                         e.setAttribute('tabindex', '-1');
-//                 });
-//                 element.style.userSelect = 'none';
-//                 element.setAttribute('tabindex', '0');
-//                 element.removeAttribute('onclick');
-//             } else {
-//                 element.firstElementChild.removeAttribute('aria-hidden');
-//                 element.firstElementChild.childNodes.forEach((e) => {
-//                     if (e.tagName === 'A')
-//                         e.removeAttribute('tabindex');
-//                 });
-//                 element.style.userSelect = 'auto';
-//                 // element.removeAttribute('tabindex');
-//             }
-//         }
-//         control.addEventListener('click', function (e) {
-//             if (e.target !== this) {
-//                 e.stopPropagation();
-//                 return;
-//             }
-//             e.preventDefault();
-//             setup(this, true);
-//         });
-//         control.addEventListener('keydown', function (e) {
-//             console.log(111, e.target)
-//             console.log(222, e.target)
-//             console.log(333, this)
-//             if (e.code === 'Enter' || e.code === 'Space') {
-//                 if (e.target !== this) {
-//                     e.stopPropagation();
-//                     return;
-//                 }
-//                 e.preventDefault();
-//                 setup(this, true);
-//             }
-//         });
-//         setup(control);
-//     }
-// }
-
 // 修复移动端网易云音乐外链。
 function fixNetEaseMusic() {
     if (clientUtils.isMobileUserAgent(navigator.userAgent)) {
@@ -245,6 +263,7 @@ function fixNetEaseMusic() {
 }
 
 function domContentLoadedHandler(eDomContentLoaded) {
+    setDebugModeBySearchBoxInput();
     performMirrorMod();
     registerTabsTag();
     addAriaRoleToCollapseControlTag();
@@ -256,6 +275,77 @@ function domContentLoadedHandler(eDomContentLoaded) {
 // const fixedPathname = fixPathname(pathname);
 // if (pathname !== fixedPathname)
 //     window.location.replace(window.location.origin + fixedPathname); // 跳转。
+
+let debugTools = {};
+if (getSmSettings().debug) {
+    debugTools = {
+        parseArgs: function (cmd) {
+            const args = [];
+            const regex = /"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|(\S+)/g;
+            let match;
+            while ((match = regex.exec(cmd)) !== null) {
+                // match[1] 是双引号内内容，match[2] 是单引号内内容，match[3] 是普通未引号包裹的内容
+                const arg = match[1] ?? match[2] ?? match[3];
+                // 去掉转义符（如果有）
+                args.push(arg.replace(/\\(["'\\])/g, "$1"));
+            }
+            return args;
+        },
+        runCommand: function (cmdStr, success, fail) {
+            let successFunc = () => { }, failFunc = () => { };
+            if (typeof success === 'function')
+                successFunc = success;
+            if (typeof fail === 'function')
+                failFunc = fail;
+            const args = this.parseArgs(cmdStr);
+            if (args.length >= 1) {
+                const cmd = args[0];
+                const cmdArgs = args.slice(1);
+                switch (cmd.toLowerCase()) {
+                    case 'decrypt':
+                        this.decryptBlock(cmdArgs, successFunc, failFunc);
+                        break;
+                }
+            } else {
+                failFunc('no command provided');
+            }
+        },
+        decryptBlock: async function (cmdArgs, success, fail) {
+            if (cmdArgs.length !== 2) {
+                fail('insufficient args provided to decrypt');
+                return;
+            }
+            const targetElementStr = cmdArgs[0];
+            const passwordStr = cmdArgs[1];
+            let targetElements = [];
+            if (targetElementStr === '*') {
+                targetElements = document.querySelectorAll('[id^=h2l-encrypted-].h2l-invisible-content');
+            } else if (targetElementStr.startsWith('h2l-encrypted-')) {
+                const element = document.querySelector(`[id=${targetElementStr}].h2l-invisible-content`);
+                if (element)
+                    targetElements.push();
+            }
+            if (targetElements.length === 0) {
+                fail('no blocks to decrypt');
+                return;
+            }
+            try {
+                const aesKeyStr = await generateBase64AesKeyAsync(passwordStr);
+                const aesKey = await importAesKeyAsync(aesKeyStr);
+                for (const element of targetElements) {
+                    const encryptedStr = element.innerText;
+                    const decryptedStr = await aesDecryptAsync(encryptedStr, aesKey);
+                    element.innerHTML = decryptedStr;
+                    element.classList.remove('h2l-invisible-content');
+                    nodeScriptReplace(element);
+                }
+                success('succeeded');
+            } catch (error) {
+                fail('failed to decrypt', error);
+            }
+        }
+    };
+}
 
 if (document.readyState !== 'loading')
     domContentLoadedHandler();
