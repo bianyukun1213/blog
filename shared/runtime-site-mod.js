@@ -302,7 +302,7 @@ if (getSmSettings().debug) {
                 const cmd = args[0];
                 const cmdArgs = args.slice(1);
                 switch (cmd.toLowerCase()) {
-                    case 'decrypt':
+                    case 'decrypt-block':
                         this.decryptBlock(cmdArgs, successFunc, failFunc);
                         break;
                 }
