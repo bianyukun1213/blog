@@ -113,7 +113,7 @@ function toggleDebugMode(val) {
 
 function setDebugModeBySearchBoxInput() {
     const searchBox = document.getElementById('tide-search-box');
-    searchBox.addEventListener('input', clientUtils.debounce(function () {
+    searchBox.addEventListener('input', window.tideClientUtils.debounce(function () {
         if (searchBox.value.trim().toLowerCase() === 'debugon') {
             toggleDebugMode(true);
             window.location.reload();
@@ -122,8 +122,8 @@ function setDebugModeBySearchBoxInput() {
             window.location.reload();
         } else {
             const match = searchBox.value.match(/^\s*debugrun\s+([\s\S]*)\s+eof\s*$/i);
-            if (match && typeof debugTools.runCommand === 'function') {
-                debugTools.runCommand(match[1].trim(), (msg) => { searchBox.value = msg }, (msg) => { searchBox.value = msg });
+            if (match && typeof window.h2lDebugTools.runCommand === 'function') {
+                window.h2lDebugTools.runCommand(match[1].trim(), (msg) => { searchBox.value = msg }, (msg) => { searchBox.value = msg });
             }
         }
     }));
@@ -254,7 +254,7 @@ function addAriaRoleToCollapseControlTag() {
 
 // 修复移动端网易云音乐外链。
 function fixNetEaseMusic() {
-    if (clientUtils.isMobileUserAgent(navigator.userAgent)) {
+    if (window.tideClientUtils.isMobileUserAgent(navigator.userAgent)) {
         [...document.getElementsByTagName('iframe')].forEach(element => {
             if (element.src.includes('music.163.com/'))
                 element.src = element.src.replace('music.163.com/', 'music.163.com/m/');
@@ -276,9 +276,9 @@ function domContentLoadedHandler(eDomContentLoaded) {
 // if (pathname !== fixedPathname)
 //     window.location.replace(window.location.origin + fixedPathname); // 跳转。
 
-let debugTools = {};
+window.h2lDebugTools = {};
 if (getSmSettings().debug) {
-    debugTools = {
+    window.h2lDebugTools = {
         parseArgs: function (cmd) {
             const args = [];
             const regex = /"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|(\S+)/g;
