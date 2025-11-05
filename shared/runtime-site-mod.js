@@ -342,6 +342,7 @@ if (getSmSettings().debug) {
                     element.classList.remove('h2l-invisible-content');
                     nodeScriptReplace(element);
                 }
+                window.tideUpdateImageViewer();
                 success('succeeded');
             } catch (error) {
                 fail('failed to decrypt blocks', error);
