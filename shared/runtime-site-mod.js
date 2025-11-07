@@ -4,7 +4,7 @@ function getSmSettings() {
     let smSettings = {
         debug: false
     };
-    const smSettingsStr = window.localStorage.getItem('sm_settings');
+    const smSettingsStr = localStorage.getItem('sm_settings');
     if (smSettingsStr) {
         try {
             smSettings = JSON.parse(smSettingsStr);
@@ -14,7 +14,7 @@ function getSmSettings() {
 }
 
 function setSmSettings(smSettings) {
-    window.localStorage.setItem('sm_settings', JSON.stringify(smSettings));
+    localStorage.setItem('sm_settings', JSON.stringify(smSettings));
 }
 
 async function generateBase64AesKeyAsync(input) {
@@ -116,10 +116,10 @@ function setDebugModeBySearchBoxInput() {
     searchBox.addEventListener('input', window.tideClientUtils.debounce(function () {
         if (searchBox.value.trim().toLowerCase() === 'debugon') {
             toggleDebugMode(true);
-            window.location.reload();
+            location.reload();
         } else if (searchBox.value.trim().toLowerCase() === 'debugoff') {
             toggleDebugMode(false);
-            window.location.reload();
+            location.reload();
         } else {
             const match = searchBox.value.match(/^\s*debugrun\s+([\s\S]*)\s+eof\s*$/i);
             if (match && typeof window.h2lDebugTools.runCommand === 'function') {
@@ -130,7 +130,7 @@ function setDebugModeBySearchBoxInput() {
 }
 
 function performMirrorMod() {
-    if (!window.location.hostname.startsWith('blog.hollisdevhub.com')) return;
+    if (!location.hostname.startsWith('blog.hollisdevhub.com')) return;
     const pageLang = getPageLang();
     switch (pageLang) {
         case 'zh-CN':
@@ -271,10 +271,10 @@ function domContentLoadedHandler(eDomContentLoaded) {
 }
 
 // 弃用，由 Cloudflare Workers 脚本重写 Url。
-// const pathname = window.location.pathname;
+// const pathname = location.pathname;
 // const fixedPathname = fixPathname(pathname);
 // if (pathname !== fixedPathname)
-//     window.location.replace(window.location.origin + fixedPathname); // 跳转。
+//     location.replace(location.origin + fixedPathname); // 跳转。
 
 window.h2lDebugTools = {};
 if (getSmSettings().debug) {

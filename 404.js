@@ -6,7 +6,7 @@ updateHead();
 updatePageTitle();
 updatePossibleLinkTip();
 function updateMirror() {
-    if (window.location.hostname === 'blog.hollisdevhub.com') {
+    if (location.hostname === 'blog.hollisdevhub.com') {
         const favIcon = document.querySelector('link[rel="icon"]');
         let favIconHref = favIcon.href;
         favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
@@ -27,29 +27,29 @@ function updatePossibleLinkTip() {
     let excluded = [];
     // 旧浏览器不支持 URLSearchParams。
     try {
-        excluded = JSON.parse(new URLSearchParams(window.location.search).get('excluded')) || [];
+        excluded = JSON.parse(new URLSearchParams(location.search).get('excluded')) || [];
     } catch (error) {
         excluded = [];
     }
     // 把自身 url 排除。
-    excluded.push(window.location.origin + window.location.pathname);
+    excluded.push(location.origin + location.pathname);
     const lang = document.getElementsByTagName('html')[0].lang;
-    const fromWhichSite = window.location.pathname.split('/')[1];
+    const fromWhichSite = location.pathname.split('/')[1];
     let possibleLinks = [];
     if (fromWhichSite === 'zh-CN') {
-        const possibleLink = window.location.origin + window.location.pathname.replace(fromWhichSite, 'en');
+        const possibleLink = location.origin + location.pathname.replace(fromWhichSite, 'en');
         if (!excluded.includes(possibleLink))
             possibleLinks.push(possibleLink);
     }
     else if (fromWhichSite === 'en') {
-        const possibleLink = window.location.origin + window.location.pathname.replace(fromWhichSite, 'zh-CN');
+        const possibleLink = location.origin + location.pathname.replace(fromWhichSite, 'zh-CN');
         if (!excluded.includes(possibleLink))
             possibleLinks.push(possibleLink);
     }
     // 这种情况是匹配不上页面语言，比如旧的链接 pathname 开头不是 /zh-CN 或 /en。
     else {
-        const possibleLinkZhCn = `${window.location.origin}/zh-CN${window.location.pathname}`;
-        const possibleLinkEn = `${window.location.origin}/en${window.location.pathname}`;
+        const possibleLinkZhCn = `${location.origin}/zh-CN${location.pathname}`;
+        const possibleLinkEn = `${location.origin}/en${location.pathname}`;
         if (!excluded.includes(possibleLinkZhCn))
             possibleLinks.push(possibleLinkZhCn);
         if (!excluded.includes(possibleLinkEn))

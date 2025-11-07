@@ -13,7 +13,7 @@ if (document.referrer !== '' && !document.referrer.startsWith('https://his2nd.li
     hrefEn += '?referrer=' + encodeURIComponent(document.referrer);
     document.getElementById('link-en').setAttribute('href', hrefEn);
 }
-const naj = new URLSearchParams(window.location.search).get('naj');
+const naj = new URLSearchParams(location.search).get('naj');
 if (naj !== 'true' && naj !== '') {
     let secondsRemain = 5;
     setInterval(() => {
@@ -30,7 +30,7 @@ if (naj !== 'true' && naj !== '') {
 function updateMirror() {
     const mirrorLink = document.getElementById('link-mirror');
     mirrorLink.innerText = content[currentLang].index.mirror;
-    if (window.location.hostname === 'blog.hollisdevhub.com') {
+    if (location.hostname === 'blog.hollisdevhub.com') {
         mirrorLink.parentElement.style.display = 'none';
         const favIcon = document.querySelector('link[rel="icon"]');
         let favIconHref = favIcon.href;
@@ -46,7 +46,7 @@ function updateHead() {
     document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang].index.description);
 }
 function updatePageTitle() {
-    if (window.location.hostname === 'blog.hollisdevhub.com') {
+    if (location.hostname === 'blog.hollisdevhub.com') {
         document.title = content[currentLang].index.title + ' ' + content[currentLang].index.mirrorTag;
         document.getElementById('site-title').innerHTML = `${content[currentLang].index.title}<span id="mirror-tag">${content[currentLang].index.mirrorTag}<span>`;
     } else {
