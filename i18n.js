@@ -80,21 +80,21 @@ function generateOpenGraph() {
 function generateJsonLd() {
     let jsonLdTemplate = `
     <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "@language": "${currentLang}",
-          "headline": "${content[currentLang].index.title}",
-          "description": "${content[currentLang].index.description}",
-          "keywords": "${content[currentLang].index.keywords}",
-          "datePublished": "${content[currentLang].index.date}",
-          "dateModified": "${content[currentLang].index.updated}",
-          "mainEntityOfPage": "https://his2nd.life/",
-          "author": [{
-            "@type": "Person",
-            "name": "Hollis"
-          }]
-        }
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@language": "${currentLang}",
+        "headline": "${content[currentLang].index.title}",
+        "description": "${content[currentLang].index.description}",
+        "keywords": "${content[currentLang].index.keywords}",
+        "datePublished": "${content[currentLang].index.date}",
+        "dateModified": "${content[currentLang].index.updated}",
+        "mainEntityOfPage": "https://his2nd.life/",
+        "author": [{
+          "@type": "Person",
+          "name": "Hollis"
+        }]
+      }
     </script>`;
     return jsonLdTemplate;
 }
