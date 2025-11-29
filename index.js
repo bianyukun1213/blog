@@ -44,6 +44,10 @@ function updateMirror() {
 }
 function updateHead() {
     document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang].index.description);
+    const keywordsEle = document.querySelector('meta[name="keywords"]');
+    keywordsEle.setAttribute('content', content[currentLang].index.keywords);
+    document.querySelectorAll('meta[property^="og"],meta[property^="article"],meta[name^="twitter"],script[type="application/ld+json"]').forEach(e => e.remove());
+    keywordsEle.insertAdjacentHTML('afterend', generateOpenGraph() + generateJsonLd());
 }
 function updatePageTitle() {
     if (location.hostname === 'blog.hollisdevhub.com') {

@@ -2,7 +2,6 @@ document.documentElement.lang = currentLang;
 document.documentElement.dir = content[currentLang].dir;
 setColorScheme();
 updateMirror();
-updateHead();
 updatePageTitle();
 updatePossibleLinkTip();
 function updateMirror() {
@@ -11,14 +10,7 @@ function updateMirror() {
         let favIconHref = favIcon.href;
         favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
         favIcon.href = favIconHref;
-        // const profileImg = document.querySelector('img.u-photo');
-        // let profileImgSrc = profileImg.src;
-        // profileImgSrc = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
-        // profileImg.src = profileImgSrc;
     }
-}
-function updateHead() {
-    document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang]['404'].description);
 }
 function updatePageTitle() {
     document.getElementById('not-found-title').innerText = document.title = content[currentLang]['404'].title;
@@ -33,7 +25,6 @@ function updatePossibleLinkTip() {
     }
     // 把自身 url 排除。
     excluded.push(location.origin + location.pathname);
-    const lang = document.getElementsByTagName('html')[0].lang;
     const fromWhichSite = location.pathname.split('/')[1];
     let possibleLinks = [];
     if (fromWhichSite === 'zh-CN') {
