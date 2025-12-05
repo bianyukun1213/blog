@@ -643,14 +643,14 @@ summary:focus,
 #tide-main-content {padding-inline:calc(var(--spacing) * 4);padding-block:calc(var(--spacing) * 8);
 }
 
-.tide-image-figure {position:relative;max-width:80%;margin-inline:auto;
+.tide-image-figure {position:relative;max-width:75%;margin-inline:auto;
 }
 
-.tide-image-inline-figure {display:inline-block;position:relative;max-width:80%;margin-inline:auto;
+.tide-image-inline-figure {display:inline-block;position:relative;max-width:75%;margin-inline:auto;
 }
 
 .tide-image-figure img,
-.tide-image-inline-figure img {max-width:100%;
+.tide-image-inline-figure img {max-width:100%;vertical-align:bottom;
 }
 
 .tide-image-mask:has(+img:not([data-mask])),
@@ -664,9 +664,6 @@ img[data-mask]:not([data-unmasked]) {visibility:hidden;
 
 .tide-image-mask {display:block;position:absolute;width:100%;height:100%;syntax:"<percentage>";inherits:false;initial-value:100%;background-color:color-mix(in srgb, var(--tide-color-background-secondary) var(--un-bg-opacity), transparent);font-size:var(--text-base-fontSize);line-height:var(--un-leading, var(--text-base-lineHeight));syntax:"<percentage>";inherits:false;initial-value:100%;color:color-mix(in srgb, var(--tide-color-text-primary) var(--un-text-opacity), transparent);text-align:center;
     font-family: var(--tide-font-global);
-}
-
-.tide-image-mask img {vertical-align:bottom;
 }
 
 .tide-image-mask-controls {display:block;position:absolute;inset-inline-start:50%;top:50%;syntax:"*";inherits:false;initial-value:0;syntax:"*";inherits:false;initial-value:0;syntax:"*";inherits:false;initial-value:0;--un-translate-x:-50%;--un-translate-y:-50%;translate:var(--un-translate-x) var(--un-translate-y);
@@ -745,9 +742,6 @@ img[data-mask]:not([data-unmasked]) {visibility:hidden;
 
     #tide-btn-nav {display:none;
     }
-
-    .tide-image-figure {max-width:50%;
-    }
 }
 
 @media (min-width: 1280px) {
@@ -818,4 +812,27 @@ pre:has(code),
     /* iframe.giscus-frame {
         forced-color-adjust: none;
     } */
+}
+
+@media print {
+
+    #tide-root,
+    #tide-content,
+    #tide-main-content-frame {
+        position: unset !important;height:unset !important;
+        @apply un-overflow-[unset]!;
+    }
+
+    #tide-sidebar {
+        transform: unset !important;
+    }
+
+    #tide-content {width:100% !important;height:unset !important;
+        transform: unset !important;
+    }
+
+    #tide-sidebar,
+    #tide-top-bar,
+    #tide-floating-widgets {display:none !important;
+    }
 }

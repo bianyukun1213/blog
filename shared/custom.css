@@ -204,3 +204,18 @@ noscript#javascript-alert p::after {
         outline-offset: var(--tide-focus-outline-offset);
     }
 }
+
+@media print {
+    .image-masonry {
+        position: unset !important;
+        height: unset !important;
+    }
+
+    .image-masonry .tide-image-figure {
+        position: relative !important;
+        width: unset !important;
+        margin: 1em auto !important;
+        left: unset !important;
+        top: unset !important;
+    }
+}
