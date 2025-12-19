@@ -7,9 +7,15 @@ const content = {
             keywords: '博客,日记,编程,影视评论',
             date: '2020-01-14T00:43:11+08:00',
             updated: '2025-11-29T16:00:40+08:00',
+            hCardPName: '边宇琨',
+            hCardPGivenName: '宇琨',
+            hCardPFamilyName: '边',
+            hCardPNickname: 'Hollis',
+            hCardPNote: '2000 年 12 月 13 日，程序员',
             title: '他的第二人生',
             mirror: '镜像站',
             mirrorTag: '[镜像站]',
+            source: '源站',
             funcJumpTip: function (seconds) {
                 return `${seconds} 秒后自动跳转到中文站……`;
             }
@@ -30,9 +36,15 @@ const content = {
             keywords: 'Blog,Journal,Programming,Entertainment reviews',
             date: '2020-01-14T00:43:11+08:00',
             updated: '2025-11-29T16:00:40+08:00',
+            hCardPName: 'Bian Yukun',
+            hCardPGivenName: 'Yukun',
+            hCardPFamilyName: 'Bian',
+            hCardPNickname: 'Hollis',
+            hCardPNote: 'December 13, 2000, programmer',
             title: 'His 2nd Life',
-            mirror: 'Mirror',
+            mirror: 'Mirror site',
             mirrorTag: '[Mirror]',
+            source: 'Source site',
             funcJumpTip: function (seconds) {
                 return `Automatically jump to the English site after ${seconds}s…`;
             }
@@ -97,4 +109,21 @@ function generateJsonLd() {
       }
     </script>`;
     return jsonLdTemplate;
+}
+function generateHCard() {
+    let hCardTemplate = `
+    <div class="h-card">
+      <span class="p-name">${content[currentLang].index.hCardPName}</span>
+      <span class="p-given-name">${content[currentLang].index.hCardPGivenName}</span>
+      <span class="p-family-name">${content[currentLang].index.hCardPFamilyName}</span>
+      <span class="p-nickname">${content[currentLang].index.hCardPNickname}</span>
+      <img class="u-photo" src="https://bucket.hollisdevhub.com/avatars/avatar.webp" />
+      <a class="u-url u-uid" href="https://yukun.bio/" target="_blank" rel="me">https://yukun.bio/</a>
+      <a class="u-url u-uid" href="https://his2nd.life/" target="_blank" rel="me">https://his2nd.life/</a>
+      <a class="u-url u-uid" href="https://m.cmx.im/@Hollis" target="_blank" rel="me noopener">https://m.cmx.im/@Hollis</a>
+      <a class="u-url u-uid" href="https://github.com/bianyukun1213" target="_blank" rel="me noopener">https://github.com/bianyukun1213</a>
+      <a class="u-email" href="mailto:bianyukun1213@outlook.com" target="_blank" rel="me noopener">bianyukun1213@outlook.com</a>
+      <div class="p-note">${content[currentLang].index.hCardPNote}</div>
+    </div>`;
+    return hCardTemplate;
 }
