@@ -1,7 +1,6 @@
 document.documentElement.lang = currentLang;
 document.documentElement.dir = content[currentLang].dir;
 setColorScheme();
-updateMirror();
 updateHead();
 updatePageTitle();
 updateHCard();
