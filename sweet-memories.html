@@ -2466,7 +2466,7 @@
  
 </div>
 </ol>
-<div id="tcomment"></div>
+<div id="waline"></div>
 </div>
  </div>
  <div id=respond-post-150 class="respond mdui-card mdui-p-a-4 mdui-m-b-4">
@@ -2548,20 +2548,20 @@ Older&nbsp;&nbsp;
     color: #18ffff;
 }
 </style>
-<script src="https://s4.zstatic.net/ajax/libs/twikoo/1.6.41/twikoo.all.min.js" defer></script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<script type="module">
+  import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+  init({
+    serverURL: 'https://waline.his2nd.life',
+    dark: true
+  });
+</script>
 <script>
 if (document.readyState !== 'loading')
     domContentLoadedHandler();
 else
     document.addEventListener('DOMContentLoaded', domContentLoadedHandler);
 function domContentLoadedHandler(eDomContentLoaded) {
-    twikoo.init({
-    envId: 'https://twikoo.his2nd.life',
-    el: '#tcomment',
-    // region: 'ap-guangzhou',
-    // path: location.pathname,
-    // lang: 'zh-CN'
-    });
     // 修复移动端网易云音乐外链。
     if (!!navigator.userAgent.match(
         /(phone|pad|pod|Mobile|iPhone|iPad|iPod|ios|Android|Windows Phone|Symbian|BlackBerry|WebOS|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG)/i
