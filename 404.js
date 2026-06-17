@@ -1,17 +1,8 @@
 document.documentElement.lang = currentLang;
 document.documentElement.dir = content[currentLang].dir;
 setColorScheme();
-updateMirror();
 updatePageTitle();
 updatePossibleLinkTip();
-function updateMirror() {
-    if (location.hostname === 'blog.hollisdevhub.com') {
-        const favIcon = document.querySelector('link[rel="icon"]');
-        let favIconHref = favIcon.href;
-        favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
-        favIcon.href = favIconHref;
-    }
-}
 function updatePageTitle() {
     document.getElementById('not-found-title').innerText = document.title = content[currentLang]['404'].title;
 }

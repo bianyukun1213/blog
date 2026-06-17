@@ -5,8 +5,7 @@ updateMirror();
 updateHead();
 updatePageTitle();
 updateHCard();
-updateMirror();
-if (document.referrer !== '' && !document.referrer.startsWith('https://archived.his2nd.life') && !document.referrer.startsWith('https://blog-archived.hollisdevhub.com')) {
+if (document.referrer !== '' && !document.referrer.startsWith('https://archived.his2nd.life') && !document.referrer.startsWith('https://h2l-archived.hollisdevhub.com')) {
     let hrefZhCn = document.getElementById('link-zh-cn').getAttribute('href');
     hrefZhCn += '?referrer=' + encodeURIComponent(document.referrer);
     document.getElementById('link-zh-cn').setAttribute('href', hrefZhCn);
@@ -28,24 +27,6 @@ if (naj !== 'true' && naj !== '') {
         updateTip(secondsRemain--);
     }, 1000);
 }
-function updateMirror() {
-    const anotherLink = document.getElementById('link-another');
-    anotherLink.href = 'https://blog-archived.hollisdevhub.com/';
-    anotherLink.innerText = content[currentLang].index.mirror;
-    if (location.hostname === 'blog-archived.hollisdevhub.com') {
-        anotherLink.href = 'https://archived.his2nd.life/';
-        anotherLink.innerText = content[currentLang].index.source;
-        // anotherLink.parentElement.style.display = 'none';
-        const favIcon = document.querySelector('link[rel="icon"]');
-        let favIconHref = favIcon.href;
-        favIconHref = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
-        favIcon.href = favIconHref;
-        // const profileImg = document.querySelector('img.u-photo');
-        // let profileImgSrc = profileImg.src;
-        // profileImgSrc = favIconHref.replace('https://bucket.hollisdevhub.com', 'https://bucket-eo.hollisdevhub.com');
-        // profileImg.src = profileImgSrc;
-    }
-}
 function updateHead() {
     document.querySelector('meta[name="description"]').setAttribute('content', content[currentLang].index.description);
     const keywordsEle = document.querySelector('meta[name="keywords"]');
@@ -54,12 +35,7 @@ function updateHead() {
     keywordsEle.insertAdjacentHTML('afterend', generateOpenGraph() + generateJsonLd());
 }
 function updatePageTitle() {
-    if (location.hostname === 'blog-archived.hollisdevhub.com') {
-        document.title = content[currentLang].index.title + ' ' + content[currentLang].index.mirrorTag;
-        document.getElementById('site-title').innerHTML = `${content[currentLang].index.title}<span id="mirror-tag">${content[currentLang].index.mirrorTag}<span>`;
-    } else {
-        document.getElementById('site-title').innerHTML = document.title = content[currentLang].index.title;
-    }
+    document.getElementById('site-title').innerHTML = document.title = content[currentLang].index.title;
 }
 function updateHCard() {
     document.querySelector('.h-card').remove();

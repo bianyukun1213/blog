@@ -117,7 +117,7 @@ function generateHCard() {
       <span class="p-given-name">${content[currentLang].index.hCardPGivenName}</span>
       <span class="p-family-name">${content[currentLang].index.hCardPFamilyName}</span>
       <span class="p-nickname">${content[currentLang].index.hCardPNickname}</span>
-      <img class="u-photo" src="https://bucket.hollisdevhub.com/avatars/avatar.webp" />
+      <img class="u-photo" src="https://bucket-eo.hollisdevhub.com/avatars/avatar.webp" />
       <a class="u-url u-uid" href="https://yukun.bio/" target="_blank" rel="me">https://yukun.bio/</a>
       <a class="u-url u-uid" href="https://his2nd.life/" target="_blank" rel="me">https://his2nd.life/</a>
       <a class="u-url u-uid" href="https://m.cmx.im/@Hollis" target="_blank" rel="me noopener">https://m.cmx.im/@Hollis</a>
