@@ -5,7 +5,7 @@ updateMirror();
 updateHead();
 updatePageTitle();
 updateHCard();
-if (document.referrer !== '' && !document.referrer.startsWith('https://archived.his2nd.life') && !document.referrer.startsWith('https://h2l-archived.hollisdevhub.com')) {
+if (document.referrer !== '' && !document.referrer.startsWith('https://archive.his2nd.life')) {
     let hrefZhCn = document.getElementById('link-zh-cn').getAttribute('href');
     hrefZhCn += '?referrer=' + encodeURIComponent(document.referrer);
     document.getElementById('link-zh-cn').setAttribute('href', hrefZhCn);
